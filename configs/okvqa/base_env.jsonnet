@@ -70,8 +70,8 @@ local dpr_training_annotations = {
   "TENSORBOARD_FOLDER": "",
   "WANDB": {
     "CACHE_DIR":  wandb_cache_dir,
-    "entity": "weizhelin",
-    "project": "VQA_publication",
+    "entity": "xl544",
+    "project": "RAVQA",
     "tags": ["OKVQA"],
   },
   "platform_type": "pytorch",
