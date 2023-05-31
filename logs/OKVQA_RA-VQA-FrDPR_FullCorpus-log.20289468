@@ -1,0 +1,693 @@
+Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/RAVQA.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='OKVQA_RA-VQA-FrDPR_FullCorpus.20289468', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=True, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='test', modules=['freeze_question_encoder', 'force_existence'], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['data_loader.additional.num_knowledge_passages=5', 'test.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt'], overfit_batches=0.0, plugins=None, precision=32, prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')
+input value {} is not a number, parse to string.
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'CACHE_DIR': '', 'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA']}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'ocr_feature_preprocessed': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10, 'num_knowledge_passages': 5}, 'dataset_modules': {'module_dict': {'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadGoogleSearchPassageData']}, 'dataset_type': 'OKVQADataset', 'dummy_dataloader': 0, 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset', 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'}, 'type': 'DataLoaderOKVQAWithKnowledge'}, 'experiment_name': 'OKVQA_RA-VQA-FrDPR_FullCorpus.20289468', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_exact_match'}, {'name': 'compute_retrieval_metrics'}, {'name': 'compute_okvqa_scores'}], 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>', '<SOV>', '<EOV>', '<BOQ>', '<EOQ>', '<BOC>', '<EOC>', '<BOK>', '<EOK>'], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'DecoderTokenizerClass': 'T5Tokenizer', 'DecoderTokenizerModelVersion': 't5-large', 'GeneratorConfigClass': 'T5Config', 'GeneratorModelClass': 'T5ForConditionalGeneration', 'GeneratorModelVersion': 't5-large', 'ModelClass': 'RagModel', 'QueryEncoderConfigClass': 'DPRConfig', 'QueryEncoderModelClass': 'DPRQuestionEncoder', 'QueryEncoderModelVersion': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder', 'RAVQA_loss_type': 'Approach6', 'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>', '<SOV>', '<EOV>', '<BOQ>', '<EOQ>', '<BOC>', '<EOC>', '<BOK>', '<EOK>']}, 'TokenizerClass': 'DPRQuestionEncoderTokenizer', 'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base', 'base_model': 'RAG', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '<EOQ>', 'start': '<BOQ>'}, 'type': 'QuestionInput'}, {'option': 'caption', 'separation_tokens': {'end': '<EOC>', 'start': '<BOC>'}, 'type': 'TextBasedVisionInput'}, {'attribute_max': 3, 'attribute_thres': 0.05, 'object_max': 40, 'ocr': 1, 'option': 'object', 'separation_tokens': {'end': '<EOV>', 'sep': '<SOV>', 'start': '<BOV>'}, 'type': 'TextBasedVisionInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0, 'retrieval_pseudo_loss': 0}, 'modules': ['freeze_question_encoder', 'force_existence'], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenization'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt', 'num_evaluation': 0}, 'train': {'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 4, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 32, 'epochs': 9999, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'lr': 0.0001, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'none', 'type': 'RagExecutor'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 100}, 'reset': False, 'mode': 'test', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test/test_evaluation/imgs', 'results_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test/test_evaluation', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468', 'args': {'config': '../configs/okvqa/RAVQA.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'test', 'reset': False, 'experiment_name': 'OKVQA_RA-VQA-FrDPR_FullCorpus.20289468', 'tags': [], 'modules': ['freeze_question_encoder', 'force_existence'], 'log_prediction_tables': True, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 32, 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['data_loader.additional.num_knowledge_passages=5', 'test.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt']}}
+['/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test/test_evaluation/imgs', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test/test_evaluation']
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data',
+ 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments',
+ 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs',
+ 'WANDB': {'entity': 'xl544',
+           'name': 'OKVQA_RA-VQA-FrDPR_FullCorpus.20289468',
+           'project': 'RAVQA',
+           'tags': ['OKVQA',
+                    'RAG',
+                    'freeze_question_encoder',
+                    'force_existence']},
+ 'args': {'DATA_FOLDER': '',
+          'EXPERIMENT_FOLDER': '',
+          'accelerator': 'auto',
+          'accumulate_grad_batches': None,
+          'amp_backend': 'native',
+          'amp_level': None,
+          'auto_lr_find': False,
+          'auto_scale_batch_size': False,
+          'auto_select_gpus': False,
+          'benchmark': None,
+          'check_val_every_n_epoch': 1,
+          'checkpoint_callback': None,
+          'config': '../configs/okvqa/RAVQA.jsonnet',
+          'default_root_dir': None,
+          'detect_anomaly': False,
+          'deterministic': None,
+          'devices': '1',
+          'enable_checkpointing': True,
+          'enable_model_summary': True,
+          'enable_progress_bar': True,
+          'experiment_name': 'OKVQA_RA-VQA-FrDPR_FullCorpus.20289468',
+          'fast_dev_run': False,
+          'flush_logs_every_n_steps': None,
+          'gpus': None,
+          'gradient_clip_algorithm': None,
+          'gradient_clip_val': None,
+          'ipus': None,
+          'limit_predict_batches': None,
+          'limit_test_batches': None,
+          'limit_train_batches': None,
+          'limit_val_batches': None,
+          'log_every_n_steps': 50,
+          'log_gpu_memory': None,
+          'log_prediction_tables': True,
+          'logger': True,
+          'max_epochs': None,
+          'max_steps': -1,
+          'max_time': None,
+          'min_epochs': None,
+          'min_steps': None,
+          'mode': 'test',
+          'modules': ['freeze_question_encoder', 'force_existence'],
+          'move_metrics_to_cpu': False,
+          'multiple_trainloader_mode': 'max_size_cycle',
+          'num_nodes': 1,
+          'num_processes': None,
+          'num_sanity_val_steps': 2,
+          'opts': ['data_loader.additional.num_knowledge_passages=5',
+                   'test.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt'],
+          'overfit_batches': 0.0,
+          'plugins': None,
+          'precision': 32,
+          'prepare_data_per_node': None,
+          'process_position': 0,
+          'profiler': None,
+          'progress_bar_refresh_rate': None,
+          'reload_dataloaders_every_n_epochs': 0,
+          'replace_sampler_ddp': True,
+          'reset': False,
+          'resume_from_checkpoint': None,
+          'stochastic_weight_avg': False,
+          'strategy': None,
+          'sync_batchnorm': False,
+          'tags': [],
+          'terminate_on_nan': None,
+          'test_batch_size': -1,
+          'test_evaluation_name': '',
+          'tpu_cores': None,
+          'track_grad_norm': -1,
+          'val_check_interval': None,
+          'weights_save_path': None,
+          'weights_summary': 'top'},
+ 'cache': {'default_folder': '../data/ok-vqa/cache',
+           'regenerate': {'ocr_feature_preprocessed': 0,
+                          'test_data_preprocessed': 0,
+                          'train_data_preprocessed': 0,
+                          'vinvl_feature_preprocessed': 0}},
+ 'cuda': 0,
+ 'data_loader': {'additional': {'max_decoder_source_length': 512,
+                                'max_source_length': 512,
+                                'max_target_length': 10,
+                                'num_knowledge_passages': 5},
+                 'dataset_modules': {'module_dict': {'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True,
+                                                                                          'test': '../data/ok-vqa/pre-extracted_features/OCR/valid',
+                                                                                          'train': '../data/ok-vqa/pre-extracted_features/OCR/train'},
+                                                                               'option': 'default',
+                                                                               'type': 'LoadGoogleOCRFeatures'},
+                                                     'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json',
+                                                                                                                     'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json',
+                                                                                                                     'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchAnnotations'},
+                                                     'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv',
+                                                                                                                      'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'},
+                                                                                                'use_full_split': True},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchPassageData'},
+                                                     'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014',
+                                                                                                      'train': '../data/ok-vqa/train2014'},
+                                                                                  'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json',
+                                                                                                                         'train': '../data/ok-vqa/mscoco_train2014_annotations.json'},
+                                                                                                    'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json',
+                                                                                                                       'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}},
+                                                                       'option': 'default',
+                                                                       'type': 'LoadOKVQAData'},
+                                                     'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json',
+                                                                                             'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json',
+                                                                                             'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'},
+                                                                                  'option': 'default',
+                                                                                  'type': 'LoadOscarCaptionFeatures'},
+                                                     'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json',
+                                                                                                                                             'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}},
+                                                                                                       'option': 'none',
+                                                                                                       'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'},
+                                                     'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv',
+                                                                                      'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'},
+                                                                           'option': 'default',
+                                                                           'type': 'LoadVinVLFeatures'}},
+                                     'module_list': ['LoadVinVLFeatures',
+                                                     'LoadGoogleOCRFeatures',
+                                                     'LoadOscarCaptionFeatures',
+                                                     'LoadOKVQAData',
+                                                     'LoadGoogleSearchPassageData']},
+                 'dataset_type': 'OKVQADataset',
+                 'dummy_dataloader': 0,
+                 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset',
+                                 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'},
+                 'type': 'DataLoaderOKVQAWithKnowledge'},
+ 'experiment_name': 'OKVQA_RA-VQA-FrDPR_FullCorpus.20289468',
+ 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468',
+ 'gpu_device': 0,
+ 'ignore_pretrained_weights': [],
+ 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test/test_evaluation/imgs',
+ 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test',
+ 'metrics': [{'name': 'compute_exact_match'},
+             {'name': 'compute_retrieval_metrics'},
+             {'name': 'compute_okvqa_scores'}],
+ 'mode': 'test',
+ 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>',
+                                                                           '<SOV>',
+                                                                           '<EOV>',
+                                                                           '<BOQ>',
+                                                                           '<EOQ>',
+                                                                           '<BOC>',
+                                                                           '<EOC>',
+                                                                           '<BOK>',
+                                                                           '<EOK>'],
+                                             'bos_token': '<PAD>',
+                                             'pad_token': '<PAD>'},
+                  'DecoderTokenizerClass': 'T5Tokenizer',
+                  'DecoderTokenizerModelVersion': 't5-large',
+                  'GeneratorConfigClass': 'T5Config',
+                  'GeneratorModelClass': 'T5ForConditionalGeneration',
+                  'GeneratorModelVersion': 't5-large',
+                  'ModelClass': 'RagModel',
+                  'QueryEncoderConfigClass': 'DPRConfig',
+                  'QueryEncoderModelClass': 'DPRQuestionEncoder',
+                  'QueryEncoderModelVersion': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder',
+                  'RAVQA_loss_type': 'Approach6',
+                  'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>',
+                                                                   '<SOV>',
+                                                                   '<EOV>',
+                                                                   '<BOQ>',
+                                                                   '<EOQ>',
+                                                                   '<BOC>',
+                                                                   '<EOC>',
+                                                                   '<BOK>',
+                                                                   '<EOK>']},
+                  'TokenizerClass': 'DPRQuestionEncoderTokenizer',
+                  'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base',
+                  'base_model': 'RAG',
+                  'decoder_input_modules': {'module_list': [],
+                                            'postprocess_module_list': []},
+                  'input_modules': {'module_list': [{'option': 'default',
+                                                     'separation_tokens': {'end': '<EOQ>',
+                                                                           'start': '<BOQ>'},
+                                                     'type': 'QuestionInput'},
+                                                    {'option': 'caption',
+                                                     'separation_tokens': {'end': '<EOC>',
+                                                                           'start': '<BOC>'},
+                                                     'type': 'TextBasedVisionInput'},
+                                                    {'attribute_max': 3,
+                                                     'attribute_thres': 0.05,
+                                                     'object_max': 40,
+                                                     'ocr': 1,
+                                                     'option': 'object',
+                                                     'separation_tokens': {'end': '<EOV>',
+                                                                           'sep': '<SOV>',
+                                                                           'start': '<BOV>'},
+                                                     'type': 'TextBasedVisionInput'}],
+                                    'postprocess_module_list': [{'option': 'default',
+                                                                 'type': 'PostProcessInputTokenization'}]},
+                  'loss_ratio': {'additional_loss': 0,
+                                 'nll_loss': 1,
+                                 'rag_loss': 0,
+                                 'retrieval_pseudo_loss': 0},
+                  'modules': ['freeze_question_encoder', 'force_existence'],
+                  'output_modules': {'module_list': [{'option': 'default',
+                                                      'type': 'GenerationOutput'}],
+                                     'postprocess_module_list': [{'option': 'default',
+                                                                  'type': 'PostProcessOutputTokenization'}]},
+                  'pretrained': 1,
+                  'rag_modules': {'module_list': []}},
+ 'platform_type': 'pytorch',
+ 'reset': False,
+ 'results_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/test/test_evaluation',
+ 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468/train/saved_model',
+ 'seed': 2021,
+ 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_RA-VQA-FrDPR_FullCorpus.20289468',
+ 'test': {'additional': {'multiprocessing': 4},
+          'batch_size': 32,
+          'evaluation_name': 'test_evaluation',
+          'load_best_model': 0,
+          'load_epoch': -1,
+          'load_model_path': '../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt',
+          'num_evaluation': 0},
+ 'train': {'adam_epsilon': 1e-08,
+           'additional': {'gradient_accumulation_steps': 4,
+                          'gradient_clipping': 0,
+                          'plugins': [],
+                          'save_top_k': 1,
+                          'save_top_k_metric': 'test/accuracy_overall',
+                          'save_top_k_mode': 'max',
+                          'warmup_steps': 0},
+           'batch_size': 32,
+           'epochs': 9999,
+           'load_best_model': 0,
+           'load_epoch': -1,
+           'load_model_path': '',
+           'lr': 0.0001,
+           'retriever_lr': 1e-05,
+           'save_interval': 1,
+           'scheduler': 'none',
+           'type': 'RagExecutor'},
+ 'valid': {'additional': {},
+           'batch_size': 32,
+           'break_interval': 3000,
+           'step_size': 100}}
+data columns: dict_keys(['vinvl_features'])
+data columns: dict_keys(['vinvl_features', 'ocr_features'])
+[Data Statistics] Caption features 123287
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features'])
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.228174
+creating index...
+index created!
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.141481
+creating index...
+index created!
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data'])
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data', 'passages'])
+initializing retrieval
+Testing: 0it [00:00, ?it/s]Testing:   0%|          | 0/158 [00:00<?, ?it/s]Testing DataLoader 0:   0%|          | 0/158 [00:00<?, ?it/s]race <---> motocross    (motocross</s>)
+vine <---> fern    (fern</s>)
+stuffed animal <---> teddy bear    (teddy bear</s>)
+mouth <---> tail    (tail</s>)
+cloth <---> suitcase    (suitcase</s>)
+man <---> woman    (woman</s>)
+down <---> down    (down</s>)
+island <---> island    (island</s>)
+shop <---> shop    (shop</s>)
+ground <---> plant    (plant</s>)
+swing <---> hit    (hit</s>)
+salt water beach <---> lake    (lake</s>)
+artist <---> sculptor    (sculptor</s>)
+condiment <---> onion    (onion</s>)
+work <---> work    (work</s>)
+bmx <---> motorcycle    (motorcycle</s>)
+commercial <---> passenger    (passenger</s>)
+girl <---> girl    (girl</s>)
+1847 <---> 1950    (1950</s>)
+ride <---> ollie    (ollie</s>)
+homerun <---> home run    (home run</s>)
+charge <---> charge    (charge</s>)
+circle <---> heart    (heart</s>)
+510 <---> 300    (300</s>)
+cross country <---> cross country    (cross country</s>)
+wetsuit <---> wetsuit    (wetsuit</s>)
+surf board <---> surf    (surf</s>)
+cloth <---> vinyl    (vinyl</s>)
+mouth <---> teeth    (teeth</s>)
+blueberry <---> chocolate    (chocolate</s>)
+vase <---> vase    (vase</s>)
+scotland <---> england    (england</s>)
+Testing DataLoader 0:   1%|          | 1/158 [00:21<56:20, 21.53s/it]Testing DataLoader 0:   1%|          | 1/158 [00:21<56:20, 21.53s/it]soup <---> sandwich    (sandwich</s>)
+tip <---> spit    (spit</s>)
+800 <---> 800    (800</s>)
+quilt <---> quilt    (quilt</s>)
+brazil <---> brazil    (brazil</s>)
+diner <---> fast food    (fast food</s>)
+firetruck <---> car    (car</s>)
+becker vineyard <---> becker    (becker</s>)
+shatter <---> break    (break</s>)
+brook brother <---> brooks brothers    (brooks brothers</s>)
+gallery <---> art store    (art store</s>)
+sushi <---> sushi    (sushi</s>)
+blue jay <---> blue    (blue</s>)
+smile <---> smile    (smile</s>)
+80 mph <---> 200 mph    (200 mph</s>)
+cowboy <---> sombrero    (sombrero</s>)
+florida california <---> florida    (florida</s>)
+good <---> sweet    (sweet</s>)
+cement <---> truck    (truck</s>)
+track <---> track    (track</s>)
+fisheye <---> blurry    (blurry</s>)
+gazebo <---> trailer    (trailer</s>)
+throw it <---> throw    (throw</s>)
+high school <---> high school    (high school</s>)
+rug <---> rug    (rug</s>)
+commercial <---> commercial    (commercial</s>)
+bat helmet <---> baseball    (baseball</s>)
+birkenstock <---> birkenstock    (birkenstock</s>)
+joss whedon <---> luc benson    (luc benson</s>)
+noon <---> afternoon    (afternoon</s>)
+high <---> high    (high</s>)
+taylor swift <---> bill clinton    (bill clinton</s>)
+Testing DataLoader 0:   1%|▏         | 2/158 [00:29<34:46, 13.38s/it]Testing DataLoader 0:   1%|▏         | 2/158 [00:29<34:46, 13.38s/it]sink <---> sink    (sink</s>)
+horn <---> horn    (horn</s>)
+kuwait airway <---> alt air    (alt air</s>)
+1892 <---> 1892    (1892</s>)
+top hat <---> top hat    (top hat</s>)
+mickey mouse <---> mickey mouse    (mickey mouse</s>)
+coconut <---> coconut    (coconut</s>)
+cross country <---> cross country    (cross country</s>)
+long neck <---> neck    (neck</s>)
+mammal <---> mammal    (mammal</s>)
+freeze <---> freeze    (freeze</s>)
+20 feet <---> 20 feet    (20 feet</s>)
+american shorthair <---> siamese    (siamese</s>)
+veggies <---> fruit    (fruit</s>)
+healthy <---> healthy    (healthy</s>)
+depression <---> depression    (depression</s>)
+toaster <---> toaster    (toaster</s>)
+sail <---> sail    (sail</s>)
+napkin <---> napkin    (napkin</s>)
+furniture <---> furniture    (furniture</s>)
+half <---> wax    (wax</s>)
+deer <---> lion    (lion</s>)
+race <---> hunt    (hunt</s>)
+electric blanket <---> heater    (heater</s>)
+helium <---> helium    (helium</s>)
+public <---> public    (public</s>)
+15 <---> 200    (200</s>)
+wave <---> water    (water</s>)
+advertising <---> identification    (identification</s>)
+art <---> decoration    (decoration</s>)
+sleep <---> sleep    (sleep</s>)
+1 world <---> fedex    (fedex</s>)
+Testing DataLoader 0:   2%|▏         | 3/158 [00:36<27:31, 10.66s/it]Testing DataLoader 0:   2%|▏         | 3/158 [00:36<27:31, 10.66s/it]drape <---> sheer    (sheer</s>)
+pig <---> pig    (pig</s>)
+key <---> start    (start</s>)
+20 feet <---> 20 feet    (20 feet</s>)
+2 cups <---> lot    (lot</s>)
+levi <---> levis    (levis</s>)
+nocturnal <---> diurnal    (diurnal</s>)
+contrail <---> smoke    (smoke</s>)
+100 lbs <---> very heavy    (very heavy</s>)
+pizzaria <---> pizza hut    (pizza hut</s>)
+chihuahua <---> pomeranian    (pomeranian</s>)
+piano <---> keyboard    (keyboard</s>)
+cargo <---> cargo    (cargo</s>)
+lab <---> pug    (pug</s>)
+pancake <---> pancake    (pancake</s>)
+pancake <---> pancake    (pancake</s>)
+thanksgiving <---> thanksgiving    (thanksgiving</s>)
+mice <---> plant    (plant</s>)
+direct <---> street sign    (street sign</s>)
+herd <---> herd    (herd</s>)
+hang 10 <---> hang 10    (hang 10</s>)
+serrated <---> serrated    (serrated</s>)
+south america <---> south america    (south america</s>)
+10 years <---> 20 years    (20 years</s>)
+sponsor <---> sponsor    (sponsor</s>)
+claw <---> claw    (claw</s>)
+concert <---> concert    (concert</s>)
+tractor <---> tractor    (tractor</s>)
+1 way <---> turn    (turn</s>)
+mate <---> fight    (fight</s>)
+library <---> library    (library</s>)
+5 minutes <---> 2 minutes    (2 minutes</s>)
+Testing DataLoader 0:   3%|▎         | 4/158 [00:44<24:51,  9.68s/it]Testing DataLoader 0:   3%|▎         | 4/158 [00:44<24:51,  9.68s/it]myna <---> sparrow    (sparrow</s>)
+short <---> casual    (casual</s>)
+uber <---> uber    (uber</s>)
+hurricane <---> flood    (flood</s>)
+400 <---> 400    (400</s>)
+flush <---> flush    (flush</s>)
+skatepark <---> skate    (skate</s>)
+kawasaki <---> bmw    (bmw</s>)
+salt and pepper <---> salt    (salt</s>)
+steam <---> steam    (steam</s>)
+spatula <---> fork    (fork</s>)
+make donuts <---> dough    (dough</s>)
+canal <---> canal    (canal</s>)
+legal <---> illegal    (illegal</s>)
+florist <---> florist    (florist</s>)
+anchor <---> anchor    (anchor</s>)
+seagull <---> seagull    (seagull</s>)
+microphone <---> microphone    (microphone</s>)
+suit <---> suit    (suit</s>)
+tempered <---> tempered    (tempered</s>)
+basin <---> pedestal    (pedestal</s>)
+meat <---> mushroom    (mushroom</s>)
+piano <---> piano    (piano</s>)
+gottlieb daimler <---> lincoln    (lincoln</s>)
+neoprene <---> neoprene    (neoprene</s>)
+rugby <---> football    (football</s>)
+horse race <---> horse race    (horse race</s>)
+plumber <---> plumber    (plumber</s>)
+sahara <---> sahara    (sahara</s>)
+rye <---> white    (white</s>)
+buddhism <---> buddhist    (buddhist</s>)
+orange <---> fruit    (fruit</s>)
+Testing DataLoader 0:   3%|▎         | 5/158 [00:52<23:03,  9.04s/it]Testing DataLoader 0:   3%|▎         | 5/158 [00:52<23:03,  9.04s/it]siamese <---> siamese    (siamese</s>)
+miami <---> paris    (paris</s>)
+carnivore <---> herbivore    (herbivore</s>)
+jelly <---> butter    (butter</s>)
+dim <---> dark    (dark</s>)
+ski <---> mountain    (mountain</s>)
+gas <---> solar    (solar</s>)
+ski pole <---> pole    (pole</s>)
+bike <---> bike    (bike</s>)
+sprinkler <---> frisbee    (frisbee</s>)
+cook it <---> bake    (bake</s>)
+fix traffic light <---> work    (work</s>)
+garden <---> garden    (garden</s>)
+calcium <---> calcium    (calcium</s>)
+ketchup and pea <---> ketchup    (ketchup</s>)
+clinton <---> barack obama    (barack obama</s>)
+brick <---> stone    (stone</s>)
+background <---> screen    (screen</s>)
+medium rare <---> medium    (medium</s>)
+cardinal <---> cardinal    (cardinal</s>)
+juice <---> soda    (soda</s>)
+political <---> traffic    (traffic</s>)
+north america <---> north america    (north america</s>)
+gasoline <---> helmet    (helmet</s>)
+chihuahua <---> doberman    (doberman</s>)
+second <---> second    (second</s>)
+canine <---> canine    (canine</s>)
+moon <---> moon    (moon</s>)
+crosswalk <---> crosswalk    (crosswalk</s>)
+luggage <---> suitcase    (suitcase</s>)
+5 feet <---> small    (small</s>)
+marathon <---> street race    (street race</s>)
+Testing DataLoader 0:   4%|▍         | 6/158 [01:00<22:06,  8.73s/it]Testing DataLoader 0:   4%|▍         | 6/158 [01:00<22:06,  8.73s/it]30.7 lbs <---> 50 pounds    (50 pounds</s>)
+old <---> old    (old</s>)
+mustang <---> stallion    (stallion</s>)
+natural <---> natural    (natural</s>)
+olives <---> olive    (olive</s>)
+suit <---> suit    (suit</s>)
+wood and metal <---> metal    (metal</s>)
+tide <---> wind    (wind</s>)
+open curtain <---> light    (light</s>)
+rack <---> towel rack    (towel rack</s>)
+microwave <---> microwave    (microwave</s>)
+tennis <---> tennis    (tennis</s>)
+60 mph <---> 60 mph    (60 mph</s>)
+wind turbine <---> windmill    (windmill</s>)
+mouse <---> mouse    (mouse</s>)
+1804 <---> 1804    (1804</s>)
+acer <---> acer    (acer</s>)
+freight <---> passenger    (passenger</s>)
+prop <---> military    (military</s>)
+caution <---> crossroad    (crossroad</s>)
+san francisco <---> seattle    (seattle</s>)
+freeway <---> highway    (highway</s>)
+mario <---> mario    (mario</s>)
+smell <---> smell    (smell</s>)
+racket <---> tennis racket    (tennis racket</s>)
+rattan <---> cane    (cane</s>)
+train station <---> station    (station</s>)
+rust <---> grease    (grease</s>)
+energy <---> energy    (energy</s>)
+regular <---> regular    (regular</s>)
+feather <---> feather    (feather</s>)
+elephant ear <---> fern    (fern</s>)
+Testing DataLoader 0:   4%|▍         | 7/158 [01:08<21:13,  8.43s/it]Testing DataLoader 0:   4%|▍         | 7/158 [01:08<21:13,  8.43s/it]legal <---> legal    (legal</s>)
+legos <---> house    (house</s>)
+950 <---> 500    (500</s>)
+violin <---> guitar    (guitar</s>)
+rainbow <---> rainbow    (rainbow</s>)
+view <---> glass    (glass</s>)
+tom sim <---> howard head    (howard head</s>)
+1977 <---> 2002    (2002</s>)
+iraq <---> ghana    (ghana</s>)
+old <---> sedan    (sedan</s>)
+jk rowling <---> beedle    (beedle</s>)
+bike <---> bike    (bike</s>)
+samsung <---> samsung    (samsung</s>)
+rough <---> rough    (rough</s>)
+polyurethane <---> fiberglass    (fiberglass</s>)
+jack daniels <---> heineken    (heineken</s>)
+cloth <---> cloth    (cloth</s>)
+russian <---> arabic    (arabic</s>)
+duck <---> duck    (duck</s>)
+windsor <---> windsor    (windsor</s>)
+coin <---> dollar    (dollar</s>)
+temperate <---> warm    (warm</s>)
+jumped <---> jump    (jump</s>)
+26 <---> 42    (42</s>)
+seagull <---> seagull    (seagull</s>)
+chihuahua <---> bulldog    (bulldog</s>)
+tower <---> church    (church</s>)
+zebra <---> equus quagga    (equus quagga</s>)
+visor <---> visor    (visor</s>)
+rock <---> brick    (brick</s>)
+zebra <---> leopard    (leopard</s>)
+clean <---> wipe    (wipe</s>)
+Testing DataLoader 0:   5%|▌         | 8/158 [01:16<20:18,  8.12s/it]Testing DataLoader 0:   5%|▌         | 8/158 [01:16<20:18,  8.12s/it]trunk <---> trunk    (trunk</s>)
+basketball <---> tennis    (tennis</s>)
+tight <---> forehand    (forehand</s>)
+quarter <---> coin    (coin</s>)
+firemen <---> firemen    (firemen</s>)
+denim <---> leather    (leather</s>)
+1880 <---> 1839    (1839</s>)
+north america <---> africa    (africa</s>)
+heat <---> cook    (cook</s>)
+cowboy hat <---> cowboy    (cowboy</s>)
+rolex <---> rolex    (rolex</s>)
+1968 <---> 1968    (1968</s>)
+cessna <---> boeing    (boeing</s>)
+dalmation <---> beagle    (beagle</s>)
+suzuki <---> suzuki    (suzuki</s>)
+sunlight <---> seashell    (seashell</s>)
+surfer <---> o'neill    (o'neill</s>)
+plate <---> candle    (candle</s>)
+flourescent <---> led    (led</s>)
+ship <---> satellite    (satellite</s>)
+kickstand <---> stand    (stand</s>)
+bowl <---> pedestal    (pedestal</s>)
+1945 <---> 1930    (1930</s>)
+window <---> window    (window</s>)
+flip <---> grind    (grind</s>)
+vehicle <---> bridge    (bridge</s>)
+underground <---> garden    (garden</s>)
+court <---> court    (court</s>)
+galley <---> apartment    (apartment</s>)
+travel <---> travel    (travel</s>)
+cell <---> cell    (cell</s>)
+culinary <---> culinary    (culinary</s>)
+Testing DataLoader 0:   6%|▌         | 9/158 [01:24<20:01,  8.07s/it]Testing DataLoader 0:   6%|▌         | 9/158 [01:24<20:01,  8.07s/it]cubicle <---> office    (office</s>)
+fly kite <---> kite    (kite</s>)
+base <---> base    (base</s>)
+call <---> bluetooth    (bluetooth</s>)
+video <---> camera    (camera</s>)
+john harington <---> john harington    (john harington</s>)
+20th <---> 20th    (20th</s>)
+flip phone <---> flip    (flip</s>)
+panther <---> panther    (panther</s>)
+15 <---> 30    (30</s>)
+kenmore <---> kenmore    (kenmore</s>)
+wifi <---> wifi    (wifi</s>)
+floral <---> floral    (floral</s>)
+dough <---> cheese    (cheese</s>)
+1 year <---> year    (year</s>)
+race horse <---> race    (race</s>)
+500 pounds <---> ton    (ton</s>)
+bike <---> bicycle    (bicycle</s>)
+alaska <---> nevada    (nevada</s>)
+hello kitty <---> hello kitty    (hello kitty</s>)
+husky <---> terrier    (terrier</s>)
+coat <---> color    (color</s>)
+open <---> closed    (closed</s>)
+70's <---> 60    (60</s>)
+rolex <---> rolex    (rolex</s>)
+rice roni <---> pretzel    (pretzel</s>)
+cirrus <---> cumulus    (cumulus</s>)
+swim <---> swim    (swim</s>)
+tree <---> tree    (tree</s>)
+biplane <---> biplane    (biplane</s>)
+yankees <---> yankees    (yankees</s>)
+1885 <---> 1886    (1886</s>)
+Testing DataLoader 0:   6%|▋         | 10/158 [01:31<19:20,  7.84s/it]Testing DataLoader 0:   6%|▋         | 10/158 [01:31<19:20,  7.84s/it]Testing DataLoader 0:   7%|▋         | 11/158 [01:38<18:50,  7.69s/it]Testing DataLoader 0:   7%|▋         | 11/158 [01:38<18:50,  7.69s/it]Testing DataLoader 0:   8%|▊         | 12/158 [01:46<18:32,  7.62s/it]Testing DataLoader 0:   8%|▊         | 12/158 [01:46<18:32,  7.62s/it]Testing DataLoader 0:   8%|▊         | 13/158 [01:53<18:24,  7.62s/it]Testing DataLoader 0:   8%|▊         | 13/158 [01:53<18:24,  7.62s/it]Testing DataLoader 0:   9%|▉         | 14/158 [02:01<18:12,  7.58s/it]Testing DataLoader 0:   9%|▉         | 14/158 [02:01<18:12,  7.58s/it]Testing DataLoader 0:   9%|▉         | 15/158 [02:08<18:07,  7.61s/it]Testing DataLoader 0:   9%|▉         | 15/158 [02:08<18:07,  7.61s/it]Testing DataLoader 0:  10%|█         | 16/158 [02:16<18:08,  7.66s/it]Testing DataLoader 0:  10%|█         | 16/158 [02:16<18:08,  7.66s/it]Testing DataLoader 0:  11%|█         | 17/158 [02:24<18:00,  7.66s/it]Testing DataLoader 0:  11%|█         | 17/158 [02:24<18:00,  7.66s/it]Testing DataLoader 0:  11%|█▏        | 18/158 [02:32<18:28,  7.92s/it]Testing DataLoader 0:  11%|█▏        | 18/158 [02:32<18:28,  7.92s/it]Testing DataLoader 0:  12%|█▏        | 19/158 [02:40<18:09,  7.84s/it]Testing DataLoader 0:  12%|█▏        | 19/158 [02:40<18:09,  7.84s/it]Testing DataLoader 0:  13%|█▎        | 20/158 [02:47<17:37,  7.66s/it]Testing DataLoader 0:  13%|█▎        | 20/158 [02:47<17:37,  7.66s/it]Testing DataLoader 0:  13%|█▎        | 21/158 [02:55<17:26,  7.64s/it]Testing DataLoader 0:  13%|█▎        | 21/158 [02:55<17:26,  7.64s/it]Testing DataLoader 0:  14%|█▍        | 22/158 [03:02<17:02,  7.52s/it]Testing DataLoader 0:  14%|█▍        | 22/158 [03:02<17:02,  7.52s/it]Testing DataLoader 0:  15%|█▍        | 23/158 [03:10<17:11,  7.64s/it]Testing DataLoader 0:  15%|█▍        | 23/158 [03:10<17:11,  7.64s/it]Testing DataLoader 0:  15%|█▌        | 24/158 [03:17<16:42,  7.48s/it]Testing DataLoader 0:  15%|█▌        | 24/158 [03:17<16:42,  7.48s/it]Testing DataLoader 0:  16%|█▌        | 25/158 [03:25<16:33,  7.47s/it]Testing DataLoader 0:  16%|█▌        | 25/158 [03:25<16:33,  7.47s/it]Testing DataLoader 0:  16%|█▋        | 26/158 [03:32<16:30,  7.50s/it]Testing DataLoader 0:  16%|█▋        | 26/158 [03:32<16:30,  7.50s/it]Testing DataLoader 0:  17%|█▋        | 27/158 [03:40<16:29,  7.55s/it]Testing DataLoader 0:  17%|█▋        | 27/158 [03:40<16:29,  7.55s/it]Testing DataLoader 0:  18%|█▊        | 28/158 [03:47<16:12,  7.48s/it]Testing DataLoader 0:  18%|█▊        | 28/158 [03:47<16:12,  7.48s/it]Testing DataLoader 0:  18%|█▊        | 29/158 [03:55<16:02,  7.46s/it]Testing DataLoader 0:  18%|█▊        | 29/158 [03:55<16:02,  7.46s/it]Testing DataLoader 0:  19%|█▉        | 30/158 [04:06<18:28,  8.66s/it]Testing DataLoader 0:  19%|█▉        | 30/158 [04:06<18:28,  8.66s/it]Testing DataLoader 0:  20%|█▉        | 31/158 [04:14<17:37,  8.33s/it]Testing DataLoader 0:  20%|█▉        | 31/158 [04:14<17:37,  8.33s/it]Testing DataLoader 0:  20%|██        | 32/158 [04:22<17:32,  8.35s/it]Testing DataLoader 0:  20%|██        | 32/158 [04:22<17:32,  8.35s/it]Testing DataLoader 0:  21%|██        | 33/158 [04:29<16:45,  8.05s/it]Testing DataLoader 0:  21%|██        | 33/158 [04:29<16:45,  8.05s/it]Testing DataLoader 0:  22%|██▏       | 34/158 [04:37<16:08,  7.81s/it]Testing DataLoader 0:  22%|██▏       | 34/158 [04:37<16:08,  7.81s/it]Testing DataLoader 0:  22%|██▏       | 35/158 [04:44<15:49,  7.72s/it]Testing DataLoader 0:  22%|██▏       | 35/158 [04:44<15:49,  7.72s/it]Testing DataLoader 0:  23%|██▎       | 36/158 [04:51<15:27,  7.60s/it]Testing DataLoader 0:  23%|██▎       | 36/158 [04:51<15:27,  7.60s/it]Testing DataLoader 0:  23%|██▎       | 37/158 [04:59<15:04,  7.48s/it]Testing DataLoader 0:  23%|██▎       | 37/158 [04:59<15:04,  7.48s/it]Testing DataLoader 0:  24%|██▍       | 38/158 [05:06<14:47,  7.40s/it]Testing DataLoader 0:  24%|██▍       | 38/158 [05:06<14:47,  7.40s/it]Testing DataLoader 0:  25%|██▍       | 39/158 [05:13<14:27,  7.29s/it]Testing DataLoader 0:  25%|██▍       | 39/158 [05:13<14:27,  7.29s/it]Testing DataLoader 0:  25%|██▌       | 40/158 [05:20<14:19,  7.28s/it]Testing DataLoader 0:  25%|██▌       | 40/158 [05:20<14:19,  7.28s/it]Testing DataLoader 0:  26%|██▌       | 41/158 [05:28<14:23,  7.38s/it]Testing DataLoader 0:  26%|██▌       | 41/158 [05:28<14:23,  7.38s/it]Testing DataLoader 0:  27%|██▋       | 42/158 [05:35<14:06,  7.29s/it]Testing DataLoader 0:  27%|██▋       | 42/158 [05:35<14:06,  7.29s/it]Testing DataLoader 0:  27%|██▋       | 43/158 [05:42<14:07,  7.37s/it]Testing DataLoader 0:  27%|██▋       | 43/158 [05:42<14:07,  7.37s/it]Testing DataLoader 0:  28%|██▊       | 44/158 [05:49<13:43,  7.22s/it]Testing DataLoader 0:  28%|██▊       | 44/158 [05:49<13:43,  7.22s/it]Testing DataLoader 0:  28%|██▊       | 45/158 [05:57<13:45,  7.31s/it]Testing DataLoader 0:  28%|██▊       | 45/158 [05:57<13:45,  7.31s/it]Testing DataLoader 0:  29%|██▉       | 46/158 [06:04<13:17,  7.12s/it]Testing DataLoader 0:  29%|██▉       | 46/158 [06:04<13:17,  7.12s/it]Testing DataLoader 0:  30%|██▉       | 47/158 [06:11<13:13,  7.15s/it]Testing DataLoader 0:  30%|██▉       | 47/158 [06:11<13:13,  7.15s/it]Testing DataLoader 0:  30%|███       | 48/158 [06:18<13:07,  7.16s/it]Testing DataLoader 0:  30%|███       | 48/158 [06:18<13:07,  7.16s/it]Testing DataLoader 0:  31%|███       | 49/158 [06:25<12:58,  7.14s/it]Testing DataLoader 0:  31%|███       | 49/158 [06:25<12:58,  7.14s/it]Testing DataLoader 0:  32%|███▏      | 50/158 [06:32<12:41,  7.05s/it]Testing DataLoader 0:  32%|███▏      | 50/158 [06:32<12:41,  7.05s/it]Testing DataLoader 0:  32%|███▏      | 51/158 [06:39<12:36,  7.07s/it]Testing DataLoader 0:  32%|███▏      | 51/158 [06:39<12:36,  7.07s/it]Testing DataLoader 0:  33%|███▎      | 52/158 [06:46<12:16,  6.94s/it]Testing DataLoader 0:  33%|███▎      | 52/158 [06:46<12:16,  6.94s/it]Testing DataLoader 0:  34%|███▎      | 53/158 [06:53<12:22,  7.07s/it]Testing DataLoader 0:  34%|███▎      | 53/158 [06:53<12:22,  7.07s/it]Testing DataLoader 0:  34%|███▍      | 54/158 [07:01<12:39,  7.30s/it]Testing DataLoader 0:  34%|███▍      | 54/158 [07:01<12:39,  7.30s/it]Testing DataLoader 0:  35%|███▍      | 55/158 [07:08<12:22,  7.21s/it]Testing DataLoader 0:  35%|███▍      | 55/158 [07:08<12:22,  7.21s/it]Testing DataLoader 0:  35%|███▌      | 56/158 [07:15<12:10,  7.16s/it]Testing DataLoader 0:  35%|███▌      | 56/158 [07:15<12:10,  7.16s/it]Testing DataLoader 0:  36%|███▌      | 57/158 [07:22<11:49,  7.02s/it]Testing DataLoader 0:  36%|███▌      | 57/158 [07:22<11:49,  7.02s/it]Testing DataLoader 0:  37%|███▋      | 58/158 [07:29<11:42,  7.03s/it]Testing DataLoader 0:  37%|███▋      | 58/158 [07:29<11:42,  7.03s/it]Testing DataLoader 0:  37%|███▋      | 59/158 [07:35<11:30,  6.98s/it]Testing DataLoader 0:  37%|███▋      | 59/158 [07:35<11:30,  6.98s/it]Testing DataLoader 0:  38%|███▊      | 60/158 [07:42<11:22,  6.97s/it]Testing DataLoader 0:  38%|███▊      | 60/158 [07:42<11:22,  6.97s/it]Testing DataLoader 0:  39%|███▊      | 61/158 [07:49<11:01,  6.82s/it]Testing DataLoader 0:  39%|███▊      | 61/158 [07:49<11:01,  6.82s/it]Testing DataLoader 0:  39%|███▉      | 62/158 [07:56<11:04,  6.92s/it]Testing DataLoader 0:  39%|███▉      | 62/158 [07:56<11:04,  6.92s/it]Testing DataLoader 0:  40%|███▉      | 63/158 [08:02<10:42,  6.77s/it]Testing DataLoader 0:  40%|███▉      | 63/158 [08:02<10:42,  6.77s/it]Testing DataLoader 0:  41%|████      | 64/158 [08:10<11:03,  7.06s/it]Testing DataLoader 0:  41%|████      | 64/158 [08:10<11:03,  7.06s/it]Testing DataLoader 0:  41%|████      | 65/158 [08:17<10:56,  7.05s/it]Testing DataLoader 0:  41%|████      | 65/158 [08:17<10:56,  7.05s/it]Testing DataLoader 0:  42%|████▏     | 66/158 [08:24<10:51,  7.08s/it]Testing DataLoader 0:  42%|████▏     | 66/158 [08:24<10:51,  7.08s/it]Testing DataLoader 0:  42%|████▏     | 67/158 [08:32<10:56,  7.22s/it]Testing DataLoader 0:  42%|████▏     | 67/158 [08:32<10:56,  7.22s/it]Testing DataLoader 0:  43%|████▎     | 68/158 [08:38<10:29,  6.99s/it]Testing DataLoader 0:  43%|████▎     | 68/158 [08:38<10:29,  6.99s/it]Testing DataLoader 0:  44%|████▎     | 69/158 [08:45<10:06,  6.81s/it]Testing DataLoader 0:  44%|████▎     | 69/158 [08:45<10:06,  6.81s/it]Testing DataLoader 0:  44%|████▍     | 70/158 [08:52<10:03,  6.86s/it]Testing DataLoader 0:  44%|████▍     | 70/158 [08:52<10:03,  6.86s/it]Testing DataLoader 0:  45%|████▍     | 71/158 [08:59<10:00,  6.90s/it]Testing DataLoader 0:  45%|████▍     | 71/158 [08:59<10:00,  6.90s/it]Testing DataLoader 0:  46%|████▌     | 72/158 [09:06<10:01,  6.99s/it]Testing DataLoader 0:  46%|████▌     | 72/158 [09:06<10:01,  6.99s/it]Testing DataLoader 0:  46%|████▌     | 73/158 [09:13<09:49,  6.93s/it]Testing DataLoader 0:  46%|████▌     | 73/158 [09:13<09:49,  6.93s/it]Testing DataLoader 0:  47%|████▋     | 74/158 [09:19<09:33,  6.83s/it]Testing DataLoader 0:  47%|████▋     | 74/158 [09:19<09:33,  6.83s/it]Testing DataLoader 0:  47%|████▋     | 75/158 [09:26<09:26,  6.82s/it]Testing DataLoader 0:  47%|████▋     | 75/158 [09:26<09:26,  6.82s/it]Testing DataLoader 0:  48%|████▊     | 76/158 [09:33<09:31,  6.96s/it]Testing DataLoader 0:  48%|████▊     | 76/158 [09:33<09:31,  6.96s/it]Testing DataLoader 0:  49%|████▊     | 77/158 [09:40<09:16,  6.87s/it]Testing DataLoader 0:  49%|████▊     | 77/158 [09:40<09:16,  6.87s/it]Testing DataLoader 0:  49%|████▉     | 78/158 [09:47<09:14,  6.93s/it]Testing DataLoader 0:  49%|████▉     | 78/158 [09:47<09:14,  6.93s/it]Testing DataLoader 0:  50%|█████     | 79/158 [09:54<09:14,  7.02s/it]Testing DataLoader 0:  50%|█████     | 79/158 [09:54<09:14,  7.02s/it]Testing DataLoader 0:  51%|█████     | 80/158 [10:01<09:02,  6.96s/it]Testing DataLoader 0:  51%|█████     | 80/158 [10:01<09:02,  6.96s/it]Testing DataLoader 0:  51%|█████▏    | 81/158 [10:08<08:53,  6.93s/it]Testing DataLoader 0:  51%|█████▏    | 81/158 [10:08<08:53,  6.93s/it]Testing DataLoader 0:  52%|█████▏    | 82/158 [10:15<08:47,  6.94s/it]Testing DataLoader 0:  52%|█████▏    | 82/158 [10:15<08:47,  6.94s/it]Testing DataLoader 0:  53%|█████▎    | 83/158 [10:22<08:44,  6.99s/it]Testing DataLoader 0:  53%|█████▎    | 83/158 [10:22<08:44,  6.99s/it]Testing DataLoader 0:  53%|█████▎    | 84/158 [10:29<08:36,  6.98s/it]Testing DataLoader 0:  53%|█████▎    | 84/158 [10:29<08:36,  6.98s/it]Testing DataLoader 0:  54%|█████▍    | 85/158 [10:37<08:41,  7.15s/it]Testing DataLoader 0:  54%|█████▍    | 85/158 [10:37<08:41,  7.15s/it]Testing DataLoader 0:  54%|█████▍    | 86/158 [10:44<08:29,  7.08s/it]Testing DataLoader 0:  54%|█████▍    | 86/158 [10:44<08:29,  7.08s/it]Testing DataLoader 0:  55%|█████▌    | 87/158 [10:50<08:06,  6.85s/it]Testing DataLoader 0:  55%|█████▌    | 87/158 [10:50<08:06,  6.85s/it]Testing DataLoader 0:  56%|█████▌    | 88/158 [10:57<08:02,  6.90s/it]Testing DataLoader 0:  56%|█████▌    | 88/158 [10:57<08:02,  6.90s/it]Testing DataLoader 0:  56%|█████▋    | 89/158 [11:04<07:59,  6.95s/it]Testing DataLoader 0:  56%|█████▋    | 89/158 [11:04<07:59,  6.95s/it]Testing DataLoader 0:  57%|█████▋    | 90/158 [11:12<08:14,  7.27s/it]Testing DataLoader 0:  57%|█████▋    | 90/158 [11:12<08:14,  7.27s/it]Testing DataLoader 0:  58%|█████▊    | 91/158 [11:20<08:14,  7.37s/it]Testing DataLoader 0:  58%|█████▊    | 91/158 [11:20<08:14,  7.37s/it]Testing DataLoader 0:  58%|█████▊    | 92/158 [11:27<07:59,  7.26s/it]Testing DataLoader 0:  58%|█████▊    | 92/158 [11:27<07:59,  7.26s/it]Testing DataLoader 0:  59%|█████▉    | 93/158 [11:34<07:49,  7.22s/it]Testing DataLoader 0:  59%|█████▉    | 93/158 [11:34<07:49,  7.22s/it]Testing DataLoader 0:  59%|█████▉    | 94/158 [11:42<07:57,  7.45s/it]Testing DataLoader 0:  59%|█████▉    | 94/158 [11:42<07:57,  7.45s/it]Testing DataLoader 0:  60%|██████    | 95/158 [11:48<07:36,  7.25s/it]Testing DataLoader 0:  60%|██████    | 95/158 [11:48<07:36,  7.25s/it]Testing DataLoader 0:  61%|██████    | 96/158 [11:56<07:34,  7.33s/it]Testing DataLoader 0:  61%|██████    | 96/158 [11:56<07:34,  7.33s/it]Testing DataLoader 0:  61%|██████▏   | 97/158 [12:03<07:16,  7.15s/it]Testing DataLoader 0:  61%|██████▏   | 97/158 [12:03<07:16,  7.15s/it]Testing DataLoader 0:  62%|██████▏   | 98/158 [12:09<07:01,  7.02s/it]Testing DataLoader 0:  62%|██████▏   | 98/158 [12:09<07:01,  7.02s/it]Testing DataLoader 0:  63%|██████▎   | 99/158 [12:17<06:59,  7.11s/it]Testing DataLoader 0:  63%|██████▎   | 99/158 [12:17<06:59,  7.11s/it]Testing DataLoader 0:  63%|██████▎   | 100/158 [12:24<06:54,  7.15s/it]Testing DataLoader 0:  63%|██████▎   | 100/158 [12:24<06:54,  7.15s/it]Testing DataLoader 0:  64%|██████▍   | 101/158 [12:30<06:34,  6.91s/it]Testing DataLoader 0:  64%|██████▍   | 101/158 [12:30<06:34,  6.91s/it]Testing DataLoader 0:  65%|██████▍   | 102/158 [12:37<06:24,  6.87s/it]Testing DataLoader 0:  65%|██████▍   | 102/158 [12:37<06:24,  6.87s/it]Testing DataLoader 0:  65%|██████▌   | 103/158 [12:44<06:16,  6.85s/it]Testing DataLoader 0:  65%|██████▌   | 103/158 [12:44<06:16,  6.85s/it]Testing DataLoader 0:  66%|██████▌   | 104/158 [12:51<06:07,  6.80s/it]Testing DataLoader 0:  66%|██████▌   | 104/158 [12:51<06:07,  6.80s/it]Testing DataLoader 0:  66%|██████▋   | 105/158 [12:58<06:06,  6.91s/it]Testing DataLoader 0:  66%|██████▋   | 105/158 [12:58<06:06,  6.91s/it]Testing DataLoader 0:  67%|██████▋   | 106/158 [13:05<05:58,  6.89s/it]Testing DataLoader 0:  67%|██████▋   | 106/158 [13:05<05:58,  6.89s/it]Testing DataLoader 0:  68%|██████▊   | 107/158 [13:11<05:48,  6.84s/it]Testing DataLoader 0:  68%|██████▊   | 107/158 [13:11<05:48,  6.84s/it]Testing DataLoader 0:  68%|██████▊   | 108/158 [13:18<05:46,  6.92s/it]Testing DataLoader 0:  68%|██████▊   | 108/158 [13:18<05:46,  6.92s/it]Testing DataLoader 0:  69%|██████▉   | 109/158 [13:25<05:32,  6.78s/it]Testing DataLoader 0:  69%|██████▉   | 109/158 [13:25<05:32,  6.78s/it]Testing DataLoader 0:  70%|██████▉   | 110/158 [13:31<05:20,  6.69s/it]Testing DataLoader 0:  70%|██████▉   | 110/158 [13:31<05:20,  6.69s/it]Testing DataLoader 0:  70%|███████   | 111/158 [13:38<05:11,  6.62s/it]Testing DataLoader 0:  70%|███████   | 111/158 [13:38<05:11,  6.62s/it]Testing DataLoader 0:  71%|███████   | 112/158 [13:44<04:58,  6.50s/it]Testing DataLoader 0:  71%|███████   | 112/158 [13:44<04:58,  6.50s/it]Testing DataLoader 0:  72%|███████▏  | 113/158 [13:51<04:55,  6.57s/it]Testing DataLoader 0:  72%|███████▏  | 113/158 [13:51<04:55,  6.57s/it]Testing DataLoader 0:  72%|███████▏  | 114/158 [13:57<04:50,  6.59s/it]Testing DataLoader 0:  72%|███████▏  | 114/158 [13:57<04:50,  6.59s/it]Testing DataLoader 0:  73%|███████▎  | 115/158 [14:04<04:43,  6.59s/it]Testing DataLoader 0:  73%|███████▎  | 115/158 [14:04<04:43,  6.59s/it]Testing DataLoader 0:  73%|███████▎  | 116/158 [14:11<04:40,  6.68s/it]Testing DataLoader 0:  73%|███████▎  | 116/158 [14:11<04:40,  6.68s/it]Testing DataLoader 0:  74%|███████▍  | 117/158 [14:17<04:32,  6.64s/it]Testing DataLoader 0:  74%|███████▍  | 117/158 [14:17<04:32,  6.64s/it]Testing DataLoader 0:  75%|███████▍  | 118/158 [14:24<04:28,  6.71s/it]Testing DataLoader 0:  75%|███████▍  | 118/158 [14:24<04:28,  6.71s/it]Testing DataLoader 0:  75%|███████▌  | 119/158 [14:31<04:18,  6.64s/it]Testing DataLoader 0:  75%|███████▌  | 119/158 [14:31<04:18,  6.64s/it]Testing DataLoader 0:  76%|███████▌  | 120/158 [14:38<04:15,  6.72s/it]Testing DataLoader 0:  76%|███████▌  | 120/158 [14:38<04:15,  6.72s/it]Testing DataLoader 0:  77%|███████▋  | 121/158 [14:44<04:08,  6.71s/it]Testing DataLoader 0:  77%|███████▋  | 121/158 [14:44<04:08,  6.71s/it]Testing DataLoader 0:  77%|███████▋  | 122/158 [14:51<04:04,  6.79s/it]Testing DataLoader 0:  77%|███████▋  | 122/158 [14:51<04:04,  6.79s/it]Testing DataLoader 0:  78%|███████▊  | 123/158 [14:58<03:53,  6.67s/it]Testing DataLoader 0:  78%|███████▊  | 123/158 [14:58<03:53,  6.67s/it]Testing DataLoader 0:  78%|███████▊  | 124/158 [15:05<03:49,  6.74s/it]Testing DataLoader 0:  78%|███████▊  | 124/158 [15:05<03:49,  6.74s/it]Testing DataLoader 0:  79%|███████▉  | 125/158 [15:11<03:40,  6.68s/it]Testing DataLoader 0:  79%|███████▉  | 125/158 [15:11<03:40,  6.68s/it]Testing DataLoader 0:  80%|███████▉  | 126/158 [15:18<03:31,  6.60s/it]Testing DataLoader 0:  80%|███████▉  | 126/158 [15:18<03:31,  6.60s/it]Testing DataLoader 0:  80%|████████  | 127/158 [15:24<03:26,  6.67s/it]Testing DataLoader 0:  80%|████████  | 127/158 [15:24<03:26,  6.67s/it]Testing DataLoader 0:  81%|████████  | 128/158 [15:31<03:21,  6.72s/it]Testing DataLoader 0:  81%|████████  | 128/158 [15:31<03:21,  6.72s/it]Testing DataLoader 0:  82%|████████▏ | 129/158 [15:38<03:12,  6.64s/it]Testing DataLoader 0:  82%|████████▏ | 129/158 [15:38<03:12,  6.64s/it]Testing DataLoader 0:  82%|████████▏ | 130/158 [15:44<03:02,  6.53s/it]Testing DataLoader 0:  82%|████████▏ | 130/158 [15:44<03:02,  6.53s/it]Testing DataLoader 0:  83%|████████▎ | 131/158 [15:50<02:55,  6.48s/it]Testing DataLoader 0:  83%|████████▎ | 131/158 [15:50<02:55,  6.48s/it]Testing DataLoader 0:  84%|████████▎ | 132/158 [15:57<02:46,  6.41s/it]Testing DataLoader 0:  84%|████████▎ | 132/158 [15:57<02:46,  6.41s/it]Testing DataLoader 0:  84%|████████▍ | 133/158 [16:03<02:42,  6.50s/it]Testing DataLoader 0:  84%|████████▍ | 133/158 [16:03<02:42,  6.50s/it]Testing DataLoader 0:  85%|████████▍ | 134/158 [16:09<02:33,  6.38s/it]Testing DataLoader 0:  85%|████████▍ | 134/158 [16:09<02:33,  6.38s/it]Testing DataLoader 0:  85%|████████▌ | 135/158 [16:16<02:26,  6.35s/it]Testing DataLoader 0:  85%|████████▌ | 135/158 [16:16<02:26,  6.35s/it]Testing DataLoader 0:  86%|████████▌ | 136/158 [16:22<02:19,  6.36s/it]Testing DataLoader 0:  86%|████████▌ | 136/158 [16:22<02:19,  6.36s/it]Testing DataLoader 0:  87%|████████▋ | 137/158 [16:28<02:13,  6.36s/it]Testing DataLoader 0:  87%|████████▋ | 137/158 [16:28<02:13,  6.36s/it]Testing DataLoader 0:  87%|████████▋ | 138/158 [16:34<02:04,  6.22s/it]Testing DataLoader 0:  87%|████████▋ | 138/158 [16:34<02:04,  6.22s/it]Testing DataLoader 0:  88%|████████▊ | 139/158 [16:40<01:57,  6.21s/it]Testing DataLoader 0:  88%|████████▊ | 139/158 [16:40<01:57,  6.21s/it]Testing DataLoader 0:  89%|████████▊ | 140/158 [16:47<01:52,  6.23s/it]Testing DataLoader 0:  89%|████████▊ | 140/158 [16:47<01:52,  6.23s/it]Testing DataLoader 0:  89%|████████▉ | 141/158 [16:53<01:46,  6.26s/it]Testing DataLoader 0:  89%|████████▉ | 141/158 [16:53<01:46,  6.26s/it]Testing DataLoader 0:  90%|████████▉ | 142/158 [16:59<01:40,  6.26s/it]Testing DataLoader 0:  90%|████████▉ | 142/158 [16:59<01:40,  6.26s/it]Testing DataLoader 0:  91%|█████████ | 143/158 [17:06<01:36,  6.45s/it]Testing DataLoader 0:  91%|█████████ | 143/158 [17:06<01:36,  6.45s/it]Testing DataLoader 0:  91%|█████████ | 144/158 [17:13<01:29,  6.40s/it]Testing DataLoader 0:  91%|█████████ | 144/158 [17:13<01:29,  6.40s/it]Testing DataLoader 0:  92%|█████████▏| 145/158 [17:19<01:22,  6.36s/it]Testing DataLoader 0:  92%|█████████▏| 145/158 [17:19<01:22,  6.36s/it]Testing DataLoader 0:  92%|█████████▏| 146/158 [17:25<01:16,  6.36s/it]Testing DataLoader 0:  92%|█████████▏| 146/158 [17:25<01:16,  6.36s/it]Testing DataLoader 0:  93%|█████████▎| 147/158 [17:32<01:10,  6.45s/it]Testing DataLoader 0:  93%|█████████▎| 147/158 [17:32<01:10,  6.45s/it]Testing DataLoader 0:  94%|█████████▎| 148/158 [17:38<01:03,  6.37s/it]Testing DataLoader 0:  94%|█████████▎| 148/158 [17:38<01:03,  6.37s/it]Testing DataLoader 0:  94%|█████████▍| 149/158 [17:45<00:59,  6.57s/it]Testing DataLoader 0:  94%|█████████▍| 149/158 [17:45<00:59,  6.57s/it]Testing DataLoader 0:  95%|█████████▍| 150/158 [17:52<00:52,  6.55s/it]Testing DataLoader 0:  95%|█████████▍| 150/158 [17:52<00:52,  6.55s/it]Testing DataLoader 0:  96%|█████████▌| 151/158 [17:58<00:46,  6.58s/it]Testing DataLoader 0:  96%|█████████▌| 151/158 [17:58<00:46,  6.58s/it]Testing DataLoader 0:  96%|█████████▌| 152/158 [18:05<00:39,  6.60s/it]Testing DataLoader 0:  96%|█████████▌| 152/158 [18:05<00:39,  6.60s/it]Testing DataLoader 0:  97%|█████████▋| 153/158 [18:11<00:32,  6.47s/it]Testing DataLoader 0:  97%|█████████▋| 153/158 [18:11<00:32,  6.47s/it]Testing DataLoader 0:  97%|█████████▋| 154/158 [18:17<00:25,  6.42s/it]Testing DataLoader 0:  97%|█████████▋| 154/158 [18:17<00:25,  6.42s/it]Testing DataLoader 0:  98%|█████████▊| 155/158 [18:24<00:19,  6.44s/it]Testing DataLoader 0:  98%|█████████▊| 155/158 [18:24<00:19,  6.44s/it]Testing DataLoader 0:  99%|█████████▊| 156/158 [18:30<00:12,  6.34s/it]Testing DataLoader 0:  99%|█████████▊| 156/158 [18:30<00:12,  6.34s/it]Testing DataLoader 0:  99%|█████████▉| 157/158 [18:37<00:06,  6.47s/it]Testing DataLoader 0:  99%|█████████▉| 157/158 [18:37<00:06,  6.47s/it]Testing DataLoader 0: 100%|██████████| 158/158 [18:41<00:00,  5.83s/it]Testing DataLoader 0: 100%|██████████| 158/158 [18:41<00:00,  5.83s/it]Loading and preparing results...     
+DONE (t=0.02s)
+creating index...
+index created!
+computing accuracy
+Finshed Percent: [--------------------] 0% Finshed Percent: [--------------------] 1% Finshed Percent: [#-------------------] 3% Finshed Percent: [#-------------------] 5% Finshed Percent: [##------------------] 7% Finshed Percent: [##------------------] 9% Finshed Percent: [##------------------] 11% Finshed Percent: [###-----------------] 13% Finshed Percent: [###-----------------] 15% Finshed Percent: [####----------------] 17% Finshed Percent: [####----------------] 19% Finshed Percent: [####----------------] 21% Finshed Percent: [#####---------------] 23% Finshed Percent: [#####---------------] 25% Finshed Percent: [######--------------] 27% Finshed Percent: [######--------------] 29% Finshed Percent: [######--------------] 31% Finshed Percent: [#######-------------] 33% Finshed Percent: [#######-------------] 35% Finshed Percent: [########------------] 37% Finshed Percent: [########------------] 39% Finshed Percent: [########------------] 41% Finshed Percent: [#########-----------] 43% Finshed Percent: [#########-----------] 45% Finshed Percent: [##########----------] 47% Finshed Percent: [##########----------] 49% Finshed Percent: [##########----------] 51% Finshed Percent: [###########---------] 53% Finshed Percent: [###########---------] 55% Finshed Percent: [###########---------] 57% Finshed Percent: [############--------] 59% Finshed Percent: [############--------] 61% Finshed Percent: [#############-------] 63% Finshed Percent: [#############-------] 65% Finshed Percent: [#############-------] 67% Finshed Percent: [##############------] 69% Finshed Percent: [##############------] 71% Finshed Percent: [###############-----] 73% Finshed Percent: [###############-----] 75% Finshed Percent: [###############-----] 77% Finshed Percent: [################----] 79% Finshed Percent: [################----] 81% Finshed Percent: [#################---] 83% Finshed Percent: [#################---] 85% Finshed Percent: [#################---] 87% Finshed Percent: [##################--] 89% Finshed Percent: [##################--] 91% Finshed Percent: [###################-] 93% Finshed Percent: [###################-] 95% Finshed Percent: [###################-] 97% Finshed Percent: [####################] 99% Done computing accuracy
+Overall Accuracy is: 51.63
+
+Per Question Type Accuracy is the following:
+one : 47.82
+eight : 49.98
+other : 53.47
+seven : 49.67
+four : 57.32
+five : 53.19
+three : 50.98
+nine : 40.00
+ten : 55.19
+two : 55.70
+six : 50.21
+
+
+Per Answer Type Accuracy is the following:
+other : 51.63
+
+
+{'test_evaluation/accuracy_AnswerType_other': 51.63,
+ 'test_evaluation/accuracy_QuestionType_eight': 49.98,
+ 'test_evaluation/accuracy_QuestionType_five': 53.19,
+ 'test_evaluation/accuracy_QuestionType_four': 57.32,
+ 'test_evaluation/accuracy_QuestionType_nine': 40.0,
+ 'test_evaluation/accuracy_QuestionType_one': 47.82,
+ 'test_evaluation/accuracy_QuestionType_other': 53.47,
+ 'test_evaluation/accuracy_QuestionType_seven': 49.67,
+ 'test_evaluation/accuracy_QuestionType_six': 50.21,
+ 'test_evaluation/accuracy_QuestionType_ten': 55.19,
+ 'test_evaluation/accuracy_QuestionType_three': 50.98,
+ 'test_evaluation/accuracy_QuestionType_two': 55.7,
+ 'test_evaluation/accuracy_overall': 51.63,
+ 'test_evaluation/epoch': 6,
+ 'test_evaluation/exact_match_at_1': 0.5618311533888228,
+ 'test_evaluation/exact_match_at_2': 0.6858898137138327,
+ 'test_evaluation/exact_match_at_3': 0.7160126833135156,
+ 'test_evaluation/exact_match_at_4': 0.7265160523186682,
+ 'test_evaluation/exact_match_at_5': 0.727705112960761,
+ 'test_evaluation/failed_hit': 0.2534284581847008,
+ 'test_evaluation/failed_no_hit': 0.21311930241775665,
+ 'test_evaluation/gold_precision_at_5': 0.37360285374554103,
+ 'test_evaluation/gold_recall_at_5': 0.6652794292508918,
+ 'test_evaluation/n_retrieved_docs': 5,
+ 'test_evaluation/precision_at_5': 0.5183511692429646,
+ 'test_evaluation/recall_at_5': 0.8127229488703924,
+ 'test_evaluation/selected_failed_hit': 0.2861672611969877,
+ 'test_evaluation/selected_failed_no_hit': 0.15200158541418946,
+ 'test_evaluation/selected_successful_hit': 0.41954022988505746,
+ 'test_evaluation/selected_successful_no_hit': 0.14229092350376535,
+ 'test_evaluation/successful_hit': 0.35723345223939756,
+ 'test_evaluation/successful_no_hit': 0.17621878715814507}
+{'retrieval_predictions_epoch6_MODE(test)_SET(TEST)_K(5)': <wandb.data_types.Table object at 0x147713922eb0>}
+Testing DataLoader 0: 100%|██████████| 158/158 [18:49<00:00,  7.15s/it]
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+                Test metric                               DataLoader 0
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+ test_evaluation/accuracy_AnswerType_other             51.630001068115234
+test_evaluation/accuracy_QuestionType_eight             49.97999954223633
+test_evaluation/accuracy_QuestionType_five             53.189998626708984
+test_evaluation/accuracy_QuestionType_four              57.31999969482422
+test_evaluation/accuracy_QuestionType_nine                    40.0
+ test_evaluation/accuracy_QuestionType_one              47.81999969482422
+test_evaluation/accuracy_QuestionType_other            53.470001220703125
+test_evaluation/accuracy_QuestionType_seven             49.66999816894531
+ test_evaluation/accuracy_QuestionType_six             50.209999084472656
+ test_evaluation/accuracy_QuestionType_ten             55.189998626708984
+test_evaluation/accuracy_QuestionType_three             50.97999954223633
+ test_evaluation/accuracy_QuestionType_two              55.70000076293945
+     test_evaluation/accuracy_overall                  51.630001068115234
+           test_evaluation/epoch                               6.0
+     test_evaluation/exact_match_at_1                  0.5618311762809753
+     test_evaluation/exact_match_at_2                  0.6858898401260376
+     test_evaluation/exact_match_at_3                  0.7160126566886902
+     test_evaluation/exact_match_at_4                   0.72651606798172
+     test_evaluation/exact_match_at_5                  0.7277051210403442
+        test_evaluation/failed_hit                     0.25342845916748047
+       test_evaluation/failed_no_hit                   0.2131192982196808
+    test_evaluation/gold_precision_at_5                0.37360286712646484
+     test_evaluation/gold_recall_at_5                  0.6652794480323792
+     test_evaluation/n_retrieved_docs                          5.0
+      test_evaluation/precision_at_5                   0.5183511972427368
+        test_evaluation/recall_at_5                     0.81272292137146
+    test_evaluation/selected_failed_hit                0.2861672639846802
+  test_evaluation/selected_failed_no_hit               0.15200158953666687
+  test_evaluation/selected_successful_hit              0.4195402264595032
+test_evaluation/selected_successful_no_hit             0.14229092001914978
+      test_evaluation/successful_hit                    0.357233464717865
+     test_evaluation/successful_no_hit                 0.17621879279613495
+────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────

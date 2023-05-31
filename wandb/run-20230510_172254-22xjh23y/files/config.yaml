@@ -1,0 +1,514 @@
+wandb_version: 1
+
+DATA_FOLDER:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Data
+EXPERIMENT_FOLDER:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Experiments
+TENSORBOARD_FOLDER:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Data_TB/tb_logs
+WANDB:
+  desc: null
+  value:
+    entity: xl544
+    project: RAVQA
+    tags:
+    - OKVQA
+    - RAG
+    - freeze_question_encoder
+    - 
+    name: OKVQA_RA-VQA-FrDPR_FullCorpus.19791441
+cache:
+  desc: null
+  value:
+    default_folder: ../data/ok-vqa/cache
+    regenerate:
+      ocr_feature_preprocessed: 0
+      test_data_preprocessed: 0
+      train_data_preprocessed: 0
+      vinvl_feature_preprocessed: 0
+cuda:
+  desc: null
+  value: 0
+data_loader:
+  desc: null
+  value:
+    additional:
+      max_decoder_source_length: 512
+      max_source_length: 512
+      max_target_length: 10
+      num_knowledge_passages: 5
+    dataset_modules:
+      module_dict:
+        LoadGoogleOCRFeatures:
+          config:
+            combine_with_vinvl: true
+            test: ../data/ok-vqa/pre-extracted_features/OCR/valid
+            train: ../data/ok-vqa/pre-extracted_features/OCR/train
+          option: default
+          type: LoadGoogleOCRFeatures
+        LoadGoogleSearchAnnotations:
+          config:
+            annotations_path:
+              test: ../data/ok-vqa/pre-extracted_features/passages/retriever_test.json
+              train: ../data/ok-vqa/pre-extracted_features/passages/retriever_train.json
+              valid: ../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json
+          option: default
+          type: LoadGoogleSearchAnnotations
+        LoadGoogleSearchPassageData:
+          config:
+            passage_data_path:
+              full: ../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv
+              train: ../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv
+            use_full_split: true
+          option: default
+          type: LoadGoogleSearchPassageData
+        LoadOKVQAData:
+          config:
+            image_data_path:
+              test: ../data/ok-vqa/val2014
+              train: ../data/ok-vqa/train2014
+            vqa_data_path:
+              annotation_files:
+                test: ../data/ok-vqa/mscoco_val2014_annotations.json
+                train: ../data/ok-vqa/mscoco_train2014_annotations.json
+              question_files:
+                test: ../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json
+                train: ../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json
+          option: default
+          type: LoadOKVQAData
+        LoadOscarCaptionFeatures:
+          config:
+            test: ../data/ok-vqa/pre-extracted_features/captions/test_predictions.json
+            train: ../data/ok-vqa/pre-extracted_features/captions/train_predictions.json
+            valid: ../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json
+          option: default
+          type: LoadOscarCaptionFeatures
+        LoadPretrainedDPROutputForGoogleSearchPassage:
+          config:
+            pretrained_dpr_outputs:
+              test: ../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json
+              train: ../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json
+          option: none
+          type: LoadPretrainedDPROutputForGoogleSearchPassage
+        LoadVinVLFeatures:
+          config:
+            test: ../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv
+            train: ../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv
+          option: default
+          type: LoadVinVLFeatures
+      module_list:
+      - LoadVinVLFeatures
+      - LoadGoogleOCRFeatures
+      - LoadOscarCaptionFeatures
+      - LoadOKVQAData
+      - LoadGoogleSearchPassageData
+    dataset_type: OKVQADataset
+    dummy_dataloader: 0
+    index_files:
+      index_passages_path: ../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset
+      index_path: ../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss
+    type: DataLoaderOKVQAWithKnowledge
+experiment_name:
+  desc: null
+  value: OKVQA_RA-VQA-FrDPR_FullCorpus.19791441
+gpu_device:
+  desc: null
+  value: 0
+ignore_pretrained_weights:
+  desc: null
+  value: []
+metrics:
+  desc: null
+  value:
+  - name: compute_exact_match
+  - name: compute_retrieval_metrics
+  - name: compute_okvqa_scores
+model_config:
+  desc: null
+  value:
+    DECODER_SPECIAL_TOKENS:
+      additional_special_tokens:
+      - <extra_id_0>
+      - <extra_id_1>
+      - <extra_id_2>
+      - <extra_id_3>
+      - <extra_id_4>
+      - <extra_id_5>
+      - <extra_id_6>
+      - <extra_id_7>
+      - <extra_id_8>
+      - <extra_id_9>
+      - <extra_id_10>
+      - <extra_id_11>
+      - <extra_id_12>
+      - <extra_id_13>
+      - <extra_id_14>
+      - <extra_id_15>
+      - <extra_id_16>
+      - <extra_id_17>
+      - <extra_id_18>
+      - <extra_id_19>
+      - <extra_id_20>
+      - <extra_id_21>
+      - <extra_id_22>
+      - <extra_id_23>
+      - <extra_id_24>
+      - <extra_id_25>
+      - <extra_id_26>
+      - <extra_id_27>
+      - <extra_id_28>
+      - <extra_id_29>
+      - <extra_id_30>
+      - <extra_id_31>
+      - <extra_id_32>
+      - <extra_id_33>
+      - <extra_id_34>
+      - <extra_id_35>
+      - <extra_id_36>
+      - <extra_id_37>
+      - <extra_id_38>
+      - <extra_id_39>
+      - <extra_id_40>
+      - <extra_id_41>
+      - <extra_id_42>
+      - <extra_id_43>
+      - <extra_id_44>
+      - <extra_id_45>
+      - <extra_id_46>
+      - <extra_id_47>
+      - <extra_id_48>
+      - <extra_id_49>
+      - <extra_id_50>
+      - <extra_id_51>
+      - <extra_id_52>
+      - <extra_id_53>
+      - <extra_id_54>
+      - <extra_id_55>
+      - <extra_id_56>
+      - <extra_id_57>
+      - <extra_id_58>
+      - <extra_id_59>
+      - <extra_id_60>
+      - <extra_id_61>
+      - <extra_id_62>
+      - <extra_id_63>
+      - <extra_id_64>
+      - <extra_id_65>
+      - <extra_id_66>
+      - <extra_id_67>
+      - <extra_id_68>
+      - <extra_id_69>
+      - <extra_id_70>
+      - <extra_id_71>
+      - <extra_id_72>
+      - <extra_id_73>
+      - <extra_id_74>
+      - <extra_id_75>
+      - <extra_id_76>
+      - <extra_id_77>
+      - <extra_id_78>
+      - <extra_id_79>
+      - <extra_id_80>
+      - <extra_id_81>
+      - <extra_id_82>
+      - <extra_id_83>
+      - <extra_id_84>
+      - <extra_id_85>
+      - <extra_id_86>
+      - <extra_id_87>
+      - <extra_id_88>
+      - <extra_id_89>
+      - <extra_id_90>
+      - <extra_id_91>
+      - <extra_id_92>
+      - <extra_id_93>
+      - <extra_id_94>
+      - <extra_id_95>
+      - <extra_id_96>
+      - <extra_id_97>
+      - <extra_id_98>
+      - <extra_id_99>
+      - <BOV>
+      - <SOV>
+      - <EOV>
+      - <BOQ>
+      - <EOQ>
+      - <BOC>
+      - <EOC>
+      - <BOK>
+      - <EOK>
+      bos_token: <PAD>
+      pad_token: <PAD>
+    DecoderTokenizerClass: T5Tokenizer
+    DecoderTokenizerModelVersion: t5-large
+    GeneratorConfigClass: T5Config
+    GeneratorModelClass: T5ForConditionalGeneration
+    GeneratorModelVersion: t5-large
+    ModelClass: RagModel
+    QueryEncoderConfigClass: DPRConfig
+    QueryEncoderModelClass: DPRQuestionEncoder
+    QueryEncoderModelVersion: ../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder
+    RAVQA_loss_type: Approach6
+    SPECIAL_TOKENS:
+      additional_special_tokens:
+      - <BOV>
+      - <SOV>
+      - <EOV>
+      - <BOQ>
+      - <EOQ>
+      - <BOC>
+      - <EOC>
+      - <BOK>
+      - <EOK>
+    TokenizerClass: DPRQuestionEncoderTokenizer
+    TokenizerModelVersion: facebook/dpr-question_encoder-single-nq-base
+    base_model: RAG
+    decoder_input_modules:
+      module_list: []
+      postprocess_module_list: []
+    input_modules:
+      module_list:
+      - option: default
+        separation_tokens:
+          end: <EOQ>
+          start: <BOQ>
+        type: QuestionInput
+      - option: caption
+        separation_tokens:
+          end: <EOC>
+          start: <BOC>
+        type: TextBasedVisionInput
+      - attribute_max: 3
+        attribute_thres: 0.05
+        object_max: 40
+        ocr: 1
+        option: object
+        separation_tokens:
+          end: <EOV>
+          sep: <SOV>
+          start: <BOV>
+        type: TextBasedVisionInput
+      postprocess_module_list:
+      - option: default
+        type: PostProcessInputTokenization
+    loss_ratio:
+      additional_loss: 0
+      nll_loss: 1
+      rag_loss: 0
+      retrieval_pseudo_loss: 0
+    modules:
+    - freeze_question_encoder
+    - force_existence
+    output_modules:
+      module_list:
+      - option: default
+        type: GenerationOutput
+      postprocess_module_list:
+      - option: default
+        type: PostProcessOutputTokenization
+    pretrained: 1
+    rag_modules:
+      module_list: []
+platform_type:
+  desc: null
+  value: pytorch
+seed:
+  desc: null
+  value: 2021
+test:
+  desc: null
+  value:
+    additional:
+      multiprocessing: 4
+    batch_size: 32
+    evaluation_name: test_evaluation
+    load_best_model: 0
+    load_epoch: -1
+    load_model_path: ''
+    num_evaluation: 0
+train:
+  desc: null
+  value:
+    adam_epsilon: 1.0e-08
+    additional:
+      gradient_accumulation_steps: 16
+      gradient_clipping: 0
+      plugins: []
+      save_top_k: 1
+      save_top_k_metric: test/accuracy_overall
+      save_top_k_mode: max
+      warmup_steps: 0
+    batch_size: 2
+    epochs: 10
+    load_best_model: 0
+    load_epoch: -1
+    load_model_path: ''
+    lr: 6.0e-05
+    retriever_lr: 1.0e-05
+    save_interval: 1
+    scheduler: linear
+    type: RagExecutor
+valid:
+  desc: null
+  value:
+    additional: {}
+    batch_size: 32
+    break_interval: 3000
+    step_size: 1
+reset:
+  desc: null
+  value: false
+mode:
+  desc: null
+  value: train
+log_path:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19791441/train
+experiment_path:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19791441
+saved_model_path:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19791441/train/saved_model
+imgs_path:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19791441/train/imgs
+tensorboard_path:
+  desc: null
+  value: /rds/user/xl544/hpc-work/Data_TB/tb_logs/OKVQA_RA-VQA-FrDPR_FullCorpus.19791441
+args:
+  desc: null
+  value:
+    config: configs/okvqa/RAVQA.jsonnet
+    DATA_FOLDER: ''
+    EXPERIMENT_FOLDER: ''
+    mode: train
+    reset: false
+    experiment_name: OKVQA_RA-VQA-FrDPR_FullCorpus.19791441
+    tags: []
+    modules:
+    - freeze_question_encoder
+    - force_existence
+    log_prediction_tables: false
+    test_batch_size: -1
+    test_evaluation_name: ''
+    logger: true
+    checkpoint_callback: null
+    enable_checkpointing: true
+    default_root_dir: null
+    gradient_clip_val: null
+    gradient_clip_algorithm: null
+    process_position: 0
+    num_nodes: 1
+    num_processes: null
+    devices: '1'
+    gpus: null
+    auto_select_gpus: false
+    tpu_cores: null
+    ipus: null
+    log_gpu_memory: null
+    progress_bar_refresh_rate: null
+    enable_progress_bar: true
+    overfit_batches: 0.0
+    track_grad_norm: -1
+    check_val_every_n_epoch: 1
+    fast_dev_run: false
+    accumulate_grad_batches: null
+    max_epochs: null
+    min_epochs: null
+    max_steps: -1
+    min_steps: null
+    max_time: null
+    limit_train_batches: null
+    limit_val_batches: null
+    limit_test_batches: null
+    limit_predict_batches: null
+    val_check_interval: null
+    flush_logs_every_n_steps: null
+    log_every_n_steps: 50
+    accelerator: auto
+    strategy: null
+    sync_batchnorm: false
+    precision: 32
+    enable_model_summary: true
+    weights_summary: top
+    weights_save_path: null
+    num_sanity_val_steps: 2
+    resume_from_checkpoint: null
+    profiler: null
+    benchmark: null
+    deterministic: null
+    reload_dataloaders_every_n_epochs: 0
+    auto_lr_find: false
+    replace_sampler_ddp: true
+    detect_anomaly: false
+    auto_scale_batch_size: false
+    prepare_data_per_node: null
+    plugins: null
+    amp_backend: native
+    amp_level: null
+    move_metrics_to_cpu: false
+    multiple_trainloader_mode: max_size_cycle
+    stochastic_weight_avg: false
+    terminate_on_nan: null
+    opts:
+    - train.epochs=10
+    - train.batch_size=2
+    - valid.step_size=1
+    - valid.batch_size=32
+    - train.additional.gradient_accumulation_steps=16
+    - train.lr=0.00006
+    - train.retriever_lr=0.00001
+    - train.scheduler=linear
+    - data_loader.additional.num_knowledge_passages=5
+_wandb:
+  desc: null
+  value:
+    python_version: 3.8.13
+    cli_version: 0.15.2
+    framework: huggingface
+    huggingface_version: 4.12.5
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1683735774.077263
+    t:
+      1:
+      - 1
+      - 5
+      - 9
+      - 11
+      - 41
+      - 49
+      - 51
+      - 53
+      - 55
+      - 63
+      2:
+      - 1
+      - 5
+      - 9
+      - 11
+      - 41
+      - 49
+      - 51
+      - 53
+      - 55
+      - 63
+      3:
+      - 7
+      - 13
+      - 15
+      - 16
+      - 23
+      4: 3.8.13
+      5: 0.15.2
+      6: 4.12.5
+      8:
+      - 5
+    m:
+    - 1: trainer/global_step
+      6:
+      - 3

@@ -23,6 +23,19 @@ import pytorch_lightning as pl
 #from datasets import load_from_disk
 import time
 
+class MLP(nn.Module):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.model(x)
+
+    def __init__(self, sizes: Tuple[int, ...], bias=True, act=nn.Tanh):
+        super(MLP, self).__init__()
+        layers = []
+        for i in range(len(sizes) - 1):
+            layers.append(nn.Linear(sizes[i], sizes[i + 1], bias=bias))
+            if i < len(sizes) - 2:
+                layers.append(act())
+        self.model = nn.Sequential(*layers)
+
 class RagModel(pl.LightningModule):
     '''
     Class for RAG, re-implementation
@@ -64,7 +77,19 @@ class RagModel(pl.LightningModule):
             self.retrieve = self.static_retrieve
         else:
             self.retrieve = self.main_retrieve
-    
+
+        self.lm_embedding_size = self.generator.model_dim
+        print("\n\n Using MLP \n\n")
+        self.prefix_length = 10
+        self.prefix_size = 768  # dimensions of clip embedding how do get from somewhere?
+        self.clip_project = MLP(
+            (
+                self.prefix_size,
+                (self.lm_embedding_size * self.prefix_length) // 2,
+                self.lm_embedding_size * self.prefix_length,
+            )
+        )
+
     def init_retrieval(self):
         if 'read_static_retrieval_results' in self.config.model_config.modules:
             # Load static retrieval results
@@ -269,11 +294,12 @@ class RagModel(pl.LightningModule):
                                     max_length=self.config.data_loader.additional.max_decoder_source_length,
                                     truncation=True,
                                     return_tensors="pt")
+        
         generator_input_ids, generator_attention_mask = encoding.input_ids, encoding.attention_mask
         generator_input_ids = generator_input_ids.to(labels.device)
         generator_attention_mask = generator_attention_mask.to(labels.device)
         generator_decoder_input_ids = self.generator._shift_right(targets)
-
+        
         return EasyDict(
             generator_input_text_sequences=extended_input_text_sequences,
             generator_input_ids=generator_input_ids,
@@ -282,11 +308,35 @@ class RagModel(pl.LightningModule):
             generator_labels=targets,
         )
 
+
+    def insert_prefix_into_emb(self, batch_size, no_documents, batch_text_tokens, batch_text_masks, batch_prefix_projections, labels):
+        prefix_len = batch_prefix_projections.shape[1]
+        text_len = batch_text_tokens.shape[1]
+        emb_dim = batch_prefix_projections.shape[2]
+        batch_text_embeddings = self.generator.shared(batch_text_tokens)
+
+        embedding_out=torch.ones((no_documents*batch_size, prefix_len+text_len, emb_dim), dtype=int, device=labels.device)*-100.0 
+        mask_out=torch.ones((no_documents*batch_size, prefix_len+text_len),dtype=int, device=labels.device)*-100
+        batch_inds_for_broadcasting=[[i] for i in range(no_documents*batch_size)]
+        text_tokens_mask=torch.zeros((no_documents*batch_size, prefix_len+text_len),dtype=int, device=labels.device)
+        text_tokens_mask[batch_inds_for_broadcasting, torch.arange(text_len)+prefix_len] =1
+        embedding_out[text_tokens_mask.bool()]=batch_text_embeddings.view(-1,emb_dim)
+        for i in range(batch_size):
+            prefix_mask = torch.zeros((no_documents*batch_size, prefix_len+text_len),dtype=int, device=labels.device).bool()
+            prefix_mask[[[j] for j in range(i*no_documents, (i+1)*no_documents)], torch.arange(prefix_len, device=labels.device)]=1
+            embedding_out[prefix_mask] = batch_prefix_projections[i].repeat(no_documents,1,1).view(-1,emb_dim)
+
+        mask_out[~text_tokens_mask.bool()]=1
+        mask_out[text_tokens_mask.bool()] = batch_text_masks.view(-1)
+        return embedding_out, mask_out
+        
+
     def forward(self, input_ids: torch.Tensor,
                       attention_mask: torch.Tensor,
                       labels: torch.Tensor,
                       question_ids: List,
                       input_text_sequences: List,
+                      prefix: torch.Tensor,
                     **kwargs):
         
         batch_size = input_ids.shape[0]
@@ -320,19 +370,32 @@ class RagModel(pl.LightningModule):
         else:
             labels = labels.repeat_interleave(n_docs, 0)
 
+        prefix_projections = self.clip_project(prefix).view(
+            -1, self.prefix_length, self.lm_embedding_size
+        )
 
         # prepare inputs for generator
         generator_inputs = self.prepare_inputs_for_generator(input_text_sequences=input_text_sequences,
                                             retrieved_docs=retrieved_docs,
                                             labels=labels, n_docs=n_docs)
         
+        joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
+                                            batch_text_masks=generator_inputs.generator_attention_mask, 
+                                            batch_prefix_projections=prefix_projections,
+                                            labels=labels)
+        
+        #generator_outputs = self.generator(
+        #                    input_ids=generator_inputs.generator_input_ids,
+        #                    attention_mask=generator_inputs.generator_attention_mask,
+        #                    decoder_input_ids=generator_inputs.generator_decoder_input_ids,
+        #                    return_dict=True)
         
         generator_outputs = self.generator(
-                            input_ids=generator_inputs.generator_input_ids,
-                            attention_mask=generator_inputs.generator_attention_mask,
+                            inputs_embeds=joint_embeddings,
+                            attention_mask=joint_attention_masks,
                             decoder_input_ids=generator_inputs.generator_decoder_input_ids,
                             return_dict=True)
-        
+
         logits = generator_outputs.logits
 
         loss_dict = self.get_loss(
@@ -358,6 +421,7 @@ class RagModel(pl.LightningModule):
     def generate(self, input_ids: torch.Tensor,
                       attention_mask: torch.Tensor,
                       labels: torch.Tensor,
+                      prefix: torch.Tensor,
                       question_ids: List,
                       input_text_sequences: List,
                       n_docs: int=None,
@@ -378,6 +442,9 @@ class RagModel(pl.LightningModule):
         # populate labels
         labels = labels.repeat_interleave(n_docs, 0)
 
+        prefix_projections = self.clip_project(prefix).view(
+            -1, self.prefix_length, self.lm_embedding_size
+        )
         # prepare inputs for generator
         generator_inputs = self.prepare_inputs_for_generator(input_text_sequences=input_text_sequences,
                                             retrieved_docs=retrieved_docs,
@@ -434,7 +501,7 @@ class RagModel(pl.LightningModule):
             # Re-forward the generator, and use generation outputs as labels
             # obtain the loss of each (question, passage) pair
 
-            # shift genereation results to left by one token
+            # shift genereation results to left by one token make space for start token
             # <bos> answer </s> --> answer </s> </s>(0)
 
             pad_token_id = self.generator.config.pad_token_id

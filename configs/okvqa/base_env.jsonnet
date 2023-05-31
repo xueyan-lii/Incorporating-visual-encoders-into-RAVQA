@@ -62,7 +62,10 @@ local dpr_training_annotations = {
   "valid": "../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json",
   "test": "../data/ok-vqa/pre-extracted_features/passages/retriever_test.json",
 };
-
+local clip_embeddings = {
+  "train": "../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl",
+  "val": "../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl",
+};
 
 {
   "DATA_FOLDER": "",
@@ -127,6 +130,10 @@ local dpr_training_annotations = {
           "type": "LoadOscarCaptionFeatures", "option": "default",
           "config": caption_features,
         },
+        "LoadClipEmbeddings": {
+          "type": "EmbeddingInput", "option": "default",
+          "config": clip_embeddings,
+          },
         "LoadOKVQAData": {
           "type": "LoadOKVQAData", "option": "default",
           "config": {

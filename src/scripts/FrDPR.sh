@@ -25,31 +25,31 @@ JOBID=$SLURM_JOB_ID
 LOG=../logs/$EXP_NAME-log.$JOBID
 ERR=../logs/$EXP_NAME-err.$JOBID
 
-# python main.py \
-#    ../configs/okvqa/RAVQA.jsonnet  \
-#    --mode train  \
-#    --experiment_name ${EXP_NAME}.$JOBID \
-#    --accelerator auto --devices 1  \
-#    --modules freeze_question_encoder force_existence  \
-#    --opts train.epochs=10  \
-#            train.batch_size=2  \
-#            valid.step_size=1  \
-#            valid.batch_size=32  \
-#            train.additional.gradient_accumulation_steps=16  \
-#            train.lr=0.00006  \
-#            train.retriever_lr=0.00001  \
-#            train.scheduler=linear  \
-#            data_loader.additional.num_knowledge_passages=5 \
-#   >> $LOG 2> $ERR
-
-# testing only from checkpoint
 python main.py \
     ../configs/okvqa/RAVQA.jsonnet  \
-    --mode test  \
+    --mode train  \
     --experiment_name ${EXP_NAME}.$JOBID \
     --accelerator auto --devices 1  \
     --modules freeze_question_encoder force_existence  \
-    --opts data_loader.additional.num_knowledge_passages=5 \
-            test.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_06.ckpt
-
+    --opts train.epochs=10  \
+            train.batch_size=2  \
+            valid.step_size=1  \
+            valid.batch_size=32  \
+            train.additional.gradient_accumulation_steps=16  \
+            train.lr=0.00006  \
+            train.retriever_lr=0.00001  \
+            train.scheduler=linear  \
+            data_loader.additional.num_knowledge_passages=5 \
    >> $LOG 2> $ERR
+
+# testing only from checkpoint
+# python main.py \
+#    ../configs/okvqa/RAVQA.jsonnet  \
+#    --mode test  \
+#    --experiment_name ${EXP_NAME}.$JOBID \
+#    --accelerator auto --devices 1  \
+#    --modules freeze_question_encoder force_existence  \
+#    --log_prediction_tables   \
+#    --opts data_loader.additional.num_knowledge_passages=5 \
+#            test.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt \
+#   >> $LOG 2> $ERR

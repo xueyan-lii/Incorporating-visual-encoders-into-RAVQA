@@ -66,9 +66,11 @@ local override = {
         {"type": "TextBasedVisionInput",  "option": "object", 
                   "object_max": 40, "attribute_max": 3, "attribute_thres":0.05, "ocr": 1,
                   "separation_tokens": {'start': '<BOV>', 'sep': '<SOV>', 'end': '<EOV>'}},
+        {"type": "EmbeddingInput", "option": "default"},
       ],
       "postprocess_module_list": [
         {"type": "PostProcessInputTokenization", "option": "default"},
+        {"type": "PostProcessClipEmbeddings", "option": "default"},
       ],
     },
     "decoder_input_modules": {
@@ -90,6 +92,7 @@ local override = {
       "ocr_feature_preprocessed": 0,
       "train_data_preprocessed": 0,
       "test_data_preprocessed": 0,
+      "clip_embeddings": 0,
     },
   },
   "data_loader": {
@@ -110,6 +113,7 @@ local override = {
         "LoadOKVQAData",
         "LoadGoogleSearchPassageData",
         "LoadPretrainedDPROutputForGoogleSearchPassage",
+        "LoadClipEmbeddings"
       ],
       "module_dict":{
       },

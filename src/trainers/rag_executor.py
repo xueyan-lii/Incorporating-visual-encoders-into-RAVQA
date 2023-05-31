@@ -59,7 +59,10 @@ class RagExecutor(BaseExecutor):
             for n, p in self.model.named_parameters():
                 if 'generator' not in n:
                     p.requires_grad = False
-                # print(n, p.requires_grad)
+
+        for n, p in self.model.named_parameters():
+                if 'clip_project' in n:
+                    p.requires_grad = True
         
         if 'freeze_generator' in self.config.model_config.modules:
             # Freeze generator
@@ -145,6 +148,7 @@ class RagExecutor(BaseExecutor):
             'question_ids': sample_batched['question_ids'],
             'answers': sample_batched['answers'],
             'training': True,
+            'prefix': sample_batched['clip_embeddings'],
         })
 
         forward_results = self.model(**train_batch)
@@ -194,6 +198,7 @@ class RagExecutor(BaseExecutor):
             'labels': sample_batched['labels'].to(self.device),
             'input_text_sequences': sample_batched['input_text_sequences'],
             'question_ids': sample_batched['question_ids'],
+            'prefix': sample_batched['clip_embeddings'],
         })
 
         generation_outputs = self.model.generate(**test_batch)

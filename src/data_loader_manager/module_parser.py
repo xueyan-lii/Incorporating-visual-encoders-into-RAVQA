@@ -288,3 +288,32 @@ class ModuleParser():
                 postprocessed_batch_data = process_func(postprocessed_batch_data)
         
         return postprocessed_batch_data
+
+    def EmbeddingInput(
+        self, sample: EasyDict, module: EasyDict
+    ) -> Optional[EasyDict]:
+        """
+        Default ImageInput module parser
+        pass on image in form expected by collate function.
+        """
+
+        return_dict = EasyDict(
+                clip_embeddings=torch.stack([torch.tensor(clip_embedding) for clip_embedding in sample.clip_embedding]),
+            )
+
+        return return_dict
+    
+    def PostProcessClipEmbeddings(
+        self, data_to_process: EasyDict
+    ) -> EasyDict:
+        """
+        Apply the transformations to the images expected by the downstream model
+        """
+        assert "clip_embeddings" in data_to_process.keys()
+        clip_embeddings = data_to_process.pop("clip_embeddings")
+        post_processed_clip_embeddings = EasyDict(
+            clip_embeddings=torch.stack(clip_embeddings),
+        )
+        
+        data_to_process.update(**post_processed_clip_embeddings)
+        return data_to_process
