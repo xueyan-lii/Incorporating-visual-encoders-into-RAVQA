@@ -60,10 +60,11 @@ class RagExecutor(BaseExecutor):
                 if 'generator' not in n:
                     p.requires_grad = False
 
-        for n, p in self.model.named_parameters():
-                if 'clip_project' in n:
-                    p.requires_grad = True
-        
+        if self.config.model_config.UsePrefixEmb: 
+            for n, p in self.model.named_parameters():
+                    if 'clip_project' in n:
+                        p.requires_grad = True
+       
         if 'freeze_generator' in self.config.model_config.modules:
             # Freeze generator
             print('freeze generator!')

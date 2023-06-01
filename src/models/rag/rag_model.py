@@ -78,17 +78,18 @@ class RagModel(pl.LightningModule):
         else:
             self.retrieve = self.main_retrieve
 
-        self.lm_embedding_size = self.generator.model_dim
-        print("\n\n Using MLP \n\n")
-        self.prefix_length = 10
-        self.prefix_size = 768  # dimensions of clip embedding how do get from somewhere?
-        self.clip_project = MLP(
-            (
-                self.prefix_size,
-                (self.lm_embedding_size * self.prefix_length) // 2,
-                self.lm_embedding_size * self.prefix_length,
+        if self.config.model_config.UsePrefixEmb:
+            self.lm_embedding_size = self.generator.model_dim
+            print("\n Using MLP \n")
+            self.prefix_length = 10
+            self.prefix_size = 768  # dimensions of clip embedding how do get from somewhere?
+            self.clip_project = MLP(
+                (
+                    self.prefix_size,
+                    (self.lm_embedding_size * self.prefix_length) // 2,
+                    self.lm_embedding_size * self.prefix_length,
+                )
             )
-        )
 
     def init_retrieval(self):
         if 'read_static_retrieval_results' in self.config.model_config.modules:
@@ -370,31 +371,32 @@ class RagModel(pl.LightningModule):
         else:
             labels = labels.repeat_interleave(n_docs, 0)
 
-        prefix_projections = self.clip_project(prefix).view(
-            -1, self.prefix_length, self.lm_embedding_size
-        )
-
         # prepare inputs for generator
         generator_inputs = self.prepare_inputs_for_generator(input_text_sequences=input_text_sequences,
                                             retrieved_docs=retrieved_docs,
                                             labels=labels, n_docs=n_docs)
         
-        joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
+        if self.config.model_config.UsePrefixEmb:
+            prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
+            
+            joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
                                             batch_text_masks=generator_inputs.generator_attention_mask, 
                                             batch_prefix_projections=prefix_projections,
                                             labels=labels)
-        
-        #generator_outputs = self.generator(
-        #                    input_ids=generator_inputs.generator_input_ids,
-        #                    attention_mask=generator_inputs.generator_attention_mask,
-        #                    decoder_input_ids=generator_inputs.generator_decoder_input_ids,
-        #                    return_dict=True)
-        
-        generator_outputs = self.generator(
+            
+            generator_outputs = self.generator(
                             inputs_embeds=joint_embeddings,
                             attention_mask=joint_attention_masks,
                             decoder_input_ids=generator_inputs.generator_decoder_input_ids,
                             return_dict=True)
+        
+        else:
+            generator_outputs = self.generator(
+                            input_ids=generator_inputs.generator_input_ids,
+                            attention_mask=generator_inputs.generator_attention_mask,
+                            decoder_input_ids=generator_inputs.generator_decoder_input_ids,
+                            return_dict=True)
+        
 
         logits = generator_outputs.logits
 
@@ -442,23 +444,34 @@ class RagModel(pl.LightningModule):
         # populate labels
         labels = labels.repeat_interleave(n_docs, 0)
 
-        prefix_projections = self.clip_project(prefix).view(
-            -1, self.prefix_length, self.lm_embedding_size
-        )
         # prepare inputs for generator
         generator_inputs = self.prepare_inputs_for_generator(input_text_sequences=input_text_sequences,
                                             retrieved_docs=retrieved_docs,
                                             labels=labels,
                                             n_docs=n_docs)
         
+        if self.config.model_config.UsePrefixEmb:
+            prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
+            
+            joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
+                                            batch_text_masks=generator_inputs.generator_attention_mask, 
+                                            batch_prefix_projections=prefix_projections,
+                                            labels=labels)
+            
+            test_batch = EasyDict({
+            'inputs_embeds': joint_embeddings,
+            'attention_mask': joint_attention_masks,
+            'return_dict': True,
+            })
         
-        # Get encoder outputs first
-        test_batch = EasyDict({
+        else:
+            test_batch = EasyDict({
             'input_ids': generator_inputs.generator_input_ids,
             'attention_mask': generator_inputs.generator_attention_mask,
             'return_dict': True,
         })
-
+        
+        # Get encoder outputs first
         encoder_outputs = self.generator.encoder(
             **test_batch
         )

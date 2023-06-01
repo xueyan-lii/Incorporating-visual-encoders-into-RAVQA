@@ -42,6 +42,11 @@ local override = {
     "GeneratorConfigClass": "T5Config",
     "GeneratorModelVersion": "t5-large",
     "pretrained": 1,
+
+    "UsePrefixEmb": 1,
+    "LoadPretrainedMLPWeights": 0,
+    "PretrainedMLPPath": "",
+
     "modules": [
     ],
     "loss_ratio":{
