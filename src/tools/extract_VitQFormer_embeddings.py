@@ -15,9 +15,9 @@ import sys
 sys.path.insert(1, '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/models/blip2')
 from blip2 import Blip2Base
 
-data_dir = Path("/home/xl544/rds/hpc-work/MLMI8_2022_VQA/data")
-vqa2_data_dir = data_dir / "vqa2"
-okvqa_data_dir = data_dir / "vqa2"
+data_dir = Path("/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data")
+okvqa_data_dir = data_dir / "ok-vqa"
+vqa_data_dir = Path("")
 
 def encode_img(device, base, image, ln_vision, visual_encoder, query_tokens, Qformer):
     #if self.low_resource:
@@ -97,7 +97,7 @@ def main(vit_model_name: str, subtype: str = "val2014"):
     )
 
     with open(
-        vqa2_data_dir / f"v2_OpenEnded_mscoco_{subtype}_questions.json", "r"
+        okvqa_data_dir / f"OpenEnded_mscoco_{subtype}_questions.json", "r"
     ) as f:
         data = json.load(f)
 
@@ -127,7 +127,7 @@ def main(vit_model_name: str, subtype: str = "val2014"):
         with torch.no_grad():
             #prefix = encode_image(image).cpu().numpy().astype(np.float32)
             prefix = encode_img(device, base, image, ln_vision, visual_encoder, query_tokens, Qformer).cpu().numpy().astype(np.float32)
-            #print(prefix.shape) #(1,32,768)
+            print(prefix.shape) #(1,32,768)
         img_ids_with_embeddings[img_id] = prefix
 
         if (i + 1) % 10000 == 0:

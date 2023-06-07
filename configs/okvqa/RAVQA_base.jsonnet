@@ -43,9 +43,10 @@ local override = {
     "GeneratorModelVersion": "t5-large",
     "pretrained": 1,
 
-    "UsePrefixEmb": 1,
+    "UsePrefixEmb": 0,
     "LoadPretrainedMLPWeights": 0,
     "PretrainedMLPPath": "",
+    "UseQformerEmb": 0,
 
     "modules": [
     ],
@@ -98,6 +99,7 @@ local override = {
       "train_data_preprocessed": 0,
       "test_data_preprocessed": 0,
       "clip_embeddings": 0,
+      "qformer_embeddings": 0,
     },
   },
   "data_loader": {

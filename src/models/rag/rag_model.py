@@ -78,16 +78,38 @@ class RagModel(pl.LightningModule):
         else:
             self.retrieve = self.main_retrieve
 
-        if self.config.model_config.UsePrefixEmb:
-            self.lm_embedding_size = self.generator.model_dim
-            print("\n Using MLP \n")
-            self.prefix_length = 10
+            self.lm_embedding_size = self.generator.model_dim #2048
+            self.prefix_length = 32
             self.prefix_size = 768  # dimensions of clip embedding how do get from somewhere?
+            
+        if self.config.model_config.UsePrefixEmb == 2:
+            print("\n Using MLP")
+            print("MLP input ",self.prefix_size, ' Hidden dim ',(self.lm_embedding_size * self.prefix_length) // 2, ' Output dim ',self.lm_embedding_size,' x ', self.prefix_length)
             self.clip_project = MLP(
                 (
                     self.prefix_size,
                     (self.lm_embedding_size * self.prefix_length) // 2,
                     self.lm_embedding_size * self.prefix_length,
+                )
+            )
+        elif self.config.model_config.UsePrefixEmb == 1:
+            print("\n Using MLP")
+            print("MLP input ",self.prefix_size,' Output dim ',self.lm_embedding_size,' x ', self.prefix_length)
+            self.clip_project = MLP(
+                (
+                    self.prefix_size,
+                    self.lm_embedding_size * self.prefix_length,
+                )
+            )
+
+        #for qformer op, prefix_length has to be 32 cannot be changed
+        elif self.config.model_config.UsePrefixEmb == 0.5: 
+            print("\n Using MLP for Qformer")
+            print("MLP input ",self.prefix_size,' Output dim ',self.lm_embedding_size)
+            self.clip_project = MLP(
+                (
+                    self.prefix_size,
+                    self.lm_embedding_size,
                 )
             )
 
@@ -153,7 +175,6 @@ class RagModel(pl.LightningModule):
         question_hidden_states = query_outputs.pooler_output
         # print('question_hidden_states', question_hidden_states.shape)
 
-        
 
         start_time = time.time()
         ids, vectors = self.index.get_top_docs(question_hidden_states.cpu().detach().numpy(), n_docs)
@@ -377,8 +398,10 @@ class RagModel(pl.LightningModule):
                                             labels=labels, n_docs=n_docs)
         
         if self.config.model_config.UsePrefixEmb:
-            prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
-            
+            if self.config.model_config.UsePrefixEmb == 0.5:
+                prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
+            else:
+                prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
             joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
                                             batch_text_masks=generator_inputs.generator_attention_mask, 
                                             batch_prefix_projections=prefix_projections,

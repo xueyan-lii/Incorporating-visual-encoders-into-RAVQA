@@ -66,6 +66,10 @@ local clip_embeddings = {
   "train": "../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl",
   "val": "../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl",
 };
+local qformer_embeddings = {
+  "train": "../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_train2014.pkl",
+  "val": "../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_val2014.pkl",
+};
 
 {
   "DATA_FOLDER": "",
@@ -132,8 +136,11 @@ local clip_embeddings = {
         },
         "LoadClipEmbeddings": {
           "type": "EmbeddingInput", "option": "default",
-          "config": clip_embeddings,
+          "config": {
+            "clip_embeddings": clip_embeddings,
+            "qformer_embeddings": qformer_embeddings,
           },
+        },
         "LoadOKVQAData": {
           "type": "LoadOKVQAData", "option": "default",
           "config": {

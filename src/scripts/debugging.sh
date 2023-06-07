@@ -1,7 +1,7 @@
 python main.py \
     ../configs/okvqa/RAVQA.jsonnet  \
     --mode train  \
-    --experiment_name OKVQA_RA-VQA-FrDPR_testrun \
+    --experiment_name OKVQA_RA-VQA-FrDPR_debugging \
     --accelerator auto --devices 1  \
     --modules freeze_question_encoder force_existence  \
     --log_prediction_tables \
@@ -15,3 +15,5 @@ python main.py \
             train.retriever_lr=0.00001  \
             train.scheduler=linear  \
             data_loader.additional.num_knowledge_passages=5 \
+            model_config.UsePrefixEmb=0.5 \
+            model_config.UseQformerEmb=1

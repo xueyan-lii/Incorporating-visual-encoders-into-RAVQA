@@ -363,36 +363,36 @@ class DataLoaderOKVQA(DataLoaderWrapper):
         self.data.vqa_data = self.data.okvqa_data
 
     def LoadClipEmbeddings(self, module_config):
-        """
-        Load clip embeddings
-        {
-          "type": "LoadClipEmbeddings", "option": "default",
-          "config": {
-                "train": "..",
-                "val": "..",
-                "test": "..",
-            },
-        },
-        """
-        #############################
-        #   Read Clip Embeddings
-        #############################
-
-        self.data.clip_embeddings = load_cached_data(
-            self.config, "clip_embeddings"
-        )
+        if self.config.model_config.UseQformerEmb:
+            self.data.clip_embeddings = load_cached_data(
+                self.config, "qformer_embeddings"
+            )
+        else:
+            self.data.clip_embeddings = load_cached_data(
+                self.config, "clip_embeddings"
+            )
+            
         if not self.data.clip_embeddings:
             self.data.clip_embeddings = EasyDict()
             for data_split in ["train", "val"]:
                 # Read pre-extracted features
-                clip_embeddings_file = module_config.config[data_split]
+                if self.config.model_config.UseQformerEmb:
+                    clip_embeddings_file = module_config.config.qformer_embeddings[data_split]
+                else:
+                    clip_embeddings_file = module_config.config.clip_embeddings[data_split]
                 logger.info(f"Reading: {clip_embeddings_file}")
                 with open(clip_embeddings_file, "rb") as f:
                     self.data.clip_embeddings.update(EasyDict(pickle.load(f)))
 
-            save_cached_data(
-                self.config, self.data.clip_embeddings, "clip_embeddings"
-            )
+            if self.config.model_config.UseQformerEmb:
+                save_cached_data(
+                    self.config, self.data.clip_embeddings, "qformer_embeddings"
+                )
+            else: 
+                save_cached_data(
+                    self.config, self.data.clip_embeddings, "clip_embeddings"
+                )
+                
 
         logger.info(
             "[Data Statistics] CLIP embeddings {}".format(
