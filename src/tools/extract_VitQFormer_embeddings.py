@@ -13,7 +13,7 @@ from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normal
 
 import sys
 sys.path.insert(1, '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/models/blip2')
-from blip2 import Blip2Base
+from blip2 import Blip2Base, disabled_train
 
 data_dir = Path("/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data")
 okvqa_data_dir = data_dir / "ok-vqa"
@@ -68,16 +68,28 @@ def main(vit_model_name: str, subtype: str = "val2014"):
 
     print('Loading VIT')
     base = Blip2Base()
+    base.load_from_pretrained(url_or_filename=q_former_model)
+
     visual_encoder, ln_vision = base.init_vision_encoder(
         vit_model_name, img_size, drop_path_rate, use_grad_checkpoint, vit_precision
-        )
+    )
+    #freeze vit not sure if needed
+    for name, param in visual_encoder.named_parameters():
+        param.requires_grad = False
+    visual_encoder = visual_encoder.eval()
+    visual_encoder.train = disabled_train
+    for name, param in ln_vision.named_parameters():
+        param.requires_grad = False
+    ln_vision = ln_vision.eval()
+    ln_vision.train = disabled_train
+
     visual_encoder.to(device)
     ln_vision.to(device)
 
     print('Loading Q-Former')
     Qformer, query_tokens = base.init_Qformer(
         num_query_token, visual_encoder.num_features
-        )
+    )
     Qformer.cls = None
     Qformer.bert.embeddings.word_embeddings = None
     Qformer.bert.embeddings.position_embeddings = None
@@ -85,7 +97,6 @@ def main(vit_model_name: str, subtype: str = "val2014"):
         layer.output = None
         layer.intermediate = None
     
-    base.load_from_pretrained(url_or_filename=q_former_model)
     Qformer.to(device)
     query_tokens.to(device)
 
@@ -127,7 +138,7 @@ def main(vit_model_name: str, subtype: str = "val2014"):
         with torch.no_grad():
             #prefix = encode_image(image).cpu().numpy().astype(np.float32)
             prefix = encode_img(device, base, image, ln_vision, visual_encoder, query_tokens, Qformer).cpu().numpy().astype(np.float32)
-            print(prefix.shape) #(1,32,768)
+            #print(prefix.shape) #(1,32,768)
         img_ids_with_embeddings[img_id] = prefix
 
         if (i + 1) % 10000 == 0:
