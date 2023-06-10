@@ -10,6 +10,7 @@ local train_epochs = 9999;
 local adam_epsilon = 1e-08;
 local lr = 1e-4;
 local retriever_lr = 1e-5;
+local MLP_lr = 1e-4;
 local gradient_accumulation_steps = 4;
 local gradient_clipping = 0;
 local warmup_steps = 0;
@@ -134,6 +135,7 @@ local override = {
     "batch_size":train_batch_size,
     "lr": lr,
     "retriever_lr": retriever_lr,
+    "MLP_lr": MLP_lr,
     "adam_epsilon": adam_epsilon,
     "load_epoch": -1,
     "load_model_path": "",

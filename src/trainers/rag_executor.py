@@ -62,8 +62,9 @@ class RagExecutor(BaseExecutor):
 
         if self.config.model_config.UsePrefixEmb: 
             for n, p in self.model.named_parameters():
-                    if 'clip_project' in n:
-                        p.requires_grad = True
+                if 'clip_project' in n:
+                    p.requires_grad = True
+                    print('Set MLP parameters ',n, ' as trainable')
        
         if 'freeze_generator' in self.config.model_config.modules:
             # Freeze generator
@@ -84,9 +85,14 @@ class RagExecutor(BaseExecutor):
                 'initial_lr': self.config.train.lr,
             },
             {
-                'params': [p for n, p in self.model.named_parameters() if 'generator' not in n and p.requires_grad],
+                'params': [p for n, p in self.model.named_parameters() if 'question_encoder' in n and p.requires_grad],
                 'lr': self.config.train.retriever_lr,
                 'initial_lr': self.config.train.retriever_lr,
+            },
+            {
+                'params': [p for n, p in self.model.named_parameters() if 'clip_project' in n],
+                'lr': self.config.train.MLP_lr,
+                'initial_lr': self.config.train.MLP_lr,
             },
         ]
             
@@ -149,7 +155,7 @@ class RagExecutor(BaseExecutor):
             'question_ids': sample_batched['question_ids'],
             'answers': sample_batched['answers'],
             'training': True,
-            'prefix': sample_batched['clip_embeddings'],
+            'prefix': sample_batched['clip_embeddings'].to(self.device),
         })
 
         forward_results = self.model(**train_batch)
@@ -199,7 +205,7 @@ class RagExecutor(BaseExecutor):
             'labels': sample_batched['labels'].to(self.device),
             'input_text_sequences': sample_batched['input_text_sequences'],
             'question_ids': sample_batched['question_ids'],
-            'prefix': sample_batched['clip_embeddings'],
+            'prefix': sample_batched['clip_embeddings'].to(self.device),
         })
 
         generation_outputs = self.model.generate(**test_batch)
@@ -232,7 +238,7 @@ class RagExecutor(BaseExecutor):
             actual_output = self.decoder_tokenizer.decode(output_sequence, skip_special_tokens=False)
             # print(self.tokenizer.decode(cleaned_i, skip_special_tokens=True))
             
-            if batch_idx < 10:
+            if batch_idx < 5:
                 print(decoded_label, '<--->', decoded_output, '   ({})'.format(actual_output))
             
             question_id = sample_batched['question_ids'][index]

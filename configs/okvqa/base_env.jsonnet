@@ -16,7 +16,7 @@ local gradient_accumulation_steps = 4;
 local gradient_clipping = 0;
 local warmup_steps = 0;
 
-local seed=2021;
+local seed = 2021;
 
 // data path configuration
 local wandb_cache_dir = ''; //'/home/wl356/rds/rds-wjb31-nmt2020/wl356/wandb_cache';

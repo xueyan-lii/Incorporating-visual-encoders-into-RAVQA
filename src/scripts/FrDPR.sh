@@ -14,7 +14,7 @@
 
 LOG=/dev/stdout
 ERR=/dev/stderr
-EXP_NAME=OKVQA_RA-VQA-flanT5-qformer
+EXP_NAME=OKVQA_RA-VQA-T5-qformer
 # UNCOMMENT BELOW FOR SLURM SBATCH
 . /etc/profile.d/modules.sh                # Leave this line (enables the module command)
 module purge                               # Removes all modules still loaded
@@ -33,16 +33,17 @@ python main.py \
     --modules freeze_question_encoder force_existence  \
     --opts train.epochs=8  \
             train.batch_size=2  \
-            valid.step_size=0.25  \
+            valid.step_size=0.5  \
             valid.batch_size=32  \
             train.additional.gradient_accumulation_steps=16  \
             train.lr=0.00006  \
             train.retriever_lr=0.00001  \
+            train.MLP_lr=0.0005 \
             train.scheduler=linear  \
             data_loader.additional.num_knowledge_passages=5 \
             model_config.UseQformerEmb=1 \model_config.UsePrefixEmb=0.5 \
-            model_config.DecoderTokenizerModelVersion="google/flan-t5-large" \
-            model_config.GeneratorModelVersion="google/flan-t5-large" \
+       #     model_config.DecoderTokenizerModelVersion="google/flan-t5-large" \
+       #     model_config.GeneratorModelVersion="google/flan-t5-large" \
    >> $LOG 2> $ERR
 
 # testing only from checkpoint

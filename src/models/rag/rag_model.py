@@ -78,9 +78,9 @@ class RagModel(pl.LightningModule):
         else:
             self.retrieve = self.main_retrieve
 
-            self.lm_embedding_size = self.generator.model_dim #2048
-            self.prefix_length = 32
-            self.prefix_size = 768  # dimensions of clip embedding how do get from somewhere?
+        self.lm_embedding_size = self.generator.model_dim #2048
+        self.prefix_length = 32
+        self.prefix_size = 768  # dimensions of clip embedding how do get from somewhere?
             
         if self.config.model_config.UsePrefixEmb == 2:
             print("\n Using MLP")
@@ -366,7 +366,7 @@ class RagModel(pl.LightningModule):
         # Retrieve docs for given question inputs
         retrieval_results = self.retrieve(input_ids, attention_mask, labels, question_ids, input_text_sequences)
         retrieved_docs, doc_scores = retrieval_results.retrieved_docs, retrieval_results.doc_scores
-        
+
         answers = kwargs.get('answers', None)
         assert answers is not None
         get_retrieval_labels_results = self.get_retrieval_labels(
@@ -398,10 +398,7 @@ class RagModel(pl.LightningModule):
                                             labels=labels, n_docs=n_docs)
         
         if self.config.model_config.UsePrefixEmb:
-            if self.config.model_config.UsePrefixEmb == 0.5:
-                prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
-            else:
-                prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
+            prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
             joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
                                             batch_text_masks=generator_inputs.generator_attention_mask, 
                                             batch_prefix_projections=prefix_projections,
@@ -419,7 +416,6 @@ class RagModel(pl.LightningModule):
                             attention_mask=generator_inputs.generator_attention_mask,
                             decoder_input_ids=generator_inputs.generator_decoder_input_ids,
                             return_dict=True)
-        
 
         logits = generator_outputs.logits
 
