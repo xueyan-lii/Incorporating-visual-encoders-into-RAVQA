@@ -14,12 +14,10 @@ from collections import Counter, defaultdict
 from easydict import EasyDict
 from transformers import T5Tokenizer, T5ForConditionalGeneration, T5Config, T5PreTrainedModel
 import pytorch_lightning as pl
+from peft import LoraConfig, get_peft_model, TaskType, PeftModelForSeq2SeqLM
 #from datasets import load_from_disk
 import time
-#import sys
-#sys.path.insert(1, '/home/xl544/rds/hpc-work/MLMI8_2022_VQA/MLMI-VQA-2022/src/models')
-#from vct0_qformer import VCT0Model_Qformer, VCT0Prefix_Qformer
-#from vct0 import VCT0Model, VCT0Prefix
+
 
 class MLP(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -34,7 +32,7 @@ class MLP(nn.Module):
                 layers.append(act())
         self.model = nn.Sequential(*layers)
 
-class PrefixModel(pl.LightningModule):
+class PrefixModelLora(pl.LightningModule):
     '''
     Class to only add image prefix embedding to question without any text captioning or document
     '''
@@ -51,6 +49,13 @@ class PrefixModel(pl.LightningModule):
         generator_model_config = GeneratorConfigClass.from_pretrained(self.config.model_config.ModelVersion)
         self.generator = GeneratorModelClass.from_pretrained(self.config.model_config.ModelVersion,
                                                     config=generator_model_config)
+        self.r=16
+        print('r value for LoRA is', self.r)
+        peft_config = LoraConfig(task_type=TaskType.SEQ_2_SEQ_LM, inference_mode=False, r=self.r, lora_alpha=32, lora_dropout=0.1)
+        self.generator = PeftModelForSeq2SeqLM(self.generator, peft_config)
+        self.generator.print_trainable_parameters()
+        #self.generator_tokenizer = self.generator_tokenizer.tokenizer
+
         self.generator.resize_token_embeddings(len(self.tokenizer))
 
         self.lm_embedding_size = self.generator.model_dim 
