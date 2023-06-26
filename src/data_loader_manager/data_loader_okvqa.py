@@ -21,6 +21,8 @@ from pprint import pprint
 from easydict import EasyDict
 from collections import defaultdict
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
+from torchvision.transforms import Compose, ToTensor, Resize, PILToTensor
+from torchvision.transforms.functional import InterpolationMode
 
 import logging
 logger = logging.getLogger(__name__)
@@ -238,7 +240,14 @@ class DataLoaderOKVQA(DataLoaderWrapper):
         ######################
         def most_frequent(List):
             return max(set(List), key = List.count)
-        
+        def _convert_image_to_rgb(image):
+            return image.convert("RGB")
+        def _transform():
+            return Compose([
+                Resize((400,400), interpolation=InterpolationMode.BICUBIC),
+                _convert_image_to_rgb,
+                PILToTensor(),
+                ])
         answer_candidate_list = []
         vqa_helpers = EasyDict({
             'train': VQA(module_config.config.vqa_data_path.annotation_files.train, 
@@ -253,7 +262,7 @@ class DataLoaderOKVQA(DataLoaderWrapper):
             'lookup': {},
             'vqa_helpers': vqa_helpers,
         })
-        
+        image_preprocessor = _transform()
         for data_split, vqa_helper in vqa_helpers.items():
             vqa_helper.createIndex()
             vqa_helper.info()
@@ -291,6 +300,9 @@ class DataLoaderOKVQA(DataLoaderWrapper):
                     
                     img_key_full = str(img_key).zfill(12)
                     img = cv2.imread(img_path)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+                    img = image_preprocessor(Image.fromarray(img))                    
+                    
                     # img_encoded_str = base64.b64encode(cv2.imencode('.jpg', img)[1])
                     
                     # Read predictions from VinVL features
@@ -367,6 +379,10 @@ class DataLoaderOKVQA(DataLoaderWrapper):
             self.data.clip_embeddings = load_cached_data(
                 self.config, "qformer_embeddings"
             )
+        #elif self.config.model_config.UseRawPixels:
+        #    self.data.clip_embeddings = load_cached_data(
+        #        self.config, "raw_pixels"
+        #    )
         else:
             self.data.clip_embeddings = load_cached_data(
                 self.config, "clip_embeddings"
@@ -378,6 +394,8 @@ class DataLoaderOKVQA(DataLoaderWrapper):
                 # Read pre-extracted features
                 if self.config.model_config.UseQformerEmb:
                     clip_embeddings_file = module_config.config.qformer_embeddings[data_split]
+                elif self.config.model_config.UseRawPixels:
+                    clip_embeddings_file = module_config.config.raw_pixels[data_split]
                 else:
                     clip_embeddings_file = module_config.config.clip_embeddings[data_split]
                 logger.info(f"Reading: {clip_embeddings_file}")
@@ -388,6 +406,10 @@ class DataLoaderOKVQA(DataLoaderWrapper):
                 save_cached_data(
                     self.config, self.data.clip_embeddings, "qformer_embeddings"
                 )
+            #elif self.config.model_config.UseRawPixels:
+            #    save_cached_data(
+            #        self.config, self.data.clip_embeddings, "raw_pixels"
+            #    )
             else: 
                 save_cached_data(
                     self.config, self.data.clip_embeddings, "clip_embeddings"
