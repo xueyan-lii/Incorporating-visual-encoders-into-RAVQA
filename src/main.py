@@ -355,6 +355,7 @@ def parse_args_sys(args_list=None):
     arg_parser.add_argument("--tags", nargs='*', default=[], help="Add tags to the wandb logger")
     arg_parser.add_argument('--modules', type=str, nargs="+", default=[], help='Select modules for models. See training scripts for examples.')
     arg_parser.add_argument('--log_prediction_tables', action='store_true', default=False, help='Log prediction tables.')
+    #arg_parser.add_argument('--bf16', action='store_true', default=False)
 
     # ===== Testing Configuration ===== #
     arg_parser.add_argument('--test_batch_size', type=int, default=-1)

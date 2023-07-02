@@ -31,6 +31,11 @@ local override = {
     "ConfigClass": "T5Config",
     "ModelVersion": "t5-large",
     "pretrained": 1,
+    "UsePrefixEmb": 0,
+    "LoadPretrainedMLPWeights": 0,
+    "PretrainedMLPPath": "",
+    "UseQformerEmb": 0,
+
     "modules": [
     ],
     "SPECIAL_TOKENS":{
@@ -46,10 +51,12 @@ local override = {
                   "separation_tokens": {'start': '<BOC>', 'end': '<EOC>'}},
         {"type": "TextBasedVisionInput",  "option": "object", 
                   "object_max": 40, "attribute_max": 3, "attribute_thres":0.05, "ocr": 1,
-                  "separation_tokens": {'start': '<BOV>', 'sep': '<SOV>', 'end': '<EOV>'}},        
+                  "separation_tokens": {'start': '<BOV>', 'sep': '<SOV>', 'end': '<EOV>'}},    
+        {"type": "EmbeddingInput", "option": "default"},    
       ],
       "postprocess_module_list": [
         {"type": "PostProcessInputTokenization", "option": "default"},
+        {"type": "PostProcessClipEmbeddings", "option": "default"},
       ],
     },
     "decoder_input_modules": {
@@ -71,6 +78,8 @@ local override = {
       "ocr_feature_preprocessed": 0,
       "train_data_preprocessed": 0,
       "test_data_preprocessed": 0,
+      "clip_embeddings": 0,
+      "qformer_embeddings": 0,
     },
   },
   "data_loader": {
@@ -88,6 +97,7 @@ local override = {
         "LoadGoogleOCRFeatures",
         "LoadOscarCaptionFeatures",
         "LoadOKVQAData",
+        "LoadClipEmbeddings",
       ],
       "module_dict":{
       },

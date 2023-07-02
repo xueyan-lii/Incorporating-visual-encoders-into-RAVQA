@@ -67,8 +67,12 @@ local clip_embeddings = {
   "val": "../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl",
 };
 local qformer_embeddings = {
-  "train": "../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_train2014.pkl",
-  "val": "../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_val2014.pkl",
+  "train": "../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl",
+  "val": "../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl",
+};
+local raw_pixels = {
+  "train": "../data/ok-vqa/pre-extracted_features/raw-pixels/okvqa_raw_pixels_train2014.pkl",
+  "val": "../data/ok-vqa/pre-extracted_features/raw-pixels/okvqa_raw_pixels_val2014.pkl",
 };
 
 {
@@ -139,6 +143,7 @@ local qformer_embeddings = {
           "config": {
             "clip_embeddings": clip_embeddings,
             "qformer_embeddings": qformer_embeddings,
+            "raw_pixels": raw_pixels, 
           },
         },
         "LoadOKVQAData": {

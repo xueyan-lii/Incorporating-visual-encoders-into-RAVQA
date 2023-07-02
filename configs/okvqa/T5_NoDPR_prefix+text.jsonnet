@@ -10,14 +10,11 @@ local train_epochs = 9999;
 local adam_epsilon = 1e-08;
 local lr = 1e-4;
 local retriever_lr = 1e-5;
-local MLP_lr = 1e-4;
+local MLP_lr = 0.0001;
 local gradient_accumulation_steps = 4;
 local gradient_clipping = 0;
 local warmup_steps = 0;
-
-local seed=2021;
-
-
+local seed = 2021;
 
 local override = {
   "platform_type": "pytorch",
@@ -25,44 +22,30 @@ local override = {
   "experiment_name": "default_test",
   "seed": seed,
   "model_config": {
-    "base_model": "RAG",
-    "ModelClass": "RagModel", // general class
-    "TokenizerClass": "DPRQuestionEncoderTokenizer",  // question encoder tokenizer
-    "TokenizerModelVersion": "facebook/dpr-question_encoder-single-nq-base", // question encoder tokenizer version
-    
-    "DecoderTokenizerClass": "T5Tokenizer",  // generator tokenizer
-    "DecoderTokenizerModelVersion": "t5-large", // generator tokenizer version
-
-    "QueryEncoderModelClass": "DPRQuestionEncoder", // question encoder
-    "QueryEncoderConfigClass": "DPRConfig", // question encoder
-    // "QueryEncoderModelVersion": "facebook/dpr-question_encoder-single-nq-base",
-    "QueryEncoderModelVersion": "/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/wl356/projects/Retrieval-Augmented-Visual-Question-Answering/Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder",
-    //"QueryEncoderModelVersion": "/additional_data/projects/RAVQA/Experiments/OKVQA_DPR_FullCorpus/train/saved_model/epoch6/query_encoder",
-    
-    "GeneratorModelClass": "T5ForConditionalGeneration", // answer generator
-    "GeneratorConfigClass": "T5Config",
-    "GeneratorModelVersion": "t5-large",
+    "base_model": "T5",
+    "ModelClass": "PrefixModel",
+    "TokenizerClass": "T5Tokenizer",
+    "TokenizerModelVersion": "t5-large",
+    "GeneratorModelClass": "T5ForConditionalGeneration",
+    "ConfigClass": "T5Config",
+    "ModelVersion": "t5-large",
     "pretrained": 1,
-
     "UsePrefixEmb": 0,
-    "LoadPretrainedMLPWeights": 0,
-    "PretrainedMLPPath": "",
     "UseQformerEmb": 0,
+    "LoadPretrainMLP": 0,
+    "UseRawPixels": 0,
 
     "modules": [
     ],
     "loss_ratio":{
       "nll_loss": 1,
-      "retrieval_pseudo_loss": 0,
+      "additional_loss": 0,
       "rag_loss": 0,
     },
-    "SPECIAL_TOKENS":{  // for query encoder
-      "additional_special_tokens": ["<BOV>", "<SOV>", "<EOV>", "<BOQ>", "<EOQ>", "<BOC>", "<EOC>", "<BOK>", "<EOK>"],
-    },
-    "DECODER_SPECIAL_TOKENS":{ // for answer generator
+    "SPECIAL_TOKENS":{
       "bos_token": "<PAD>",
       "pad_token": "<PAD>",
-      "additional_special_tokens": ["<BOV>", "<SOV>", "<EOV>", "<BOQ>", "<EOQ>", "<BOC>", "<EOC>", "<BOK>", "<EOK>"],
+      "additional_special_tokens": ["<BOV>", "<SOV>", "<EOV>", "<BOQ>", "<EOQ>", "<BOC>", "<EOC>"],
     },
     "input_modules": {
       "module_list":[
@@ -72,8 +55,8 @@ local override = {
                   "separation_tokens": {'start': '<BOC>', 'end': '<EOC>'}},
         {"type": "TextBasedVisionInput",  "option": "object", 
                   "object_max": 40, "attribute_max": 3, "attribute_thres":0.05, "ocr": 1,
-                  "separation_tokens": {'start': '<BOV>', 'sep': '<SOV>', 'end': '<EOV>'}},
-        {"type": "EmbeddingInput", "option": "default"},
+                  "separation_tokens": {'start': '<BOV>', 'sep': '<SOV>', 'end': '<EOV>'}},    
+        {"type": "EmbeddingInput", "option": "default"},  
       ],
       "postprocess_module_list": [
         {"type": "PostProcessInputTokenization", "option": "default"},
@@ -104,14 +87,13 @@ local override = {
     },
   },
   "data_loader": {
-    "type": "DataLoaderOKVQAWithKnowledge",
+    "type": "DataLoaderOKVQA",
     "dataset_type": "OKVQADataset",
     "dummy_dataloader": 0,
     "additional":{
       'max_source_length':512,
       'max_decoder_source_length': 512,
       'max_target_length':10,
-      'num_knowledge_passages': 5,
     },
     "dataset_modules": {
       "module_list": [
@@ -119,8 +101,6 @@ local override = {
         "LoadGoogleOCRFeatures",
         "LoadOscarCaptionFeatures",
         "LoadOKVQAData",
-        "LoadGoogleSearchPassageData",
-        "LoadPretrainedDPROutputForGoogleSearchPassage",
         "LoadClipEmbeddings",
       ],
       "module_dict":{
@@ -130,7 +110,7 @@ local override = {
   "cuda": 0,
   "gpu_device":0,
   "train": {
-    "type": "RagExecutor",
+    "type": "T5ExecutorWithPrefix",
     "epochs":train_epochs,
     "batch_size":train_batch_size,
     "lr": lr,
@@ -146,7 +126,7 @@ local override = {
         "gradient_accumulation_steps": gradient_accumulation_steps,
         "warmup_steps": warmup_steps,
         "gradient_clipping": gradient_clipping,
-    }
+    },
   },
   "valid": {
     "batch_size":valid_batch_size,
@@ -167,8 +147,6 @@ local override = {
     },
   },
   "metrics": [
-    {'name': 'compute_exact_match'},
-    {'name': 'compute_retrieval_metrics'},
     {'name': 'compute_okvqa_scores'},
   ],
 };
