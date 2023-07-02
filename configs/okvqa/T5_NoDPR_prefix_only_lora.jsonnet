@@ -10,7 +10,7 @@ local train_epochs = 9999;
 local adam_epsilon = 1e-08;
 local lr = 1e-4;
 local retriever_lr = 1e-5;
-local MLP_lr = 0.0001;
+local MLP_lr = 1e-4;
 local gradient_accumulation_steps = 4;
 local gradient_clipping = 0;
 local warmup_steps = 0;
@@ -23,7 +23,7 @@ local override = {
   "seed": seed,
   "model_config": {
     "base_model": "T5",
-    "ModelClass": "PrefixModel",
+    "ModelClass": "PrefixModelLora",
     "TokenizerClass": "T5Tokenizer",
     "TokenizerModelVersion": "t5-large",
     "GeneratorModelClass": "T5ForConditionalGeneration",
@@ -32,7 +32,7 @@ local override = {
     "pretrained": 1,
     "UsePrefixEmb": 0,
     "UseQformerEmb": 0,
-    "LoadPretrainMLP": 0,
+    "LoadPretrainMLPs": 0,
     "UseRawPixels": 0,
 
     "modules": [

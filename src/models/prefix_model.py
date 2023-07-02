@@ -14,7 +14,7 @@ from collections import Counter, defaultdict
 from easydict import EasyDict
 from transformers import T5Tokenizer, T5ForConditionalGeneration, T5Config, T5PreTrainedModel
 import pytorch_lightning as pl
-#from datasets import load_from_disk
+from peft import LoraConfig, get_peft_model, TaskType, PeftModelForSeq2SeqLM
 import time
 #import sys
 #sys.path.insert(1, '/home/xl544/rds/hpc-work/MLMI8_2022_VQA/MLMI-VQA-2022/src/models')
@@ -49,10 +49,15 @@ class PrefixModel(pl.LightningModule):
         GeneratorModelClass = globals()[self.config.model_config.GeneratorModelClass]
         GeneratorConfigClass = globals()[self.config.model_config.ConfigClass]
         generator_model_config = GeneratorConfigClass.from_pretrained(self.config.model_config.ModelVersion)
-        self.generator = GeneratorModelClass.from_pretrained(self.config.model_config.ModelVersion,
-                                                    config=generator_model_config)
+        self.generator = GeneratorModelClass.from_pretrained(self.config.model_config.ModelVersion,config=generator_model_config)
+        '''
+        self.r=8
+        print('r value for LoRA is', self.r)
+        peft_config = LoraConfig(task_type=TaskType.SEQ_2_SEQ_LM, inference_mode=False, r=self.r, lora_alpha=32, lora_dropout=0.1)
+        self.generator = PeftModelForSeq2SeqLM(self.generator, peft_config)
+        self.generator.print_trainable_parameters()
+        '''                                          
         self.generator.resize_token_embeddings(len(self.tokenizer))
-
         self.lm_embedding_size = self.generator.model_dim 
         self.prefix_length = 32
         self.prefix_size = 768  

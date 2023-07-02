@@ -379,10 +379,6 @@ class DataLoaderOKVQA(DataLoaderWrapper):
             self.data.clip_embeddings = load_cached_data(
                 self.config, "qformer_embeddings"
             )
-        #elif self.config.model_config.UseRawPixels:
-        #    self.data.clip_embeddings = load_cached_data(
-        #        self.config, "raw_pixels"
-        #    )
         else:
             self.data.clip_embeddings = load_cached_data(
                 self.config, "clip_embeddings"
@@ -394,8 +390,6 @@ class DataLoaderOKVQA(DataLoaderWrapper):
                 # Read pre-extracted features
                 if self.config.model_config.UseQformerEmb:
                     clip_embeddings_file = module_config.config.qformer_embeddings[data_split]
-                elif self.config.model_config.UseRawPixels:
-                    clip_embeddings_file = module_config.config.raw_pixels[data_split]
                 else:
                     clip_embeddings_file = module_config.config.clip_embeddings[data_split]
                 logger.info(f"Reading: {clip_embeddings_file}")

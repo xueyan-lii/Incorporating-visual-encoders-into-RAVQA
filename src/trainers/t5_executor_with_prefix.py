@@ -32,6 +32,7 @@ from .metrics_processors import MetricsProcessor
 from .base_executor import BaseExecutor
 from transformers import T5Tokenizer, T5ForConditionalGeneration, T5Config
 from models.prefix_model import PrefixModel
+from models.prefix_model_lora import PrefixModelLora
 from utils.dirs import *
 
 
@@ -59,6 +60,11 @@ class T5ExecutorWithPrefix(BaseExecutor):
                 if 'clip_project' in n:
                     p.requires_grad = True
                     print('Set MLP parameters ',n, ' as trainable')
+        
+        #set all parameters as trainable
+        for n, p in self.model.named_parameters():
+            p.requires_grad = True
+            #print(p.requires_grad, n)
 
         optimization_parameters = [
             {
@@ -222,7 +228,7 @@ class T5ExecutorWithPrefix(BaseExecutor):
                 question_id,
                 item['img_key'],
                 item['question'],
-                item['img_caption']['caption'],
+                #item['img_caption']['caption'],
                 item['answers'],
                 item['gold_answer'],
                 decoded_output,
@@ -247,7 +253,8 @@ class T5ExecutorWithPrefix(BaseExecutor):
         # Batching every validation step outputs
         batch_predictions = []
 
-        columns=["question_id", "image_key", "question", "caption", "answers", "gold_answer", "prediction"]
+        #columns=["question_id", "image_key", "question", "caption", "answers", "gold_answer", "prediction"]
+        columns=["question_id", "image_key", "question", "answers", "gold_answer", "prediction"]
         test_table = wandb.Table(columns=columns)
 
 

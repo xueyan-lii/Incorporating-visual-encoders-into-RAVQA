@@ -3,7 +3,6 @@ python main.py ../configs/okvqa/T5_NoDPR_prefix_only_lora.jsonnet \
     --experiment_name lora_test  \
     --accelerator auto --devices 1  \
     --num_sanity_val_steps 1 \
-    --bf16 \
     --opts train.epochs=10  \
             train.batch_size=2  \
             valid.step_size=0.5  \
@@ -15,6 +14,6 @@ python main.py ../configs/okvqa/T5_NoDPR_prefix_only_lora.jsonnet \
             model_config.UsePrefixEmb=0 \
             model_config.UseQformerEmb=0 \
             model_config.LoadPretrainedMLP=0 \
-            model_config.TokenizerModelVersion="google/flan-t5-xxl" \
-            model_config.ModelVersion="google/flan-t5-xxl" \
+            model_config.TokenizerModelVersion="google/flan-t5-xl" \
+            model_config.ModelVersion="google/flan-t5-xl" \
    

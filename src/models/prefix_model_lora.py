@@ -49,7 +49,7 @@ class PrefixModelLora(pl.LightningModule):
         generator_model_config = GeneratorConfigClass.from_pretrained(self.config.model_config.ModelVersion)
         self.generator = GeneratorModelClass.from_pretrained(self.config.model_config.ModelVersion,
                                                     config=generator_model_config)
-        self.r=16
+        self.r = 8
         print('r value for LoRA is', self.r)
         peft_config = LoraConfig(task_type=TaskType.SEQ_2_SEQ_LM, inference_mode=False, r=self.r, lora_alpha=32, lora_dropout=0.1)
         self.generator = PeftModelForSeq2SeqLM(self.generator, peft_config)

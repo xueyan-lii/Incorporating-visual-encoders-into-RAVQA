@@ -5,7 +5,7 @@ python main.py \
     --accelerator auto --devices 1  \
     --modules freeze_question_encoder force_existence  \
     --log_prediction_tables \
-    --num_sanity_val_steps 1 \
+    --num_sanity_val_steps 2 \
     --opts train.epochs=10  \
             train.batch_size=2  \
             valid.step_size=1  \
@@ -16,7 +16,7 @@ python main.py \
             train.MLP_lr=0.0005 \
             train.scheduler=linear  \
             data_loader.additional.num_knowledge_passages=5 \
-            model_config.UsePrefixEmb=0.5 \
-            model_config.UseQformerEmb=0 \
+            model_config.UsePrefixEmb=1 \
+            model_config.UseQformerEmb=1 \
            # model_config.DecoderTokenizerModelVersion="google/flan-t5-large" \
            # model_config.GeneratorModelVersion="google/flan-t5-large" \

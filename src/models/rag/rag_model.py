@@ -398,7 +398,11 @@ class RagModel(pl.LightningModule):
                                             labels=labels, n_docs=n_docs)
         
         if self.config.model_config.UsePrefixEmb:
-            prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
+            #print('1',prefix.shape)
+            prefix_projections = self.clip_project(prefix.to(torch.float)).view(-1, self.prefix_length, self.lm_embedding_size)
+            #reshape to remove extra dimension
+            #print('2',prefix_projections.shape)
+            #print('3',(self.clip_project(prefix.to(torch.float))).shape)
             joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
                                             batch_text_masks=generator_inputs.generator_attention_mask, 
                                             batch_prefix_projections=prefix_projections,
@@ -470,7 +474,11 @@ class RagModel(pl.LightningModule):
                                             n_docs=n_docs)
         
         if self.config.model_config.UsePrefixEmb:
-            prefix_projections = self.clip_project(prefix).view(-1, self.prefix_length, self.lm_embedding_size)
+            #print('1',prefix.shape)
+            prefix_projections = self.clip_project(prefix.to(torch.float)).view(-1, self.prefix_length, self.lm_embedding_size)
+            
+            #print('2',prefix_projections.shape)
+            #print('3',(self.clip_project(prefix.to(torch.float))).shape)
             
             joint_embeddings, joint_attention_masks = self.insert_prefix_into_emb(batch_size=batch_size, no_documents=n_docs, batch_text_tokens=generator_inputs.generator_input_ids, 
                                             batch_text_masks=generator_inputs.generator_attention_mask, 
