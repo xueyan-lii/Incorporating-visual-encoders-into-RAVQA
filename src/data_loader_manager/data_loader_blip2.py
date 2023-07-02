@@ -34,7 +34,7 @@ from data_loader_manager.data_loader_wrapper import DataLoaderWrapper
 from data_loader_manager.datasets import *
 
 from torchvision.utils import make_grid, save_image
-from torchvision.transforms import Compose, ToTensor, Resize
+from torchvision.transforms import Compose, ToTensor, Resize, PILToTensor
 from torchvision.transforms.functional import InterpolationMode
 
 from PIL import Image
@@ -84,9 +84,9 @@ class DataLoaderBLIP2(DataLoaderWrapper):
             return image.convert("RGB")
         def _transform():
             return Compose([
-                Resize((500,500), interpolation=InterpolationMode.BICUBIC),
+                Resize((400,400), interpolation=InterpolationMode.BICUBIC),
                 _convert_image_to_rgb,
-                ToTensor(),
+                PILToTensor(),
                 ])
         
         answer_candidate_list = []
@@ -109,7 +109,7 @@ class DataLoaderBLIP2(DataLoaderWrapper):
             vqa_helper.info()
 
             # For each data split, prepare dataset
-            self.data.okvqa_data[data_split] = load_cached_data(self.config, '{}_data_preprocessed'.format(data_split))
+            self.data.okvqa_data[data_split] = load_cached_data(self.config, '{}_data_preprocessed_BLIP2'.format(data_split))
             if not self.data.okvqa_data[data_split]:
                 # This split data is not cached
                 self.data.okvqa_data[data_split] = EasyDict({}) # re-initialise
@@ -133,6 +133,7 @@ class DataLoaderBLIP2(DataLoaderWrapper):
                     # img_key = img_p.replace('..', '').split('.')[0].split('_')[-1]
                     img_key = imgId
                     img_key_str = str(img_key)
+                    #removed since oscar captions are not loaded
                     #img_caption = self.data.caption_features.get(img_key_str, None)
                     #if img_caption is not None: 
                     #    img_caption = img_caption[0] 
@@ -141,6 +142,7 @@ class DataLoaderBLIP2(DataLoaderWrapper):
                     
                     img_key_full = str(img_key).zfill(12)
                     img = cv2.imread(img_path)
+                    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
                     img = image_preprocessor(Image.fromarray(img))                    
                     
                     related_question_ids = vqa_helper.getQuesIds(imgIds=[imgId])
@@ -170,7 +172,7 @@ class DataLoaderBLIP2(DataLoaderWrapper):
                                 #     print(ans, 'is added from test set!')
                 
                 # After building the data split, save to cache
-                save_cached_data(self.config, self.data.okvqa_data[data_split], '{}_data_preprocessed'.format(data_split))
+                save_cached_data(self.config, self.data.okvqa_data[data_split], '{}_data_preprocessed_BLIP2'.format(data_split))
 
             for entry_data in self.data.okvqa_data[data_split].data_items:
                 self.data.okvqa_data['lookup'][str(entry_data.question_id)] = entry_data
@@ -192,10 +194,7 @@ class DataLoaderBLIP2(DataLoaderWrapper):
             self.data.clip_embeddings = load_cached_data(
                 self.config, "qformer_embeddings"
             )
-        elif self.config.model_config.UseRawPixels:
-            self.data.clip_embeddings = load_cached_data(
-                self.config, "raw_pixels"
-            )
+        
         else:
             self.data.clip_embeddings = load_cached_data(
                 self.config, "clip_embeddings"
@@ -207,8 +206,6 @@ class DataLoaderBLIP2(DataLoaderWrapper):
                 # Read pre-extracted features
                 if self.config.model_config.UseQformerEmb:
                     clip_embeddings_file = module_config.config.qformer_embeddings[data_split]
-                elif self.config.model_config.UseRawPixels:
-                    clip_embeddings_file = module_config.config.raw_pixels[data_split]
                 else:
                     clip_embeddings_file = module_config.config.clip_embeddings[data_split]
                 logger.info(f"Reading: {clip_embeddings_file}")
@@ -218,10 +215,6 @@ class DataLoaderBLIP2(DataLoaderWrapper):
             if self.config.model_config.UseQformerEmb:
                 save_cached_data(
                     self.config, self.data.clip_embeddings, "qformer_embeddings"
-                )
-            elif self.config.model_config.UseRawPixels:
-                save_cached_data(
-                    self.config, self.data.clip_embeddings, "raw_pixels"
                 )
             else: 
                 save_cached_data(

@@ -53,7 +53,7 @@ class BLIP2Executor(BaseExecutor):
         """
         Return optimizers and schedulers
         """
-
+        #if not self.config.model_config.UseInstructBLIP:
         for n, p in self.model.named_parameters():
             if 'vision_model' in n:
                 p.requires_grad = False
@@ -61,21 +61,33 @@ class BLIP2Executor(BaseExecutor):
                 p.requires_grad = False
             elif 'language_projection' in n: #MLP layer
                 p.requires_grad = True
-            else:
+            elif 'language_model' in n:
                 p.requires_grad = True #language_model
-            #print(n,p.requires_grad)
-        
-
+            else:
+                p.requires_grad = False
+            print(n,p.requires_grad)
+        '''
+        else:
+            for n, p in self.model.named_parameters():
+                if 'query_tokens' in n:#for instructblip from github
+                    p.requires_grad = False
+                elif 'visual_encoder' in n: 
+                    p.requires_grad = False
+                elif 'Qformer' in n: 
+                    p.requires_grad = False
+                elif 't5_proj' in n: 
+                    p.requires_grad = True
+                elif 't5_model' in n:
+                    p.requires_grad = True 
+                else:
+                    p.requires_grad = False
+                print(n,p.requires_grad)
+        '''
         optimization_parameters = [
             {
-                'params': [p for n, p in self.model.named_parameters() if 'language_model' in n and p.requires_grad],
+                'params': [p for n, p in self.model.named_parameters() if p.requires_grad],
                 'lr': self.config.train.lr,
                 'initial_lr': self.config.train.lr,
-            },
-            {
-                'params': [p for n, p in self.model.named_parameters() if 'language_projection' in n],
-                'lr': self.config.train.MLP_lr,
-                'initial_lr': self.config.train.MLP_lr,
             },
         ]
         

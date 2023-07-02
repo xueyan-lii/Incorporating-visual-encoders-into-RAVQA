@@ -6,9 +6,10 @@ python main.py ../configs/okvqa/T5_NoDPR_blip2.jsonnet \
     --opts train.epochs=10  \
             train.batch_size=2  \
             valid.step_size=0.5  \
-            valid.batch_size=2  \
+            valid.batch_size=4  \
             train.additional.gradient_accumulation_steps=16  \
             train.lr=0.00006  \
-            train.MLP_lr=0.0003 \
+            train.MLP_lr=0.0001 \
             train.scheduler=linear \
+            model_config.UseInstructBLIP=1 \
    
