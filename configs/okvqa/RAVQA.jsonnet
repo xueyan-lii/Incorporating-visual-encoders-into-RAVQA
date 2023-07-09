@@ -34,7 +34,6 @@ local override = {
         "LoadOscarCaptionFeatures",
         "LoadOKVQAData",
         "LoadGoogleSearchPassageData",
-        "LoadClipEmbeddings",
       ],
       "module_dict":{
       },

@@ -155,7 +155,6 @@ class RagExecutor(BaseExecutor):
             'question_ids': sample_batched['question_ids'],
             'answers': sample_batched['answers'],
             'training': True,
-            'prefix': sample_batched['clip_embeddings'].to(self.device),
         })
 
         forward_results = self.model(**train_batch)
@@ -205,7 +204,6 @@ class RagExecutor(BaseExecutor):
             'labels': sample_batched['labels'].to(self.device),
             'input_text_sequences': sample_batched['input_text_sequences'],
             'question_ids': sample_batched['question_ids'],
-            'prefix': sample_batched['clip_embeddings'].to(self.device),
         })
 
         generation_outputs = self.model.generate(**test_batch)
