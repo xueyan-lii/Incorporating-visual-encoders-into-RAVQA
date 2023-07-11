@@ -57,7 +57,7 @@ class PrefixModel(pl.LightningModule):
         self.generator = PeftModelForSeq2SeqLM(self.generator, peft_config)
         self.generator.print_trainable_parameters()
         '''                                          
-        self.generator.resize_token_embeddings(len(self.tokenizer))
+        self.generator.resize_token_embeddings(len(self.tokenizer)) #comment this out when using lora
         self.lm_embedding_size = self.generator.model_dim 
         self.prefix_length = 32
         self.prefix_size = 768  

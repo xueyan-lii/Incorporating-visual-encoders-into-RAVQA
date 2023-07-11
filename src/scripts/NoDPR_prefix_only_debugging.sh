@@ -11,7 +11,7 @@ python main.py ../configs/okvqa/T5_NoDPR_prefix_only.jsonnet \
             train.lr=0.00006  \
             train.MLP_lr=0.0001 \
             train.scheduler=linear \
-            model_config.PretrainedMLPPath=/home/xl544/rds/hpc-work/MLMI8_2022_VQA/Experiments/successful_runs/Pretrain_qformer_mlp_con_cap_T5-XL.22975003/train/saved_model/model_09.ckpt \
+            model_config.PretrainedMLPPath=/home/xl544/rds/hpc-work/MLMI8_2022_VQA/Experiments/Pretrain_instructblip_mlp_con_cap.23335506/train/saved_model/model_11.ckpt \
             model_config.UsePrefixEmb=0.5 \
             model_config.UseQformerEmb=1 \
             model_config.LoadPretrainedMLP=1 \

@@ -33,7 +33,6 @@ local override = {
     "UsePrefixEmb": 0,
     "UseQformerEmb": 0,
     "LoadPretrainMLPs": 0,
-    "UseRawPixels": 1,
     "UseInstructBLIP" : 0,
 
     "modules": [
@@ -69,11 +68,11 @@ local override = {
   },
   "cache":{
     "regenerate":{
-      "train_data_preprocessed_BLIP2": 0,
-      "test_data_preprocessed_BLIP2": 0,
+      "train_data_preprocessed_BLIP2_text": 0,
+      "test_data_preprocessed_BLIP2_text": 0,
       "clip_embeddings": 0,
       "qformer_embeddings": 0,
-      "raw_pixels": 0,
+      "instructBLIP_embeddings": 0,
     },
   },
   "data_loader": {

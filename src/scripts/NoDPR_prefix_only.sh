@@ -25,6 +25,7 @@ JOBID=$SLURM_JOB_ID
 LOG=../logs/$EXP_NAME-log.$JOBID
 ERR=../logs/$EXP_NAME-err.$JOBID
 
+# used for qformer or vit prefix, with pretrained mlp or not, for any t5 models
 python main.py ../configs/okvqa/T5_NoDPR_prefix_only.jsonnet \
     --mode train \
     --experiment_name ${EXP_NAME}.$JOBID  \
@@ -38,9 +39,9 @@ python main.py ../configs/okvqa/T5_NoDPR_prefix_only.jsonnet \
             train.lr=0.00006  \
             train.MLP_lr=0.0001 \
             train.scheduler=linear \
-            model_config.PretrainedMLPPath=/home/xl544/rds/hpc-work/MLMI8_2022_VQA/Experiments/successful_runs/Pretrain_qformer_mlp_con_cap_T5-XL.22975003/train/saved_model/model_09.ckpt \
-            model_config.UsePrefixEmb=0.5 \
-            model_config.UseQformerEmb=1 \
+            model_config.PretrainedMLPPath=/home/xl544/rds/hpc-work/MLMI8_2022_VQA/Experiments/successful_runs/Pretrain_Concap_vit_prompt_t5xl.22975139/train/saved_model/model_09.ckpt \
+            model_config.UsePrefixEmb=1 \
+            model_config.UseQformerEmb=0 \
             model_config.LoadPretrainedMLP=1 \
             model_config.TokenizerModelVersion="google/flan-t5-xl" \
             model_config.ModelVersion="google/flan-t5-xl" \

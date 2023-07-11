@@ -33,7 +33,7 @@ local override = {
     "UsePrefixEmb": 0,
     "UseQformerEmb": 0,
     "LoadPretrainMLP": 0,
-    "UseRawPixels": 0,
+    "UseInstructBLIPEmb": 0,
 
     "modules": [
     ],
@@ -79,6 +79,7 @@ local override = {
       "test_data_preprocessed": 0,
       "clip_embeddings": 0,
       "qformer_embeddings": 0,
+      "instructBLIP_embeddings": 0,
     },
   },
   "data_loader": {
