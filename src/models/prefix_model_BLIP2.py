@@ -1,3 +1,4 @@
+# can use instructblip or blip2 hgface package
 import copy
 import math
 import os
@@ -26,7 +27,6 @@ from peft import LoraConfig, get_peft_model, TaskType, PeftModelForSeq2SeqLM
 import sys
 sys.path.insert(1, '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/models')
 #from PeftModel4Seq2SeqLM import PeftModelForSeq2SeqLM
-from InstructBLIP_lora import InstructBLIPLora
 #used when github instructblip is used
 #sys.path.insert(1, '/home/xl544/rds/hpc-work/LAVIS')
 #from lavis.models import load_model_and_preprocess

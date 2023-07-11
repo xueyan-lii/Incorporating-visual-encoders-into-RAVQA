@@ -12,7 +12,7 @@ python main.py ../configs/okvqa/T5_NoDPR_prefix_only_instructblip_emb.jsonnet \
             train.MLP_lr=0.0003 \
             train.scheduler=linear \
             model_config.UsePrefixEmb=0.5 \
-            model_config.PretrainedMLPPath=/home/xl544/rds/hpc-work/MLMI8_2022_VQA/Experiments/Pretrain_instructblip_mlp_con_cap.23317389/train/saved_model/model_09.ckpt \
+            model_config.PretrainedMLPPath=/home/xl544/rds/hpc-work/MLMI8_2022_VQA/Experiments/Pretrain_instructblip_mlp_con_cap.23335506/train/saved_model/model_11.ckpt \
             model_config.LoadPretrainedMLP=1 \
-            model_config.TokenizerModelVersion="google/flan-t5-large" \
-            model_config.ModelVersion="google/flan-t5-large" \
+            model_config.TokenizerModelVersion="google/flan-t5-xl" \
+            model_config.ModelVersion="google/flan-t5-xl" \
