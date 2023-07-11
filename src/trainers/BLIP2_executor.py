@@ -65,7 +65,7 @@ class BLIP2Executor(BaseExecutor):
                 p.requires_grad = True #language_model
             else:
                 p.requires_grad = False
-            print(n,p.requires_grad)
+            #print(n,p.requires_grad)
         '''
         else:
             for n, p in self.model.named_parameters():

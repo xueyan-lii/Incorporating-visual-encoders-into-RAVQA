@@ -14,7 +14,7 @@
 
 LOG=/dev/stdout
 ERR=/dev/stderr
-EXP_NAME=OKVQA_RA-VQA-xl
+EXP_NAME=OKVQA-instructblip
 # UNCOMMENT BELOW FOR SLURM SBATCH
 . /etc/profile.d/modules.sh                # Leave this line (enables the module command)
 module purge                               # Removes all modules still loaded
@@ -26,25 +26,23 @@ LOG=../logs/$EXP_NAME-log.$JOBID
 ERR=../logs/$EXP_NAME-err.$JOBID
 
 python main.py \
-    ../configs/okvqa/RAVQA.jsonnet  \
+    ../configs/okvqa/RAVQA_instructblip.jsonnet  \
     --mode train  \
     --experiment_name ${EXP_NAME}.$JOBID \
     --accelerator auto --devices 1  \
-    --modules freeze_question_encoder force_existence  \
+    --modules force_existence  \
+    --precision bf16 \
     --opts train.epochs=8  \
-            train.batch_size=2  \
+            train.batch_size=1  \
             valid.step_size=0.5  \
-            valid.batch_size=32  \
-            train.additional.gradient_accumulation_steps=16  \
+            valid.batch_size=4  \
+            train.additional.gradient_accumulation_steps=32  \
             train.lr=0.00006  \
             train.retriever_lr=0.00001  \
-            train.MLP_lr=0.0005 \
             train.scheduler=linear  \
+            model_config.loss_ratio.additional_loss=1  \
+            model_config.RAVQA_loss_type=Approach6  \
             data_loader.additional.num_knowledge_passages=5 \
-            model_config.UseQformerEmb=0 \
-            model_config.UsePrefixEmb=0 \
-            model_config.DecoderTokenizerModelVersion="google/flan-t5-xl" \
-            model_config.GeneratorModelVersion="google/flan-t5-xl" \
    >> $LOG 2> $ERR
 
 # testing only from checkpoint

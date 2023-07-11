@@ -69,7 +69,9 @@ class RagExecutorInstructBLIP(BaseExecutor):
                 # print(n, p.requires_grad)
         
         for n, p in self.model.named_parameters():
-            if 'vision_model' in n:
+            if 'query_tokens' in n:
+                p.requires_grad = False
+            elif 'vision_model' in n:
                 p.requires_grad = False
             elif 'qformer' in n:
                 p.requires_grad = False
@@ -77,8 +79,7 @@ class RagExecutorInstructBLIP(BaseExecutor):
                 p.requires_grad = True
             elif 'language_model' in n:
                 p.requires_grad = True #language_model
-            else:
-                p.requires_grad = False
+            print(n, p.requires_grad)
 
         if self.config.train.retriever_lr != self.config.train.lr:
             logger.info('using different learning rate for retriever')

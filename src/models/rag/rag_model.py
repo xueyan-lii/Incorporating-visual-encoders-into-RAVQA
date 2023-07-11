@@ -1,5 +1,3 @@
-
-
 import copy
 import math
 import os
@@ -20,6 +18,8 @@ from transformers import DPRQuestionEncoder, DPRContextEncoder, DPRConfig
 from transformers import BertModel, BertConfig
 from transformers.models.rag.retrieval_rag import CustomHFIndex, CanonicalHFIndex
 import pytorch_lightning as pl
+from peft import LoraConfig, get_peft_model, TaskType, PeftModelForSeq2SeqLM
+
 #from datasets import load_from_disk
 import time
 
@@ -63,9 +63,14 @@ class RagModel(pl.LightningModule):
         generator_model_config = GeneratorConfigClass.from_pretrained(self.config.model_config.GeneratorModelVersion)
         self.generator = GeneratorModelClass.from_pretrained(self.config.model_config.GeneratorModelVersion,
                                                     config=generator_model_config)
+        self.r=8
+        print('r value for LoRA is', self.r)
+        peft_config = LoraConfig(task_type=TaskType.SEQ_2_SEQ_LM, inference_mode=False, r=self.r, lora_alpha=32, lora_dropout=0.1)
+        self.generator = PeftModelForSeq2SeqLM(self.generator, peft_config)
+        self.generator.print_trainable_parameters()
         
         self.question_encoder.resize_token_embeddings(len(self.retriever_tokenizer))
-        self.generator.resize_token_embeddings(len(self.generator_tokenizer))
+        #self.generator.resize_token_embeddings(len(self.generator_tokenizer))
         
         self.loss_fct = CrossEntropyLoss(ignore_index=-100)
 
@@ -358,7 +363,6 @@ class RagModel(pl.LightningModule):
                       labels: torch.Tensor,
                       question_ids: List,
                       input_text_sequences: List,
-                      prefix: torch.Tensor,
                     **kwargs):
         
         batch_size = input_ids.shape[0]
@@ -446,7 +450,6 @@ class RagModel(pl.LightningModule):
     def generate(self, input_ids: torch.Tensor,
                       attention_mask: torch.Tensor,
                       labels: torch.Tensor,
-                      prefix: torch.Tensor,
                       question_ids: List,
                       input_text_sequences: List,
                       n_docs: int=None,
