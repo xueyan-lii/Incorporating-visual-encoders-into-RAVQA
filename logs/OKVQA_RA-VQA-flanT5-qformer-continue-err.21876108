@@ -1,0 +1,344 @@
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+[38;20m[INFO] - __main__ : Initialization done with the config: {'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'RAG', 'freeze_question_encoder', 'force_existence'], 'name': 'OKVQA_RA-VQA-flanT5-qformer-continue.21876108'}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'ocr_feature_preprocessed': 0, 'qformer_embeddings': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10, 'num_knowledge_passages': 5}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadGoogleSearchPassageData', 'LoadClipEmbeddings']}, 'dataset_type': 'OKVQADataset', 'dummy_dataloader': 0, 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset', 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'}, 'type': 'DataLoaderOKVQAWithKnowledge'}, 'experiment_name': 'OKVQA_RA-VQA-flanT5-qformer-continue.21876108', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_exact_match'}, {'name': 'compute_retrieval_metrics'}, {'name': 'compute_okvqa_scores'}], 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>', '<SOV>', '<EOV>', '<BOQ>', '<EOQ>', '<BOC>', '<EOC>', '<BOK>', '<EOK>'], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'DecoderTokenizerClass': 'T5Tokenizer', 'DecoderTokenizerModelVersion': 'google/flan-t5-large', 'GeneratorConfigClass': 'T5Config', 'GeneratorModelClass': 'T5ForConditionalGeneration', 'GeneratorModelVersion': 'google/flan-t5-large', 'LoadPretrainedMLPWeights': 0, 'ModelClass': 'RagModel', 'PretrainedMLPPath': '', 'QueryEncoderConfigClass': 'DPRConfig', 'QueryEncoderModelClass': 'DPRQuestionEncoder', 'QueryEncoderModelVersion': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder', 'RAVQA_loss_type': 'Approach6', 'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>', '<SOV>', '<EOV>', '<BOQ>', '<EOQ>', '<BOC>', '<EOC>', '<BOK>', '<EOK>']}, 'TokenizerClass': 'DPRQuestionEncoderTokenizer', 'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base', 'UsePrefixEmb': 0.5, 'UseQformerEmb': 1, 'base_model': 'RAG', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '<EOQ>', 'start': '<BOQ>'}, 'type': 'QuestionInput'}, {'option': 'caption', 'separation_tokens': {'end': '<EOC>', 'start': '<BOC>'}, 'type': 'TextBasedVisionInput'}, {'attribute_max': 3, 'attribute_thres': 0.05, 'object_max': 40, 'ocr': 1, 'option': 'object', 'separation_tokens': {'end': '<EOV>', 'sep': '<SOV>', 'start': '<BOV>'}, 'type': 'TextBasedVisionInput'}, {'option': 'default', 'type': 'EmbeddingInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}, {'option': 'default', 'type': 'PostProcessClipEmbeddings'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0, 'retrieval_pseudo_loss': 0}, 'modules': ['freeze_question_encoder', 'force_existence'], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenization'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'num_evaluation': 0}, 'train': {'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 16, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 2, 'epochs': 8, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '../Experiments/OKVQA_RA-VQA-flanT5-qformer.21842925/train/saved_model/model_5.ckpt', 'lr': 6e-05, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'linear', 'type': 'RagExecutor'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 0.25}, 'reset': False, 'mode': 'train', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/train', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/train/imgs', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_RA-VQA-flanT5-qformer-continue.21876108', 'args': {'config': '../configs/okvqa/RAVQA.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'train', 'reset': False, 'experiment_name': 'OKVQA_RA-VQA-flanT5-qformer-continue.21876108', 'tags': [], 'modules': ['freeze_question_encoder', 'force_existence'], 'log_prediction_tables': False, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 32, 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['train.epochs=8', 'train.batch_size=2', 'valid.step_size=0.25', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.retriever_lr=0.00001', 'train.scheduler=linear', 'data_loader.additional.num_knowledge_passages=5', 'model_config.UseQformerEmb=1', 'model_config.UsePrefixEmb=0.5', 'train.load_model_path=../Experiments/OKVQA_RA-VQA-flanT5-qformer.21842925/train/saved_model/model_5.ckpt', 'model_config.DecoderTokenizerModelVersion=google/flan-t5-large', 'model_config.GeneratorModelVersion=google/flan-t5-large']}}[0m
+Global seed set to 2021
+[38;20m[INFO] - __main__ : All seeds have been set to 2021[0m
+[38;20m[INFO] - __main__ : init wandb logger with the following settings: {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'RAG', 'freeze_question_encoder', 'force_existence'], 'name': 'OKVQA_RA-VQA-flanT5-qformer-continue.21876108'}[0m
+wandb: Currently logged in as: xl544. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.15.4 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.2
+wandb: Run data is saved locally in /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/wandb/run-20230607_172552-8ciyxf77
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run OKVQA_RA-VQA-flanT5-qformer-continue.21876108
+wandb: ⭐️ View project at https://wandb.ai/xl544/RAVQA
+wandb: 🚀 View run at https://wandb.ai/xl544/RAVQA/runs/8ciyxf77
+Multiprocessing is handled by SLURM.
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+[38;20m[INFO] - __main__ : arguments passed to trainer: Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/RAVQA.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='OKVQA_RA-VQA-flanT5-qformer-continue.21876108', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=False, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='train', modules=['freeze_question_encoder', 'force_existence'], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['train.epochs=8', 'train.batch_size=2', 'valid.step_size=0.25', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.retriever_lr=0.00001', 'train.scheduler=linear', 'data_loader.additional.num_knowledge_passages=5', 'model_config.UseQformerEmb=1', 'model_config.UsePrefixEmb=0.5', 'train.load_model_path=../Experiments/OKVQA_RA-VQA-flanT5-qformer.21842925/train/saved_model/model_5.ckpt', 'model_config.DecoderTokenizerModelVersion=google/flan-t5-large', 'model_config.GeneratorModelVersion=google/flan-t5-large'], overfit_batches=0.0, plugins=None, precision=32, prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')[0m
+[38;20m[INFO] - __main__ : additional arguments passed to trainer: {'accumulate_grad_batches': 16, 'default_root_dir': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/train/saved_model', 'max_epochs': 8, 'logger': [<pytorch_lightning.loggers.tensorboard.TensorBoardLogger object at 0x1455962dd100>, <pytorch_lightning.loggers.wandb.WandbLogger object at 0x1455962ce3a0>, <utils.metrics_log_callback.MetricsHistoryLogger object at 0x145595a09bb0>], 'callbacks': [<pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint object at 0x1455962ce0a0>, <pytorch_lightning.callbacks.progress.tqdm_progress.TQDMProgressBar object at 0x1455959b8610>, <pytorch_lightning.callbacks.model_summary.ModelSummary object at 0x1455959b8b20>, <pytorch_lightning.callbacks.gradient_accumulation_scheduler.GradientAccumulationScheduler object at 0x1455959b8a30>], 'plugins': [], 'log_every_n_steps': 10, 'val_check_interval': 0.25}[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/vinvl_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] VinVL features 14031[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/ocr_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] OCR features 14031, 5462 has annotations.[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : OCR feature detected in VinVL feature dict...skipping..[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/train_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: train  entries: 9009[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/test_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: test  entries: 5046[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}[0m
+  0%|          | 0/168380 [00:00<?, ?it/s]  9%|▉         | 15918/168380 [00:00<00:00, 159175.22it/s] 19%|█▉        | 31836/168380 [00:00<00:00, 157747.19it/s] 29%|██▊       | 48097/168380 [00:00<00:00, 159950.41it/s] 38%|███▊      | 64539/168380 [00:00<00:00, 161704.40it/s] 48%|████▊     | 81038/168380 [00:00<00:00, 162865.45it/s] 58%|█████▊    | 97326/168380 [00:00<00:00, 162308.09it/s] 68%|██████▊   | 114114/168380 [00:00<00:00, 164121.01it/s] 79%|███████▉  | 133210/168380 [00:00<00:00, 172636.35it/s] 91%|█████████ | 152445/168380 [00:00<00:00, 178778.86it/s]100%|█████████▉| 168307/168380 [00:00<00:00, 171096.81it/s]
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_eva_clip_g_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/qformer_embeddings.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] CLIP embeddings 14031[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets : initialising OKVQADataset...[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets : initialising OKVQADataset...[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa_with_knowledge : [Data Statistics]: training data loader: 4505;  test data loader: 158[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Created a temporary directory at /tmp/tmpr4i6hlqf[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Writing /tmp/tmpr4i6hlqf/_remote_module_non_scriptable.py[0m
+[38;20m[INFO] - trainers.base_executor : Initializing RagExecutor...[0m
+[38;20m[INFO] - __main__ : config file was successfully saved to /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108 for future use.[0m
+Restoring states from the checkpoint path at ../Experiments/OKVQA_RA-VQA-flanT5-qformer.21842925/train/saved_model/model_5.ckpt
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:342: UserWarning: The dirpath has changed from '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer.21842925/train/saved_model' to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/train/saved_model', therefore `best_model_score`, `kth_best_model_path`, `kth_value`, `last_model_path` and `best_k_models` won't be reloaded. Only `best_model_path` will be reloaded.
+  warnings.warn(
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[38;20m[INFO] - trainers.rag_executor : using different learning rate for retriever[0m
+[38;20m[INFO] - trainers.rag_executor : #params: 558   lr: 6e-05[0m
+[38;20m[INFO] - trainers.rag_executor : #params: 2   lr: 1e-05[0m
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+
+  | Name  | Type     | Params
+-----------------------------------
+0 | model | RagModel | 893 M 
+-----------------------------------
+783 M     Trainable params
+109 M     Non-trainable params
+893 M     Total params
+3,573.559 Total estimated model params size (MB)
+Missing logger folder: /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/OKVQA_RA-VQA-flanT5-qformer-continue.21876108
+Restored all states from the checkpoint file at ../Experiments/OKVQA_RA-VQA-flanT5-qformer.21842925/train/saved_model/model_5.ckpt
+SLURM auto-requeueing enabled. Setting signal handlers.
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Failed to compute OKVQA scores: Results do not correspond to current VQA set. Either the results do not have predictions for all question ids in annotation file or there is atleast one question id that does not belong to the question ids in the annotation file.This could be due to the fact that OKVQA parser requires all questions to evaluatethe accuracy. Ignore this error if this is the sanity check.[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [sanity_check]: {'test/exact_match_at_1': 0.609375, 'test/exact_match_at_2': 0.703125, 'test/exact_match_at_3': 0.71875, 'test/exact_match_at_4': 0.71875, 'test/exact_match_at_5': 0.71875, 'test/recall_at_5': 0.796875, 'test/precision_at_5': 0.515625, 'test/gold_precision_at_5': 0.3375, 'test/gold_recall_at_5': 0.640625, 'test/successful_hit': 0.340625, 'test/successful_no_hit': 0.171875, 'test/failed_hit': 0.240625, 'test/failed_no_hit': 0.246875, 'test/selected_successful_hit': 0.453125, 'test/selected_successful_no_hit': 0.15625, 'test/selected_failed_hit': 0.21875, 'test/selected_failed_no_hit': 0.171875, 'test/n_retrieved_docs': 5, 'test/epoch': 5}[0m
+[33;20m[WARNING] - root : Sanity check mode, not saving to loggers.[0m
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 2. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5877923107411811, 'test/exact_match_at_2': 0.703725723345224, 'test/exact_match_at_3': 0.7376139516448672, 'test/exact_match_at_4': 0.7457391993658343, 'test/exact_match_at_5': 0.7479191438763377, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.3663892191835117, 'test/successful_no_hit': 0.18386841062227507, 'test/failed_hit': 0.2574712643678161, 'test/failed_no_hit': 0.19227110582639714, 'test/selected_successful_hit': 0.4383670233848593, 'test/selected_successful_no_hit': 0.14942528735632185, 'test/selected_failed_hit': 0.2859690844233056, 'test/selected_failed_no_hit': 0.12623860483551327, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 54.02, 'test/accuracy_QuestionType_one': 49.62, 'test/accuracy_QuestionType_eight': 52.58, 'test/accuracy_QuestionType_other': 56.22, 'test/accuracy_QuestionType_seven': 52.24, 'test/accuracy_QuestionType_four': 61.69, 'test/accuracy_QuestionType_five': 55.93, 'test/accuracy_QuestionType_three': 53.55, 'test/accuracy_QuestionType_nine': 40.95, 'test/accuracy_QuestionType_ten': 52.56, 'test/accuracy_QuestionType_two': 54.42, 'test/accuracy_QuestionType_six': 52.06, 'test/accuracy_AnswerType_other': 54.02, 'test/epoch': 6}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5893777249306381, 'test/exact_match_at_2': 0.7047166072136346, 'test/exact_match_at_3': 0.7378121284185494, 'test/exact_match_at_4': 0.7445501387237415, 'test/exact_match_at_5': 0.7463337296868807, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.36523979389615535, 'test/successful_no_hit': 0.1891399128022196, 'test/failed_hit': 0.244867221561633, 'test/failed_no_hit': 0.20075307173999207, 'test/selected_successful_hit': 0.43638525564803804, 'test/selected_successful_no_hit': 0.15299246928260007, 'test/selected_failed_hit': 0.27824019024970276, 'test/selected_failed_no_hit': 0.13238208481965913, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 54.12, 'test/accuracy_QuestionType_one': 49.2, 'test/accuracy_QuestionType_eight': 53.07, 'test/accuracy_QuestionType_other': 56.28, 'test/accuracy_QuestionType_seven': 51.82, 'test/accuracy_QuestionType_four': 62.36, 'test/accuracy_QuestionType_five': 56.22, 'test/accuracy_QuestionType_three': 53.18, 'test/accuracy_QuestionType_nine': 42.86, 'test/accuracy_QuestionType_ten': 51.78, 'test/accuracy_QuestionType_two': 53.84, 'test/accuracy_QuestionType_six': 53.19, 'test/accuracy_AnswerType_other': 54.12, 'test/epoch': 6}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5871977804201347, 'test/exact_match_at_2': 0.703725723345224, 'test/exact_match_at_3': 0.7374157748711851, 'test/exact_match_at_4': 0.7447483154974237, 'test/exact_match_at_5': 0.7471264367816092, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.3657550535077289, 'test/successful_no_hit': 0.1870788743559255, 'test/failed_hit': 0.25124851367419737, 'test/failed_no_hit': 0.19591755846214823, 'test/selected_successful_hit': 0.4357907253269917, 'test/selected_successful_no_hit': 0.1514070550931431, 'test/selected_failed_hit': 0.2806183115338882, 'test/selected_failed_no_hit': 0.13218390804597702, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 54.0, 'test/accuracy_QuestionType_one': 48.54, 'test/accuracy_QuestionType_eight': 52.91, 'test/accuracy_QuestionType_other': 56.12, 'test/accuracy_QuestionType_seven': 52.29, 'test/accuracy_QuestionType_four': 61.94, 'test/accuracy_QuestionType_five': 55.75, 'test/accuracy_QuestionType_three': 53.41, 'test/accuracy_QuestionType_nine': 45.24, 'test/accuracy_QuestionType_ten': 53.33, 'test/accuracy_QuestionType_two': 54.65, 'test/accuracy_QuestionType_six': 52.77, 'test/accuracy_AnswerType_other': 54.0, 'test/epoch': 6}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5879904875148633, 'test/exact_match_at_2': 0.7047166072136346, 'test/exact_match_at_3': 0.7354340071343638, 'test/exact_match_at_4': 0.7433610780816489, 'test/exact_match_at_5': 0.7451446690447879, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.3652794292508918, 'test/successful_no_hit': 0.18652397938961554, 'test/failed_hit': 0.24926674593737613, 'test/failed_no_hit': 0.19892984542211653, 'test/selected_successful_hit': 0.43737613951644866, 'test/selected_successful_no_hit': 0.15061434799841458, 'test/selected_failed_hit': 0.2810146650812525, 'test/selected_failed_no_hit': 0.13099484740388426, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 54.05, 'test/accuracy_QuestionType_one': 48.73, 'test/accuracy_QuestionType_eight': 52.28, 'test/accuracy_QuestionType_other': 56.35, 'test/accuracy_QuestionType_seven': 52.9, 'test/accuracy_QuestionType_four': 62.61, 'test/accuracy_QuestionType_five': 55.85, 'test/accuracy_QuestionType_three': 52.8, 'test/accuracy_QuestionType_nine': 47.62, 'test/accuracy_QuestionType_ten': 52.56, 'test/accuracy_QuestionType_two': 55.0, 'test/accuracy_QuestionType_six': 52.06, 'test/accuracy_AnswerType_other': 54.05, 'test/epoch': 6}[0m
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 1. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+Epoch 6, global step 1974: 'test/accuracy_overall' reached 54.05000 (best 54.05000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/train/saved_model/model_6.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5862068965517241, 'test/exact_match_at_2': 0.7045184304399524, 'test/exact_match_at_3': 0.735632183908046, 'test/exact_match_at_4': 0.7433610780816489, 'test/exact_match_at_5': 0.7457391993658343, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.3654379706698375, 'test/successful_no_hit': 0.18426476416963933, 'test/failed_hit': 0.2529131985731272, 'test/failed_no_hit': 0.19738406658739596, 'test/selected_successful_hit': 0.434799841458581, 'test/selected_successful_no_hit': 0.1514070550931431, 'test/selected_failed_hit': 0.28279825604439157, 'test/selected_failed_no_hit': 0.13099484740388426, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 53.94, 'test/accuracy_QuestionType_one': 48.81, 'test/accuracy_QuestionType_eight': 52.26, 'test/accuracy_QuestionType_other': 56.06, 'test/accuracy_QuestionType_seven': 52.8, 'test/accuracy_QuestionType_four': 62.43, 'test/accuracy_QuestionType_five': 55.3, 'test/accuracy_QuestionType_three': 53.41, 'test/accuracy_QuestionType_nine': 44.52, 'test/accuracy_QuestionType_ten': 52.56, 'test/accuracy_QuestionType_two': 54.65, 'test/accuracy_QuestionType_six': 53.48, 'test/accuracy_AnswerType_other': 53.94, 'test/epoch': 7}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5873959571938169, 'test/exact_match_at_2': 0.7033293697978596, 'test/exact_match_at_3': 0.7352358303606817, 'test/exact_match_at_4': 0.7419738406658739, 'test/exact_match_at_5': 0.7439556084026953, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.3640507332540626, 'test/successful_no_hit': 0.1880697582243361, 'test/failed_hit': 0.24581847007530716, 'test/failed_no_hit': 0.20206103844629408, 'test/selected_successful_hit': 0.4328180737217598, 'test/selected_successful_no_hit': 0.1545778834720571, 'test/selected_failed_hit': 0.27586206896551724, 'test/selected_failed_no_hit': 0.1367419738406659, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 53.98, 'test/accuracy_QuestionType_one': 48.27, 'test/accuracy_QuestionType_eight': 52.21, 'test/accuracy_QuestionType_other': 56.19, 'test/accuracy_QuestionType_seven': 52.52, 'test/accuracy_QuestionType_four': 63.14, 'test/accuracy_QuestionType_five': 56.1, 'test/accuracy_QuestionType_three': 53.18, 'test/accuracy_QuestionType_nine': 42.14, 'test/accuracy_QuestionType_ten': 53.02, 'test/accuracy_QuestionType_two': 54.42, 'test/accuracy_QuestionType_six': 53.48, 'test/accuracy_AnswerType_other': 53.98, 'test/epoch': 7}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5891795481569561, 'test/exact_match_at_2': 0.7045184304399524, 'test/exact_match_at_3': 0.7366230677764566, 'test/exact_match_at_4': 0.7439556084026953, 'test/exact_match_at_5': 0.7455410225921522, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.3640507332540626, 'test/successful_no_hit': 0.18977407847800237, 'test/failed_hit': 0.24320253666270314, 'test/failed_no_hit': 0.20297265160523187, 'test/selected_successful_hit': 0.4326198969480777, 'test/selected_successful_no_hit': 0.15655965120887833, 'test/selected_failed_hit': 0.2730875941339675, 'test/selected_failed_no_hit': 0.1377328577090765, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 54.15, 'test/accuracy_QuestionType_one': 48.46, 'test/accuracy_QuestionType_eight': 52.51, 'test/accuracy_QuestionType_other': 56.19, 'test/accuracy_QuestionType_seven': 52.38, 'test/accuracy_QuestionType_four': 63.14, 'test/accuracy_QuestionType_five': 55.98, 'test/accuracy_QuestionType_three': 53.55, 'test/accuracy_QuestionType_nine': 44.52, 'test/accuracy_QuestionType_ten': 55.35, 'test/accuracy_QuestionType_two': 53.84, 'test/accuracy_QuestionType_six': 53.48, 'test/accuracy_AnswerType_other': 54.15, 'test/epoch': 7}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5891795481569561, 'test/exact_match_at_2': 0.7033293697978596, 'test/exact_match_at_3': 0.7354340071343638, 'test/exact_match_at_4': 0.7429647245342846, 'test/exact_match_at_5': 0.7447483154974237, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3732461355529132, 'test/gold_recall_at_5': 0.6668648434403488, 'test/successful_hit': 0.36393182718985334, 'test/successful_no_hit': 0.18989298454221165, 'test/failed_hit': 0.2441141498216409, 'test/failed_no_hit': 0.20206103844629408, 'test/selected_successful_hit': 0.43222354340071345, 'test/selected_successful_no_hit': 0.15695600475624258, 'test/selected_failed_hit': 0.2730875941339675, 'test/selected_failed_no_hit': 0.1377328577090765, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 54.15, 'test/accuracy_QuestionType_one': 48.22, 'test/accuracy_QuestionType_eight': 52.56, 'test/accuracy_QuestionType_other': 56.35, 'test/accuracy_QuestionType_seven': 52.38, 'test/accuracy_QuestionType_four': 62.96, 'test/accuracy_QuestionType_five': 56.17, 'test/accuracy_QuestionType_three': 53.69, 'test/accuracy_QuestionType_nine': 44.52, 'test/accuracy_QuestionType_ten': 54.88, 'test/accuracy_QuestionType_two': 53.84, 'test/accuracy_QuestionType_six': 53.48, 'test/accuracy_AnswerType_other': 54.15, 'test/epoch': 7}[0m
+Epoch 7, global step 2256: 'test/accuracy_overall' reached 54.15000 (best 54.15000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-flanT5-qformer-continue.21876108/train/saved_model/model_7.ckpt' as top 1
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: \ 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: | 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: / 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: - 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: \ 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: | 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: / 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: - 0.015 MB of 0.015 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb:                                     epoch ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁████████████████████
+wandb:            test/accuracy_AnswerType_other ▄▇▃▅▁▂██
+wandb:   test/accuracy_AnswerType_other_auto_max ▁█
+wandb:   test/accuracy_AnswerType_other_auto_min █▁
+wandb:          test/accuracy_QuestionType_eight ▄█▇▂▁▁▃▄
+wandb: test/accuracy_QuestionType_eight_auto_max ▁▁
+wandb: test/accuracy_QuestionType_eight_auto_min █▁
+wandb:           test/accuracy_QuestionType_five ▆█▄▅▁▇▆█
+wandb:  test/accuracy_QuestionType_five_auto_max ▁▁
+wandb:  test/accuracy_QuestionType_five_auto_min █▁
+wandb:           test/accuracy_QuestionType_four ▁▄▂▅▅██▇
+wandb:  test/accuracy_QuestionType_four_auto_max ▁█
+wandb:  test/accuracy_QuestionType_four_auto_min ▁▁
+wandb:           test/accuracy_QuestionType_nine ▁▃▆█▅▂▅▅
+wandb:  test/accuracy_QuestionType_nine_auto_max ▁▁
+wandb:  test/accuracy_QuestionType_nine_auto_min ▁▁
+wandb:            test/accuracy_QuestionType_one █▆▃▄▄▁▂▁
+wandb:   test/accuracy_QuestionType_one_auto_max ▁▁
+wandb:   test/accuracy_QuestionType_one_auto_min █▁
+wandb:          test/accuracy_QuestionType_other ▅▆▂█▁▄▄█
+wandb: test/accuracy_QuestionType_other_auto_max ▁▁
+wandb: test/accuracy_QuestionType_other_auto_min █▁
+wandb:          test/accuracy_QuestionType_seven ▄▁▄█▇▆▅▅
+wandb: test/accuracy_QuestionType_seven_auto_max ▁▁
+wandb: test/accuracy_QuestionType_seven_auto_min ▁▁
+wandb:            test/accuracy_QuestionType_six ▁▇▅▁████
+wandb:   test/accuracy_QuestionType_six_auto_max ▁█
+wandb:   test/accuracy_QuestionType_six_auto_min ▁▁
+wandb:            test/accuracy_QuestionType_ten ▃▁▄▃▃▃█▇
+wandb:   test/accuracy_QuestionType_ten_auto_max ▁█
+wandb:   test/accuracy_QuestionType_ten_auto_min ▁▁
+wandb:          test/accuracy_QuestionType_three ▇▄▆▁▆▄▇█
+wandb: test/accuracy_QuestionType_three_auto_max ▁█
+wandb: test/accuracy_QuestionType_three_auto_min ▁▁
+wandb:            test/accuracy_QuestionType_two ▄▁▆█▆▄▁▁
+wandb:   test/accuracy_QuestionType_two_auto_max ▁▁
+wandb:   test/accuracy_QuestionType_two_auto_min ▁▁
+wandb:                     test/accuracy_overall ▄▇▃▅▁▂██
+wandb:            test/accuracy_overall_auto_max ▁█
+wandb:            test/accuracy_overall_auto_min █▁
+wandb:                                test/epoch ▁▁▁▁████
+wandb:                       test/epoch_auto_max ▁█
+wandb:                       test/epoch_auto_min ▁▁
+wandb:                     test/exact_match_at_1 ▅█▃▅▁▄██
+wandb:            test/exact_match_at_1_auto_max ▁▁
+wandb:            test/exact_match_at_1_auto_min █▁
+wandb:                     test/exact_match_at_2 ▃█▃█▇▁▇▁
+wandb:            test/exact_match_at_2_auto_max ▁▁
+wandb:            test/exact_match_at_2_auto_min █▁
+wandb:                     test/exact_match_at_3 ▇█▇▂▂▁▅▂
+wandb:            test/exact_match_at_3_auto_max ▁▁
+wandb:            test/exact_match_at_3_auto_min █▁
+wandb:                     test/exact_match_at_4 █▆▆▄▄▁▅▃
+wandb:            test/exact_match_at_4_auto_max ▁▁
+wandb:            test/exact_match_at_4_auto_min █▁
+wandb:                     test/exact_match_at_5 █▅▇▃▄▁▄▂
+wandb:            test/exact_match_at_5_auto_max ▁▁
+wandb:            test/exact_match_at_5_auto_min █▁
+wandb:                           test/failed_hit █▂▅▄▆▂▁▁
+wandb:                  test/failed_hit_auto_max ▁▁
+wandb:                  test/failed_hit_auto_min █▁
+wandb:                        test/failed_no_hit ▁▇▃▅▄▇█▇
+wandb:               test/failed_no_hit_auto_max ▁█
+wandb:               test/failed_no_hit_auto_min ▁▁
+wandb:                  test/gold_precision_at_5 ▁▁▁▁▁▁▁▁
+wandb:         test/gold_precision_at_5_auto_max ▁▁
+wandb:         test/gold_precision_at_5_auto_min ▁▁
+wandb:                     test/gold_recall_at_5 ▁▁▁▁▁▁▁▁
+wandb:            test/gold_recall_at_5_auto_max ▁▁
+wandb:            test/gold_recall_at_5_auto_min ▁▁
+wandb:                     test/n_retrieved_docs ▁▁▁▁▁▁▁▁
+wandb:            test/n_retrieved_docs_auto_max ▁▁
+wandb:            test/n_retrieved_docs_auto_min ▁▁
+wandb:                       test/precision_at_5 ▁▁▁▁▁▁▁▁
+wandb:              test/precision_at_5_auto_max ▁▁
+wandb:              test/precision_at_5_auto_min ▁▁
+wandb:                          test/recall_at_5 ▁▁▁▁▁▁▁▁
+wandb:                 test/recall_at_5_auto_max ▁▁
+wandb:                 test/recall_at_5_auto_min ▁▁
+wandb:                  test/selected_failed_hit █▄▅▅▆▃▁▁
+wandb:         test/selected_failed_hit_auto_max ▁▁
+wandb:         test/selected_failed_hit_auto_min █▁
+wandb:               test/selected_failed_no_hit ▁▅▅▄▄▇██
+wandb:      test/selected_failed_no_hit_auto_max ▁█
+wandb:      test/selected_failed_no_hit_auto_min ▁▁
+wandb:              test/selected_successful_hit █▆▅▇▄▂▁▁
+wandb:     test/selected_successful_hit_auto_max ▁▁
+wandb:     test/selected_successful_hit_auto_min █▁
+wandb:           test/selected_successful_no_hit ▁▄▃▂▃▆██
+wandb:  test/selected_successful_no_hit_auto_max ▁█
+wandb:  test/selected_successful_no_hit_auto_min ▁▁
+wandb:                       test/successful_hit █▅▆▅▅▁▁▁
+wandb:              test/successful_hit_auto_max ▁▁
+wandb:              test/successful_hit_auto_min █▁
+wandb:                    test/successful_no_hit ▁▇▅▄▁▆██
+wandb:           test/successful_no_hit_auto_max ▁█
+wandb:           test/successful_no_hit_auto_min ▁▁
+wandb:                          train/loss_epoch █▁
+wandb:                 train/loss_epoch_auto_max ▁
+wandb:                 train/loss_epoch_auto_min ▁
+wandb:                           train/loss_step ▂▄▅▄▁▂▃▂▄▂▃▅▁█▃▃▂▅▄▂▃▁▇▄▃▂▂▂▁▄▃▃▅▃▁▃▁▅▁▅
+wandb:                  train/loss_step_auto_max ▁█
+wandb:                  train/loss_step_auto_min █▁
+wandb:                               train/lr[0] ███▇▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁
+wandb:                      train/lr[0]_auto_max ▁▁
+wandb:                      train/lr[0]_auto_min █▁
+wandb:                               train/lr[1] ███▇▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁
+wandb:                      train/lr[1]_auto_max ▁▁
+wandb:                      train/lr[1]_auto_min █▁
+wandb:                       trainer/global_step ▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇████
+wandb: 
+wandb: Run summary:
+wandb:                                     epoch 7
+wandb:            test/accuracy_AnswerType_other 54.15
+wandb:   test/accuracy_AnswerType_other_auto_max 54.15
+wandb:   test/accuracy_AnswerType_other_auto_min 53.94
+wandb:          test/accuracy_QuestionType_eight 52.56
+wandb: test/accuracy_QuestionType_eight_auto_max 53.07
+wandb: test/accuracy_QuestionType_eight_auto_min 52.21
+wandb:           test/accuracy_QuestionType_five 56.17
+wandb:  test/accuracy_QuestionType_five_auto_max 56.22
+wandb:  test/accuracy_QuestionType_five_auto_min 55.3
+wandb:           test/accuracy_QuestionType_four 62.96
+wandb:  test/accuracy_QuestionType_four_auto_max 63.14
+wandb:  test/accuracy_QuestionType_four_auto_min 61.69
+wandb:           test/accuracy_QuestionType_nine 44.52
+wandb:  test/accuracy_QuestionType_nine_auto_max 47.62
+wandb:  test/accuracy_QuestionType_nine_auto_min 40.95
+wandb:            test/accuracy_QuestionType_one 48.22
+wandb:   test/accuracy_QuestionType_one_auto_max 49.62
+wandb:   test/accuracy_QuestionType_one_auto_min 48.22
+wandb:          test/accuracy_QuestionType_other 56.35
+wandb: test/accuracy_QuestionType_other_auto_max 56.35
+wandb: test/accuracy_QuestionType_other_auto_min 56.06
+wandb:          test/accuracy_QuestionType_seven 52.38
+wandb: test/accuracy_QuestionType_seven_auto_max 52.9
+wandb: test/accuracy_QuestionType_seven_auto_min 51.82
+wandb:            test/accuracy_QuestionType_six 53.48
+wandb:   test/accuracy_QuestionType_six_auto_max 53.48
+wandb:   test/accuracy_QuestionType_six_auto_min 52.06
+wandb:            test/accuracy_QuestionType_ten 54.88
+wandb:   test/accuracy_QuestionType_ten_auto_max 55.35
+wandb:   test/accuracy_QuestionType_ten_auto_min 51.78
+wandb:          test/accuracy_QuestionType_three 53.69
+wandb: test/accuracy_QuestionType_three_auto_max 53.69
+wandb: test/accuracy_QuestionType_three_auto_min 52.8
+wandb:            test/accuracy_QuestionType_two 53.84
+wandb:   test/accuracy_QuestionType_two_auto_max 55.0
+wandb:   test/accuracy_QuestionType_two_auto_min 53.84
+wandb:                     test/accuracy_overall 54.15
+wandb:            test/accuracy_overall_auto_max 54.15
+wandb:            test/accuracy_overall_auto_min 53.94
+wandb:                                test/epoch 7.0
+wandb:                       test/epoch_auto_max 7.0
+wandb:                       test/epoch_auto_min 6.0
+wandb:                     test/exact_match_at_1 0.58918
+wandb:            test/exact_match_at_1_auto_max 0.58938
+wandb:            test/exact_match_at_1_auto_min 0.58621
+wandb:                     test/exact_match_at_2 0.70333
+wandb:            test/exact_match_at_2_auto_max 0.70472
+wandb:            test/exact_match_at_2_auto_min 0.70333
+wandb:                     test/exact_match_at_3 0.73543
+wandb:            test/exact_match_at_3_auto_max 0.73781
+wandb:            test/exact_match_at_3_auto_min 0.73524
+wandb:                     test/exact_match_at_4 0.74296
+wandb:            test/exact_match_at_4_auto_max 0.74574
+wandb:            test/exact_match_at_4_auto_min 0.74197
+wandb:                     test/exact_match_at_5 0.74475
+wandb:            test/exact_match_at_5_auto_max 0.74792
+wandb:            test/exact_match_at_5_auto_min 0.74396
+wandb:                           test/failed_hit 0.24411
+wandb:                  test/failed_hit_auto_max 0.25747
+wandb:                  test/failed_hit_auto_min 0.2432
+wandb:                        test/failed_no_hit 0.20206
+wandb:               test/failed_no_hit_auto_max 0.20297
+wandb:               test/failed_no_hit_auto_min 0.19227
+wandb:                  test/gold_precision_at_5 0.37325
+wandb:         test/gold_precision_at_5_auto_max 0.37325
+wandb:         test/gold_precision_at_5_auto_min 0.37325
+wandb:                     test/gold_recall_at_5 0.66686
+wandb:            test/gold_recall_at_5_auto_max 0.66686
+wandb:            test/gold_recall_at_5_auto_min 0.66686
+wandb:                     test/n_retrieved_docs 5.0
+wandb:            test/n_retrieved_docs_auto_max 5.0
+wandb:            test/n_retrieved_docs_auto_min 5.0
+wandb:                       test/precision_at_5 0.51835
+wandb:              test/precision_at_5_auto_max 0.51835
+wandb:              test/precision_at_5_auto_min 0.51835
+wandb:                          test/recall_at_5 0.81272
+wandb:                 test/recall_at_5_auto_max 0.81272
+wandb:                 test/recall_at_5_auto_min 0.81272
+wandb:                  test/selected_failed_hit 0.27309
+wandb:         test/selected_failed_hit_auto_max 0.28597
+wandb:         test/selected_failed_hit_auto_min 0.27309
+wandb:               test/selected_failed_no_hit 0.13773
+wandb:      test/selected_failed_no_hit_auto_max 0.13773
+wandb:      test/selected_failed_no_hit_auto_min 0.12624
+wandb:              test/selected_successful_hit 0.43222
+wandb:     test/selected_successful_hit_auto_max 0.43837
+wandb:     test/selected_successful_hit_auto_min 0.43222
+wandb:           test/selected_successful_no_hit 0.15696
+wandb:  test/selected_successful_no_hit_auto_max 0.15696
+wandb:  test/selected_successful_no_hit_auto_min 0.14943
+wandb:                       test/successful_hit 0.36393
+wandb:              test/successful_hit_auto_max 0.36639
+wandb:              test/successful_hit_auto_min 0.36393
+wandb:                    test/successful_no_hit 0.18989
+wandb:           test/successful_no_hit_auto_max 0.18989
+wandb:           test/successful_no_hit_auto_min 0.18387
+wandb:                          train/loss_epoch 0.38445
+wandb:                 train/loss_epoch_auto_max 0.44212
+wandb:                 train/loss_epoch_auto_min 0.44212
+wandb:                           train/loss_step 0.93136
+wandb:                  train/loss_step_auto_max 1.75981
+wandb:                  train/loss_step_auto_min 0.00342
+wandb:                               train/lr[0] 0.0
+wandb:                      train/lr[0]_auto_max 1e-05
+wandb:                      train/lr[0]_auto_min 0.0
+wandb:                               train/lr[1] 0.0
+wandb:                      train/lr[1]_auto_max 0.0
+wandb:                      train/lr[1]_auto_min 0.0
+wandb:                       trainer/global_step 2255
+wandb: 
+wandb: 🚀 View run OKVQA_RA-VQA-flanT5-qformer-continue.21876108 at: https://wandb.ai/xl544/RAVQA/runs/8ciyxf77
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230607_172552-8ciyxf77/logs

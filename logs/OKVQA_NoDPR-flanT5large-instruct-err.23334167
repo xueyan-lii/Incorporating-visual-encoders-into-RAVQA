@@ -1,0 +1,247 @@
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libtorch_cuda_cu.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+[38;20m[INFO] - __main__ : Initialization done with the config: {'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'T5'], 'name': 'OKVQA_NoDPR-flanT5large-instruct.23334167'}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'instructBLIP_embeddings': 0, 'ocr_feature_preprocessed': 0, 'qformer_embeddings': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadClipEmbeddings']}, 'dataset_type': 'OKVQADataset_Instruct', 'dummy_dataloader': 0, 'type': 'DataLoaderOKVQA'}, 'experiment_name': 'OKVQA_NoDPR-flanT5large-instruct.23334167', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_okvqa_scores'}], 'model_config': {'ConfigClass': 'T5Config', 'GeneratorModelClass': 'T5ForConditionalGeneration', 'LoadPretrainMLP': 0, 'ModelClass': 'PrefixModel', 'ModelVersion': 'google/flan-t5-large', 'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOQ>', '<EOQ>'], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'TokenizerClass': 'T5Tokenizer', 'TokenizerModelVersion': 'google/flan-t5-large', 'UseInstructBLIPEmb': 1, 'UsePrefixEmb': 0.5, 'UseQformerEmb': 0, 'base_model': 'T5', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '<EOQ>', 'start': '<BOQ>'}, 'type': 'QuestionInput'}, {'option': 'default', 'type': 'EmbeddingInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}, {'option': 'default', 'type': 'PostProcessClipEmbeddings'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0}, 'modules': [], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenization'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}, 'LoadPretrainedMLP': 0}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'num_evaluation': 0}, 'train': {'MLP_lr': 0.0003, 'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 16, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 2, 'epochs': 10, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'lr': 6e-05, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'linear', 'type': 'T5ExecutorWithPrefix'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 0.5}, 'reset': False, 'mode': 'train', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/imgs', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_NoDPR-flanT5large-instruct.23334167', 'args': {'config': '../configs/okvqa/T5_NoDPR_prefix_only_instructblip_emb.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'train', 'reset': False, 'experiment_name': 'OKVQA_NoDPR-flanT5large-instruct.23334167', 'tags': [], 'modules': [], 'log_prediction_tables': False, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 32, 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['train.epochs=10', 'train.batch_size=2', 'valid.step_size=0.5', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.MLP_lr=0.0003', 'train.scheduler=linear', 'model_config.UsePrefixEmb=0.5', 'model_config.LoadPretrainedMLP=0', 'model_config.TokenizerModelVersion=google/flan-t5-large', 'model_config.ModelVersion=google/flan-t5-large']}}[0m
+Global seed set to 2021
+[38;20m[INFO] - __main__ : All seeds have been set to 2021[0m
+[38;20m[INFO] - __main__ : init wandb logger with the following settings: {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'T5'], 'name': 'OKVQA_NoDPR-flanT5large-instruct.23334167'}[0m
+wandb: Currently logged in as: xl544. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.15.4
+wandb: Run data is saved locally in /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/wandb/run-20230703_225320-1sa924t1
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run OKVQA_NoDPR-flanT5large-instruct.23334167
+wandb: ⭐️ View project at https://wandb.ai/xl544/RAVQA
+wandb: 🚀 View run at https://wandb.ai/xl544/RAVQA/runs/1sa924t1
+Multiprocessing is handled by SLURM.
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+[38;20m[INFO] - __main__ : arguments passed to trainer: Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/T5_NoDPR_prefix_only_instructblip_emb.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='OKVQA_NoDPR-flanT5large-instruct.23334167', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=False, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='train', modules=[], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['train.epochs=10', 'train.batch_size=2', 'valid.step_size=0.5', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.MLP_lr=0.0003', 'train.scheduler=linear', 'model_config.UsePrefixEmb=0.5', 'model_config.LoadPretrainedMLP=0', 'model_config.TokenizerModelVersion=google/flan-t5-large', 'model_config.ModelVersion=google/flan-t5-large'], overfit_batches=0.0, plugins=None, precision=32, prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')[0m
+[38;20m[INFO] - __main__ : additional arguments passed to trainer: {'accumulate_grad_batches': 16, 'default_root_dir': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model', 'max_epochs': 10, 'logger': [<pytorch_lightning.loggers.tensorboard.TensorBoardLogger object at 0x14d814ec05e0>, <pytorch_lightning.loggers.wandb.WandbLogger object at 0x14d814ec0520>, <utils.metrics_log_callback.MetricsHistoryLogger object at 0x14d8147e0370>], 'callbacks': [<pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint object at 0x14d814ec0a30>, <pytorch_lightning.callbacks.progress.tqdm_progress.TQDMProgressBar object at 0x14d8147a9f70>, <pytorch_lightning.callbacks.model_summary.ModelSummary object at 0x14d81453fdf0>, <pytorch_lightning.callbacks.gradient_accumulation_scheduler.GradientAccumulationScheduler object at 0x14d81453fe50>], 'plugins': [], 'log_every_n_steps': 10, 'val_check_interval': 0.5}[0m
+[33;20m[WARNING] - __main__ : No checkpoint exists from '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/last.ckpt'. Skipping...[0m
+[38;20m[INFO] - __main__ : **First time to train**[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/vinvl_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] VinVL features 14031[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/ocr_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] OCR features 14031, 5462 has annotations.[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : OCR feature detected in VinVL feature dict...skipping..[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/train_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: train  entries: 9009[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/test_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: test  entries: 5046[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/instructBLIP_embeddings.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] CLIP embeddings 14055[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets_instructBLIP : initialising OKVQADataset_Instruct...[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets_instructBLIP : initialising OKVQADataset_Instruct...[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics]: training data loader: 4505;  test data loader: 158[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Created a temporary directory at /tmp/tmp_ihmj1u7[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Writing /tmp/tmp_ihmj1u7/_remote_module_non_scriptable.py[0m
+[38;20m[INFO] - trainers.base_executor : Initializing T5ExecutorWithPrefix...[0m
+[38;20m[INFO] - __main__ : config file was successfully saved to /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167 for future use.[0m
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[38;20m[INFO] - trainers.t5_executor_with_prefix : #params: 558   lr: 6e-05[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : #params: 2   lr: 0.0003[0m
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+
+  | Name  | Type        | Params
+--------------------------------------
+0 | model | PrefixModel | 783 M 
+--------------------------------------
+783 M     Trainable params
+0         Non-trainable params
+783 M     Total params
+3,135.545 Total estimated model params size (MB)
+Missing logger folder: /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_NoDPR-flanT5large-instruct.23334167/OKVQA_NoDPR-flanT5large-instruct.23334167
+SLURM auto-requeueing enabled. Setting signal handlers.
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/data_loader_manager/module_parser.py:301: UserWarning: To copy construct from a tensor, it is recommended to use sourceTensor.clone().detach() or sourceTensor.clone().detach().requires_grad_(True), rather than torch.tensor(sourceTensor).
+  clip_embeddings=torch.stack([torch.tensor(clip_embedding) for clip_embedding in sample.clip_embedding]),
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Failed to compute OKVQA scores: Results do not correspond to current VQA set. Either the results do not have predictions for all question ids in annotation file or there is atleast one question id that does not belong to the question ids in the annotation file.This could be due to the fact that OKVQA parser requires all questions to evaluatethe accuracy. Ignore this error if this is the sanity check.[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [sanity_check]: {'test/epoch': 0}[0m
+[33;20m[WARNING] - root : Sanity check mode, not saving to loggers.[0m
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 2. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 18.52, 'test/accuracy_QuestionType_one': 17.56, 'test/accuracy_QuestionType_eight': 16.05, 'test/accuracy_QuestionType_other': 21.13, 'test/accuracy_QuestionType_seven': 17.66, 'test/accuracy_QuestionType_four': 15.73, 'test/accuracy_QuestionType_five': 19.88, 'test/accuracy_QuestionType_three': 20.19, 'test/accuracy_QuestionType_nine': 16.43, 'test/accuracy_QuestionType_ten': 29.77, 'test/accuracy_QuestionType_two': 19.65, 'test/accuracy_QuestionType_six': 18.16, 'test/accuracy_AnswerType_other': 18.52, 'test/epoch': 0}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 20.12, 'test/accuracy_QuestionType_one': 20.47, 'test/accuracy_QuestionType_eight': 16.21, 'test/accuracy_QuestionType_other': 22.23, 'test/accuracy_QuestionType_seven': 22.2, 'test/accuracy_QuestionType_four': 17.67, 'test/accuracy_QuestionType_five': 21.91, 'test/accuracy_QuestionType_three': 21.64, 'test/accuracy_QuestionType_nine': 12.38, 'test/accuracy_QuestionType_ten': 32.25, 'test/accuracy_QuestionType_two': 19.53, 'test/accuracy_QuestionType_six': 15.74, 'test/accuracy_AnswerType_other': 20.12, 'test/epoch': 0}[0m
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 1. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+Epoch 0, global step 282: 'test/accuracy_overall' reached 20.12000 (best 20.12000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_0.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 22.84, 'test/accuracy_QuestionType_one': 22.93, 'test/accuracy_QuestionType_eight': 20.3, 'test/accuracy_QuestionType_other': 24.26, 'test/accuracy_QuestionType_seven': 23.27, 'test/accuracy_QuestionType_four': 21.2, 'test/accuracy_QuestionType_five': 24.72, 'test/accuracy_QuestionType_three': 23.69, 'test/accuracy_QuestionType_nine': 21.19, 'test/accuracy_QuestionType_ten': 32.71, 'test/accuracy_QuestionType_two': 19.65, 'test/accuracy_QuestionType_six': 19.43, 'test/accuracy_AnswerType_other': 22.84, 'test/epoch': 1}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 23.3, 'test/accuracy_QuestionType_one': 22.8, 'test/accuracy_QuestionType_eight': 20.21, 'test/accuracy_QuestionType_other': 26.11, 'test/accuracy_QuestionType_seven': 23.55, 'test/accuracy_QuestionType_four': 22.08, 'test/accuracy_QuestionType_five': 24.6, 'test/accuracy_QuestionType_three': 24.49, 'test/accuracy_QuestionType_nine': 22.14, 'test/accuracy_QuestionType_ten': 31.47, 'test/accuracy_QuestionType_two': 22.91, 'test/accuracy_QuestionType_six': 19.43, 'test/accuracy_AnswerType_other': 23.3, 'test/epoch': 1}[0m
+Epoch 1, global step 564: 'test/accuracy_overall' reached 23.30000 (best 23.30000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_1.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 23.99, 'test/accuracy_QuestionType_one': 21.75, 'test/accuracy_QuestionType_eight': 21.3, 'test/accuracy_QuestionType_other': 26.2, 'test/accuracy_QuestionType_seven': 26.73, 'test/accuracy_QuestionType_four': 23.84, 'test/accuracy_QuestionType_five': 24.97, 'test/accuracy_QuestionType_three': 26.26, 'test/accuracy_QuestionType_nine': 22.86, 'test/accuracy_QuestionType_ten': 28.53, 'test/accuracy_QuestionType_two': 22.91, 'test/accuracy_QuestionType_six': 21.28, 'test/accuracy_AnswerType_other': 23.99, 'test/epoch': 2}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 25.07, 'test/accuracy_QuestionType_one': 23.32, 'test/accuracy_QuestionType_eight': 22.53, 'test/accuracy_QuestionType_other': 26.85, 'test/accuracy_QuestionType_seven': 25.98, 'test/accuracy_QuestionType_four': 26.17, 'test/accuracy_QuestionType_five': 26.46, 'test/accuracy_QuestionType_three': 26.96, 'test/accuracy_QuestionType_nine': 20.95, 'test/accuracy_QuestionType_ten': 28.37, 'test/accuracy_QuestionType_two': 24.42, 'test/accuracy_QuestionType_six': 22.27, 'test/accuracy_AnswerType_other': 25.07, 'test/epoch': 2}[0m
+Epoch 2, global step 846: 'test/accuracy_overall' reached 25.07000 (best 25.07000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_2.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 25.53, 'test/accuracy_QuestionType_one': 22.78, 'test/accuracy_QuestionType_eight': 22.02, 'test/accuracy_QuestionType_other': 28.76, 'test/accuracy_QuestionType_seven': 27.01, 'test/accuracy_QuestionType_four': 26.95, 'test/accuracy_QuestionType_five': 27.03, 'test/accuracy_QuestionType_three': 27.52, 'test/accuracy_QuestionType_nine': 20.48, 'test/accuracy_QuestionType_ten': 28.37, 'test/accuracy_QuestionType_two': 25.0, 'test/accuracy_QuestionType_six': 24.68, 'test/accuracy_AnswerType_other': 25.53, 'test/epoch': 3}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 25.6, 'test/accuracy_QuestionType_one': 23.03, 'test/accuracy_QuestionType_eight': 21.47, 'test/accuracy_QuestionType_other': 27.59, 'test/accuracy_QuestionType_seven': 27.38, 'test/accuracy_QuestionType_four': 29.38, 'test/accuracy_QuestionType_five': 25.99, 'test/accuracy_QuestionType_three': 26.12, 'test/accuracy_QuestionType_nine': 22.14, 'test/accuracy_QuestionType_ten': 32.87, 'test/accuracy_QuestionType_two': 24.65, 'test/accuracy_QuestionType_six': 29.22, 'test/accuracy_AnswerType_other': 25.6, 'test/epoch': 3}[0m
+Epoch 3, global step 1128: 'test/accuracy_overall' reached 25.60000 (best 25.60000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_3.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 27.19, 'test/accuracy_QuestionType_one': 24.03, 'test/accuracy_QuestionType_eight': 23.77, 'test/accuracy_QuestionType_other': 29.73, 'test/accuracy_QuestionType_seven': 27.9, 'test/accuracy_QuestionType_four': 32.49, 'test/accuracy_QuestionType_five': 27.35, 'test/accuracy_QuestionType_three': 27.8, 'test/accuracy_QuestionType_nine': 20.95, 'test/accuracy_QuestionType_ten': 30.7, 'test/accuracy_QuestionType_two': 25.47, 'test/accuracy_QuestionType_six': 31.35, 'test/accuracy_AnswerType_other': 27.19, 'test/epoch': 4}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 28.15, 'test/accuracy_QuestionType_one': 24.5, 'test/accuracy_QuestionType_eight': 22.93, 'test/accuracy_QuestionType_other': 31.6, 'test/accuracy_QuestionType_seven': 29.72, 'test/accuracy_QuestionType_four': 35.66, 'test/accuracy_QuestionType_five': 28.0, 'test/accuracy_QuestionType_three': 28.6, 'test/accuracy_QuestionType_nine': 23.33, 'test/accuracy_QuestionType_ten': 37.67, 'test/accuracy_QuestionType_two': 25.81, 'test/accuracy_QuestionType_six': 27.52, 'test/accuracy_AnswerType_other': 28.15, 'test/epoch': 4}[0m
+Epoch 4, global step 1410: 'test/accuracy_overall' reached 28.15000 (best 28.15000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_4.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 29.03, 'test/accuracy_QuestionType_one': 26.4, 'test/accuracy_QuestionType_eight': 25.28, 'test/accuracy_QuestionType_other': 31.73, 'test/accuracy_QuestionType_seven': 29.02, 'test/accuracy_QuestionType_four': 39.54, 'test/accuracy_QuestionType_five': 27.55, 'test/accuracy_QuestionType_three': 27.24, 'test/accuracy_QuestionType_nine': 24.52, 'test/accuracy_QuestionType_ten': 32.71, 'test/accuracy_QuestionType_two': 28.49, 'test/accuracy_QuestionType_six': 26.81, 'test/accuracy_AnswerType_other': 29.03, 'test/epoch': 5}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 28.93, 'test/accuracy_QuestionType_one': 26.4, 'test/accuracy_QuestionType_eight': 24.7, 'test/accuracy_QuestionType_other': 30.99, 'test/accuracy_QuestionType_seven': 28.69, 'test/accuracy_QuestionType_four': 38.48, 'test/accuracy_QuestionType_five': 28.99, 'test/accuracy_QuestionType_three': 27.8, 'test/accuracy_QuestionType_nine': 22.86, 'test/accuracy_QuestionType_ten': 31.47, 'test/accuracy_QuestionType_two': 27.44, 'test/accuracy_QuestionType_six': 28.94, 'test/accuracy_AnswerType_other': 28.93, 'test/epoch': 5}[0m
+Epoch 5, global step 1692: 'test/accuracy_overall' reached 28.93000 (best 28.93000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_5.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 30.32, 'test/accuracy_QuestionType_one': 27.6, 'test/accuracy_QuestionType_eight': 25.81, 'test/accuracy_QuestionType_other': 33.93, 'test/accuracy_QuestionType_seven': 30.0, 'test/accuracy_QuestionType_four': 41.38, 'test/accuracy_QuestionType_five': 29.61, 'test/accuracy_QuestionType_three': 27.76, 'test/accuracy_QuestionType_nine': 23.33, 'test/accuracy_QuestionType_ten': 34.11, 'test/accuracy_QuestionType_two': 27.44, 'test/accuracy_QuestionType_six': 30.21, 'test/accuracy_AnswerType_other': 30.32, 'test/epoch': 6}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 30.69, 'test/accuracy_QuestionType_one': 27.85, 'test/accuracy_QuestionType_eight': 27.26, 'test/accuracy_QuestionType_other': 32.7, 'test/accuracy_QuestionType_seven': 30.19, 'test/accuracy_QuestionType_four': 41.94, 'test/accuracy_QuestionType_five': 29.91, 'test/accuracy_QuestionType_three': 28.69, 'test/accuracy_QuestionType_nine': 22.86, 'test/accuracy_QuestionType_ten': 35.97, 'test/accuracy_QuestionType_two': 27.67, 'test/accuracy_QuestionType_six': 29.5, 'test/accuracy_AnswerType_other': 30.69, 'test/epoch': 6}[0m
+Epoch 6, global step 1974: 'test/accuracy_overall' reached 30.69000 (best 30.69000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_6.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 32.21, 'test/accuracy_QuestionType_one': 29.67, 'test/accuracy_QuestionType_eight': 29.53, 'test/accuracy_QuestionType_other': 34.83, 'test/accuracy_QuestionType_seven': 32.94, 'test/accuracy_QuestionType_four': 42.19, 'test/accuracy_QuestionType_five': 30.91, 'test/accuracy_QuestionType_three': 28.97, 'test/accuracy_QuestionType_nine': 25.71, 'test/accuracy_QuestionType_ten': 37.98, 'test/accuracy_QuestionType_two': 27.91, 'test/accuracy_QuestionType_six': 30.35, 'test/accuracy_AnswerType_other': 32.21, 'test/epoch': 7}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 32.0, 'test/accuracy_QuestionType_one': 29.99, 'test/accuracy_QuestionType_eight': 29.14, 'test/accuracy_QuestionType_other': 34.6, 'test/accuracy_QuestionType_seven': 32.71, 'test/accuracy_QuestionType_four': 41.66, 'test/accuracy_QuestionType_five': 30.76, 'test/accuracy_QuestionType_three': 29.67, 'test/accuracy_QuestionType_nine': 23.33, 'test/accuracy_QuestionType_ten': 36.28, 'test/accuracy_QuestionType_two': 27.79, 'test/accuracy_QuestionType_six': 29.22, 'test/accuracy_AnswerType_other': 32.0, 'test/epoch': 7}[0m
+Epoch 7, global step 2256: 'test/accuracy_overall' reached 32.00000 (best 32.00000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_7.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 32.0, 'test/accuracy_QuestionType_one': 29.82, 'test/accuracy_QuestionType_eight': 30.0, 'test/accuracy_QuestionType_other': 33.47, 'test/accuracy_QuestionType_seven': 31.07, 'test/accuracy_QuestionType_four': 42.68, 'test/accuracy_QuestionType_five': 31.13, 'test/accuracy_QuestionType_three': 28.93, 'test/accuracy_QuestionType_nine': 23.1, 'test/accuracy_QuestionType_ten': 35.5, 'test/accuracy_QuestionType_two': 27.44, 'test/accuracy_QuestionType_six': 32.2, 'test/accuracy_AnswerType_other': 32.0, 'test/epoch': 8}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 32.86, 'test/accuracy_QuestionType_one': 30.09, 'test/accuracy_QuestionType_eight': 31.21, 'test/accuracy_QuestionType_other': 35.32, 'test/accuracy_QuestionType_seven': 33.36, 'test/accuracy_QuestionType_four': 41.98, 'test/accuracy_QuestionType_five': 31.53, 'test/accuracy_QuestionType_three': 30.84, 'test/accuracy_QuestionType_nine': 25.48, 'test/accuracy_QuestionType_ten': 37.83, 'test/accuracy_QuestionType_two': 26.63, 'test/accuracy_QuestionType_six': 31.06, 'test/accuracy_AnswerType_other': 32.86, 'test/epoch': 8}[0m
+Epoch 8, global step 2538: 'test/accuracy_overall' reached 32.86000 (best 32.86000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_8.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 33.03, 'test/accuracy_QuestionType_one': 29.94, 'test/accuracy_QuestionType_eight': 31.67, 'test/accuracy_QuestionType_other': 35.57, 'test/accuracy_QuestionType_seven': 32.52, 'test/accuracy_QuestionType_four': 42.54, 'test/accuracy_QuestionType_five': 31.65, 'test/accuracy_QuestionType_three': 30.89, 'test/accuracy_QuestionType_nine': 26.67, 'test/accuracy_QuestionType_ten': 39.53, 'test/accuracy_QuestionType_two': 26.86, 'test/accuracy_QuestionType_six': 31.06, 'test/accuracy_AnswerType_other': 33.03, 'test/epoch': 9}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 33.07, 'test/accuracy_QuestionType_one': 30.21, 'test/accuracy_QuestionType_eight': 31.26, 'test/accuracy_QuestionType_other': 35.99, 'test/accuracy_QuestionType_seven': 31.82, 'test/accuracy_QuestionType_four': 42.33, 'test/accuracy_QuestionType_five': 32.27, 'test/accuracy_QuestionType_three': 31.12, 'test/accuracy_QuestionType_nine': 25.48, 'test/accuracy_QuestionType_ten': 38.29, 'test/accuracy_QuestionType_two': 27.44, 'test/accuracy_QuestionType_six': 31.49, 'test/accuracy_AnswerType_other': 33.07, 'test/epoch': 9}[0m
+Epoch 9, global step 2820: 'test/accuracy_overall' reached 33.07000 (best 33.07000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_NoDPR-flanT5large-instruct.23334167/train/saved_model/model_9.ckpt' as top 1
+wandb: Waiting for W&B process to finish... (success).
+wandb: 
+wandb: Run history:
+wandb:                                     epoch ▁▁▁▁▂▂▂▂▃▃▃▃▃▃▃▃▄▄▄▄▅▅▅▅▆▆▆▆▆▆▆▆▇▇▇▇████
+wandb:            test/accuracy_AnswerType_other ▁▂▃▃▄▄▄▄▅▆▆▆▇▇█▇▇███
+wandb:   test/accuracy_AnswerType_other_auto_max ▁▃▄▄▅▆▇███
+wandb:   test/accuracy_AnswerType_other_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:          test/accuracy_QuestionType_eight ▁▁▃▃▃▄▄▃▄▄▅▅▅▆▇▇▇███
+wandb: test/accuracy_QuestionType_eight_auto_max ▁▃▄▄▄▅▆▇██
+wandb: test/accuracy_QuestionType_eight_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:           test/accuracy_QuestionType_five ▁▂▄▄▄▅▅▄▅▆▅▆▆▇▇▇▇███
+wandb:  test/accuracy_QuestionType_five_auto_max ▁▃▄▄▅▆▆▇██
+wandb:  test/accuracy_QuestionType_five_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:           test/accuracy_QuestionType_four ▁▂▂▃▃▄▄▅▅▆▇▇████████
+wandb:  test/accuracy_QuestionType_four_auto_max ▁▂▃▄▆▇████
+wandb:  test/accuracy_QuestionType_four_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:           test/accuracy_QuestionType_nine ▃▁▅▆▆▅▅▆▅▆▇▆▆▆█▆▆▇█▇
+wandb:  test/accuracy_QuestionType_nine_auto_max ▁▅▅▅▆▇▇▇▇█
+wandb:  test/accuracy_QuestionType_nine_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:            test/accuracy_QuestionType_one ▁▃▄▄▃▄▄▄▅▅▆▆▇▇██████
+wandb:   test/accuracy_QuestionType_one_auto_max ▁▃▃▃▄▅▆███
+wandb:   test/accuracy_QuestionType_one_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:          test/accuracy_QuestionType_other ▁▂▂▃▃▄▅▄▅▆▆▆▇▆▇▇▇███
+wandb: test/accuracy_QuestionType_other_auto_max ▁▃▃▄▆▆▇▇██
+wandb: test/accuracy_QuestionType_other_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:          test/accuracy_QuestionType_seven ▁▃▄▄▅▅▅▅▆▆▆▆▇▇██▇██▇
+wandb: test/accuracy_QuestionType_seven_auto_max ▁▂▄▄▆▆▆███
+wandb: test/accuracy_QuestionType_seven_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:            test/accuracy_QuestionType_six ▂▁▃▃▃▄▅▇█▆▆▇▇▇▇▇████
+wandb:   test/accuracy_QuestionType_six_auto_max ▁▂▃▇██████
+wandb:   test/accuracy_QuestionType_six_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:            test/accuracy_QuestionType_ten ▂▃▄▃▁▁▁▄▂▇▄▃▅▆▇▆▅▇█▇
+wandb:   test/accuracy_QuestionType_ten_auto_max ▁▁▁▂▆▆▆▇▇█
+wandb:   test/accuracy_QuestionType_ten_auto_min ██▁▁▁▁▁▁▁▁
+wandb:          test/accuracy_QuestionType_three ▁▂▃▄▅▅▆▅▆▆▆▆▆▆▇▇▇███
+wandb: test/accuracy_QuestionType_three_auto_max ▁▃▅▅▆▆▆▇██
+wandb: test/accuracy_QuestionType_three_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:            test/accuracy_QuestionType_two ▁▁▁▄▄▅▅▅▆▆█▇▇▇█▇▇▇▇▇
+wandb:   test/accuracy_QuestionType_two_auto_max ▁▄▅▅▆█████
+wandb:   test/accuracy_QuestionType_two_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:                     test/accuracy_overall ▁▂▃▃▄▄▄▄▅▆▆▆▇▇█▇▇███
+wandb:            test/accuracy_overall_auto_max ▁▃▄▄▅▆▇███
+wandb:            test/accuracy_overall_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:                                test/epoch ▁▁▂▂▃▃▃▃▄▄▅▅▆▆▆▆▇▇██
+wandb:                       test/epoch_auto_max ▁▂▃▃▄▅▆▆▇█
+wandb:                       test/epoch_auto_min ▁▁▁▁▁▁▁▁▁▁
+wandb:                          train/loss_epoch █▆▅▄▃▂▂▁▁▁
+wandb:                 train/loss_epoch_auto_max ▁▁▁▁▁▁▁▁▁
+wandb:                 train/loss_epoch_auto_min █▆▅▄▃▂▂▁▁
+wandb:                           train/loss_step █▇▃▅▂▆▄▇▃▃▂▆▄▅▅▆▆▄▂▃▂█▂▃▁▃▃▃▂▃▃▃▅▄▁▆▂▃▄▅
+wandb:                  train/loss_step_auto_max ▁▆████████
+wandb:                  train/loss_step_auto_min █▄▄▁▁▁▁▁▁▁
+wandb:                               train/lr[0] ███▇▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁
+wandb:                      train/lr[0]_auto_max ▁▁▁▁▁▁▁▁▁▁
+wandb:                      train/lr[0]_auto_min █▇▆▆▅▄▃▃▂▁
+wandb:                               train/lr[1] ███▇▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁
+wandb:                      train/lr[1]_auto_max ▁▁▁▁▁▁▁▁▁▁
+wandb:                      train/lr[1]_auto_min █▇▆▆▅▄▃▃▂▁
+wandb:                       trainer/global_step ▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇███
+wandb: 
+wandb: Run summary:
+wandb:                                     epoch 9
+wandb:            test/accuracy_AnswerType_other 33.07
+wandb:   test/accuracy_AnswerType_other_auto_max 33.07
+wandb:   test/accuracy_AnswerType_other_auto_min 18.52
+wandb:          test/accuracy_QuestionType_eight 31.26
+wandb: test/accuracy_QuestionType_eight_auto_max 31.67
+wandb: test/accuracy_QuestionType_eight_auto_min 16.05
+wandb:           test/accuracy_QuestionType_five 32.27
+wandb:  test/accuracy_QuestionType_five_auto_max 32.27
+wandb:  test/accuracy_QuestionType_five_auto_min 19.88
+wandb:           test/accuracy_QuestionType_four 42.33
+wandb:  test/accuracy_QuestionType_four_auto_max 42.68
+wandb:  test/accuracy_QuestionType_four_auto_min 15.73
+wandb:           test/accuracy_QuestionType_nine 25.48
+wandb:  test/accuracy_QuestionType_nine_auto_max 26.67
+wandb:  test/accuracy_QuestionType_nine_auto_min 12.38
+wandb:            test/accuracy_QuestionType_one 30.21
+wandb:   test/accuracy_QuestionType_one_auto_max 30.21
+wandb:   test/accuracy_QuestionType_one_auto_min 17.56
+wandb:          test/accuracy_QuestionType_other 35.99
+wandb: test/accuracy_QuestionType_other_auto_max 35.99
+wandb: test/accuracy_QuestionType_other_auto_min 21.13
+wandb:          test/accuracy_QuestionType_seven 31.82
+wandb: test/accuracy_QuestionType_seven_auto_max 33.36
+wandb: test/accuracy_QuestionType_seven_auto_min 17.66
+wandb:            test/accuracy_QuestionType_six 31.49
+wandb:   test/accuracy_QuestionType_six_auto_max 32.2
+wandb:   test/accuracy_QuestionType_six_auto_min 15.74
+wandb:            test/accuracy_QuestionType_ten 38.29
+wandb:   test/accuracy_QuestionType_ten_auto_max 39.53
+wandb:   test/accuracy_QuestionType_ten_auto_min 28.37
+wandb:          test/accuracy_QuestionType_three 31.12
+wandb: test/accuracy_QuestionType_three_auto_max 31.12
+wandb: test/accuracy_QuestionType_three_auto_min 20.19
+wandb:            test/accuracy_QuestionType_two 27.44
+wandb:   test/accuracy_QuestionType_two_auto_max 28.49
+wandb:   test/accuracy_QuestionType_two_auto_min 19.53
+wandb:                     test/accuracy_overall 33.07
+wandb:            test/accuracy_overall_auto_max 33.07
+wandb:            test/accuracy_overall_auto_min 18.52
+wandb:                                test/epoch 9.0
+wandb:                       test/epoch_auto_max 9.0
+wandb:                       test/epoch_auto_min 0.0
+wandb:                          train/loss_epoch 1.08981
+wandb:                 train/loss_epoch_auto_max 2.3342
+wandb:                 train/loss_epoch_auto_min 1.13171
+wandb:                           train/loss_step 0.4785
+wandb:                  train/loss_step_auto_max 4.69166
+wandb:                  train/loss_step_auto_min 0.09519
+wandb:                               train/lr[0] 0.0
+wandb:                      train/lr[0]_auto_max 6e-05
+wandb:                      train/lr[0]_auto_min 0.0
+wandb:                               train/lr[1] 0.0
+wandb:                      train/lr[1]_auto_max 0.0003
+wandb:                      train/lr[1]_auto_min 0.0
+wandb:                       trainer/global_step 2819
+wandb: 
+wandb: 🚀 View run OKVQA_NoDPR-flanT5large-instruct.23334167 at: https://wandb.ai/xl544/RAVQA/runs/1sa924t1
+wandb: Synced 6 W&B file(s), 0 media file(s), 2 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230703_225320-1sa924t1/logs

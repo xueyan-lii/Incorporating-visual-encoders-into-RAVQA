@@ -1,0 +1,357 @@
+Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/RAVQA_instructblip.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='OKVQA_FrDPR-instructblip.23643559', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=False, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='train', modules=['freeze_question_encoder', 'force_existence'], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['train.epochs=8', 'train.batch_size=2', 'valid.step_size=0.5', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.retriever_lr=0.00001', 'train.scheduler=linear', 'data_loader.additional.num_knowledge_passages=5'], overfit_batches=0.0, plugins=None, precision='bf16', prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')
+input value {} is not a number, parse to string.
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'CACHE_DIR': '', 'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA']}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'ocr_feature_preprocessed': 0, 'qformer_embeddings': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10, 'num_knowledge_passages': 5}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadGoogleSearchPassageData']}, 'dataset_type': 'OKVQADatasetBLIP2Text', 'dummy_dataloader': 0, 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset', 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'}, 'type': 'DataLoaderOKVQAWithKnowledge'}, 'experiment_name': 'OKVQA_FrDPR-instructblip.23643559', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_exact_match'}, {'name': 'compute_retrieval_metrics'}, {'name': 'compute_okvqa_scores'}], 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': [], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'DecoderTokenizerClass': 'InstructBlipProcessor', 'DecoderTokenizerModelVersion': 'Salesforce/instructblip-flan-t5-xl', 'GeneratorModelClass': 'InstructBlipForConditionalGeneration', 'GeneratorModelVersion': 'Salesforce/instructblip-flan-t5-xl', 'LoadPretrainMLP': 0, 'ModelClass': 'RagModelInstructBLIP', 'QueryEncoderConfigClass': 'DPRConfig', 'QueryEncoderModelClass': 'DPRQuestionEncoder', 'QueryEncoderModelVersion': '/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/wl356/projects/Retrieval-Augmented-Visual-Question-Answering/Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder', 'RAVQA_loss_type': 'Approach6', 'SPECIAL_TOKENS': {'additional_special_tokens': []}, 'TokenizerClass': 'DPRQuestionEncoderTokenizer', 'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base', 'UseInstructBLIPEmb': 0, 'UsePrefixEmb': 0, 'UseQformerEmb': 0, 'base_model': 'RAG', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '', 'start': 'Question:'}, 'type': 'QuestionInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0}, 'modules': ['freeze_question_encoder', 'force_existence'], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenizationInstructBLIP'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'num_evaluation': 0}, 'train': {'MLP_lr': 0.0001, 'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 16, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 2, 'epochs': 8, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'lr': 6e-05, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'linear', 'type': 'RagExecutorInstructBLIP'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 0.5}, 'reset': False, 'mode': 'train', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train/imgs', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_FrDPR-instructblip.23643559', 'args': {'config': '../configs/okvqa/RAVQA_instructblip.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'train', 'reset': False, 'experiment_name': 'OKVQA_FrDPR-instructblip.23643559', 'tags': [], 'modules': ['freeze_question_encoder', 'force_existence'], 'log_prediction_tables': False, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 'bf16', 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['train.epochs=8', 'train.batch_size=2', 'valid.step_size=0.5', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.retriever_lr=0.00001', 'train.scheduler=linear', 'data_loader.additional.num_knowledge_passages=5']}}
+['/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train/saved_model', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train/imgs', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_FrDPR-instructblip.23643559']
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data',
+ 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments',
+ 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs',
+ 'WANDB': {'entity': 'xl544',
+           'name': 'OKVQA_FrDPR-instructblip.23643559',
+           'project': 'RAVQA',
+           'tags': ['OKVQA',
+                    'RAG',
+                    'freeze_question_encoder',
+                    'force_existence']},
+ 'args': {'DATA_FOLDER': '',
+          'EXPERIMENT_FOLDER': '',
+          'accelerator': 'auto',
+          'accumulate_grad_batches': None,
+          'amp_backend': 'native',
+          'amp_level': None,
+          'auto_lr_find': False,
+          'auto_scale_batch_size': False,
+          'auto_select_gpus': False,
+          'benchmark': None,
+          'check_val_every_n_epoch': 1,
+          'checkpoint_callback': None,
+          'config': '../configs/okvqa/RAVQA_instructblip.jsonnet',
+          'default_root_dir': None,
+          'detect_anomaly': False,
+          'deterministic': None,
+          'devices': '1',
+          'enable_checkpointing': True,
+          'enable_model_summary': True,
+          'enable_progress_bar': True,
+          'experiment_name': 'OKVQA_FrDPR-instructblip.23643559',
+          'fast_dev_run': False,
+          'flush_logs_every_n_steps': None,
+          'gpus': None,
+          'gradient_clip_algorithm': None,
+          'gradient_clip_val': None,
+          'ipus': None,
+          'limit_predict_batches': None,
+          'limit_test_batches': None,
+          'limit_train_batches': None,
+          'limit_val_batches': None,
+          'log_every_n_steps': 50,
+          'log_gpu_memory': None,
+          'log_prediction_tables': False,
+          'logger': True,
+          'max_epochs': None,
+          'max_steps': -1,
+          'max_time': None,
+          'min_epochs': None,
+          'min_steps': None,
+          'mode': 'train',
+          'modules': ['freeze_question_encoder', 'force_existence'],
+          'move_metrics_to_cpu': False,
+          'multiple_trainloader_mode': 'max_size_cycle',
+          'num_nodes': 1,
+          'num_processes': None,
+          'num_sanity_val_steps': 2,
+          'opts': ['train.epochs=8',
+                   'train.batch_size=2',
+                   'valid.step_size=0.5',
+                   'valid.batch_size=32',
+                   'train.additional.gradient_accumulation_steps=16',
+                   'train.lr=0.00006',
+                   'train.retriever_lr=0.00001',
+                   'train.scheduler=linear',
+                   'data_loader.additional.num_knowledge_passages=5'],
+          'overfit_batches': 0.0,
+          'plugins': None,
+          'precision': 'bf16',
+          'prepare_data_per_node': None,
+          'process_position': 0,
+          'profiler': None,
+          'progress_bar_refresh_rate': None,
+          'reload_dataloaders_every_n_epochs': 0,
+          'replace_sampler_ddp': True,
+          'reset': False,
+          'resume_from_checkpoint': None,
+          'stochastic_weight_avg': False,
+          'strategy': None,
+          'sync_batchnorm': False,
+          'tags': [],
+          'terminate_on_nan': None,
+          'test_batch_size': -1,
+          'test_evaluation_name': '',
+          'tpu_cores': None,
+          'track_grad_norm': -1,
+          'val_check_interval': None,
+          'weights_save_path': None,
+          'weights_summary': 'top'},
+ 'cache': {'default_folder': '../data/ok-vqa/cache',
+           'regenerate': {'clip_embeddings': 0,
+                          'ocr_feature_preprocessed': 0,
+                          'qformer_embeddings': 0,
+                          'test_data_preprocessed': 0,
+                          'train_data_preprocessed': 0,
+                          'vinvl_feature_preprocessed': 0}},
+ 'cuda': 0,
+ 'data_loader': {'additional': {'max_decoder_source_length': 512,
+                                'max_source_length': 512,
+                                'max_target_length': 10,
+                                'num_knowledge_passages': 5},
+                 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl',
+                                                                                                           'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'},
+                                                                                       'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl',
+                                                                                                                   'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'},
+                                                                                       'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl',
+                                                                                                              'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}},
+                                                                            'option': 'default',
+                                                                            'type': 'EmbeddingInput'},
+                                                     'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True,
+                                                                                          'test': '../data/ok-vqa/pre-extracted_features/OCR/valid',
+                                                                                          'train': '../data/ok-vqa/pre-extracted_features/OCR/train'},
+                                                                               'option': 'default',
+                                                                               'type': 'LoadGoogleOCRFeatures'},
+                                                     'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json',
+                                                                                                                     'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json',
+                                                                                                                     'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchAnnotations'},
+                                                     'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv',
+                                                                                                                      'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'},
+                                                                                                'use_full_split': True},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchPassageData'},
+                                                     'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014',
+                                                                                                      'train': '../data/ok-vqa/train2014'},
+                                                                                  'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json',
+                                                                                                                         'train': '../data/ok-vqa/mscoco_train2014_annotations.json'},
+                                                                                                    'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json',
+                                                                                                                       'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}},
+                                                                       'option': 'default',
+                                                                       'type': 'LoadOKVQAData'},
+                                                     'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json',
+                                                                                             'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json',
+                                                                                             'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'},
+                                                                                  'option': 'default',
+                                                                                  'type': 'LoadOscarCaptionFeatures'},
+                                                     'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json',
+                                                                                                                                             'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}},
+                                                                                                       'option': 'none',
+                                                                                                       'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'},
+                                                     'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv',
+                                                                                      'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'},
+                                                                           'option': 'default',
+                                                                           'type': 'LoadVinVLFeatures'}},
+                                     'module_list': ['LoadVinVLFeatures',
+                                                     'LoadGoogleOCRFeatures',
+                                                     'LoadOscarCaptionFeatures',
+                                                     'LoadOKVQAData',
+                                                     'LoadGoogleSearchPassageData']},
+                 'dataset_type': 'OKVQADatasetBLIP2Text',
+                 'dummy_dataloader': 0,
+                 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset',
+                                 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'},
+                 'type': 'DataLoaderOKVQAWithKnowledge'},
+ 'experiment_name': 'OKVQA_FrDPR-instructblip.23643559',
+ 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559',
+ 'gpu_device': 0,
+ 'ignore_pretrained_weights': [],
+ 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train/imgs',
+ 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train',
+ 'metrics': [{'name': 'compute_exact_match'},
+             {'name': 'compute_retrieval_metrics'},
+             {'name': 'compute_okvqa_scores'}],
+ 'mode': 'train',
+ 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': [],
+                                             'bos_token': '<PAD>',
+                                             'pad_token': '<PAD>'},
+                  'DecoderTokenizerClass': 'InstructBlipProcessor',
+                  'DecoderTokenizerModelVersion': 'Salesforce/instructblip-flan-t5-xl',
+                  'GeneratorModelClass': 'InstructBlipForConditionalGeneration',
+                  'GeneratorModelVersion': 'Salesforce/instructblip-flan-t5-xl',
+                  'LoadPretrainMLP': 0,
+                  'ModelClass': 'RagModelInstructBLIP',
+                  'QueryEncoderConfigClass': 'DPRConfig',
+                  'QueryEncoderModelClass': 'DPRQuestionEncoder',
+                  'QueryEncoderModelVersion': '/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/wl356/projects/Retrieval-Augmented-Visual-Question-Answering/Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder',
+                  'RAVQA_loss_type': 'Approach6',
+                  'SPECIAL_TOKENS': {'additional_special_tokens': []},
+                  'TokenizerClass': 'DPRQuestionEncoderTokenizer',
+                  'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base',
+                  'UseInstructBLIPEmb': 0,
+                  'UsePrefixEmb': 0,
+                  'UseQformerEmb': 0,
+                  'base_model': 'RAG',
+                  'decoder_input_modules': {'module_list': [],
+                                            'postprocess_module_list': []},
+                  'input_modules': {'module_list': [{'option': 'default',
+                                                     'separation_tokens': {'end': '',
+                                                                           'start': 'Question:'},
+                                                     'type': 'QuestionInput'}],
+                                    'postprocess_module_list': [{'option': 'default',
+                                                                 'type': 'PostProcessInputTokenization'}]},
+                  'loss_ratio': {'additional_loss': 0,
+                                 'nll_loss': 1,
+                                 'rag_loss': 0},
+                  'modules': ['freeze_question_encoder', 'force_existence'],
+                  'output_modules': {'module_list': [{'option': 'default',
+                                                      'type': 'GenerationOutput'}],
+                                     'postprocess_module_list': [{'option': 'default',
+                                                                  'type': 'PostProcessOutputTokenizationInstructBLIP'}]},
+                  'pretrained': 1,
+                  'rag_modules': {'module_list': []}},
+ 'platform_type': 'pytorch',
+ 'reset': False,
+ 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_FrDPR-instructblip.23643559/train/saved_model',
+ 'seed': 2021,
+ 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_FrDPR-instructblip.23643559',
+ 'test': {'additional': {'multiprocessing': 4},
+          'batch_size': 32,
+          'evaluation_name': 'test_evaluation',
+          'load_best_model': 0,
+          'load_epoch': -1,
+          'load_model_path': '',
+          'num_evaluation': 0},
+ 'train': {'MLP_lr': 0.0001,
+           'adam_epsilon': 1e-08,
+           'additional': {'gradient_accumulation_steps': 16,
+                          'gradient_clipping': 0,
+                          'plugins': [],
+                          'save_top_k': 1,
+                          'save_top_k_metric': 'test/accuracy_overall',
+                          'save_top_k_mode': 'max',
+                          'warmup_steps': 0},
+           'batch_size': 2,
+           'epochs': 8,
+           'load_best_model': 0,
+           'load_epoch': -1,
+           'load_model_path': '',
+           'lr': 6e-05,
+           'retriever_lr': 1e-05,
+           'save_interval': 1,
+           'scheduler': 'linear',
+           'type': 'RagExecutorInstructBLIP'},
+ 'valid': {'additional': {},
+           'batch_size': 32,
+           'break_interval': 3000,
+           'step_size': 0.5}}
+data columns: dict_keys(['vinvl_features'])
+data columns: dict_keys(['vinvl_features', 'ocr_features'])
+[Data Statistics] Caption features 123287
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features'])
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.127565
+creating index...
+index created!
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.060070
+creating index...
+index created!
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data'])
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data', 'passages'])
+Uses full checkpoint from Salesforce/instructblip-flan-t5-xl
+r value for LoRA is 8
+trainable params: 4718592 || all params: 2854475776 || trainable%: 0.16530502867367827
+initializing retrieval
+freeze retriever!
+Sanity Checking: 0it [00:00, ?it/s]Sanity Checking:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]race <---> racing    (<pad> racing</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+vine <---> succulent    (<pad> succulent</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+stuffed animal <---> teddy bear    (<pad> teddy bear</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+mouth <---> mouth    (<pad> mouth</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+cloth <---> luggage    (<pad> luggage</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+man <---> trev    (<pad> trev</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+down <---> down    (<pad> down</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+island <---> island    (<pad> island</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+shop <---> shopping    (<pad> shopping</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+ground <---> tree    (<pad> tree</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+swing <---> baseball    (<pad> baseball</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+salt water beach <---> might also like: hat vocabulary word list birthday vocabulary word list circuses and fairs    (<pad> might also like: hat vocabulary word list birthday vocabulary word list circuses and fairs)
+artist <---> thomas ball    (<pad> thomas ball</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+condiment <---> coleslaw    (<pad> coleslaw</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+work <---> work    (<pad> work</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+bmx <---> mountain bike    (<pad> mountain bike</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+commercial <---> jet    (<pad> jet</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+girl <---> girl    (<pad> girl</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+1847 <---> 600 bce    (<pad> 600 bce</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+ride <---> surfer spin    (<pad> surfer spin</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+homerun <---> solo shot    (<pad> solo shot</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+charge <---> charging    (<pad> charging</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+circle <---> rounded    (<pad> rounded</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+510 <---> 5.7    (<pad> 5.7</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+cross country <---> cross country    (<pad> cross country</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+wetsuit <---> Answer: black    (<pad> Answer: black</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+surfboard <---> ceed    (<pad> ceed</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+cloth <---> leather    (<pad> leather</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+mouth <---> mouth    (<pad> mouth</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+blueberry <---> buttery    (<pad> buttery</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+vase <---> glass    (<pad> glass</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+scotland <---> vietnam    (<pad> vietnam</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+Sanity Checking DataLoader 0:  50%|█████     | 1/2 [00:14<00:14, 14.11s/it]Sanity Checking DataLoader 0:  50%|█████     | 1/2 [00:14<00:14, 14.11s/it]soup <---> soup    (<pad> soup</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+tip <---> scat    (<pad> scat</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+800 <---> 700    (<pad> 700</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+quilt <---> quilt    (<pad> quilt</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+brazil <---> brazil    (<pad> brazil</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+diner <---> Answer: a restaurant    (<pad> Answer: a restaurant</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+firetruck <---> helicopter    (<pad> helicopter</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+becker vineyard <---> becker    (<pad> becker</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+shatter <---> equal    (<pad> equal</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+brook brother <--->     (<pad></s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+gallery <---> ebay    (<pad> ebay</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+sushi <---> maki    (<pad> maki</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+blue jay <---> canary    (<pad> canary</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+smile <---> nod    (<pad> nod</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+80 mph <---> 290 mph    (<pad> 290 mph</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+sombrero <---> sombrero    (<pad> sombrero</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+california <---> no    (<pad> no</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+good <---> sour    (<pad> sour</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+cement <---> delivery    (<pad> delivery</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+track <---> platform    (<pad> platform</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+fisheye <---> double entendre    (<pad> double entendre</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+gazebo <---> tent    (<pad> tent</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+throw it <---> hump    (<pad> hump</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+high school <---> high school    (<pad> high school</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+rug <---> carpet    (<pad> carpet</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+commercial <---> commercial    (<pad> commercial</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+batter <---> baseball    (<pad> baseball</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+birkenstock <---> ball    (<pad> ball</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+joss whedon <---> michael apted    (<pad> michael apted</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+noon <---> afternoon    (<pad> afternoon</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+high <---> high    (<pad> high</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+taylor swift <---> bill clinton    (<pad> bill clinton</s><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad><pad>)
+Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:24<00:00, 12.01s/it]Sanity Checking DataLoader 0: 100%|██████████| 2/2 [00:24<00:00, 12.01s/it]Loading and preparing results...     
+{'test/epoch': 0,
+ 'test/exact_match_at_1': 0.296875,
+ 'test/exact_match_at_2': 0.46875,
+ 'test/exact_match_at_3': 0.5625,
+ 'test/exact_match_at_4': 0.625,
+ 'test/exact_match_at_5': 0.640625,
+ 'test/failed_hit': 0.30625,
+ 'test/failed_no_hit': 0.31875,
+ 'test/gold_precision_at_5': 0.24687499999999998,
+ 'test/gold_recall_at_5': 0.515625,
+ 'test/n_retrieved_docs': 5,
+ 'test/precision_at_5': 0.36562500000000003,
+ 'test/recall_at_5': 0.625,
+ 'test/selected_failed_hit': 0.546875,
+ 'test/selected_failed_no_hit': 0.15625,
+ 'test/selected_successful_hit': 0.234375,
+ 'test/selected_successful_no_hit': 0.0625,
+ 'test/successful_hit': 0.2125,
+ 'test/successful_no_hit': 0.1625}
+{'retrieval_predictions_epoch0_MODE(train)_SET(TEST)_K(5)': <wandb.data_types.Table object at 0x153a3d8c6460>}
+                                                                           Training: 0it [00:00, ?it/s]Training:   0%|          | 0/4821 [00:00<?, ?it/s]Epoch 0:   0%|          | 0/4821 [00:00<?, ?it/s] Epoch 0:   0%|          | 1/4821 [00:00<45:40,  1.76it/s]Epoch 0:   0%|          | 1/4821 [00:00<45:43,  1.76it/s]Epoch 0:   0%|          | 1/4821 [00:00<45:45,  1.76it/s, loss=2.26, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 2/4821 [00:00<39:10,  2.05it/s, loss=2.26, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 2/4821 [00:00<39:12,  2.05it/s, loss=2.26, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 2/4821 [00:00<39:14,  2.05it/s, loss=2.05, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 3/4821 [00:01<38:39,  2.08it/s, loss=2.05, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 3/4821 [00:01<38:40,  2.08it/s, loss=2.05, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 3/4821 [00:01<38:41,  2.08it/s, loss=4.14, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 4/4821 [00:01<37:57,  2.11it/s, loss=4.14, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 4/4821 [00:01<37:58,  2.11it/s, loss=4.14, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 4/4821 [00:01<37:59,  2.11it/s, loss=3.2, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5] Epoch 0:   0%|          | 5/4821 [00:02<41:35,  1.93it/s, loss=3.2, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 5/4821 [00:02<41:36,  1.93it/s, loss=3.2, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 5/4821 [00:02<41:36,  1.93it/s, loss=2.68, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 6/4821 [00:02<40:03,  2.00it/s, loss=2.68, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 6/4821 [00:02<40:03,  2.00it/s, loss=2.68, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 6/4821 [00:02<40:04,  2.00it/s, loss=3.91, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 7/4821 [00:03<40:18,  1.99it/s, loss=3.91, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 7/4821 [00:03<40:19,  1.99it/s, loss=3.91, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 7/4821 [00:03<40:19,  1.99it/s, loss=5.68, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 8/4821 [00:04<40:17,  1.99it/s, loss=5.68, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 8/4821 [00:04<40:17,  1.99it/s, loss=5.68, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 8/4821 [00:04<40:17,  1.99it/s, loss=5.23, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 9/4821 [00:04<39:54,  2.01it/s, loss=5.23, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 9/4821 [00:04<39:54,  2.01it/s, loss=5.23, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 9/4821 [00:04<39:55,  2.01it/s, loss=5.99, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 10/4821 [00:05<40:12,  1.99it/s, loss=5.99, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 10/4821 [00:05<40:12,  1.99it/s, loss=5.99, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 10/4821 [00:05<40:12,  1.99it/s, loss=6.39, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 11/4821 [00:05<40:11,  1.99it/s, loss=6.39, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 11/4821 [00:05<40:11,  1.99it/s, loss=6.39, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 11/4821 [00:05<40:11,  1.99it/s, loss=7.38, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 12/4821 [00:05<39:45,  2.02it/s, loss=7.38, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 12/4821 [00:05<39:45,  2.02it/s, loss=7.38, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 12/4821 [00:05<39:45,  2.02it/s, loss=7.97, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 13/4821 [00:06<39:20,  2.04it/s, loss=7.97, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 13/4821 [00:06<39:20,  2.04it/s, loss=7.97, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 13/4821 [00:06<39:20,  2.04it/s, loss=8.4, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5] Epoch 0:   0%|          | 14/4821 [00:06<39:35,  2.02it/s, loss=8.4, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 14/4821 [00:06<39:35,  2.02it/s, loss=8.4, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 14/4821 [00:06<39:35,  2.02it/s, loss=8.63, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 15/4821 [00:07<39:41,  2.02it/s, loss=8.63, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 15/4821 [00:07<39:41,  2.02it/s, loss=8.63, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 15/4821 [00:07<39:41,  2.02it/s, loss=8.64, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 16/4821 [00:07<39:38,  2.02it/s, loss=8.64, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 16/4821 [00:07<39:39,  2.02it/s, loss=8.64, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 16/4821 [00:07<39:59,  2.00it/s, loss=8.59, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 17/4821 [00:08<40:39,  1.97it/s, loss=8.59, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 17/4821 [00:08<40:39,  1.97it/s, loss=8.59, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=1e-5]Epoch 0:   0%|          | 17/4821 [00:08<40:39,  1.97it/s, loss=9.14, v_num=_1.0, train/lr[0]=5.99e-5, train/lr[1]=9.99e-6]

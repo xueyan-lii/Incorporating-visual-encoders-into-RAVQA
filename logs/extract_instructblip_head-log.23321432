@@ -1,0 +1,8 @@
+Extracting val2014 using BLIP2 qformer output
+Using  cuda
+Loading InstructBLIP
+Uses full checkpoint from Salesforce/instructblip-flan-t5-xl
+{'year': 2019, 'version': '1.0', 'description': 'This is v1.0 of the OK-VQA dataset.'}
+5046 questions loaded from json 
+Done
+5033 embeddings saved 

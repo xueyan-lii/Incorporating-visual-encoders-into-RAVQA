@@ -1,0 +1,6 @@
+Extracting train2014 using BLIP2 qformer output
+Using  cuda
+{'year': 2019, 'version': '1.0', 'description': 'This is v1.0 of the OK-VQA dataset.'}
+9009 questions loaded from json 
+Done
+8998 embeddings saved 

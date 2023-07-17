@@ -1,0 +1,1674 @@
+Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/T5_NoDPR_blip2.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='NoDPR-instructBLIP2.23046785', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=False, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='train', modules=[], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['train.epochs=10', 'train.batch_size=2', 'valid.step_size=2', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.MLP_lr=0.0003', 'train.scheduler=linear'], overfit_batches=0.0, plugins=None, precision=32, prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')
+input value {} is not a number, parse to string.
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'CACHE_DIR': '', 'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA']}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'ocr_feature_preprocessed': 0, 'qformer_embeddings': 0, 'raw_pixels': 0, 'test_data_preprocessed': 0, 'test_data_preprocessed_BLIP2': 0, 'train_data_preprocessed': 0, 'train_data_preprocessed_BLIP2': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}, 'raw_pixels': {'train': '../data/ok-vqa/pre-extracted_features/raw-pixels/okvqa_raw_pixels_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/raw-pixels/okvqa_raw_pixels_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadOKVQAData']}, 'dataset_type': 'OKVQADatasetBLIP2', 'dummy_dataloader': 0, 'type': 'DataLoaderBLIP2'}, 'experiment_name': 'NoDPR-instructBLIP2.23046785', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_okvqa_scores'}], 'model_config': {'ConfigClass': 'T5Config', 'GeneratorModelClass': 'Blip2Processor', 'LoadPretrainMLPs': 0, 'ModelClass': 'PrefixModelBLIP2', 'ModelVersion': 'Salesforce/blip2-flan-t5-xl', 'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOQ>', '<EOQ>'], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'TokenizerClass': 'T5Tokenizer', 'TokenizerModelVersion': 't5-large', 'UsePrefixEmb': 0, 'UseQformerEmb': 0, 'UseRawPixels': 1, 'base_model': 'T5', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '<EOQ>', 'start': '<BOQ>'}, 'type': 'QuestionInput'}], 'postprocess_module_list': []}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0}, 'modules': [], 'output_modules': {'module_list': [], 'postprocess_module_list': []}, 'pretrained': 1, 'rag_modules': {'module_list': []}}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'num_evaluation': 0}, 'train': {'MLP_lr': 0.0003, 'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 16, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 2, 'epochs': 10, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'lr': 6e-05, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'linear', 'type': 'BLIP2Executor'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 2}, 'reset': False, 'mode': 'train', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train/imgs', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/NoDPR-instructBLIP2.23046785', 'args': {'config': '../configs/okvqa/T5_NoDPR_blip2.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'train', 'reset': False, 'experiment_name': 'NoDPR-instructBLIP2.23046785', 'tags': [], 'modules': [], 'log_prediction_tables': False, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 32, 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['train.epochs=10', 'train.batch_size=2', 'valid.step_size=2', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.MLP_lr=0.0003', 'train.scheduler=linear']}}
+['/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train/saved_model', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train/imgs', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/NoDPR-instructBLIP2.23046785']
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data',
+ 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments',
+ 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs',
+ 'WANDB': {'entity': 'xl544',
+           'name': 'NoDPR-instructBLIP2.23046785',
+           'project': 'RAVQA',
+           'tags': ['OKVQA', 'T5']},
+ 'args': {'DATA_FOLDER': '',
+          'EXPERIMENT_FOLDER': '',
+          'accelerator': 'auto',
+          'accumulate_grad_batches': None,
+          'amp_backend': 'native',
+          'amp_level': None,
+          'auto_lr_find': False,
+          'auto_scale_batch_size': False,
+          'auto_select_gpus': False,
+          'benchmark': None,
+          'check_val_every_n_epoch': 1,
+          'checkpoint_callback': None,
+          'config': '../configs/okvqa/T5_NoDPR_blip2.jsonnet',
+          'default_root_dir': None,
+          'detect_anomaly': False,
+          'deterministic': None,
+          'devices': '1',
+          'enable_checkpointing': True,
+          'enable_model_summary': True,
+          'enable_progress_bar': True,
+          'experiment_name': 'NoDPR-instructBLIP2.23046785',
+          'fast_dev_run': False,
+          'flush_logs_every_n_steps': None,
+          'gpus': None,
+          'gradient_clip_algorithm': None,
+          'gradient_clip_val': None,
+          'ipus': None,
+          'limit_predict_batches': None,
+          'limit_test_batches': None,
+          'limit_train_batches': None,
+          'limit_val_batches': None,
+          'log_every_n_steps': 50,
+          'log_gpu_memory': None,
+          'log_prediction_tables': False,
+          'logger': True,
+          'max_epochs': None,
+          'max_steps': -1,
+          'max_time': None,
+          'min_epochs': None,
+          'min_steps': None,
+          'mode': 'train',
+          'modules': [],
+          'move_metrics_to_cpu': False,
+          'multiple_trainloader_mode': 'max_size_cycle',
+          'num_nodes': 1,
+          'num_processes': None,
+          'num_sanity_val_steps': 2,
+          'opts': ['train.epochs=10',
+                   'train.batch_size=2',
+                   'valid.step_size=2',
+                   'valid.batch_size=32',
+                   'train.additional.gradient_accumulation_steps=16',
+                   'train.lr=0.00006',
+                   'train.MLP_lr=0.0003',
+                   'train.scheduler=linear'],
+          'overfit_batches': 0.0,
+          'plugins': None,
+          'precision': 32,
+          'prepare_data_per_node': None,
+          'process_position': 0,
+          'profiler': None,
+          'progress_bar_refresh_rate': None,
+          'reload_dataloaders_every_n_epochs': 0,
+          'replace_sampler_ddp': True,
+          'reset': False,
+          'resume_from_checkpoint': None,
+          'stochastic_weight_avg': False,
+          'strategy': None,
+          'sync_batchnorm': False,
+          'tags': [],
+          'terminate_on_nan': None,
+          'test_batch_size': -1,
+          'test_evaluation_name': '',
+          'tpu_cores': None,
+          'track_grad_norm': -1,
+          'val_check_interval': None,
+          'weights_save_path': None,
+          'weights_summary': 'top'},
+ 'cache': {'default_folder': '../data/ok-vqa/cache',
+           'regenerate': {'clip_embeddings': 0,
+                          'ocr_feature_preprocessed': 0,
+                          'qformer_embeddings': 0,
+                          'raw_pixels': 0,
+                          'test_data_preprocessed': 0,
+                          'test_data_preprocessed_BLIP2': 0,
+                          'train_data_preprocessed': 0,
+                          'train_data_preprocessed_BLIP2': 0,
+                          'vinvl_feature_preprocessed': 0}},
+ 'cuda': 0,
+ 'data_loader': {'additional': {'max_decoder_source_length': 512,
+                                'max_source_length': 512,
+                                'max_target_length': 10},
+                 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl',
+                                                                                                           'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'},
+                                                                                       'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl',
+                                                                                                              'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'},
+                                                                                       'raw_pixels': {'train': '../data/ok-vqa/pre-extracted_features/raw-pixels/okvqa_raw_pixels_train2014.pkl',
+                                                                                                      'val': '../data/ok-vqa/pre-extracted_features/raw-pixels/okvqa_raw_pixels_val2014.pkl'}},
+                                                                            'option': 'default',
+                                                                            'type': 'EmbeddingInput'},
+                                                     'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True,
+                                                                                          'test': '../data/ok-vqa/pre-extracted_features/OCR/valid',
+                                                                                          'train': '../data/ok-vqa/pre-extracted_features/OCR/train'},
+                                                                               'option': 'default',
+                                                                               'type': 'LoadGoogleOCRFeatures'},
+                                                     'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json',
+                                                                                                                     'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json',
+                                                                                                                     'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchAnnotations'},
+                                                     'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv',
+                                                                                                                      'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'},
+                                                                                                'use_full_split': True},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchPassageData'},
+                                                     'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014',
+                                                                                                      'train': '../data/ok-vqa/train2014'},
+                                                                                  'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json',
+                                                                                                                         'train': '../data/ok-vqa/mscoco_train2014_annotations.json'},
+                                                                                                    'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json',
+                                                                                                                       'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}},
+                                                                       'option': 'default',
+                                                                       'type': 'LoadOKVQAData'},
+                                                     'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json',
+                                                                                             'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json',
+                                                                                             'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'},
+                                                                                  'option': 'default',
+                                                                                  'type': 'LoadOscarCaptionFeatures'},
+                                                     'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json',
+                                                                                                                                             'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}},
+                                                                                                       'option': 'none',
+                                                                                                       'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'},
+                                                     'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv',
+                                                                                      'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'},
+                                                                           'option': 'default',
+                                                                           'type': 'LoadVinVLFeatures'}},
+                                     'module_list': ['LoadOKVQAData']},
+                 'dataset_type': 'OKVQADatasetBLIP2',
+                 'dummy_dataloader': 0,
+                 'type': 'DataLoaderBLIP2'},
+ 'experiment_name': 'NoDPR-instructBLIP2.23046785',
+ 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785',
+ 'gpu_device': 0,
+ 'ignore_pretrained_weights': [],
+ 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train/imgs',
+ 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train',
+ 'metrics': [{'name': 'compute_okvqa_scores'}],
+ 'mode': 'train',
+ 'model_config': {'ConfigClass': 'T5Config',
+                  'GeneratorModelClass': 'Blip2Processor',
+                  'LoadPretrainMLPs': 0,
+                  'ModelClass': 'PrefixModelBLIP2',
+                  'ModelVersion': 'Salesforce/blip2-flan-t5-xl',
+                  'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOQ>',
+                                                                   '<EOQ>'],
+                                     'bos_token': '<PAD>',
+                                     'pad_token': '<PAD>'},
+                  'TokenizerClass': 'T5Tokenizer',
+                  'TokenizerModelVersion': 't5-large',
+                  'UsePrefixEmb': 0,
+                  'UseQformerEmb': 0,
+                  'UseRawPixels': 1,
+                  'base_model': 'T5',
+                  'decoder_input_modules': {'module_list': [],
+                                            'postprocess_module_list': []},
+                  'input_modules': {'module_list': [{'option': 'default',
+                                                     'separation_tokens': {'end': '<EOQ>',
+                                                                           'start': '<BOQ>'},
+                                                     'type': 'QuestionInput'}],
+                                    'postprocess_module_list': []},
+                  'loss_ratio': {'additional_loss': 0,
+                                 'nll_loss': 1,
+                                 'rag_loss': 0},
+                  'modules': [],
+                  'output_modules': {'module_list': [],
+                                     'postprocess_module_list': []},
+                  'pretrained': 1,
+                  'rag_modules': {'module_list': []}},
+ 'platform_type': 'pytorch',
+ 'reset': False,
+ 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-instructBLIP2.23046785/train/saved_model',
+ 'seed': 2021,
+ 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/NoDPR-instructBLIP2.23046785',
+ 'test': {'additional': {'multiprocessing': 4},
+          'batch_size': 32,
+          'evaluation_name': 'test_evaluation',
+          'load_best_model': 0,
+          'load_epoch': -1,
+          'load_model_path': '',
+          'num_evaluation': 0},
+ 'train': {'MLP_lr': 0.0003,
+           'adam_epsilon': 1e-08,
+           'additional': {'gradient_accumulation_steps': 16,
+                          'gradient_clipping': 0,
+                          'plugins': [],
+                          'save_top_k': 1,
+                          'save_top_k_metric': 'test/accuracy_overall',
+                          'save_top_k_mode': 'max',
+                          'warmup_steps': 0},
+           'batch_size': 2,
+           'epochs': 10,
+           'load_best_model': 0,
+           'load_epoch': -1,
+           'load_model_path': '',
+           'lr': 6e-05,
+           'retriever_lr': 1e-05,
+           'save_interval': 1,
+           'scheduler': 'linear',
+           'type': 'BLIP2Executor'},
+ 'valid': {'additional': {},
+           'batch_size': 32,
+           'break_interval': 3000,
+           'step_size': 2}}
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.330507
+creating index...
+index created!
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.104352
+creating index...
+index created!
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+data columns: dict_keys(['okvqa_data', 'vqa_data'])
+model.query_tokens True
+model.visual_encoder.cls_token False
+model.visual_encoder.pos_embed False
+model.visual_encoder.patch_embed.proj.weight False
+model.visual_encoder.patch_embed.proj.bias False
+model.visual_encoder.blocks.0.norm1.weight False
+model.visual_encoder.blocks.0.norm1.bias False
+model.visual_encoder.blocks.0.attn.q_bias False
+model.visual_encoder.blocks.0.attn.v_bias False
+model.visual_encoder.blocks.0.attn.qkv.weight False
+model.visual_encoder.blocks.0.attn.proj.weight False
+model.visual_encoder.blocks.0.attn.proj.bias False
+model.visual_encoder.blocks.0.norm2.weight False
+model.visual_encoder.blocks.0.norm2.bias False
+model.visual_encoder.blocks.0.mlp.fc1.weight False
+model.visual_encoder.blocks.0.mlp.fc1.bias False
+model.visual_encoder.blocks.0.mlp.fc2.weight False
+model.visual_encoder.blocks.0.mlp.fc2.bias False
+model.visual_encoder.blocks.1.norm1.weight False
+model.visual_encoder.blocks.1.norm1.bias False
+model.visual_encoder.blocks.1.attn.q_bias False
+model.visual_encoder.blocks.1.attn.v_bias False
+model.visual_encoder.blocks.1.attn.qkv.weight False
+model.visual_encoder.blocks.1.attn.proj.weight False
+model.visual_encoder.blocks.1.attn.proj.bias False
+model.visual_encoder.blocks.1.norm2.weight False
+model.visual_encoder.blocks.1.norm2.bias False
+model.visual_encoder.blocks.1.mlp.fc1.weight False
+model.visual_encoder.blocks.1.mlp.fc1.bias False
+model.visual_encoder.blocks.1.mlp.fc2.weight False
+model.visual_encoder.blocks.1.mlp.fc2.bias False
+model.visual_encoder.blocks.2.norm1.weight False
+model.visual_encoder.blocks.2.norm1.bias False
+model.visual_encoder.blocks.2.attn.q_bias False
+model.visual_encoder.blocks.2.attn.v_bias False
+model.visual_encoder.blocks.2.attn.qkv.weight False
+model.visual_encoder.blocks.2.attn.proj.weight False
+model.visual_encoder.blocks.2.attn.proj.bias False
+model.visual_encoder.blocks.2.norm2.weight False
+model.visual_encoder.blocks.2.norm2.bias False
+model.visual_encoder.blocks.2.mlp.fc1.weight False
+model.visual_encoder.blocks.2.mlp.fc1.bias False
+model.visual_encoder.blocks.2.mlp.fc2.weight False
+model.visual_encoder.blocks.2.mlp.fc2.bias False
+model.visual_encoder.blocks.3.norm1.weight False
+model.visual_encoder.blocks.3.norm1.bias False
+model.visual_encoder.blocks.3.attn.q_bias False
+model.visual_encoder.blocks.3.attn.v_bias False
+model.visual_encoder.blocks.3.attn.qkv.weight False
+model.visual_encoder.blocks.3.attn.proj.weight False
+model.visual_encoder.blocks.3.attn.proj.bias False
+model.visual_encoder.blocks.3.norm2.weight False
+model.visual_encoder.blocks.3.norm2.bias False
+model.visual_encoder.blocks.3.mlp.fc1.weight False
+model.visual_encoder.blocks.3.mlp.fc1.bias False
+model.visual_encoder.blocks.3.mlp.fc2.weight False
+model.visual_encoder.blocks.3.mlp.fc2.bias False
+model.visual_encoder.blocks.4.norm1.weight False
+model.visual_encoder.blocks.4.norm1.bias False
+model.visual_encoder.blocks.4.attn.q_bias False
+model.visual_encoder.blocks.4.attn.v_bias False
+model.visual_encoder.blocks.4.attn.qkv.weight False
+model.visual_encoder.blocks.4.attn.proj.weight False
+model.visual_encoder.blocks.4.attn.proj.bias False
+model.visual_encoder.blocks.4.norm2.weight False
+model.visual_encoder.blocks.4.norm2.bias False
+model.visual_encoder.blocks.4.mlp.fc1.weight False
+model.visual_encoder.blocks.4.mlp.fc1.bias False
+model.visual_encoder.blocks.4.mlp.fc2.weight False
+model.visual_encoder.blocks.4.mlp.fc2.bias False
+model.visual_encoder.blocks.5.norm1.weight False
+model.visual_encoder.blocks.5.norm1.bias False
+model.visual_encoder.blocks.5.attn.q_bias False
+model.visual_encoder.blocks.5.attn.v_bias False
+model.visual_encoder.blocks.5.attn.qkv.weight False
+model.visual_encoder.blocks.5.attn.proj.weight False
+model.visual_encoder.blocks.5.attn.proj.bias False
+model.visual_encoder.blocks.5.norm2.weight False
+model.visual_encoder.blocks.5.norm2.bias False
+model.visual_encoder.blocks.5.mlp.fc1.weight False
+model.visual_encoder.blocks.5.mlp.fc1.bias False
+model.visual_encoder.blocks.5.mlp.fc2.weight False
+model.visual_encoder.blocks.5.mlp.fc2.bias False
+model.visual_encoder.blocks.6.norm1.weight False
+model.visual_encoder.blocks.6.norm1.bias False
+model.visual_encoder.blocks.6.attn.q_bias False
+model.visual_encoder.blocks.6.attn.v_bias False
+model.visual_encoder.blocks.6.attn.qkv.weight False
+model.visual_encoder.blocks.6.attn.proj.weight False
+model.visual_encoder.blocks.6.attn.proj.bias False
+model.visual_encoder.blocks.6.norm2.weight False
+model.visual_encoder.blocks.6.norm2.bias False
+model.visual_encoder.blocks.6.mlp.fc1.weight False
+model.visual_encoder.blocks.6.mlp.fc1.bias False
+model.visual_encoder.blocks.6.mlp.fc2.weight False
+model.visual_encoder.blocks.6.mlp.fc2.bias False
+model.visual_encoder.blocks.7.norm1.weight False
+model.visual_encoder.blocks.7.norm1.bias False
+model.visual_encoder.blocks.7.attn.q_bias False
+model.visual_encoder.blocks.7.attn.v_bias False
+model.visual_encoder.blocks.7.attn.qkv.weight False
+model.visual_encoder.blocks.7.attn.proj.weight False
+model.visual_encoder.blocks.7.attn.proj.bias False
+model.visual_encoder.blocks.7.norm2.weight False
+model.visual_encoder.blocks.7.norm2.bias False
+model.visual_encoder.blocks.7.mlp.fc1.weight False
+model.visual_encoder.blocks.7.mlp.fc1.bias False
+model.visual_encoder.blocks.7.mlp.fc2.weight False
+model.visual_encoder.blocks.7.mlp.fc2.bias False
+model.visual_encoder.blocks.8.norm1.weight False
+model.visual_encoder.blocks.8.norm1.bias False
+model.visual_encoder.blocks.8.attn.q_bias False
+model.visual_encoder.blocks.8.attn.v_bias False
+model.visual_encoder.blocks.8.attn.qkv.weight False
+model.visual_encoder.blocks.8.attn.proj.weight False
+model.visual_encoder.blocks.8.attn.proj.bias False
+model.visual_encoder.blocks.8.norm2.weight False
+model.visual_encoder.blocks.8.norm2.bias False
+model.visual_encoder.blocks.8.mlp.fc1.weight False
+model.visual_encoder.blocks.8.mlp.fc1.bias False
+model.visual_encoder.blocks.8.mlp.fc2.weight False
+model.visual_encoder.blocks.8.mlp.fc2.bias False
+model.visual_encoder.blocks.9.norm1.weight False
+model.visual_encoder.blocks.9.norm1.bias False
+model.visual_encoder.blocks.9.attn.q_bias False
+model.visual_encoder.blocks.9.attn.v_bias False
+model.visual_encoder.blocks.9.attn.qkv.weight False
+model.visual_encoder.blocks.9.attn.proj.weight False
+model.visual_encoder.blocks.9.attn.proj.bias False
+model.visual_encoder.blocks.9.norm2.weight False
+model.visual_encoder.blocks.9.norm2.bias False
+model.visual_encoder.blocks.9.mlp.fc1.weight False
+model.visual_encoder.blocks.9.mlp.fc1.bias False
+model.visual_encoder.blocks.9.mlp.fc2.weight False
+model.visual_encoder.blocks.9.mlp.fc2.bias False
+model.visual_encoder.blocks.10.norm1.weight False
+model.visual_encoder.blocks.10.norm1.bias False
+model.visual_encoder.blocks.10.attn.q_bias False
+model.visual_encoder.blocks.10.attn.v_bias False
+model.visual_encoder.blocks.10.attn.qkv.weight False
+model.visual_encoder.blocks.10.attn.proj.weight False
+model.visual_encoder.blocks.10.attn.proj.bias False
+model.visual_encoder.blocks.10.norm2.weight False
+model.visual_encoder.blocks.10.norm2.bias False
+model.visual_encoder.blocks.10.mlp.fc1.weight False
+model.visual_encoder.blocks.10.mlp.fc1.bias False
+model.visual_encoder.blocks.10.mlp.fc2.weight False
+model.visual_encoder.blocks.10.mlp.fc2.bias False
+model.visual_encoder.blocks.11.norm1.weight False
+model.visual_encoder.blocks.11.norm1.bias False
+model.visual_encoder.blocks.11.attn.q_bias False
+model.visual_encoder.blocks.11.attn.v_bias False
+model.visual_encoder.blocks.11.attn.qkv.weight False
+model.visual_encoder.blocks.11.attn.proj.weight False
+model.visual_encoder.blocks.11.attn.proj.bias False
+model.visual_encoder.blocks.11.norm2.weight False
+model.visual_encoder.blocks.11.norm2.bias False
+model.visual_encoder.blocks.11.mlp.fc1.weight False
+model.visual_encoder.blocks.11.mlp.fc1.bias False
+model.visual_encoder.blocks.11.mlp.fc2.weight False
+model.visual_encoder.blocks.11.mlp.fc2.bias False
+model.visual_encoder.blocks.12.norm1.weight False
+model.visual_encoder.blocks.12.norm1.bias False
+model.visual_encoder.blocks.12.attn.q_bias False
+model.visual_encoder.blocks.12.attn.v_bias False
+model.visual_encoder.blocks.12.attn.qkv.weight False
+model.visual_encoder.blocks.12.attn.proj.weight False
+model.visual_encoder.blocks.12.attn.proj.bias False
+model.visual_encoder.blocks.12.norm2.weight False
+model.visual_encoder.blocks.12.norm2.bias False
+model.visual_encoder.blocks.12.mlp.fc1.weight False
+model.visual_encoder.blocks.12.mlp.fc1.bias False
+model.visual_encoder.blocks.12.mlp.fc2.weight False
+model.visual_encoder.blocks.12.mlp.fc2.bias False
+model.visual_encoder.blocks.13.norm1.weight False
+model.visual_encoder.blocks.13.norm1.bias False
+model.visual_encoder.blocks.13.attn.q_bias False
+model.visual_encoder.blocks.13.attn.v_bias False
+model.visual_encoder.blocks.13.attn.qkv.weight False
+model.visual_encoder.blocks.13.attn.proj.weight False
+model.visual_encoder.blocks.13.attn.proj.bias False
+model.visual_encoder.blocks.13.norm2.weight False
+model.visual_encoder.blocks.13.norm2.bias False
+model.visual_encoder.blocks.13.mlp.fc1.weight False
+model.visual_encoder.blocks.13.mlp.fc1.bias False
+model.visual_encoder.blocks.13.mlp.fc2.weight False
+model.visual_encoder.blocks.13.mlp.fc2.bias False
+model.visual_encoder.blocks.14.norm1.weight False
+model.visual_encoder.blocks.14.norm1.bias False
+model.visual_encoder.blocks.14.attn.q_bias False
+model.visual_encoder.blocks.14.attn.v_bias False
+model.visual_encoder.blocks.14.attn.qkv.weight False
+model.visual_encoder.blocks.14.attn.proj.weight False
+model.visual_encoder.blocks.14.attn.proj.bias False
+model.visual_encoder.blocks.14.norm2.weight False
+model.visual_encoder.blocks.14.norm2.bias False
+model.visual_encoder.blocks.14.mlp.fc1.weight False
+model.visual_encoder.blocks.14.mlp.fc1.bias False
+model.visual_encoder.blocks.14.mlp.fc2.weight False
+model.visual_encoder.blocks.14.mlp.fc2.bias False
+model.visual_encoder.blocks.15.norm1.weight False
+model.visual_encoder.blocks.15.norm1.bias False
+model.visual_encoder.blocks.15.attn.q_bias False
+model.visual_encoder.blocks.15.attn.v_bias False
+model.visual_encoder.blocks.15.attn.qkv.weight False
+model.visual_encoder.blocks.15.attn.proj.weight False
+model.visual_encoder.blocks.15.attn.proj.bias False
+model.visual_encoder.blocks.15.norm2.weight False
+model.visual_encoder.blocks.15.norm2.bias False
+model.visual_encoder.blocks.15.mlp.fc1.weight False
+model.visual_encoder.blocks.15.mlp.fc1.bias False
+model.visual_encoder.blocks.15.mlp.fc2.weight False
+model.visual_encoder.blocks.15.mlp.fc2.bias False
+model.visual_encoder.blocks.16.norm1.weight False
+model.visual_encoder.blocks.16.norm1.bias False
+model.visual_encoder.blocks.16.attn.q_bias False
+model.visual_encoder.blocks.16.attn.v_bias False
+model.visual_encoder.blocks.16.attn.qkv.weight False
+model.visual_encoder.blocks.16.attn.proj.weight False
+model.visual_encoder.blocks.16.attn.proj.bias False
+model.visual_encoder.blocks.16.norm2.weight False
+model.visual_encoder.blocks.16.norm2.bias False
+model.visual_encoder.blocks.16.mlp.fc1.weight False
+model.visual_encoder.blocks.16.mlp.fc1.bias False
+model.visual_encoder.blocks.16.mlp.fc2.weight False
+model.visual_encoder.blocks.16.mlp.fc2.bias False
+model.visual_encoder.blocks.17.norm1.weight False
+model.visual_encoder.blocks.17.norm1.bias False
+model.visual_encoder.blocks.17.attn.q_bias False
+model.visual_encoder.blocks.17.attn.v_bias False
+model.visual_encoder.blocks.17.attn.qkv.weight False
+model.visual_encoder.blocks.17.attn.proj.weight False
+model.visual_encoder.blocks.17.attn.proj.bias False
+model.visual_encoder.blocks.17.norm2.weight False
+model.visual_encoder.blocks.17.norm2.bias False
+model.visual_encoder.blocks.17.mlp.fc1.weight False
+model.visual_encoder.blocks.17.mlp.fc1.bias False
+model.visual_encoder.blocks.17.mlp.fc2.weight False
+model.visual_encoder.blocks.17.mlp.fc2.bias False
+model.visual_encoder.blocks.18.norm1.weight False
+model.visual_encoder.blocks.18.norm1.bias False
+model.visual_encoder.blocks.18.attn.q_bias False
+model.visual_encoder.blocks.18.attn.v_bias False
+model.visual_encoder.blocks.18.attn.qkv.weight False
+model.visual_encoder.blocks.18.attn.proj.weight False
+model.visual_encoder.blocks.18.attn.proj.bias False
+model.visual_encoder.blocks.18.norm2.weight False
+model.visual_encoder.blocks.18.norm2.bias False
+model.visual_encoder.blocks.18.mlp.fc1.weight False
+model.visual_encoder.blocks.18.mlp.fc1.bias False
+model.visual_encoder.blocks.18.mlp.fc2.weight False
+model.visual_encoder.blocks.18.mlp.fc2.bias False
+model.visual_encoder.blocks.19.norm1.weight False
+model.visual_encoder.blocks.19.norm1.bias False
+model.visual_encoder.blocks.19.attn.q_bias False
+model.visual_encoder.blocks.19.attn.v_bias False
+model.visual_encoder.blocks.19.attn.qkv.weight False
+model.visual_encoder.blocks.19.attn.proj.weight False
+model.visual_encoder.blocks.19.attn.proj.bias False
+model.visual_encoder.blocks.19.norm2.weight False
+model.visual_encoder.blocks.19.norm2.bias False
+model.visual_encoder.blocks.19.mlp.fc1.weight False
+model.visual_encoder.blocks.19.mlp.fc1.bias False
+model.visual_encoder.blocks.19.mlp.fc2.weight False
+model.visual_encoder.blocks.19.mlp.fc2.bias False
+model.visual_encoder.blocks.20.norm1.weight False
+model.visual_encoder.blocks.20.norm1.bias False
+model.visual_encoder.blocks.20.attn.q_bias False
+model.visual_encoder.blocks.20.attn.v_bias False
+model.visual_encoder.blocks.20.attn.qkv.weight False
+model.visual_encoder.blocks.20.attn.proj.weight False
+model.visual_encoder.blocks.20.attn.proj.bias False
+model.visual_encoder.blocks.20.norm2.weight False
+model.visual_encoder.blocks.20.norm2.bias False
+model.visual_encoder.blocks.20.mlp.fc1.weight False
+model.visual_encoder.blocks.20.mlp.fc1.bias False
+model.visual_encoder.blocks.20.mlp.fc2.weight False
+model.visual_encoder.blocks.20.mlp.fc2.bias False
+model.visual_encoder.blocks.21.norm1.weight False
+model.visual_encoder.blocks.21.norm1.bias False
+model.visual_encoder.blocks.21.attn.q_bias False
+model.visual_encoder.blocks.21.attn.v_bias False
+model.visual_encoder.blocks.21.attn.qkv.weight False
+model.visual_encoder.blocks.21.attn.proj.weight False
+model.visual_encoder.blocks.21.attn.proj.bias False
+model.visual_encoder.blocks.21.norm2.weight False
+model.visual_encoder.blocks.21.norm2.bias False
+model.visual_encoder.blocks.21.mlp.fc1.weight False
+model.visual_encoder.blocks.21.mlp.fc1.bias False
+model.visual_encoder.blocks.21.mlp.fc2.weight False
+model.visual_encoder.blocks.21.mlp.fc2.bias False
+model.visual_encoder.blocks.22.norm1.weight False
+model.visual_encoder.blocks.22.norm1.bias False
+model.visual_encoder.blocks.22.attn.q_bias False
+model.visual_encoder.blocks.22.attn.v_bias False
+model.visual_encoder.blocks.22.attn.qkv.weight False
+model.visual_encoder.blocks.22.attn.proj.weight False
+model.visual_encoder.blocks.22.attn.proj.bias False
+model.visual_encoder.blocks.22.norm2.weight False
+model.visual_encoder.blocks.22.norm2.bias False
+model.visual_encoder.blocks.22.mlp.fc1.weight False
+model.visual_encoder.blocks.22.mlp.fc1.bias False
+model.visual_encoder.blocks.22.mlp.fc2.weight False
+model.visual_encoder.blocks.22.mlp.fc2.bias False
+model.visual_encoder.blocks.23.norm1.weight False
+model.visual_encoder.blocks.23.norm1.bias False
+model.visual_encoder.blocks.23.attn.q_bias False
+model.visual_encoder.blocks.23.attn.v_bias False
+model.visual_encoder.blocks.23.attn.qkv.weight False
+model.visual_encoder.blocks.23.attn.proj.weight False
+model.visual_encoder.blocks.23.attn.proj.bias False
+model.visual_encoder.blocks.23.norm2.weight False
+model.visual_encoder.blocks.23.norm2.bias False
+model.visual_encoder.blocks.23.mlp.fc1.weight False
+model.visual_encoder.blocks.23.mlp.fc1.bias False
+model.visual_encoder.blocks.23.mlp.fc2.weight False
+model.visual_encoder.blocks.23.mlp.fc2.bias False
+model.visual_encoder.blocks.24.norm1.weight False
+model.visual_encoder.blocks.24.norm1.bias False
+model.visual_encoder.blocks.24.attn.q_bias False
+model.visual_encoder.blocks.24.attn.v_bias False
+model.visual_encoder.blocks.24.attn.qkv.weight False
+model.visual_encoder.blocks.24.attn.proj.weight False
+model.visual_encoder.blocks.24.attn.proj.bias False
+model.visual_encoder.blocks.24.norm2.weight False
+model.visual_encoder.blocks.24.norm2.bias False
+model.visual_encoder.blocks.24.mlp.fc1.weight False
+model.visual_encoder.blocks.24.mlp.fc1.bias False
+model.visual_encoder.blocks.24.mlp.fc2.weight False
+model.visual_encoder.blocks.24.mlp.fc2.bias False
+model.visual_encoder.blocks.25.norm1.weight False
+model.visual_encoder.blocks.25.norm1.bias False
+model.visual_encoder.blocks.25.attn.q_bias False
+model.visual_encoder.blocks.25.attn.v_bias False
+model.visual_encoder.blocks.25.attn.qkv.weight False
+model.visual_encoder.blocks.25.attn.proj.weight False
+model.visual_encoder.blocks.25.attn.proj.bias False
+model.visual_encoder.blocks.25.norm2.weight False
+model.visual_encoder.blocks.25.norm2.bias False
+model.visual_encoder.blocks.25.mlp.fc1.weight False
+model.visual_encoder.blocks.25.mlp.fc1.bias False
+model.visual_encoder.blocks.25.mlp.fc2.weight False
+model.visual_encoder.blocks.25.mlp.fc2.bias False
+model.visual_encoder.blocks.26.norm1.weight False
+model.visual_encoder.blocks.26.norm1.bias False
+model.visual_encoder.blocks.26.attn.q_bias False
+model.visual_encoder.blocks.26.attn.v_bias False
+model.visual_encoder.blocks.26.attn.qkv.weight False
+model.visual_encoder.blocks.26.attn.proj.weight False
+model.visual_encoder.blocks.26.attn.proj.bias False
+model.visual_encoder.blocks.26.norm2.weight False
+model.visual_encoder.blocks.26.norm2.bias False
+model.visual_encoder.blocks.26.mlp.fc1.weight False
+model.visual_encoder.blocks.26.mlp.fc1.bias False
+model.visual_encoder.blocks.26.mlp.fc2.weight False
+model.visual_encoder.blocks.26.mlp.fc2.bias False
+model.visual_encoder.blocks.27.norm1.weight False
+model.visual_encoder.blocks.27.norm1.bias False
+model.visual_encoder.blocks.27.attn.q_bias False
+model.visual_encoder.blocks.27.attn.v_bias False
+model.visual_encoder.blocks.27.attn.qkv.weight False
+model.visual_encoder.blocks.27.attn.proj.weight False
+model.visual_encoder.blocks.27.attn.proj.bias False
+model.visual_encoder.blocks.27.norm2.weight False
+model.visual_encoder.blocks.27.norm2.bias False
+model.visual_encoder.blocks.27.mlp.fc1.weight False
+model.visual_encoder.blocks.27.mlp.fc1.bias False
+model.visual_encoder.blocks.27.mlp.fc2.weight False
+model.visual_encoder.blocks.27.mlp.fc2.bias False
+model.visual_encoder.blocks.28.norm1.weight False
+model.visual_encoder.blocks.28.norm1.bias False
+model.visual_encoder.blocks.28.attn.q_bias False
+model.visual_encoder.blocks.28.attn.v_bias False
+model.visual_encoder.blocks.28.attn.qkv.weight False
+model.visual_encoder.blocks.28.attn.proj.weight False
+model.visual_encoder.blocks.28.attn.proj.bias False
+model.visual_encoder.blocks.28.norm2.weight False
+model.visual_encoder.blocks.28.norm2.bias False
+model.visual_encoder.blocks.28.mlp.fc1.weight False
+model.visual_encoder.blocks.28.mlp.fc1.bias False
+model.visual_encoder.blocks.28.mlp.fc2.weight False
+model.visual_encoder.blocks.28.mlp.fc2.bias False
+model.visual_encoder.blocks.29.norm1.weight False
+model.visual_encoder.blocks.29.norm1.bias False
+model.visual_encoder.blocks.29.attn.q_bias False
+model.visual_encoder.blocks.29.attn.v_bias False
+model.visual_encoder.blocks.29.attn.qkv.weight False
+model.visual_encoder.blocks.29.attn.proj.weight False
+model.visual_encoder.blocks.29.attn.proj.bias False
+model.visual_encoder.blocks.29.norm2.weight False
+model.visual_encoder.blocks.29.norm2.bias False
+model.visual_encoder.blocks.29.mlp.fc1.weight False
+model.visual_encoder.blocks.29.mlp.fc1.bias False
+model.visual_encoder.blocks.29.mlp.fc2.weight False
+model.visual_encoder.blocks.29.mlp.fc2.bias False
+model.visual_encoder.blocks.30.norm1.weight False
+model.visual_encoder.blocks.30.norm1.bias False
+model.visual_encoder.blocks.30.attn.q_bias False
+model.visual_encoder.blocks.30.attn.v_bias False
+model.visual_encoder.blocks.30.attn.qkv.weight False
+model.visual_encoder.blocks.30.attn.proj.weight False
+model.visual_encoder.blocks.30.attn.proj.bias False
+model.visual_encoder.blocks.30.norm2.weight False
+model.visual_encoder.blocks.30.norm2.bias False
+model.visual_encoder.blocks.30.mlp.fc1.weight False
+model.visual_encoder.blocks.30.mlp.fc1.bias False
+model.visual_encoder.blocks.30.mlp.fc2.weight False
+model.visual_encoder.blocks.30.mlp.fc2.bias False
+model.visual_encoder.blocks.31.norm1.weight False
+model.visual_encoder.blocks.31.norm1.bias False
+model.visual_encoder.blocks.31.attn.q_bias False
+model.visual_encoder.blocks.31.attn.v_bias False
+model.visual_encoder.blocks.31.attn.qkv.weight False
+model.visual_encoder.blocks.31.attn.proj.weight False
+model.visual_encoder.blocks.31.attn.proj.bias False
+model.visual_encoder.blocks.31.norm2.weight False
+model.visual_encoder.blocks.31.norm2.bias False
+model.visual_encoder.blocks.31.mlp.fc1.weight False
+model.visual_encoder.blocks.31.mlp.fc1.bias False
+model.visual_encoder.blocks.31.mlp.fc2.weight False
+model.visual_encoder.blocks.31.mlp.fc2.bias False
+model.visual_encoder.blocks.32.norm1.weight False
+model.visual_encoder.blocks.32.norm1.bias False
+model.visual_encoder.blocks.32.attn.q_bias False
+model.visual_encoder.blocks.32.attn.v_bias False
+model.visual_encoder.blocks.32.attn.qkv.weight False
+model.visual_encoder.blocks.32.attn.proj.weight False
+model.visual_encoder.blocks.32.attn.proj.bias False
+model.visual_encoder.blocks.32.norm2.weight False
+model.visual_encoder.blocks.32.norm2.bias False
+model.visual_encoder.blocks.32.mlp.fc1.weight False
+model.visual_encoder.blocks.32.mlp.fc1.bias False
+model.visual_encoder.blocks.32.mlp.fc2.weight False
+model.visual_encoder.blocks.32.mlp.fc2.bias False
+model.visual_encoder.blocks.33.norm1.weight False
+model.visual_encoder.blocks.33.norm1.bias False
+model.visual_encoder.blocks.33.attn.q_bias False
+model.visual_encoder.blocks.33.attn.v_bias False
+model.visual_encoder.blocks.33.attn.qkv.weight False
+model.visual_encoder.blocks.33.attn.proj.weight False
+model.visual_encoder.blocks.33.attn.proj.bias False
+model.visual_encoder.blocks.33.norm2.weight False
+model.visual_encoder.blocks.33.norm2.bias False
+model.visual_encoder.blocks.33.mlp.fc1.weight False
+model.visual_encoder.blocks.33.mlp.fc1.bias False
+model.visual_encoder.blocks.33.mlp.fc2.weight False
+model.visual_encoder.blocks.33.mlp.fc2.bias False
+model.visual_encoder.blocks.34.norm1.weight False
+model.visual_encoder.blocks.34.norm1.bias False
+model.visual_encoder.blocks.34.attn.q_bias False
+model.visual_encoder.blocks.34.attn.v_bias False
+model.visual_encoder.blocks.34.attn.qkv.weight False
+model.visual_encoder.blocks.34.attn.proj.weight False
+model.visual_encoder.blocks.34.attn.proj.bias False
+model.visual_encoder.blocks.34.norm2.weight False
+model.visual_encoder.blocks.34.norm2.bias False
+model.visual_encoder.blocks.34.mlp.fc1.weight False
+model.visual_encoder.blocks.34.mlp.fc1.bias False
+model.visual_encoder.blocks.34.mlp.fc2.weight False
+model.visual_encoder.blocks.34.mlp.fc2.bias False
+model.visual_encoder.blocks.35.norm1.weight False
+model.visual_encoder.blocks.35.norm1.bias False
+model.visual_encoder.blocks.35.attn.q_bias False
+model.visual_encoder.blocks.35.attn.v_bias False
+model.visual_encoder.blocks.35.attn.qkv.weight False
+model.visual_encoder.blocks.35.attn.proj.weight False
+model.visual_encoder.blocks.35.attn.proj.bias False
+model.visual_encoder.blocks.35.norm2.weight False
+model.visual_encoder.blocks.35.norm2.bias False
+model.visual_encoder.blocks.35.mlp.fc1.weight False
+model.visual_encoder.blocks.35.mlp.fc1.bias False
+model.visual_encoder.blocks.35.mlp.fc2.weight False
+model.visual_encoder.blocks.35.mlp.fc2.bias False
+model.visual_encoder.blocks.36.norm1.weight False
+model.visual_encoder.blocks.36.norm1.bias False
+model.visual_encoder.blocks.36.attn.q_bias False
+model.visual_encoder.blocks.36.attn.v_bias False
+model.visual_encoder.blocks.36.attn.qkv.weight False
+model.visual_encoder.blocks.36.attn.proj.weight False
+model.visual_encoder.blocks.36.attn.proj.bias False
+model.visual_encoder.blocks.36.norm2.weight False
+model.visual_encoder.blocks.36.norm2.bias False
+model.visual_encoder.blocks.36.mlp.fc1.weight False
+model.visual_encoder.blocks.36.mlp.fc1.bias False
+model.visual_encoder.blocks.36.mlp.fc2.weight False
+model.visual_encoder.blocks.36.mlp.fc2.bias False
+model.visual_encoder.blocks.37.norm1.weight False
+model.visual_encoder.blocks.37.norm1.bias False
+model.visual_encoder.blocks.37.attn.q_bias False
+model.visual_encoder.blocks.37.attn.v_bias False
+model.visual_encoder.blocks.37.attn.qkv.weight False
+model.visual_encoder.blocks.37.attn.proj.weight False
+model.visual_encoder.blocks.37.attn.proj.bias False
+model.visual_encoder.blocks.37.norm2.weight False
+model.visual_encoder.blocks.37.norm2.bias False
+model.visual_encoder.blocks.37.mlp.fc1.weight False
+model.visual_encoder.blocks.37.mlp.fc1.bias False
+model.visual_encoder.blocks.37.mlp.fc2.weight False
+model.visual_encoder.blocks.37.mlp.fc2.bias False
+model.visual_encoder.blocks.38.norm1.weight False
+model.visual_encoder.blocks.38.norm1.bias False
+model.visual_encoder.blocks.38.attn.q_bias False
+model.visual_encoder.blocks.38.attn.v_bias False
+model.visual_encoder.blocks.38.attn.qkv.weight False
+model.visual_encoder.blocks.38.attn.proj.weight False
+model.visual_encoder.blocks.38.attn.proj.bias False
+model.visual_encoder.blocks.38.norm2.weight False
+model.visual_encoder.blocks.38.norm2.bias False
+model.visual_encoder.blocks.38.mlp.fc1.weight False
+model.visual_encoder.blocks.38.mlp.fc1.bias False
+model.visual_encoder.blocks.38.mlp.fc2.weight False
+model.visual_encoder.blocks.38.mlp.fc2.bias False
+model.ln_vision.weight True
+model.ln_vision.bias True
+model.Qformer.bert.embeddings.word_embeddings.weight False
+model.Qformer.bert.embeddings.position_embeddings.weight False
+model.Qformer.bert.embeddings.LayerNorm.weight False
+model.Qformer.bert.embeddings.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.0.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.0.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.0.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.0.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.0.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.0.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.0.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.0.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.0.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.0.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.0.crossattention.self.query.weight False
+model.Qformer.bert.encoder.layer.0.crossattention.self.query.bias False
+model.Qformer.bert.encoder.layer.0.crossattention.self.key.weight False
+model.Qformer.bert.encoder.layer.0.crossattention.self.key.bias False
+model.Qformer.bert.encoder.layer.0.crossattention.self.value.weight False
+model.Qformer.bert.encoder.layer.0.crossattention.self.value.bias False
+model.Qformer.bert.encoder.layer.0.crossattention.output.dense.weight False
+model.Qformer.bert.encoder.layer.0.crossattention.output.dense.bias False
+model.Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.0.crossattention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.0.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.0.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.0.output.dense.weight False
+model.Qformer.bert.encoder.layer.0.output.dense.bias False
+model.Qformer.bert.encoder.layer.0.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.0.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.0.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.0.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.0.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.0.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.0.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.0.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.1.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.1.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.1.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.1.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.1.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.1.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.1.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.1.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.1.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.1.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.1.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.1.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.1.output.dense.weight False
+model.Qformer.bert.encoder.layer.1.output.dense.bias False
+model.Qformer.bert.encoder.layer.1.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.1.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.1.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.1.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.1.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.1.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.1.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.1.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.2.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.2.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.2.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.2.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.2.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.2.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.2.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.2.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.2.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.2.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.2.crossattention.self.query.weight False
+model.Qformer.bert.encoder.layer.2.crossattention.self.query.bias False
+model.Qformer.bert.encoder.layer.2.crossattention.self.key.weight False
+model.Qformer.bert.encoder.layer.2.crossattention.self.key.bias False
+model.Qformer.bert.encoder.layer.2.crossattention.self.value.weight False
+model.Qformer.bert.encoder.layer.2.crossattention.self.value.bias False
+model.Qformer.bert.encoder.layer.2.crossattention.output.dense.weight False
+model.Qformer.bert.encoder.layer.2.crossattention.output.dense.bias False
+model.Qformer.bert.encoder.layer.2.crossattention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.2.crossattention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.2.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.2.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.2.output.dense.weight False
+model.Qformer.bert.encoder.layer.2.output.dense.bias False
+model.Qformer.bert.encoder.layer.2.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.2.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.2.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.2.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.2.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.2.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.2.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.2.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.3.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.3.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.3.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.3.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.3.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.3.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.3.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.3.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.3.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.3.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.3.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.3.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.3.output.dense.weight False
+model.Qformer.bert.encoder.layer.3.output.dense.bias False
+model.Qformer.bert.encoder.layer.3.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.3.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.3.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.3.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.3.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.3.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.3.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.3.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.4.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.4.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.4.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.4.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.4.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.4.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.4.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.4.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.4.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.4.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.4.crossattention.self.query.weight False
+model.Qformer.bert.encoder.layer.4.crossattention.self.query.bias False
+model.Qformer.bert.encoder.layer.4.crossattention.self.key.weight False
+model.Qformer.bert.encoder.layer.4.crossattention.self.key.bias False
+model.Qformer.bert.encoder.layer.4.crossattention.self.value.weight False
+model.Qformer.bert.encoder.layer.4.crossattention.self.value.bias False
+model.Qformer.bert.encoder.layer.4.crossattention.output.dense.weight False
+model.Qformer.bert.encoder.layer.4.crossattention.output.dense.bias False
+model.Qformer.bert.encoder.layer.4.crossattention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.4.crossattention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.4.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.4.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.4.output.dense.weight False
+model.Qformer.bert.encoder.layer.4.output.dense.bias False
+model.Qformer.bert.encoder.layer.4.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.4.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.4.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.4.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.4.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.4.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.4.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.4.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.5.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.5.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.5.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.5.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.5.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.5.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.5.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.5.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.5.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.5.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.5.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.5.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.5.output.dense.weight False
+model.Qformer.bert.encoder.layer.5.output.dense.bias False
+model.Qformer.bert.encoder.layer.5.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.5.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.5.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.5.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.5.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.5.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.5.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.5.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.6.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.6.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.6.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.6.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.6.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.6.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.6.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.6.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.6.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.6.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.6.crossattention.self.query.weight False
+model.Qformer.bert.encoder.layer.6.crossattention.self.query.bias False
+model.Qformer.bert.encoder.layer.6.crossattention.self.key.weight False
+model.Qformer.bert.encoder.layer.6.crossattention.self.key.bias False
+model.Qformer.bert.encoder.layer.6.crossattention.self.value.weight False
+model.Qformer.bert.encoder.layer.6.crossattention.self.value.bias False
+model.Qformer.bert.encoder.layer.6.crossattention.output.dense.weight False
+model.Qformer.bert.encoder.layer.6.crossattention.output.dense.bias False
+model.Qformer.bert.encoder.layer.6.crossattention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.6.crossattention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.6.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.6.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.6.output.dense.weight False
+model.Qformer.bert.encoder.layer.6.output.dense.bias False
+model.Qformer.bert.encoder.layer.6.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.6.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.6.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.6.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.6.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.6.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.6.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.6.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.7.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.7.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.7.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.7.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.7.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.7.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.7.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.7.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.7.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.7.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.7.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.7.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.7.output.dense.weight False
+model.Qformer.bert.encoder.layer.7.output.dense.bias False
+model.Qformer.bert.encoder.layer.7.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.7.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.7.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.7.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.7.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.7.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.7.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.7.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.8.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.8.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.8.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.8.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.8.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.8.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.8.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.8.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.8.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.8.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.8.crossattention.self.query.weight False
+model.Qformer.bert.encoder.layer.8.crossattention.self.query.bias False
+model.Qformer.bert.encoder.layer.8.crossattention.self.key.weight False
+model.Qformer.bert.encoder.layer.8.crossattention.self.key.bias False
+model.Qformer.bert.encoder.layer.8.crossattention.self.value.weight False
+model.Qformer.bert.encoder.layer.8.crossattention.self.value.bias False
+model.Qformer.bert.encoder.layer.8.crossattention.output.dense.weight False
+model.Qformer.bert.encoder.layer.8.crossattention.output.dense.bias False
+model.Qformer.bert.encoder.layer.8.crossattention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.8.crossattention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.8.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.8.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.8.output.dense.weight False
+model.Qformer.bert.encoder.layer.8.output.dense.bias False
+model.Qformer.bert.encoder.layer.8.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.8.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.8.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.8.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.8.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.8.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.8.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.8.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.9.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.9.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.9.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.9.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.9.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.9.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.9.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.9.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.9.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.9.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.9.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.9.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.9.output.dense.weight False
+model.Qformer.bert.encoder.layer.9.output.dense.bias False
+model.Qformer.bert.encoder.layer.9.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.9.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.9.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.9.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.9.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.9.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.9.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.9.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.10.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.10.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.10.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.10.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.10.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.10.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.10.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.10.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.10.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.10.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.10.crossattention.self.query.weight False
+model.Qformer.bert.encoder.layer.10.crossattention.self.query.bias False
+model.Qformer.bert.encoder.layer.10.crossattention.self.key.weight False
+model.Qformer.bert.encoder.layer.10.crossattention.self.key.bias False
+model.Qformer.bert.encoder.layer.10.crossattention.self.value.weight False
+model.Qformer.bert.encoder.layer.10.crossattention.self.value.bias False
+model.Qformer.bert.encoder.layer.10.crossattention.output.dense.weight False
+model.Qformer.bert.encoder.layer.10.crossattention.output.dense.bias False
+model.Qformer.bert.encoder.layer.10.crossattention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.10.crossattention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.10.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.10.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.10.output.dense.weight False
+model.Qformer.bert.encoder.layer.10.output.dense.bias False
+model.Qformer.bert.encoder.layer.10.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.10.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.10.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.10.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.10.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.10.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.10.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.10.output_query.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.11.attention.self.query.weight False
+model.Qformer.bert.encoder.layer.11.attention.self.query.bias False
+model.Qformer.bert.encoder.layer.11.attention.self.key.weight False
+model.Qformer.bert.encoder.layer.11.attention.self.key.bias False
+model.Qformer.bert.encoder.layer.11.attention.self.value.weight False
+model.Qformer.bert.encoder.layer.11.attention.self.value.bias False
+model.Qformer.bert.encoder.layer.11.attention.output.dense.weight False
+model.Qformer.bert.encoder.layer.11.attention.output.dense.bias False
+model.Qformer.bert.encoder.layer.11.attention.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.11.attention.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.11.intermediate.dense.weight False
+model.Qformer.bert.encoder.layer.11.intermediate.dense.bias False
+model.Qformer.bert.encoder.layer.11.output.dense.weight False
+model.Qformer.bert.encoder.layer.11.output.dense.bias False
+model.Qformer.bert.encoder.layer.11.output.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.11.output.LayerNorm.bias False
+model.Qformer.bert.encoder.layer.11.intermediate_query.dense.weight False
+model.Qformer.bert.encoder.layer.11.intermediate_query.dense.bias False
+model.Qformer.bert.encoder.layer.11.output_query.dense.weight False
+model.Qformer.bert.encoder.layer.11.output_query.dense.bias False
+model.Qformer.bert.encoder.layer.11.output_query.LayerNorm.weight False
+model.Qformer.bert.encoder.layer.11.output_query.LayerNorm.bias False
+model.t5_model.shared.weight True
+model.t5_model.encoder.block.0.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.0.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.0.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.0.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.0.layer.0.SelfAttention.relative_attention_bias.weight True
+model.t5_model.encoder.block.0.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.0.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.0.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.0.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.0.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.1.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.1.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.1.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.1.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.1.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.1.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.1.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.1.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.1.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.2.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.2.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.2.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.2.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.2.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.2.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.2.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.2.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.2.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.3.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.3.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.3.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.3.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.3.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.3.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.3.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.3.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.3.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.4.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.4.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.4.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.4.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.4.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.4.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.4.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.4.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.4.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.5.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.5.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.5.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.5.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.5.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.5.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.5.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.5.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.5.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.6.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.6.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.6.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.6.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.6.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.6.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.6.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.6.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.6.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.7.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.7.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.7.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.7.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.7.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.7.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.7.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.7.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.7.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.8.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.8.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.8.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.8.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.8.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.8.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.8.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.8.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.8.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.9.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.9.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.9.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.9.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.9.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.9.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.9.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.9.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.9.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.10.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.10.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.10.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.10.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.10.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.10.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.10.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.10.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.10.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.11.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.11.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.11.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.11.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.11.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.11.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.11.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.11.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.11.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.12.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.12.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.12.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.12.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.12.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.12.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.12.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.12.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.12.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.13.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.13.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.13.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.13.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.13.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.13.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.13.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.13.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.13.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.14.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.14.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.14.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.14.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.14.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.14.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.14.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.14.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.14.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.15.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.15.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.15.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.15.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.15.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.15.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.15.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.15.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.15.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.16.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.16.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.16.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.16.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.16.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.16.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.16.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.16.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.16.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.17.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.17.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.17.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.17.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.17.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.17.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.17.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.17.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.17.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.18.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.18.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.18.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.18.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.18.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.18.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.18.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.18.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.18.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.19.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.19.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.19.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.19.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.19.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.19.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.19.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.19.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.19.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.20.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.20.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.20.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.20.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.20.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.20.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.20.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.20.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.20.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.21.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.21.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.21.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.21.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.21.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.21.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.21.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.21.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.21.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.22.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.22.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.22.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.22.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.22.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.22.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.22.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.22.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.22.layer.1.layer_norm.weight True
+model.t5_model.encoder.block.23.layer.0.SelfAttention.q.weight True
+model.t5_model.encoder.block.23.layer.0.SelfAttention.k.weight True
+model.t5_model.encoder.block.23.layer.0.SelfAttention.v.weight True
+model.t5_model.encoder.block.23.layer.0.SelfAttention.o.weight True
+model.t5_model.encoder.block.23.layer.0.layer_norm.weight True
+model.t5_model.encoder.block.23.layer.1.DenseReluDense.wi_0.weight True
+model.t5_model.encoder.block.23.layer.1.DenseReluDense.wi_1.weight True
+model.t5_model.encoder.block.23.layer.1.DenseReluDense.wo.weight True
+model.t5_model.encoder.block.23.layer.1.layer_norm.weight True
+model.t5_model.encoder.final_layer_norm.weight True
+model.t5_model.decoder.block.0.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.0.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.0.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.0.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.0.layer.0.SelfAttention.relative_attention_bias.weight True
+model.t5_model.decoder.block.0.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.0.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.0.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.0.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.0.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.0.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.0.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.0.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.0.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.0.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.1.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.1.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.1.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.1.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.1.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.1.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.1.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.1.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.1.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.1.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.1.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.1.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.1.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.1.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.2.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.2.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.2.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.2.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.2.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.2.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.2.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.2.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.2.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.2.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.2.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.2.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.2.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.2.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.3.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.3.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.3.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.3.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.3.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.3.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.3.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.3.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.3.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.3.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.3.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.3.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.3.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.3.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.4.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.4.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.4.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.4.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.4.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.4.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.4.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.4.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.4.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.4.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.4.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.4.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.4.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.4.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.5.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.5.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.5.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.5.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.5.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.5.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.5.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.5.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.5.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.5.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.5.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.5.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.5.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.5.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.6.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.6.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.6.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.6.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.6.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.6.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.6.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.6.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.6.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.6.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.6.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.6.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.6.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.6.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.7.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.7.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.7.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.7.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.7.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.7.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.7.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.7.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.7.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.7.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.7.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.7.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.7.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.7.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.8.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.8.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.8.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.8.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.8.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.8.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.8.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.8.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.8.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.8.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.8.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.8.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.8.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.8.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.9.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.9.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.9.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.9.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.9.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.9.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.9.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.9.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.9.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.9.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.9.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.9.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.9.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.9.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.10.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.10.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.10.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.10.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.10.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.10.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.10.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.10.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.10.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.10.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.10.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.10.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.10.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.10.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.11.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.11.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.11.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.11.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.11.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.11.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.11.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.11.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.11.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.11.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.11.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.11.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.11.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.11.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.12.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.12.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.12.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.12.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.12.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.12.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.12.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.12.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.12.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.12.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.12.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.12.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.12.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.12.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.13.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.13.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.13.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.13.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.13.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.13.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.13.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.13.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.13.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.13.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.13.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.13.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.13.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.13.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.14.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.14.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.14.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.14.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.14.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.14.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.14.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.14.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.14.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.14.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.14.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.14.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.14.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.14.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.15.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.15.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.15.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.15.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.15.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.15.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.15.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.15.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.15.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.15.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.15.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.15.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.15.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.15.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.16.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.16.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.16.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.16.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.16.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.16.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.16.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.16.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.16.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.16.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.16.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.16.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.16.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.16.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.17.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.17.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.17.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.17.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.17.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.17.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.17.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.17.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.17.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.17.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.17.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.17.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.17.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.17.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.18.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.18.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.18.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.18.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.18.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.18.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.18.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.18.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.18.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.18.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.18.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.18.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.18.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.18.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.19.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.19.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.19.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.19.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.19.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.19.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.19.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.19.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.19.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.19.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.19.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.19.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.19.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.19.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.20.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.20.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.20.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.20.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.20.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.20.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.20.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.20.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.20.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.20.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.20.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.20.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.20.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.20.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.21.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.21.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.21.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.21.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.21.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.21.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.21.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.21.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.21.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.21.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.21.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.21.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.21.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.21.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.22.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.22.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.22.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.22.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.22.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.22.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.22.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.22.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.22.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.22.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.22.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.22.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.22.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.22.layer.2.layer_norm.weight True
+model.t5_model.decoder.block.23.layer.0.SelfAttention.q.weight True
+model.t5_model.decoder.block.23.layer.0.SelfAttention.k.weight True
+model.t5_model.decoder.block.23.layer.0.SelfAttention.v.weight True
+model.t5_model.decoder.block.23.layer.0.SelfAttention.o.weight True
+model.t5_model.decoder.block.23.layer.0.layer_norm.weight True
+model.t5_model.decoder.block.23.layer.1.EncDecAttention.q.weight True
+model.t5_model.decoder.block.23.layer.1.EncDecAttention.k.weight True
+model.t5_model.decoder.block.23.layer.1.EncDecAttention.v.weight True
+model.t5_model.decoder.block.23.layer.1.EncDecAttention.o.weight True
+model.t5_model.decoder.block.23.layer.1.layer_norm.weight True
+model.t5_model.decoder.block.23.layer.2.DenseReluDense.wi_0.weight True
+model.t5_model.decoder.block.23.layer.2.DenseReluDense.wi_1.weight True
+model.t5_model.decoder.block.23.layer.2.DenseReluDense.wo.weight True
+model.t5_model.decoder.block.23.layer.2.layer_norm.weight True
+model.t5_model.decoder.final_layer_norm.weight True
+model.t5_model.lm_head.weight True
+model.t5_proj.weight True
+model.t5_proj.bias True
+Sanity Checking: 0it [00:00, ?it/s]Sanity Checking:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0:   0%|          | 0/2 [00:00<?, ?it/s]Sanity Checking DataLoader 0:  50%|█████     | 1/2 [02:35<02:35, 155.26s/it]Sanity Checking DataLoader 0:  50%|█████     | 1/2 [02:35<02:35, 155.26s/it]Sanity Checking DataLoader 0: 100%|██████████| 2/2 [02:50<00:00, 73.09s/it] Sanity Checking DataLoader 0: 100%|██████████| 2/2 [02:50<00:00, 73.09s/it]Loading and preparing results...     
+{'test/epoch': 0}
+{'retrieval_predictions_epoch0_MODE(train)_SET(TEST)': <wandb.data_types.Table object at 0x14d77186b580>}
+                                                                           Training: 0it [00:00, ?it/s]Training:   0%|          | 0/360321 [00:00<?, ?it/s]Epoch 0:   0%|          | 0/360321 [00:00<?, ?it/s] 
+generator_outputs {'loss': tensor(0.7785, device='cuda:0', grad_fn=<NllLossBackward0>)}
+Epoch 0:   0%|          | 1/360321 [00:00<33:22:39,  3.00it/s]Epoch 0:   0%|          | 1/360321 [00:00<33:25:46,  2.99it/s]Epoch 0:   0%|          | 1/360321 [00:00<33:28:18,  2.99it/s, loss=0.779, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+generator_outputs {'loss': tensor(1.4195, device='cuda:0', grad_fn=<NllLossBackward0>)}
+Epoch 0:   0%|          | 2/360321 [00:00<28:03:36,  3.57it/s, loss=0.779, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 2/360321 [00:00<28:05:22,  3.56it/s, loss=0.779, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 2/360321 [00:00<28:06:42,  3.56it/s, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]  
+Validation: 0it [00:00, ?it/s][A
+Validation:   0%|          | 0/158 [00:00<?, ?it/s][A
+Validation DataLoader 0:   0%|          | 0/158 [00:00<?, ?it/s][A
+Validation DataLoader 0:   1%|          | 1/158 [02:25<6:21:01, 145.61s/it][A
+Validation DataLoader 0:   1%|          | 1/158 [02:25<6:21:01, 145.61s/it][AEpoch 0:   0%|          | 3/360321 [02:26<4877:27:58, 48.73s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 3/360321 [02:26<4877:28:18, 48.73s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   1%|▏         | 2/158 [02:41<2:59:42, 69.12s/it] [A
+Validation DataLoader 0:   1%|▏         | 2/158 [02:41<2:59:42, 69.12s/it][AEpoch 0:   0%|          | 4/360321 [02:41<4047:32:55, 40.44s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 4/360321 [02:41<4047:33:09, 40.44s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   2%|▏         | 3/158 [05:04<4:26:16, 103.08s/it][A
+Validation DataLoader 0:   2%|▏         | 3/158 [05:04<4:26:16, 103.08s/it][AEpoch 0:   0%|          | 5/360321 [05:05<6110:19:45, 61.05s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 5/360321 [05:05<6110:19:56, 61.05s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   3%|▎         | 4/158 [07:29<5:06:54, 119.57s/it][A
+Validation DataLoader 0:   3%|▎         | 4/158 [07:29<5:06:54, 119.57s/it][AEpoch 0:   0%|          | 6/360321 [07:30<7508:24:14, 75.02s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 6/360321 [07:30<7508:24:24, 75.02s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   3%|▎         | 5/158 [09:53<5:27:11, 128.31s/it][A
+Validation DataLoader 0:   3%|▎         | 5/158 [09:53<5:27:11, 128.31s/it][AEpoch 0:   0%|          | 7/360321 [09:53<8491:53:00, 84.84s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 7/360321 [09:53<8491:53:08, 84.84s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   4%|▍         | 6/158 [12:18<5:39:45, 134.12s/it][A
+Validation DataLoader 0:   4%|▍         | 6/158 [12:18<5:39:45, 134.12s/it][AEpoch 0:   0%|          | 8/360321 [12:19<9249:20:19, 92.41s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 8/360321 [12:19<9249:20:27, 92.41s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   4%|▍         | 7/158 [14:43<5:46:09, 137.54s/it][A
+Validation DataLoader 0:   4%|▍         | 7/158 [14:43<5:46:09, 137.54s/it][AEpoch 0:   0%|          | 9/360321 [14:43<9829:40:04, 98.21s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 9/360321 [14:43<9829:40:10, 98.21s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   5%|▌         | 8/158 [14:47<3:57:29, 95.00s/it] [A
+Validation DataLoader 0:   5%|▌         | 8/158 [14:47<3:57:29, 95.00s/it][AEpoch 0:   0%|          | 10/360321 [14:47<8885:41:23, 88.78s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 10/360321 [14:47<8885:41:29, 88.78s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]
+Validation DataLoader 0:   6%|▌         | 9/158 [15:09<2:59:50, 72.42s/it][A
+Validation DataLoader 0:   6%|▌         | 9/158 [15:09<2:59:50, 72.42s/it][AEpoch 0:   0%|          | 11/360321 [15:10<8284:59:41, 82.78s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]Epoch 0:   0%|          | 11/360321 [15:10<8284:59:46, 82.78s/it, loss=1.1, v_num=_1.0, train/lr[0]=6e-5, train/lr[1]=0.0003]

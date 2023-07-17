@@ -1,0 +1,682 @@
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/torchvision/io/image.py:13: UserWarning: Failed to load image Python extension: libtorch_cuda_cu.so: cannot open shared object file: No such file or directory
+  warn(f"Failed to load image Python extension: {e}")
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+[38;20m[INFO] - __main__ : Initialization done with the config: {'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'T5'], 'name': 'NoDPR-flan-t5-xl-lora.22571932'}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'ocr_feature_preprocessed': 0, 'qformer_embeddings': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadClipEmbeddings']}, 'dataset_type': 'OKVQADataset', 'dummy_dataloader': 0, 'type': 'DataLoaderOKVQA'}, 'experiment_name': 'NoDPR-flan-t5-xl-lora.22571932', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_okvqa_scores'}], 'model_config': {'ConfigClass': 'T5Config', 'GeneratorModelClass': 'T5ForConditionalGeneration', 'LoadPretrainMLPs': 0, 'ModelClass': 'PrefixModelLora', 'ModelVersion': 'google/flan-t5-xl', 'PretrainedMLPPath': '', 'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOQ>', '<EOQ>'], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'TokenizerClass': 'T5Tokenizer', 'TokenizerModelVersion': 'google/flan-t5-xl', 'UsePrefixEmb': 0, 'UseQformerEmb': 0, 'base_model': 'T5', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '<EOQ>', 'start': '<BOQ>'}, 'type': 'QuestionInput'}, {'option': 'default', 'type': 'EmbeddingInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}, {'option': 'default', 'type': 'PostProcessClipEmbeddings'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0}, 'modules': [], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenization'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}, 'LoadPretrainedMLP': 0}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'num_evaluation': 0}, 'train': {'MLP_lr': 0.0001, 'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 16, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 2, 'epochs': 10, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'lr': 6e-05, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'linear', 'type': 'T5ExecutorWithPrefix'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 0.5}, 'reset': False, 'mode': 'train', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/imgs', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/NoDPR-flan-t5-xl-lora.22571932', 'args': {'config': '../configs/okvqa/T5_NoDPR_prefix_only_lora.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'train', 'reset': False, 'experiment_name': 'NoDPR-flan-t5-xl-lora.22571932', 'tags': [], 'modules': [], 'log_prediction_tables': False, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 32, 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['train.epochs=10', 'train.batch_size=2', 'valid.step_size=0.5', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.MLP_lr=0.0001', 'train.scheduler=linear', 'model_config.UsePrefixEmb=0', 'model_config.UseQformerEmb=0', 'model_config.LoadPretrainedMLP=0', 'model_config.TokenizerModelVersion=google/flan-t5-xl', 'model_config.ModelVersion=google/flan-t5-xl']}}[0m
+Global seed set to 2021
+[38;20m[INFO] - __main__ : All seeds have been set to 2021[0m
+[38;20m[INFO] - __main__ : init wandb logger with the following settings: {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'T5'], 'name': 'NoDPR-flan-t5-xl-lora.22571932'}[0m
+wandb: Currently logged in as: xl544. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.15.4
+wandb: Run data is saved locally in /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/wandb/run-20230620_143214-ea5a0ofs
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run NoDPR-flan-t5-xl-lora.22571932
+wandb: ⭐️ View project at https://wandb.ai/xl544/RAVQA
+wandb: 🚀 View run at https://wandb.ai/xl544/RAVQA/runs/ea5a0ofs
+Multiprocessing is handled by SLURM.
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+[38;20m[INFO] - __main__ : arguments passed to trainer: Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/T5_NoDPR_prefix_only_lora.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='NoDPR-flan-t5-xl-lora.22571932', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=False, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='train', modules=[], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['train.epochs=10', 'train.batch_size=2', 'valid.step_size=0.5', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00006', 'train.MLP_lr=0.0001', 'train.scheduler=linear', 'model_config.UsePrefixEmb=0', 'model_config.UseQformerEmb=0', 'model_config.LoadPretrainedMLP=0', 'model_config.TokenizerModelVersion=google/flan-t5-xl', 'model_config.ModelVersion=google/flan-t5-xl'], overfit_batches=0.0, plugins=None, precision=32, prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')[0m
+[38;20m[INFO] - __main__ : additional arguments passed to trainer: {'accumulate_grad_batches': 16, 'default_root_dir': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/saved_model', 'max_epochs': 10, 'logger': [<pytorch_lightning.loggers.tensorboard.TensorBoardLogger object at 0x1509ae4e8ee0>, <pytorch_lightning.loggers.wandb.WandbLogger object at 0x1509ae4f7d00>, <utils.metrics_log_callback.MetricsHistoryLogger object at 0x1509ade04c70>], 'callbacks': [<pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint object at 0x1509ae4f76d0>, <pytorch_lightning.callbacks.progress.tqdm_progress.TQDMProgressBar object at 0x1509adb3a100>, <pytorch_lightning.callbacks.model_summary.ModelSummary object at 0x1509adb3adf0>, <pytorch_lightning.callbacks.gradient_accumulation_scheduler.GradientAccumulationScheduler object at 0x1509adb3aca0>], 'plugins': [], 'log_every_n_steps': 10, 'val_check_interval': 0.5}[0m
+[33;20m[WARNING] - __main__ : No checkpoint exists from '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/saved_model/last.ckpt'. Skipping...[0m
+[38;20m[INFO] - __main__ : **First time to train**[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/vinvl_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] VinVL features 14031[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/ocr_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] OCR features 14031, 5462 has annotations.[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : OCR feature detected in VinVL feature dict...skipping..[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/train_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: train  entries: 9009[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/test_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: test  entries: 5046[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/clip_embeddings.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] CLIP embeddings 123287[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets : initialising OKVQADataset...[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets : initialising OKVQADataset...[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics]: training data loader: 4505;  test data loader: 158[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Created a temporary directory at /tmp/tmpx0s9jn4k[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Writing /tmp/tmpx0s9jn4k/_remote_module_non_scriptable.py[0m
+[38;20m[INFO] - trainers.base_executor : Initializing T5ExecutorWithPrefix...[0m
+Downloading shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Downloading (…)l-00001-of-00002.bin:   0%|          | 0.00/9.45G [00:00<?, ?B/s][A
+Downloading (…)l-00001-of-00002.bin:   0%|          | 10.5M/9.45G [00:00<01:45, 89.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:   0%|          | 31.5M/9.45G [00:00<01:30, 104MB/s] [A
+Downloading (…)l-00001-of-00002.bin:   1%|          | 52.4M/9.45G [00:00<01:24, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:   1%|          | 73.4M/9.45G [00:00<01:22, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:   1%|          | 94.4M/9.45G [00:00<01:21, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:   1%|          | 115M/9.45G [00:01<01:20, 116MB/s] [A
+Downloading (…)l-00001-of-00002.bin:   1%|▏         | 136M/9.45G [00:01<01:20, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:   2%|▏         | 157M/9.45G [00:01<01:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   2%|▏         | 178M/9.45G [00:01<01:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   2%|▏         | 199M/9.45G [00:01<01:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   2%|▏         | 220M/9.45G [00:01<01:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   3%|▎         | 241M/9.45G [00:02<01:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   3%|▎         | 262M/9.45G [00:02<01:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   3%|▎         | 283M/9.45G [00:02<01:19, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:   3%|▎         | 304M/9.45G [00:02<01:17, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   3%|▎         | 325M/9.45G [00:02<01:17, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   4%|▎         | 346M/9.45G [00:02<01:17, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   4%|▍         | 367M/9.45G [00:03<01:17, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   4%|▍         | 388M/9.45G [00:03<01:17, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   4%|▍         | 409M/9.45G [00:03<01:16, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   5%|▍         | 430M/9.45G [00:03<01:16, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   5%|▍         | 451M/9.45G [00:03<01:16, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   5%|▍         | 472M/9.45G [00:04<01:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   5%|▌         | 493M/9.45G [00:04<01:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   5%|▌         | 514M/9.45G [00:04<01:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   6%|▌         | 535M/9.45G [00:04<01:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   6%|▌         | 556M/9.45G [00:04<01:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   6%|▌         | 577M/9.45G [00:04<01:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   6%|▋         | 598M/9.45G [00:05<01:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   7%|▋         | 619M/9.45G [00:05<01:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   7%|▋         | 640M/9.45G [00:05<01:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   7%|▋         | 661M/9.45G [00:05<01:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   7%|▋         | 682M/9.45G [00:05<01:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   7%|▋         | 703M/9.45G [00:06<01:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   8%|▊         | 724M/9.45G [00:06<01:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   8%|▊         | 744M/9.45G [00:06<01:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:   8%|▊         | 765M/9.45G [00:06<01:14, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:   8%|▊         | 786M/9.45G [00:06<01:13, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   9%|▊         | 807M/9.45G [00:06<01:13, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   9%|▉         | 828M/9.45G [00:07<01:13, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   9%|▉         | 849M/9.45G [00:07<01:13, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   9%|▉         | 870M/9.45G [00:07<01:12, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:   9%|▉         | 891M/9.45G [00:07<01:12, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  10%|▉         | 912M/9.45G [00:07<01:12, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  10%|▉         | 933M/9.45G [00:07<01:12, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  10%|█         | 954M/9.45G [00:08<01:12, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  10%|█         | 975M/9.45G [00:08<01:12, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  11%|█         | 996M/9.45G [00:08<01:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  11%|█         | 1.02G/9.45G [00:08<01:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  11%|█         | 1.04G/9.45G [00:08<01:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  11%|█         | 1.06G/9.45G [00:09<01:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  11%|█▏        | 1.08G/9.45G [00:09<01:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  12%|█▏        | 1.10G/9.45G [00:09<01:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  12%|█▏        | 1.12G/9.45G [00:09<01:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  12%|█▏        | 1.14G/9.45G [00:09<01:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  12%|█▏        | 1.16G/9.45G [00:09<01:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  13%|█▎        | 1.18G/9.45G [00:10<01:35, 86.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  13%|█▎        | 1.21G/9.45G [00:10<01:27, 93.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  13%|█▎        | 1.23G/9.45G [00:10<01:22, 99.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  13%|█▎        | 1.25G/9.45G [00:10<01:18, 104MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  13%|█▎        | 1.27G/9.45G [00:11<01:15, 108MB/s][A
+Downloading (…)l-00001-of-00002.bin:  14%|█▎        | 1.29G/9.45G [00:11<01:13, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  14%|█▍        | 1.31G/9.45G [00:11<01:12, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  14%|█▍        | 1.33G/9.45G [00:11<01:11, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  14%|█▍        | 1.35G/9.45G [00:11<01:11, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  15%|█▍        | 1.37G/9.45G [00:11<01:09, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  15%|█▍        | 1.39G/9.45G [00:12<01:09, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  15%|█▍        | 1.42G/9.45G [00:12<01:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  15%|█▌        | 1.44G/9.45G [00:12<01:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  15%|█▌        | 1.46G/9.45G [00:12<01:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  16%|█▌        | 1.48G/9.45G [00:12<01:07, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  16%|█▌        | 1.50G/9.45G [00:13<01:07, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  16%|█▌        | 1.52G/9.45G [00:13<01:10, 112MB/s][A
+Downloading (…)l-00001-of-00002.bin:  16%|█▋        | 1.54G/9.45G [00:13<01:09, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  17%|█▋        | 1.56G/9.45G [00:13<01:09, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  17%|█▋        | 1.58G/9.45G [00:13<01:08, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  17%|█▋        | 1.60G/9.45G [00:13<01:07, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  17%|█▋        | 1.63G/9.45G [00:14<01:07, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  17%|█▋        | 1.65G/9.45G [00:14<01:13, 106MB/s][A
+Downloading (…)l-00001-of-00002.bin:  18%|█▊        | 1.67G/9.45G [00:14<01:32, 84.5MB/s][A
+Downloading (…)l-00001-of-00002.bin:  18%|█▊        | 1.68G/9.45G [00:14<01:40, 77.4MB/s][A
+Downloading (…)l-00001-of-00002.bin:  18%|█▊        | 1.69G/9.45G [00:15<01:46, 72.7MB/s][A
+Downloading (…)l-00001-of-00002.bin:  18%|█▊        | 1.70G/9.45G [00:15<01:52, 69.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  18%|█▊        | 1.71G/9.45G [00:15<01:56, 66.2MB/s][A
+Downloading (…)l-00001-of-00002.bin:  18%|█▊        | 1.72G/9.45G [00:15<01:57, 65.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  18%|█▊        | 1.74G/9.45G [00:15<01:36, 80.2MB/s][A
+Downloading (…)l-00001-of-00002.bin:  19%|█▊        | 1.76G/9.45G [00:15<01:24, 91.1MB/s][A
+Downloading (…)l-00001-of-00002.bin:  19%|█▉        | 1.78G/9.45G [00:16<01:17, 98.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  19%|█▉        | 1.80G/9.45G [00:16<01:13, 104MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  19%|█▉        | 1.82G/9.45G [00:16<01:10, 108MB/s][A
+Downloading (…)l-00001-of-00002.bin:  20%|█▉        | 1.85G/9.45G [00:16<01:08, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  20%|█▉        | 1.87G/9.45G [00:16<01:07, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  20%|█▉        | 1.89G/9.45G [00:17<01:06, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  20%|██        | 1.91G/9.45G [00:17<01:05, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  20%|██        | 1.93G/9.45G [00:17<01:13, 102MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██        | 1.94G/9.45G [00:17<01:20, 93.5MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██        | 1.95G/9.45G [00:17<01:30, 82.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██        | 1.96G/9.45G [00:18<01:39, 75.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██        | 1.97G/9.45G [00:18<01:46, 70.2MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██        | 1.98G/9.45G [00:18<01:51, 66.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██        | 1.99G/9.45G [00:18<01:55, 64.5MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██        | 2.00G/9.45G [00:18<01:50, 67.2MB/s][A
+Downloading (…)l-00001-of-00002.bin:  21%|██▏       | 2.02G/9.45G [00:18<01:29, 82.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  22%|██▏       | 2.04G/9.45G [00:19<01:19, 93.5MB/s][A
+Downloading (…)l-00001-of-00002.bin:  22%|██▏       | 2.07G/9.45G [00:19<01:13, 101MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  22%|██▏       | 2.09G/9.45G [00:19<01:09, 106MB/s][A
+Downloading (…)l-00001-of-00002.bin:  22%|██▏       | 2.11G/9.45G [00:19<01:07, 109MB/s][A
+Downloading (…)l-00001-of-00002.bin:  23%|██▎       | 2.13G/9.45G [00:19<01:05, 112MB/s][A
+Downloading (…)l-00001-of-00002.bin:  23%|██▎       | 2.15G/9.45G [00:19<01:04, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  23%|██▎       | 2.17G/9.45G [00:20<01:03, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  23%|██▎       | 2.19G/9.45G [00:20<01:02, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  23%|██▎       | 2.21G/9.45G [00:20<01:02, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  24%|██▎       | 2.23G/9.45G [00:20<01:02, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  24%|██▍       | 2.25G/9.45G [00:20<01:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  24%|██▍       | 2.28G/9.45G [00:21<01:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  24%|██▍       | 2.30G/9.45G [00:21<01:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  25%|██▍       | 2.32G/9.45G [00:21<01:03, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  25%|██▍       | 2.34G/9.45G [00:21<01:06, 106MB/s][A
+Downloading (…)l-00001-of-00002.bin:  25%|██▍       | 2.36G/9.45G [00:21<01:03, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  25%|██▌       | 2.38G/9.45G [00:21<01:02, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  25%|██▌       | 2.40G/9.45G [00:22<01:01, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  26%|██▌       | 2.42G/9.45G [00:22<01:01, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  26%|██▌       | 2.44G/9.45G [00:22<01:00, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  26%|██▌       | 2.46G/9.45G [00:22<01:00, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  26%|██▋       | 2.49G/9.45G [00:22<00:59, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  27%|██▋       | 2.51G/9.45G [00:23<00:59, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  27%|██▋       | 2.53G/9.45G [00:23<00:59, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  27%|██▋       | 2.55G/9.45G [00:23<00:58, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  27%|██▋       | 2.57G/9.45G [00:23<00:58, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  27%|██▋       | 2.59G/9.45G [00:23<00:58, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  28%|██▊       | 2.61G/9.45G [00:23<00:58, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  28%|██▊       | 2.63G/9.45G [00:24<00:58, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  28%|██▊       | 2.65G/9.45G [00:24<00:57, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  28%|██▊       | 2.67G/9.45G [00:24<00:57, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  29%|██▊       | 2.69G/9.45G [00:24<01:21, 83.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  29%|██▊       | 2.72G/9.45G [00:25<01:14, 90.7MB/s][A
+Downloading (…)l-00001-of-00002.bin:  29%|██▉       | 2.74G/9.45G [00:25<01:08, 97.4MB/s][A
+Downloading (…)l-00001-of-00002.bin:  29%|██▉       | 2.76G/9.45G [00:25<01:05, 102MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  29%|██▉       | 2.78G/9.45G [00:25<01:14, 89.1MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|██▉       | 2.79G/9.45G [00:25<01:20, 82.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|██▉       | 2.80G/9.45G [00:26<01:27, 75.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|██▉       | 2.81G/9.45G [00:26<01:33, 71.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|██▉       | 2.82G/9.45G [00:26<01:38, 67.6MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|██▉       | 2.83G/9.45G [00:26<01:41, 65.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|███       | 2.84G/9.45G [00:26<01:48, 61.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|███       | 2.85G/9.45G [00:26<01:47, 61.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|███       | 2.86G/9.45G [00:27<01:46, 61.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  30%|███       | 2.87G/9.45G [00:27<01:48, 60.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  31%|███       | 2.88G/9.45G [00:27<01:41, 65.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  31%|███       | 2.90G/9.45G [00:27<01:20, 80.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  31%|███       | 2.93G/9.45G [00:27<01:10, 92.1MB/s][A
+Downloading (…)l-00001-of-00002.bin:  31%|███       | 2.95G/9.45G [00:28<01:05, 99.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  31%|███▏      | 2.97G/9.45G [00:28<01:01, 105MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  32%|███▏      | 2.99G/9.45G [00:28<00:59, 109MB/s][A
+Downloading (…)l-00001-of-00002.bin:  32%|███▏      | 3.01G/9.45G [00:28<00:57, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  32%|███▏      | 3.03G/9.45G [00:28<00:56, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  32%|███▏      | 3.05G/9.45G [00:29<01:12, 87.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  32%|███▏      | 3.06G/9.45G [00:29<01:19, 80.6MB/s][A
+Downloading (…)l-00001-of-00002.bin:  33%|███▎      | 3.07G/9.45G [00:29<01:25, 74.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  33%|███▎      | 3.08G/9.45G [00:29<01:30, 70.4MB/s][A
+Downloading (…)l-00001-of-00002.bin:  33%|███▎      | 3.09G/9.45G [00:29<01:34, 67.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  33%|███▎      | 3.10G/9.45G [00:29<01:30, 70.5MB/s][A
+Downloading (…)l-00001-of-00002.bin:  33%|███▎      | 3.12G/9.45G [00:30<01:14, 84.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  33%|███▎      | 3.15G/9.45G [00:30<01:06, 94.7MB/s][A
+Downloading (…)l-00001-of-00002.bin:  34%|███▎      | 3.17G/9.45G [00:30<01:01, 102MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  34%|███▎      | 3.19G/9.45G [00:30<00:58, 106MB/s][A
+Downloading (…)l-00001-of-00002.bin:  34%|███▍      | 3.21G/9.45G [00:30<00:56, 110MB/s][A
+Downloading (…)l-00001-of-00002.bin:  34%|███▍      | 3.23G/9.45G [00:31<00:55, 112MB/s][A
+Downloading (…)l-00001-of-00002.bin:  34%|███▍      | 3.25G/9.45G [00:31<00:54, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  35%|███▍      | 3.27G/9.45G [00:31<00:54, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  35%|███▍      | 3.29G/9.45G [00:31<00:54, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  35%|███▌      | 3.31G/9.45G [00:31<00:53, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  35%|███▌      | 3.33G/9.45G [00:31<00:52, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  36%|███▌      | 3.36G/9.45G [00:32<00:52, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  36%|███▌      | 3.38G/9.45G [00:32<00:52, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  36%|███▌      | 3.40G/9.45G [00:32<00:51, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  36%|███▌      | 3.42G/9.45G [00:32<00:51, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  36%|███▋      | 3.44G/9.45G [00:32<00:51, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  37%|███▋      | 3.46G/9.45G [00:32<00:51, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  37%|███▋      | 3.48G/9.45G [00:33<00:50, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  37%|███▋      | 3.50G/9.45G [00:33<00:50, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  37%|███▋      | 3.52G/9.45G [00:33<00:50, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  38%|███▊      | 3.54G/9.45G [00:33<00:50, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  38%|███▊      | 3.57G/9.45G [00:33<00:50, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  38%|███▊      | 3.59G/9.45G [00:34<00:50, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  38%|███▊      | 3.61G/9.45G [00:34<00:50, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  38%|███▊      | 3.63G/9.45G [00:34<00:49, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  39%|███▊      | 3.65G/9.45G [00:34<00:49, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  39%|███▉      | 3.67G/9.45G [00:34<00:49, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  39%|███▉      | 3.69G/9.45G [00:34<00:49, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  39%|███▉      | 3.71G/9.45G [00:35<00:48, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  40%|███▉      | 3.73G/9.45G [00:35<00:49, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  40%|███▉      | 3.75G/9.45G [00:35<00:48, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  40%|███▉      | 3.77G/9.45G [00:35<00:48, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  40%|████      | 3.80G/9.45G [00:35<00:48, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  40%|████      | 3.82G/9.45G [00:36<00:47, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  41%|████      | 3.84G/9.45G [00:36<00:48, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  41%|████      | 3.86G/9.45G [00:36<00:47, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  41%|████      | 3.88G/9.45G [00:36<00:47, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  41%|████▏     | 3.90G/9.45G [00:36<00:47, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  42%|████▏     | 3.92G/9.45G [00:36<00:47, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  42%|████▏     | 3.94G/9.45G [00:37<00:46, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  42%|████▏     | 3.96G/9.45G [00:37<00:46, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  42%|████▏     | 3.98G/9.45G [00:37<00:47, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  42%|████▏     | 4.01G/9.45G [00:37<00:46, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  43%|████▎     | 4.03G/9.45G [00:37<00:45, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  43%|████▎     | 4.05G/9.45G [00:38<00:45, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  43%|████▎     | 4.07G/9.45G [00:38<00:45, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  43%|████▎     | 4.09G/9.45G [00:38<00:45, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  43%|████▎     | 4.11G/9.45G [00:38<00:45, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  44%|████▎     | 4.13G/9.45G [00:38<00:45, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  44%|████▍     | 4.15G/9.45G [00:38<00:45, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  44%|████▍     | 4.17G/9.45G [00:39<00:45, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  44%|████▍     | 4.19G/9.45G [00:39<00:44, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  45%|████▍     | 4.22G/9.45G [00:39<00:44, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  45%|████▍     | 4.24G/9.45G [00:39<00:44, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  45%|████▌     | 4.26G/9.45G [00:39<00:44, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  45%|████▌     | 4.28G/9.45G [00:40<00:59, 86.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  45%|████▌     | 4.30G/9.45G [00:40<00:55, 92.2MB/s][A
+Downloading (…)l-00001-of-00002.bin:  46%|████▌     | 4.32G/9.45G [00:40<00:51, 99.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  46%|████▌     | 4.34G/9.45G [00:40<00:48, 105MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  46%|████▌     | 4.36G/9.45G [00:40<00:47, 108MB/s][A
+Downloading (…)l-00001-of-00002.bin:  46%|████▋     | 4.38G/9.45G [00:41<00:45, 110MB/s][A
+Downloading (…)l-00001-of-00002.bin:  47%|████▋     | 4.40G/9.45G [00:41<00:45, 112MB/s][A
+Downloading (…)l-00001-of-00002.bin:  47%|████▋     | 4.42G/9.45G [00:41<00:44, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  47%|████▋     | 4.45G/9.45G [00:41<00:43, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  47%|████▋     | 4.47G/9.45G [00:41<00:43, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  47%|████▋     | 4.49G/9.45G [00:41<00:42, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  48%|████▊     | 4.51G/9.45G [00:42<00:42, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  48%|████▊     | 4.53G/9.45G [00:42<00:42, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  48%|████▊     | 4.55G/9.45G [00:42<00:41, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  48%|████▊     | 4.57G/9.45G [00:42<00:42, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  49%|████▊     | 4.59G/9.45G [00:42<00:42, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  49%|████▉     | 4.61G/9.45G [00:43<00:41, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  49%|████▉     | 4.63G/9.45G [00:43<00:41, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  49%|████▉     | 4.66G/9.45G [00:43<00:41, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  49%|████▉     | 4.68G/9.45G [00:43<00:40, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  50%|████▉     | 4.70G/9.45G [00:43<00:40, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  50%|████▉     | 4.72G/9.45G [00:43<00:40, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  50%|█████     | 4.74G/9.45G [00:44<00:40, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  50%|█████     | 4.76G/9.45G [00:44<00:40, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  51%|█████     | 4.78G/9.45G [00:44<00:39, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  51%|█████     | 4.80G/9.45G [00:44<00:39, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  51%|█████     | 4.82G/9.45G [00:44<00:39, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  51%|█████▏    | 4.84G/9.45G [00:45<00:39, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  51%|█████▏    | 4.87G/9.45G [00:45<00:39, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  52%|█████▏    | 4.89G/9.45G [00:45<00:39, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  52%|█████▏    | 4.91G/9.45G [00:45<00:39, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  52%|█████▏    | 4.93G/9.45G [00:45<00:39, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  52%|█████▏    | 4.95G/9.45G [00:45<00:38, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  53%|█████▎    | 4.97G/9.45G [00:46<00:38, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  53%|█████▎    | 4.99G/9.45G [00:46<00:38, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  53%|█████▎    | 5.01G/9.45G [00:46<00:38, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  53%|█████▎    | 5.03G/9.45G [00:46<00:38, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  53%|█████▎    | 5.05G/9.45G [00:46<00:38, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  54%|█████▎    | 5.08G/9.45G [00:47<00:37, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  54%|█████▍    | 5.10G/9.45G [00:47<00:37, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  54%|█████▍    | 5.12G/9.45G [00:47<00:37, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  54%|█████▍    | 5.14G/9.45G [00:47<00:36, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  55%|█████▍    | 5.16G/9.45G [00:47<00:36, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  55%|█████▍    | 5.18G/9.45G [00:47<00:36, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  55%|█████▌    | 5.20G/9.45G [00:48<00:36, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  55%|█████▌    | 5.22G/9.45G [00:48<00:36, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  55%|█████▌    | 5.24G/9.45G [00:48<00:35, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  56%|█████▌    | 5.26G/9.45G [00:48<00:35, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  56%|█████▌    | 5.28G/9.45G [00:48<00:35, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  56%|█████▌    | 5.31G/9.45G [00:49<00:35, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  56%|█████▋    | 5.33G/9.45G [00:49<00:35, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  57%|█████▋    | 5.35G/9.45G [00:49<00:35, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  57%|█████▋    | 5.37G/9.45G [00:49<00:35, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  57%|█████▋    | 5.39G/9.45G [00:49<00:34, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  57%|█████▋    | 5.41G/9.45G [00:49<00:34, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  57%|█████▋    | 5.43G/9.45G [00:50<00:34, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  58%|█████▊    | 5.45G/9.45G [00:50<00:34, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  58%|█████▊    | 5.47G/9.45G [00:50<00:33, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  58%|█████▊    | 5.49G/9.45G [00:50<00:33, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  58%|█████▊    | 5.52G/9.45G [00:50<00:33, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  59%|█████▊    | 5.54G/9.45G [00:50<00:33, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  59%|█████▉    | 5.56G/9.45G [00:51<00:33, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  59%|█████▉    | 5.58G/9.45G [00:51<00:33, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  59%|█████▉    | 5.60G/9.45G [00:51<00:32, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  59%|█████▉    | 5.62G/9.45G [00:51<00:33, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  60%|█████▉    | 5.64G/9.45G [00:51<00:32, 119MB/s][A
+Downloading (…)l-00001-of-00002.bin:  60%|█████▉    | 5.66G/9.45G [00:52<00:32, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  60%|██████    | 5.68G/9.45G [00:52<00:31, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  60%|██████    | 5.70G/9.45G [00:52<00:31, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  61%|██████    | 5.73G/9.45G [00:52<00:32, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  61%|██████    | 5.75G/9.45G [00:52<00:31, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  61%|██████    | 5.77G/9.45G [00:52<00:31, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  61%|██████▏   | 5.79G/9.45G [00:53<00:31, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  61%|██████▏   | 5.81G/9.45G [00:53<00:31, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  62%|██████▏   | 5.83G/9.45G [00:53<00:30, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  62%|██████▏   | 5.85G/9.45G [00:53<00:30, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  62%|██████▏   | 5.87G/9.45G [00:53<00:30, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  62%|██████▏   | 5.89G/9.45G [00:54<00:30, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  63%|██████▎   | 5.91G/9.45G [00:54<00:30, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  63%|██████▎   | 5.93G/9.45G [00:54<00:30, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  63%|██████▎   | 5.96G/9.45G [00:54<00:30, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  63%|██████▎   | 5.98G/9.45G [00:54<00:29, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  63%|██████▎   | 6.00G/9.45G [00:54<00:29, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  64%|██████▎   | 6.02G/9.45G [00:55<00:29, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  64%|██████▍   | 6.04G/9.45G [00:55<00:29, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  64%|██████▍   | 6.06G/9.45G [00:55<00:29, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  64%|██████▍   | 6.08G/9.45G [00:55<00:28, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  65%|██████▍   | 6.10G/9.45G [00:55<00:28, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  65%|██████▍   | 6.12G/9.45G [00:56<00:28, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  65%|██████▌   | 6.14G/9.45G [00:56<00:28, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  65%|██████▌   | 6.17G/9.45G [00:56<00:27, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  65%|██████▌   | 6.19G/9.45G [00:56<00:28, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  66%|██████▌   | 6.21G/9.45G [00:56<00:37, 87.5MB/s][A
+Downloading (…)l-00001-of-00002.bin:  66%|██████▌   | 6.23G/9.45G [00:57<00:33, 94.7MB/s][A
+Downloading (…)l-00001-of-00002.bin:  66%|██████▌   | 6.25G/9.45G [00:57<00:31, 101MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  66%|██████▋   | 6.27G/9.45G [00:57<00:30, 105MB/s][A
+Downloading (…)l-00001-of-00002.bin:  67%|██████▋   | 6.29G/9.45G [00:57<00:29, 108MB/s][A
+Downloading (…)l-00001-of-00002.bin:  67%|██████▋   | 6.31G/9.45G [00:57<00:28, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  67%|██████▋   | 6.33G/9.45G [00:58<00:28, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  67%|██████▋   | 6.35G/9.45G [00:58<00:27, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  67%|██████▋   | 6.38G/9.45G [00:58<00:26, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  68%|██████▊   | 6.40G/9.45G [00:58<00:26, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  68%|██████▊   | 6.42G/9.45G [00:58<00:26, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  68%|██████▊   | 6.44G/9.45G [00:58<00:26, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  68%|██████▊   | 6.46G/9.45G [00:59<00:25, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  69%|██████▊   | 6.48G/9.45G [00:59<00:25, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  69%|██████▉   | 6.50G/9.45G [00:59<00:25, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  69%|██████▉   | 6.52G/9.45G [00:59<00:25, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  69%|██████▉   | 6.54G/9.45G [00:59<00:24, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  69%|██████▉   | 6.56G/9.45G [00:59<00:24, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  70%|██████▉   | 6.59G/9.45G [01:00<00:24, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  70%|██████▉   | 6.61G/9.45G [01:00<00:24, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  70%|███████   | 6.63G/9.45G [01:00<00:24, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  70%|███████   | 6.65G/9.45G [01:00<00:23, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  71%|███████   | 6.67G/9.45G [01:00<00:23, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  71%|███████   | 6.69G/9.45G [01:01<00:23, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  71%|███████   | 6.71G/9.45G [01:01<00:23, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  71%|███████   | 6.73G/9.45G [01:01<00:23, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  71%|███████▏  | 6.75G/9.45G [01:01<00:22, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  72%|███████▏  | 6.77G/9.45G [01:01<00:22, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  72%|███████▏  | 6.79G/9.45G [01:01<00:22, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  72%|███████▏  | 6.82G/9.45G [01:02<00:22, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  72%|███████▏  | 6.84G/9.45G [01:02<00:22, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  73%|███████▎  | 6.86G/9.45G [01:02<00:22, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  73%|███████▎  | 6.88G/9.45G [01:02<00:21, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  73%|███████▎  | 6.90G/9.45G [01:02<00:21, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  73%|███████▎  | 6.92G/9.45G [01:03<00:21, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  73%|███████▎  | 6.94G/9.45G [01:03<00:21, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  74%|███████▎  | 6.96G/9.45G [01:03<00:21, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  74%|███████▍  | 6.98G/9.45G [01:03<00:20, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  74%|███████▍  | 7.00G/9.45G [01:03<00:20, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  74%|███████▍  | 7.03G/9.45G [01:03<00:20, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  75%|███████▍  | 7.05G/9.45G [01:04<00:20, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  75%|███████▍  | 7.07G/9.45G [01:04<00:20, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  75%|███████▌  | 7.09G/9.45G [01:04<00:20, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  75%|███████▌  | 7.11G/9.45G [01:04<00:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  75%|███████▌  | 7.13G/9.45G [01:04<00:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  76%|███████▌  | 7.15G/9.45G [01:04<00:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  76%|███████▌  | 7.17G/9.45G [01:05<00:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  76%|███████▌  | 7.19G/9.45G [01:05<00:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  76%|███████▋  | 7.21G/9.45G [01:05<00:19, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  77%|███████▋  | 7.24G/9.45G [01:05<00:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  77%|███████▋  | 7.26G/9.45G [01:05<00:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  77%|███████▋  | 7.28G/9.45G [01:06<00:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  77%|███████▋  | 7.30G/9.45G [01:06<00:18, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  77%|███████▋  | 7.32G/9.45G [01:06<00:18, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  78%|███████▊  | 7.34G/9.45G [01:06<00:17, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  78%|███████▊  | 7.36G/9.45G [01:06<00:17, 118MB/s][A
+Downloading (…)l-00001-of-00002.bin:  78%|███████▊  | 7.38G/9.45G [01:06<00:17, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  78%|███████▊  | 7.40G/9.45G [01:07<00:17, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  79%|███████▊  | 7.42G/9.45G [01:07<00:17, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  79%|███████▉  | 7.44G/9.45G [01:07<00:17, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  79%|███████▉  | 7.47G/9.45G [01:07<00:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  79%|███████▉  | 7.49G/9.45G [01:07<00:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  79%|███████▉  | 7.51G/9.45G [01:08<00:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  80%|███████▉  | 7.53G/9.45G [01:08<00:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  80%|███████▉  | 7.55G/9.45G [01:08<00:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  80%|████████  | 7.57G/9.45G [01:08<00:16, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  80%|████████  | 7.59G/9.45G [01:08<00:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  81%|████████  | 7.61G/9.45G [01:08<00:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  81%|████████  | 7.63G/9.45G [01:09<00:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  81%|████████  | 7.65G/9.45G [01:09<00:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  81%|████████  | 7.68G/9.45G [01:09<00:15, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  81%|████████▏ | 7.70G/9.45G [01:09<00:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  82%|████████▏ | 7.72G/9.45G [01:09<00:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  82%|████████▏ | 7.74G/9.45G [01:09<00:14, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  82%|████████▏ | 7.76G/9.45G [01:10<00:19, 87.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  82%|████████▏ | 7.78G/9.45G [01:10<00:17, 94.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  83%|████████▎ | 7.80G/9.45G [01:10<00:16, 100MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  83%|████████▎ | 7.82G/9.45G [01:10<00:15, 105MB/s][A
+Downloading (…)l-00001-of-00002.bin:  83%|████████▎ | 7.84G/9.45G [01:11<00:14, 108MB/s][A
+Downloading (…)l-00001-of-00002.bin:  83%|████████▎ | 7.86G/9.45G [01:11<00:14, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  83%|████████▎ | 7.89G/9.45G [01:11<00:13, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  84%|████████▎ | 7.91G/9.45G [01:11<00:13, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  84%|████████▍ | 7.93G/9.45G [01:11<00:13, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  84%|████████▍ | 7.95G/9.45G [01:11<00:12, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  84%|████████▍ | 7.97G/9.45G [01:12<00:12, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  85%|████████▍ | 7.99G/9.45G [01:12<00:12, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  85%|████████▍ | 8.01G/9.45G [01:12<00:12, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  85%|████████▍ | 8.03G/9.45G [01:12<00:12, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  85%|████████▌ | 8.05G/9.45G [01:12<00:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  85%|████████▌ | 8.07G/9.45G [01:13<00:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  86%|████████▌ | 8.10G/9.45G [01:13<00:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  86%|████████▌ | 8.12G/9.45G [01:13<00:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  86%|████████▌ | 8.14G/9.45G [01:13<00:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  86%|████████▋ | 8.16G/9.45G [01:13<00:11, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  87%|████████▋ | 8.18G/9.45G [01:13<00:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  87%|████████▋ | 8.20G/9.45G [01:14<00:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  87%|████████▋ | 8.22G/9.45G [01:14<00:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  87%|████████▋ | 8.24G/9.45G [01:14<00:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  87%|████████▋ | 8.26G/9.45G [01:14<00:10, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  88%|████████▊ | 8.28G/9.45G [01:14<00:09, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  88%|████████▊ | 8.30G/9.45G [01:15<00:09, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  88%|████████▊ | 8.33G/9.45G [01:15<00:09, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  88%|████████▊ | 8.35G/9.45G [01:15<00:09, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  89%|████████▊ | 8.37G/9.45G [01:15<00:09, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  89%|████████▉ | 8.39G/9.45G [01:15<00:09, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  89%|████████▉ | 8.41G/9.45G [01:15<00:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  89%|████████▉ | 8.43G/9.45G [01:16<00:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  89%|████████▉ | 8.45G/9.45G [01:16<00:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  90%|████████▉ | 8.47G/9.45G [01:16<00:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  90%|████████▉ | 8.49G/9.45G [01:16<00:08, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  90%|█████████ | 8.51G/9.45G [01:16<00:07, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  90%|█████████ | 8.54G/9.45G [01:17<00:10, 89.7MB/s][A
+Downloading (…)l-00001-of-00002.bin:  90%|█████████ | 8.55G/9.45G [01:17<00:11, 82.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████ | 8.56G/9.45G [01:17<00:11, 75.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████ | 8.57G/9.45G [01:17<00:12, 71.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████ | 8.58G/9.45G [01:17<00:12, 67.6MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████ | 8.59G/9.45G [01:18<00:13, 65.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████ | 8.60G/9.45G [01:18<00:13, 63.2MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████ | 8.61G/9.45G [01:18<00:13, 61.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████ | 8.62G/9.45G [01:18<00:13, 61.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████▏| 8.63G/9.45G [01:18<00:13, 60.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  91%|█████████▏| 8.64G/9.45G [01:18<00:13, 59.8MB/s][A
+Downloading (…)l-00001-of-00002.bin:  92%|█████████▏| 8.65G/9.45G [01:19<00:13, 59.5MB/s][A
+Downloading (…)l-00001-of-00002.bin:  92%|█████████▏| 8.66G/9.45G [01:19<00:13, 59.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  92%|█████████▏| 8.67G/9.45G [01:19<00:13, 59.1MB/s][A
+Downloading (…)l-00001-of-00002.bin:  92%|█████████▏| 8.68G/9.45G [01:19<00:13, 59.0MB/s][A
+Downloading (…)l-00001-of-00002.bin:  92%|█████████▏| 8.69G/9.45G [01:19<00:12, 58.9MB/s][A
+Downloading (…)l-00001-of-00002.bin:  92%|█████████▏| 8.70G/9.45G [01:19<00:11, 62.6MB/s][A
+Downloading (…)l-00001-of-00002.bin:  92%|█████████▏| 8.72G/9.45G [01:20<00:09, 79.7MB/s][A
+Downloading (…)l-00001-of-00002.bin:  93%|█████████▎| 8.75G/9.45G [01:20<00:07, 91.4MB/s][A
+Downloading (…)l-00001-of-00002.bin:  93%|█████████▎| 8.77G/9.45G [01:20<00:06, 99.3MB/s][A
+Downloading (…)l-00001-of-00002.bin:  93%|█████████▎| 8.79G/9.45G [01:20<00:06, 105MB/s] [A
+Downloading (…)l-00001-of-00002.bin:  93%|█████████▎| 8.81G/9.45G [01:20<00:05, 109MB/s][A
+Downloading (…)l-00001-of-00002.bin:  93%|█████████▎| 8.83G/9.45G [01:21<00:05, 111MB/s][A
+Downloading (…)l-00001-of-00002.bin:  94%|█████████▎| 8.85G/9.45G [01:21<00:05, 113MB/s][A
+Downloading (…)l-00001-of-00002.bin:  94%|█████████▍| 8.87G/9.45G [01:21<00:05, 114MB/s][A
+Downloading (…)l-00001-of-00002.bin:  94%|█████████▍| 8.89G/9.45G [01:21<00:04, 115MB/s][A
+Downloading (…)l-00001-of-00002.bin:  94%|█████████▍| 8.91G/9.45G [01:21<00:04, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  95%|█████████▍| 8.93G/9.45G [01:21<00:04, 116MB/s][A
+Downloading (…)l-00001-of-00002.bin:  95%|█████████▍| 8.95G/9.45G [01:22<00:04, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  95%|█████████▍| 8.98G/9.45G [01:22<00:04, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  95%|█████████▌| 9.00G/9.45G [01:22<00:03, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  95%|█████████▌| 9.02G/9.45G [01:22<00:03, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  96%|█████████▌| 9.04G/9.45G [01:22<00:03, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  96%|█████████▌| 9.06G/9.45G [01:23<00:03, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  96%|█████████▌| 9.08G/9.45G [01:23<00:03, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  96%|█████████▋| 9.10G/9.45G [01:23<00:02, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  97%|█████████▋| 9.12G/9.45G [01:23<00:02, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  97%|█████████▋| 9.14G/9.45G [01:23<00:02, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  97%|█████████▋| 9.16G/9.45G [01:23<00:02, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  97%|█████████▋| 9.19G/9.45G [01:24<00:02, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  97%|█████████▋| 9.21G/9.45G [01:24<00:02, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  98%|█████████▊| 9.23G/9.45G [01:24<00:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  98%|█████████▊| 9.25G/9.45G [01:24<00:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  98%|█████████▊| 9.27G/9.45G [01:24<00:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  98%|█████████▊| 9.29G/9.45G [01:25<00:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  99%|█████████▊| 9.31G/9.45G [01:25<00:01, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  99%|█████████▉| 9.33G/9.45G [01:25<00:00, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  99%|█████████▉| 9.35G/9.45G [01:25<00:00, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  99%|█████████▉| 9.37G/9.45G [01:25<00:00, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin:  99%|█████████▉| 9.40G/9.45G [01:25<00:00, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin: 100%|█████████▉| 9.42G/9.45G [01:26<00:00, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin: 100%|█████████▉| 9.44G/9.45G [01:26<00:00, 117MB/s][A
+Downloading (…)l-00001-of-00002.bin: 100%|██████████| 9.45G/9.45G [01:26<00:00, 118MB/s][ADownloading (…)l-00001-of-00002.bin: 100%|██████████| 9.45G/9.45G [01:26<00:00, 109MB/s]
+Downloading shards:  50%|█████     | 1/2 [01:26<01:26, 86.50s/it]
+Downloading (…)l-00002-of-00002.bin:   0%|          | 0.00/1.95G [00:00<?, ?B/s][A
+Downloading (…)l-00002-of-00002.bin:   1%|          | 21.0M/1.95G [00:00<00:16, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:   2%|▏         | 41.9M/1.95G [00:00<00:16, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:   3%|▎         | 62.9M/1.95G [00:00<00:16, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:   4%|▍         | 83.9M/1.95G [00:00<00:15, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:   5%|▌         | 105M/1.95G [00:00<00:15, 117MB/s] [A
+Downloading (…)l-00002-of-00002.bin:   6%|▋         | 126M/1.95G [00:01<00:15, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:   8%|▊         | 147M/1.95G [00:01<00:15, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:   9%|▊         | 168M/1.95G [00:01<00:15, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  10%|▉         | 189M/1.95G [00:01<00:15, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  11%|█         | 210M/1.95G [00:01<00:14, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  12%|█▏        | 231M/1.95G [00:01<00:14, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  13%|█▎        | 252M/1.95G [00:02<00:14, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  14%|█▍        | 273M/1.95G [00:02<00:14, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  15%|█▌        | 294M/1.95G [00:02<00:14, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  16%|█▌        | 315M/1.95G [00:02<00:13, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  17%|█▋        | 336M/1.95G [00:02<00:13, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  18%|█▊        | 357M/1.95G [00:03<00:18, 88.5MB/s][A
+Downloading (…)l-00002-of-00002.bin:  19%|█▉        | 367M/1.95G [00:03<00:19, 80.2MB/s][A
+Downloading (…)l-00002-of-00002.bin:  19%|█▉        | 377M/1.95G [00:03<00:21, 73.8MB/s][A
+Downloading (…)l-00002-of-00002.bin:  20%|█▉        | 388M/1.95G [00:03<00:22, 70.8MB/s][A
+Downloading (…)l-00002-of-00002.bin:  21%|██        | 409M/1.95G [00:03<00:18, 83.1MB/s][A
+Downloading (…)l-00002-of-00002.bin:  22%|██▏       | 430M/1.95G [00:04<00:16, 92.7MB/s][A
+Downloading (…)l-00002-of-00002.bin:  23%|██▎       | 451M/1.95G [00:04<00:15, 99.8MB/s][A
+Downloading (…)l-00002-of-00002.bin:  24%|██▍       | 472M/1.95G [00:04<00:14, 105MB/s] [A
+Downloading (…)l-00002-of-00002.bin:  25%|██▌       | 493M/1.95G [00:04<00:13, 109MB/s][A
+Downloading (…)l-00002-of-00002.bin:  26%|██▋       | 514M/1.95G [00:04<00:12, 111MB/s][A
+Downloading (…)l-00002-of-00002.bin:  27%|██▋       | 535M/1.95G [00:05<00:12, 113MB/s][A
+Downloading (…)l-00002-of-00002.bin:  29%|██▊       | 556M/1.95G [00:05<00:12, 114MB/s][A
+Downloading (…)l-00002-of-00002.bin:  30%|██▉       | 577M/1.95G [00:05<00:11, 115MB/s][A
+Downloading (…)l-00002-of-00002.bin:  31%|███       | 598M/1.95G [00:05<00:11, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  32%|███▏      | 619M/1.95G [00:05<00:11, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  33%|███▎      | 640M/1.95G [00:05<00:11, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  34%|███▍      | 661M/1.95G [00:06<00:11, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  35%|███▍      | 682M/1.95G [00:06<00:10, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  36%|███▌      | 703M/1.95G [00:06<00:10, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  37%|███▋      | 724M/1.95G [00:06<00:10, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  38%|███▊      | 744M/1.95G [00:06<00:10, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  39%|███▉      | 765M/1.95G [00:07<00:10, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  40%|████      | 786M/1.95G [00:07<00:09, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  41%|████▏     | 807M/1.95G [00:07<00:11, 103MB/s][A
+Downloading (…)l-00002-of-00002.bin:  42%|████▏     | 828M/1.95G [00:07<00:10, 107MB/s][A
+Downloading (…)l-00002-of-00002.bin:  44%|████▎     | 849M/1.95G [00:07<00:10, 110MB/s][A
+Downloading (…)l-00002-of-00002.bin:  45%|████▍     | 870M/1.95G [00:07<00:09, 112MB/s][A
+Downloading (…)l-00002-of-00002.bin:  46%|████▌     | 891M/1.95G [00:08<00:09, 114MB/s][A
+Downloading (…)l-00002-of-00002.bin:  47%|████▋     | 912M/1.95G [00:08<00:09, 115MB/s][A
+Downloading (…)l-00002-of-00002.bin:  48%|████▊     | 933M/1.95G [00:08<00:08, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  49%|████▉     | 954M/1.95G [00:08<00:08, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  50%|█████     | 975M/1.95G [00:08<00:08, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  51%|█████     | 996M/1.95G [00:09<00:08, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  52%|█████▏    | 1.02G/1.95G [00:09<00:07, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  53%|█████▎    | 1.04G/1.95G [00:09<00:07, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  54%|█████▍    | 1.06G/1.95G [00:09<00:07, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  55%|█████▌    | 1.08G/1.95G [00:09<00:07, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  56%|█████▋    | 1.10G/1.95G [00:09<00:07, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  58%|█████▊    | 1.12G/1.95G [00:10<00:07, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  59%|█████▊    | 1.14G/1.95G [00:10<00:06, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  60%|█████▉    | 1.16G/1.95G [00:10<00:06, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  61%|██████    | 1.18G/1.95G [00:10<00:06, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  62%|██████▏   | 1.21G/1.95G [00:11<00:08, 91.0MB/s][A
+Downloading (…)l-00002-of-00002.bin:  62%|██████▏   | 1.22G/1.95G [00:11<00:08, 83.7MB/s][A
+Downloading (…)l-00002-of-00002.bin:  63%|██████▎   | 1.23G/1.95G [00:11<00:08, 83.5MB/s][A
+Downloading (…)l-00002-of-00002.bin:  63%|██████▎   | 1.24G/1.95G [00:11<00:08, 86.9MB/s][A
+Downloading (…)l-00002-of-00002.bin:  64%|██████▍   | 1.25G/1.95G [00:11<00:07, 89.7MB/s][A
+Downloading (…)l-00002-of-00002.bin:  65%|██████▍   | 1.26G/1.95G [00:11<00:07, 88.6MB/s][A
+Downloading (…)l-00002-of-00002.bin:  65%|██████▌   | 1.27G/1.95G [00:11<00:07, 88.0MB/s][A
+Downloading (…)l-00002-of-00002.bin:  66%|██████▌   | 1.28G/1.95G [00:11<00:07, 88.5MB/s][A
+Downloading (…)l-00002-of-00002.bin:  67%|██████▋   | 1.30G/1.95G [00:12<00:07, 89.4MB/s][A
+Downloading (…)l-00002-of-00002.bin:  68%|██████▊   | 1.32G/1.95G [00:12<00:07, 85.7MB/s][A
+Downloading (…)l-00002-of-00002.bin:  68%|██████▊   | 1.33G/1.95G [00:12<00:08, 76.5MB/s][A
+Downloading (…)l-00002-of-00002.bin:  69%|██████▉   | 1.34G/1.95G [00:12<00:08, 74.0MB/s][A
+Downloading (…)l-00002-of-00002.bin:  69%|██████▉   | 1.35G/1.95G [00:12<00:07, 79.1MB/s][A
+Downloading (…)l-00002-of-00002.bin:  70%|███████   | 1.37G/1.95G [00:13<00:08, 65.8MB/s][A
+Downloading (…)l-00002-of-00002.bin:  72%|███████▏  | 1.39G/1.95G [00:13<00:07, 78.8MB/s][A
+Downloading (…)l-00002-of-00002.bin:  73%|███████▎  | 1.42G/1.95G [00:13<00:06, 89.0MB/s][A
+Downloading (…)l-00002-of-00002.bin:  74%|███████▎  | 1.44G/1.95G [00:13<00:05, 96.8MB/s][A
+Downloading (…)l-00002-of-00002.bin:  75%|███████▍  | 1.46G/1.95G [00:13<00:04, 103MB/s] [A
+Downloading (…)l-00002-of-00002.bin:  76%|███████▌  | 1.48G/1.95G [00:14<00:04, 107MB/s][A
+Downloading (…)l-00002-of-00002.bin:  77%|███████▋  | 1.50G/1.95G [00:14<00:04, 109MB/s][A
+Downloading (…)l-00002-of-00002.bin:  78%|███████▊  | 1.52G/1.95G [00:14<00:03, 111MB/s][A
+Downloading (…)l-00002-of-00002.bin:  79%|███████▉  | 1.54G/1.95G [00:14<00:03, 113MB/s][A
+Downloading (…)l-00002-of-00002.bin:  80%|████████  | 1.56G/1.95G [00:14<00:03, 114MB/s][A
+Downloading (…)l-00002-of-00002.bin:  81%|████████  | 1.58G/1.95G [00:15<00:03, 115MB/s][A
+Downloading (…)l-00002-of-00002.bin:  82%|████████▏ | 1.60G/1.95G [00:15<00:02, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  83%|████████▎ | 1.63G/1.95G [00:15<00:02, 116MB/s][A
+Downloading (…)l-00002-of-00002.bin:  84%|████████▍ | 1.65G/1.95G [00:15<00:02, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  86%|████████▌ | 1.67G/1.95G [00:15<00:02, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  87%|████████▋ | 1.69G/1.95G [00:15<00:02, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  88%|████████▊ | 1.71G/1.95G [00:16<00:02, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  89%|████████▊ | 1.73G/1.95G [00:16<00:01, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  90%|████████▉ | 1.75G/1.95G [00:16<00:01, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  91%|█████████ | 1.77G/1.95G [00:16<00:01, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  92%|█████████▏| 1.79G/1.95G [00:16<00:01, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  93%|█████████▎| 1.81G/1.95G [00:16<00:01, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  94%|█████████▍| 1.84G/1.95G [00:17<00:00, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  95%|█████████▌| 1.86G/1.95G [00:17<00:00, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  96%|█████████▋| 1.88G/1.95G [00:17<00:00, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  97%|█████████▋| 1.90G/1.95G [00:17<00:00, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin:  98%|█████████▊| 1.92G/1.95G [00:17<00:00, 117MB/s][A
+Downloading (…)l-00002-of-00002.bin: 100%|█████████▉| 1.94G/1.95G [00:18<00:00, 117MB/s][ADownloading (…)l-00002-of-00002.bin: 100%|██████████| 1.95G/1.95G [00:18<00:00, 108MB/s]
+Downloading shards: 100%|██████████| 2/2 [01:44<00:00, 46.36s/it]Downloading shards: 100%|██████████| 2/2 [01:44<00:00, 52.38s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:06<00:06,  6.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:10<00:00,  5.02s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:10<00:00,  5.25s/it]
+Downloading (…)neration_config.json:   0%|          | 0.00/147 [00:00<?, ?B/s]Downloading (…)neration_config.json: 100%|██████████| 147/147 [00:00<00:00, 160kB/s]
+[38;20m[INFO] - __main__ : config file was successfully saved to /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932 for future use.[0m
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[38;20m[INFO] - trainers.t5_executor_with_prefix : #params: 846   lr: 6e-05[0m
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+
+  | Name  | Type            | Params
+------------------------------------------
+0 | model | PrefixModelLora | 2.9 B 
+------------------------------------------
+2.9 B     Trainable params
+0         Non-trainable params
+2.9 B     Total params
+11,417.494Total estimated model params size (MB)
+Missing logger folder: /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/NoDPR-flan-t5-xl-lora.22571932/NoDPR-flan-t5-xl-lora.22571932
+SLURM auto-requeueing enabled. Setting signal handlers.
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Failed to compute OKVQA scores: Results do not correspond to current VQA set. Either the results do not have predictions for all question ids in annotation file or there is atleast one question id that does not belong to the question ids in the annotation file.This could be due to the fact that OKVQA parser requires all questions to evaluatethe accuracy. Ignore this error if this is the sanity check.[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [sanity_check]: {'test/epoch': 0}[0m
+[33;20m[WARNING] - root : Sanity check mode, not saving to loggers.[0m
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 2. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 25.17, 'test/accuracy_QuestionType_one': 21.97, 'test/accuracy_QuestionType_eight': 22.53, 'test/accuracy_QuestionType_other': 25.65, 'test/accuracy_QuestionType_seven': 28.13, 'test/accuracy_QuestionType_four': 25.93, 'test/accuracy_QuestionType_five': 27.06, 'test/accuracy_QuestionType_three': 27.24, 'test/accuracy_QuestionType_nine': 17.86, 'test/accuracy_QuestionType_ten': 32.71, 'test/accuracy_QuestionType_two': 30.58, 'test/accuracy_QuestionType_six': 19.43, 'test/accuracy_AnswerType_other': 25.17, 'test/epoch': 0}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 27.93, 'test/accuracy_QuestionType_one': 24.9, 'test/accuracy_QuestionType_eight': 26.53, 'test/accuracy_QuestionType_other': 29.37, 'test/accuracy_QuestionType_seven': 30.28, 'test/accuracy_QuestionType_four': 31.46, 'test/accuracy_QuestionType_five': 28.47, 'test/accuracy_QuestionType_three': 28.97, 'test/accuracy_QuestionType_nine': 23.33, 'test/accuracy_QuestionType_ten': 33.33, 'test/accuracy_QuestionType_two': 24.07, 'test/accuracy_QuestionType_six': 22.41, 'test/accuracy_AnswerType_other': 27.93, 'test/epoch': 0}[0m
+/home/xl544/.conda/envs/BLIP2/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 1. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+Epoch 0, global step 282: 'test/accuracy_overall' reached 27.93000 (best 27.93000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/saved_model/model_0.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 28.69, 'test/accuracy_QuestionType_one': 27.11, 'test/accuracy_QuestionType_eight': 25.51, 'test/accuracy_QuestionType_other': 31.76, 'test/accuracy_QuestionType_seven': 30.98, 'test/accuracy_QuestionType_four': 25.78, 'test/accuracy_QuestionType_five': 31.83, 'test/accuracy_QuestionType_three': 31.4, 'test/accuracy_QuestionType_nine': 27.14, 'test/accuracy_QuestionType_ten': 32.71, 'test/accuracy_QuestionType_two': 25.12, 'test/accuracy_QuestionType_six': 23.97, 'test/accuracy_AnswerType_other': 28.69, 'test/epoch': 1}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 29.32, 'test/accuracy_QuestionType_one': 26.03, 'test/accuracy_QuestionType_eight': 26.67, 'test/accuracy_QuestionType_other': 29.82, 'test/accuracy_QuestionType_seven': 31.82, 'test/accuracy_QuestionType_four': 31.85, 'test/accuracy_QuestionType_five': 31.03, 'test/accuracy_QuestionType_three': 31.54, 'test/accuracy_QuestionType_nine': 22.38, 'test/accuracy_QuestionType_ten': 30.39, 'test/accuracy_QuestionType_two': 31.16, 'test/accuracy_QuestionType_six': 28.79, 'test/accuracy_AnswerType_other': 29.32, 'test/epoch': 1}[0m
+Epoch 1, global step 564: 'test/accuracy_overall' reached 29.32000 (best 29.32000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/saved_model/model_1.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 29.54, 'test/accuracy_QuestionType_one': 27.75, 'test/accuracy_QuestionType_eight': 27.05, 'test/accuracy_QuestionType_other': 30.86, 'test/accuracy_QuestionType_seven': 31.68, 'test/accuracy_QuestionType_four': 31.6, 'test/accuracy_QuestionType_five': 30.29, 'test/accuracy_QuestionType_three': 30.33, 'test/accuracy_QuestionType_nine': 24.52, 'test/accuracy_QuestionType_ten': 33.64, 'test/accuracy_QuestionType_two': 29.3, 'test/accuracy_QuestionType_six': 27.52, 'test/accuracy_AnswerType_other': 29.54, 'test/epoch': 2}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 29.84, 'test/accuracy_QuestionType_one': 27.26, 'test/accuracy_QuestionType_eight': 27.21, 'test/accuracy_QuestionType_other': 30.08, 'test/accuracy_QuestionType_seven': 32.62, 'test/accuracy_QuestionType_four': 31.99, 'test/accuracy_QuestionType_five': 31.43, 'test/accuracy_QuestionType_three': 31.03, 'test/accuracy_QuestionType_nine': 27.14, 'test/accuracy_QuestionType_ten': 37.05, 'test/accuracy_QuestionType_two': 27.79, 'test/accuracy_QuestionType_six': 27.52, 'test/accuracy_AnswerType_other': 29.84, 'test/epoch': 2}[0m
+Epoch 2, global step 846: 'test/accuracy_overall' reached 29.84000 (best 29.84000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/saved_model/model_2.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 30.03, 'test/accuracy_QuestionType_one': 27.8, 'test/accuracy_QuestionType_eight': 27.7, 'test/accuracy_QuestionType_other': 30.89, 'test/accuracy_QuestionType_seven': 31.73, 'test/accuracy_QuestionType_four': 31.75, 'test/accuracy_QuestionType_five': 33.17, 'test/accuracy_QuestionType_three': 28.97, 'test/accuracy_QuestionType_nine': 25.71, 'test/accuracy_QuestionType_ten': 37.67, 'test/accuracy_QuestionType_two': 26.4, 'test/accuracy_QuestionType_six': 26.52, 'test/accuracy_AnswerType_other': 30.03, 'test/epoch': 3}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 30.79, 'test/accuracy_QuestionType_one': 28.36, 'test/accuracy_QuestionType_eight': 29.77, 'test/accuracy_QuestionType_other': 29.53, 'test/accuracy_QuestionType_seven': 31.96, 'test/accuracy_QuestionType_four': 33.9, 'test/accuracy_QuestionType_five': 32.62, 'test/accuracy_QuestionType_three': 30.47, 'test/accuracy_QuestionType_nine': 25.95, 'test/accuracy_QuestionType_ten': 37.21, 'test/accuracy_QuestionType_two': 30.12, 'test/accuracy_QuestionType_six': 28.94, 'test/accuracy_AnswerType_other': 30.79, 'test/epoch': 3}[0m
+Epoch 3, global step 1128: 'test/accuracy_overall' reached 30.79000 (best 30.79000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/NoDPR-flan-t5-xl-lora.22571932/train/saved_model/model_3.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 30.3, 'test/accuracy_QuestionType_one': 27.95, 'test/accuracy_QuestionType_eight': 27.51, 'test/accuracy_QuestionType_other': 30.15, 'test/accuracy_QuestionType_seven': 32.43, 'test/accuracy_QuestionType_four': 32.66, 'test/accuracy_QuestionType_five': 34.83, 'test/accuracy_QuestionType_three': 28.22, 'test/accuracy_QuestionType_nine': 25.95, 'test/accuracy_QuestionType_ten': 35.19, 'test/accuracy_QuestionType_two': 28.14, 'test/accuracy_QuestionType_six': 26.67, 'test/accuracy_AnswerType_other': 30.3, 'test/epoch': 4}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 30.63, 'test/accuracy_QuestionType_one': 28.71, 'test/accuracy_QuestionType_eight': 28.49, 'test/accuracy_QuestionType_other': 30.21, 'test/accuracy_QuestionType_seven': 32.24, 'test/accuracy_QuestionType_four': 33.16, 'test/accuracy_QuestionType_five': 34.11, 'test/accuracy_QuestionType_three': 28.64, 'test/accuracy_QuestionType_nine': 30.48, 'test/accuracy_QuestionType_ten': 35.04, 'test/accuracy_QuestionType_two': 29.53, 'test/accuracy_QuestionType_six': 24.96, 'test/accuracy_AnswerType_other': 30.63, 'test/epoch': 4}[0m
+Epoch 4, global step 1410: 'test/accuracy_overall' was not in top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 29.69, 'test/accuracy_QuestionType_one': 27.16, 'test/accuracy_QuestionType_eight': 27.72, 'test/accuracy_QuestionType_other': 28.85, 'test/accuracy_QuestionType_seven': 31.07, 'test/accuracy_QuestionType_four': 32.52, 'test/accuracy_QuestionType_five': 32.77, 'test/accuracy_QuestionType_three': 29.21, 'test/accuracy_QuestionType_nine': 30.0, 'test/accuracy_QuestionType_ten': 36.9, 'test/accuracy_QuestionType_two': 27.79, 'test/accuracy_QuestionType_six': 23.97, 'test/accuracy_AnswerType_other': 29.69, 'test/epoch': 5}[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.t5_executor_with_prefix : Evaluation results [validate]: {'test/accuracy_overall': 30.27, 'test/accuracy_QuestionType_one': 27.9, 'test/accuracy_QuestionType_eight': 27.77, 'test/accuracy_QuestionType_other': 30.31, 'test/accuracy_QuestionType_seven': 32.52, 'test/accuracy_QuestionType_four': 33.72, 'test/accuracy_QuestionType_five': 32.72, 'test/accuracy_QuestionType_three': 28.97, 'test/accuracy_QuestionType_nine': 31.19, 'test/accuracy_QuestionType_ten': 36.43, 'test/accuracy_QuestionType_two': 28.02, 'test/accuracy_QuestionType_six': 24.68, 'test/accuracy_AnswerType_other': 30.27, 'test/epoch': 5}[0m
+Epoch 5, global step 1692: 'test/accuracy_overall' was not in top 1

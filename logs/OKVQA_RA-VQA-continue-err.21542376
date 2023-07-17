@@ -1,0 +1,320 @@
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/fuzzywuzzy/fuzz.py:11: UserWarning: Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning
+  warnings.warn('Using slow pure-python SequenceMatcher. Install python-Levenshtein to remove this warning')
+[38;20m[INFO] - __main__ : Initialization done with the config: {'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'RAG', 'freeze_question_encoder', 'force_existence'], 'name': 'OKVQA_RA-VQA-continue.21542376'}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'ocr_feature_preprocessed': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10, 'num_knowledge_passages': 5}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadGoogleSearchPassageData', 'LoadClipEmbeddings']}, 'dataset_type': 'OKVQADataset', 'dummy_dataloader': 0, 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset', 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'}, 'type': 'DataLoaderOKVQAWithKnowledge'}, 'experiment_name': 'OKVQA_RA-VQA-continue.21542376', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_exact_match'}, {'name': 'compute_retrieval_metrics'}, {'name': 'compute_okvqa_scores'}], 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>', '<SOV>', '<EOV>', '<BOQ>', '<EOQ>', '<BOC>', '<EOC>', '<BOK>', '<EOK>'], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'DecoderTokenizerClass': 'T5Tokenizer', 'DecoderTokenizerModelVersion': 't5-large', 'GeneratorConfigClass': 'T5Config', 'GeneratorModelClass': 'T5ForConditionalGeneration', 'GeneratorModelVersion': 't5-large', 'LoadPretrainedMLPWeights': 0, 'ModelClass': 'RagModel', 'PretrainedMLPPath': '', 'QueryEncoderConfigClass': 'DPRConfig', 'QueryEncoderModelClass': 'DPRQuestionEncoder', 'QueryEncoderModelVersion': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder', 'RAVQA_loss_type': 'Approach6', 'SPECIAL_TOKENS': {'additional_special_tokens': ['<BOV>', '<SOV>', '<EOV>', '<BOQ>', '<EOQ>', '<BOC>', '<EOC>', '<BOK>', '<EOK>']}, 'TokenizerClass': 'DPRQuestionEncoderTokenizer', 'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base', 'UsePrefixEmb': 0, 'base_model': 'RAG', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '<EOQ>', 'start': '<BOQ>'}, 'type': 'QuestionInput'}, {'option': 'caption', 'separation_tokens': {'end': '<EOC>', 'start': '<BOC>'}, 'type': 'TextBasedVisionInput'}, {'attribute_max': 3, 'attribute_thres': 0.05, 'object_max': 40, 'ocr': 1, 'option': 'object', 'separation_tokens': {'end': '<EOV>', 'sep': '<SOV>', 'start': '<BOV>'}, 'type': 'TextBasedVisionInput'}, {'option': 'default', 'type': 'EmbeddingInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}, {'option': 'default', 'type': 'PostProcessClipEmbeddings'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0, 'retrieval_pseudo_loss': 0}, 'modules': ['freeze_question_encoder', 'force_existence'], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenization'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'num_evaluation': 0}, 'train': {'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 16, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 2, 'epochs': 9, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt', 'lr': 3e-05, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'linear', 'type': 'RagExecutor'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 1}, 'reset': False, 'mode': 'train', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376/train', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376/train/imgs', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_RA-VQA-continue.21542376', 'args': {'config': '../configs/okvqa/RAVQA.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'train', 'reset': False, 'experiment_name': 'OKVQA_RA-VQA-continue.21542376', 'tags': [], 'modules': ['freeze_question_encoder', 'force_existence'], 'log_prediction_tables': True, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 32, 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['train.epochs=9', 'train.batch_size=2', 'valid.step_size=1', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00003', 'train.retriever_lr=0.00001', 'train.scheduler=linear', 'data_loader.additional.num_knowledge_passages=5', 'model_config.UsePrefixEmb=0', 'train.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt']}}[0m
+Global seed set to 2021
+[38;20m[INFO] - __main__ : All seeds have been set to 2021[0m
+[38;20m[INFO] - __main__ : init wandb logger with the following settings: {'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA', 'RAG', 'freeze_question_encoder', 'force_existence'], 'name': 'OKVQA_RA-VQA-continue.21542376'}[0m
+wandb: Currently logged in as: xl544. Use `wandb login --relogin` to force relogin
+wandb: wandb version 0.15.3 is available!  To upgrade, please run:
+wandb:  $ pip install wandb --upgrade
+wandb: Tracking run with wandb version 0.15.2
+wandb: Run data is saved locally in /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/src/wandb/run-20230601_130857-g762ob6o
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run OKVQA_RA-VQA-continue.21542376
+wandb: ⭐️ View project at https://wandb.ai/xl544/RAVQA
+wandb: 🚀 View run at https://wandb.ai/xl544/RAVQA/runs/g762ob6o
+Multiprocessing is handled by SLURM.
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+[38;20m[INFO] - __main__ : arguments passed to trainer: Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/RAVQA.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='OKVQA_RA-VQA-continue.21542376', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=True, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='train', modules=['freeze_question_encoder', 'force_existence'], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['train.epochs=9', 'train.batch_size=2', 'valid.step_size=1', 'valid.batch_size=32', 'train.additional.gradient_accumulation_steps=16', 'train.lr=0.00003', 'train.retriever_lr=0.00001', 'train.scheduler=linear', 'data_loader.additional.num_knowledge_passages=5', 'model_config.UsePrefixEmb=0', 'train.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt'], overfit_batches=0.0, plugins=None, precision=32, prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')[0m
+[38;20m[INFO] - __main__ : additional arguments passed to trainer: {'accumulate_grad_batches': 16, 'default_root_dir': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376/train/saved_model', 'max_epochs': 9, 'logger': [<pytorch_lightning.loggers.tensorboard.TensorBoardLogger object at 0x146b1241ce50>, <pytorch_lightning.loggers.wandb.WandbLogger object at 0x146a48fbc1f0>, <utils.metrics_log_callback.MetricsHistoryLogger object at 0x146a484fd280>], 'callbacks': [<pytorch_lightning.callbacks.model_checkpoint.ModelCheckpoint object at 0x146a48f308b0>, <pytorch_lightning.callbacks.progress.tqdm_progress.TQDMProgressBar object at 0x146b33080040>, <pytorch_lightning.callbacks.model_summary.ModelSummary object at 0x146a485251c0>, <pytorch_lightning.callbacks.gradient_accumulation_scheduler.GradientAccumulationScheduler object at 0x146a48525af0>], 'plugins': [], 'log_every_n_steps': 10}[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/vinvl_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] VinVL features 14031[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/ocr_feature_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] OCR features 14031, 5462 has annotations.[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : OCR feature detected in VinVL feature dict...skipping..[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/train_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: train  entries: 9009[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/test_data_preprocessed.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data statistics] split: test  entries: 5046[0m
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}[0m
+  0%|          | 0/168380 [00:00<?, ?it/s] 10%|▉         | 16594/168380 [00:00<00:00, 165926.71it/s] 20%|█▉        | 33187/168380 [00:00<00:00, 162637.91it/s] 29%|██▉       | 49466/168380 [00:00<00:00, 162701.59it/s] 39%|███▉      | 66003/168380 [00:00<00:00, 163746.58it/s] 49%|████▉     | 82530/168380 [00:00<00:00, 164286.34it/s] 59%|█████▉    | 98961/168380 [00:00<00:00, 161354.87it/s] 69%|██████▉   | 116197/168380 [00:00<00:00, 164893.96it/s] 80%|████████  | 135545/168380 [00:00<00:00, 173902.99it/s] 92%|█████████▏| 154578/168380 [00:00<00:00, 179001.81it/s]100%|█████████▉| 168307/168380 [00:00<00:00, 172300.14it/s]
+[38;20m[INFO] - data_loader_manager.data_loader_wrapper : Loading dataset module: {'config': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'option': 'default', 'type': 'EmbeddingInput'}[0m
+[38;20m[INFO] - utils.cache_system : reading preprocessed data from ../data/ok-vqa/cache/clip_embeddings.pkl[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa : [Data Statistics] CLIP embeddings 123287[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets : initialising OKVQADataset...[0m
+[38;20m[INFO] - data_loader_manager.datasets.okvqa_datasets : initialising OKVQADataset...[0m
+[38;20m[INFO] - data_loader_manager.data_loader_okvqa_with_knowledge : [Data Statistics]: training data loader: 4505;  test data loader: 158[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Created a temporary directory at /tmp/tmppmklz_cm[0m
+[38;20m[INFO] - torch.distributed.nn.jit.instantiator : Writing /tmp/tmppmklz_cm/_remote_module_non_scriptable.py[0m
+[38;20m[INFO] - trainers.base_executor : Initializing RagExecutor...[0m
+[38;20m[INFO] - __main__ : config file was successfully saved to /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376 for future use.[0m
+Restoring states from the checkpoint path at ../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/callbacks/model_checkpoint.py:342: UserWarning: The dirpath has changed from '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model' to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376/train/saved_model', therefore `best_model_score`, `kth_best_model_path`, `kth_value`, `last_model_path` and `best_k_models` won't be reloaded. Only `best_model_path` will be reloaded.
+  warnings.warn(
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [0]
+[38;20m[INFO] - trainers.rag_executor : using different learning rate for retriever[0m
+[38;20m[INFO] - trainers.rag_executor : #params: 509   lr: 3e-05[0m
+[38;20m[INFO] - trainers.rag_executor : #params: 0   lr: 1e-05[0m
+Loading `train_dataloader` to estimate number of stepping batches.
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, train_dataloader, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+
+  | Name  | Type     | Params
+-----------------------------------
+0 | model | RagModel | 847 M 
+-----------------------------------
+737 M     Trainable params
+109 M     Non-trainable params
+847 M     Total params
+3,388.555 Total estimated model params size (MB)
+Missing logger folder: /rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/OKVQA_RA-VQA-continue.21542376/OKVQA_RA-VQA-continue.21542376
+Restored all states from the checkpoint file at ../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt
+SLURM auto-requeueing enabled. Setting signal handlers.
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/trainer/connectors/data_connector.py:240: PossibleUserWarning: The dataloader, val_dataloader 0, does not have many workers which may be a bottleneck. Consider increasing the value of the `num_workers` argument` (try 128 which is the number of cpus on this machine) in the `DataLoader` init to improve performance.
+  rank_zero_warn(
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Failed to compute OKVQA scores: Results do not correspond to current VQA set. Either the results do not have predictions for all question ids in annotation file or there is atleast one question id that does not belong to the question ids in the annotation file.This could be due to the fact that OKVQA parser requires all questions to evaluatethe accuracy. Ignore this error if this is the sanity check.[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [sanity_check]: {'test/exact_match_at_1': 0.59375, 'test/exact_match_at_2': 0.671875, 'test/exact_match_at_3': 0.703125, 'test/exact_match_at_4': 0.71875, 'test/exact_match_at_5': 0.71875, 'test/recall_at_5': 0.796875, 'test/precision_at_5': 0.515625, 'test/gold_precision_at_5': 0.353125, 'test/gold_recall_at_5': 0.671875, 'test/successful_hit': 0.36875, 'test/successful_no_hit': 0.121875, 'test/failed_hit': 0.228125, 'test/failed_no_hit': 0.28125, 'test/selected_successful_hit': 0.5, 'test/selected_successful_no_hit': 0.09375, 'test/selected_failed_hit': 0.203125, 'test/selected_failed_no_hit': 0.203125, 'test/n_retrieved_docs': 5, 'test/epoch': 6}[0m
+[33;20m[WARNING] - root : Sanity check mode, not saving to loggers.[0m
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 2. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+/home/xl544/.conda/envs/RAVQA/lib/python3.8/site-packages/pytorch_lightning/utilities/data.py:72: UserWarning: Trying to infer the `batch_size` from an ambiguous collection. The batch size we found is 1. To avoid any miscalculations, use `self.log(..., batch_size=batch_size)`.
+  warning_cache.warn(
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5614347998414586, 'test/exact_match_at_2': 0.6872770511296076, 'test/exact_match_at_3': 0.7175980975029727, 'test/exact_match_at_4': 0.7267142290923504, 'test/exact_match_at_5': 0.727705112960761, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3742370194213238, 'test/gold_recall_at_5': 0.6676575505350772, 'test/successful_hit': 0.35846214823622674, 'test/successful_no_hit': 0.1759809750297265, 'test/failed_hit': 0.25580657946888624, 'test/failed_no_hit': 0.20975029726516053, 'test/selected_successful_hit': 0.4207292905271502, 'test/selected_successful_no_hit': 0.14070550931430836, 'test/selected_failed_hit': 0.2875544986127626, 'test/selected_failed_no_hit': 0.15101070154577884, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 51.59, 'test/accuracy_QuestionType_one': 47.11, 'test/accuracy_QuestionType_eight': 49.93, 'test/accuracy_QuestionType_other': 53.86, 'test/accuracy_QuestionType_seven': 50.98, 'test/accuracy_QuestionType_four': 57.39, 'test/accuracy_QuestionType_five': 52.87, 'test/accuracy_QuestionType_three': 50.05, 'test/accuracy_QuestionType_nine': 38.33, 'test/accuracy_QuestionType_ten': 54.42, 'test/accuracy_QuestionType_two': 57.79, 'test/accuracy_QuestionType_six': 51.35, 'test/accuracy_AnswerType_other': 51.59, 'test/epoch': 7}[0m
+Epoch 7, global step 2256: 'test/accuracy_overall' reached 51.59000 (best 51.59000), saving model to '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA_RA-VQA-continue.21542376/train/saved_model/model_7.ckpt' as top 1
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_exact_match'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_retrieval_metrics'}...[0m
+[38;20m[INFO] - trainers.metrics_processors : Running metrics {'name': 'compute_okvqa_scores'}...[0m
+[38;20m[INFO] - trainers.rag_executor : Evaluation results [validate]: {'test/exact_match_at_1': 0.5610384462940944, 'test/exact_match_at_2': 0.6845025762980579, 'test/exact_match_at_3': 0.715021799445105, 'test/exact_match_at_4': 0.7235434007134364, 'test/exact_match_at_5': 0.7243361078081649, 'test/recall_at_5': 0.8127229488703924, 'test/precision_at_5': 0.5183511692429646, 'test/gold_precision_at_5': 0.3742370194213238, 'test/gold_recall_at_5': 0.6676575505350772, 'test/successful_hit': 0.3571145461751883, 'test/successful_no_hit': 0.17764565992865636, 'test/failed_hit': 0.2509710661910424, 'test/failed_no_hit': 0.21426872770511296, 'test/selected_successful_hit': 0.41914387633769323, 'test/selected_successful_no_hit': 0.14189456995640112, 'test/selected_failed_hit': 0.28299643281807374, 'test/selected_failed_no_hit': 0.15596512088783196, 'test/n_retrieved_docs': 5, 'test/accuracy_overall': 51.52, 'test/accuracy_QuestionType_one': 47.72, 'test/accuracy_QuestionType_eight': 49.58, 'test/accuracy_QuestionType_other': 53.57, 'test/accuracy_QuestionType_seven': 50.09, 'test/accuracy_QuestionType_four': 57.18, 'test/accuracy_QuestionType_five': 52.77, 'test/accuracy_QuestionType_three': 50.23, 'test/accuracy_QuestionType_nine': 39.52, 'test/accuracy_QuestionType_ten': 54.57, 'test/accuracy_QuestionType_two': 57.56, 'test/accuracy_QuestionType_six': 51.63, 'test/accuracy_AnswerType_other': 51.52, 'test/epoch': 8}[0m
+Epoch 8, global step 2538: 'test/accuracy_overall' was not in top 1
+wandb: Waiting for W&B process to finish... (success).
+wandb: - 37.186 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: \ 41.733 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: | 49.575 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: / 49.575 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: - 49.575 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: \ 49.575 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: | 49.575 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: / 49.575 MB of 49.575 MB uploaded (0.000 MB deduped)wandb: 
+wandb: Run history:
+wandb:                                     epoch ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁████████████████████
+wandb:            test/accuracy_AnswerType_other █▁
+wandb:   test/accuracy_AnswerType_other_auto_max ▁▁
+wandb:   test/accuracy_AnswerType_other_auto_min █▁
+wandb:          test/accuracy_QuestionType_eight █▁
+wandb: test/accuracy_QuestionType_eight_auto_max ▁▁
+wandb: test/accuracy_QuestionType_eight_auto_min █▁
+wandb:           test/accuracy_QuestionType_five █▁
+wandb:  test/accuracy_QuestionType_five_auto_max ▁▁
+wandb:  test/accuracy_QuestionType_five_auto_min █▁
+wandb:           test/accuracy_QuestionType_four █▁
+wandb:  test/accuracy_QuestionType_four_auto_max ▁▁
+wandb:  test/accuracy_QuestionType_four_auto_min █▁
+wandb:           test/accuracy_QuestionType_nine ▁█
+wandb:  test/accuracy_QuestionType_nine_auto_max ▁█
+wandb:  test/accuracy_QuestionType_nine_auto_min ▁▁
+wandb:            test/accuracy_QuestionType_one ▁█
+wandb:   test/accuracy_QuestionType_one_auto_max ▁█
+wandb:   test/accuracy_QuestionType_one_auto_min ▁▁
+wandb:          test/accuracy_QuestionType_other █▁
+wandb: test/accuracy_QuestionType_other_auto_max ▁▁
+wandb: test/accuracy_QuestionType_other_auto_min █▁
+wandb:          test/accuracy_QuestionType_seven █▁
+wandb: test/accuracy_QuestionType_seven_auto_max ▁▁
+wandb: test/accuracy_QuestionType_seven_auto_min █▁
+wandb:            test/accuracy_QuestionType_six ▁█
+wandb:   test/accuracy_QuestionType_six_auto_max ▁█
+wandb:   test/accuracy_QuestionType_six_auto_min ▁▁
+wandb:            test/accuracy_QuestionType_ten ▁█
+wandb:   test/accuracy_QuestionType_ten_auto_max ▁█
+wandb:   test/accuracy_QuestionType_ten_auto_min ▁▁
+wandb:          test/accuracy_QuestionType_three ▁█
+wandb: test/accuracy_QuestionType_three_auto_max ▁█
+wandb: test/accuracy_QuestionType_three_auto_min ▁▁
+wandb:            test/accuracy_QuestionType_two █▁
+wandb:   test/accuracy_QuestionType_two_auto_max ▁▁
+wandb:   test/accuracy_QuestionType_two_auto_min █▁
+wandb:                     test/accuracy_overall █▁
+wandb:            test/accuracy_overall_auto_max ▁▁
+wandb:            test/accuracy_overall_auto_min █▁
+wandb:                                test/epoch ▁█
+wandb:                       test/epoch_auto_max ▁█
+wandb:                       test/epoch_auto_min ▁▁
+wandb:                     test/exact_match_at_1 █▁
+wandb:            test/exact_match_at_1_auto_max ▁▁
+wandb:            test/exact_match_at_1_auto_min █▁
+wandb:                     test/exact_match_at_2 █▁
+wandb:            test/exact_match_at_2_auto_max ▁▁
+wandb:            test/exact_match_at_2_auto_min █▁
+wandb:                     test/exact_match_at_3 █▁
+wandb:            test/exact_match_at_3_auto_max ▁▁
+wandb:            test/exact_match_at_3_auto_min █▁
+wandb:                     test/exact_match_at_4 █▁
+wandb:            test/exact_match_at_4_auto_max ▁▁
+wandb:            test/exact_match_at_4_auto_min █▁
+wandb:                     test/exact_match_at_5 █▁
+wandb:            test/exact_match_at_5_auto_max ▁▁
+wandb:            test/exact_match_at_5_auto_min █▁
+wandb:                           test/failed_hit █▁
+wandb:                  test/failed_hit_auto_max ▁▁
+wandb:                  test/failed_hit_auto_min █▁
+wandb:                        test/failed_no_hit ▁█
+wandb:               test/failed_no_hit_auto_max ▁█
+wandb:               test/failed_no_hit_auto_min ▁▁
+wandb:                  test/gold_precision_at_5 ▁▁
+wandb:         test/gold_precision_at_5_auto_max ▁▁
+wandb:         test/gold_precision_at_5_auto_min ▁▁
+wandb:                     test/gold_recall_at_5 ▁▁
+wandb:            test/gold_recall_at_5_auto_max ▁▁
+wandb:            test/gold_recall_at_5_auto_min ▁▁
+wandb:                     test/n_retrieved_docs ▁▁
+wandb:            test/n_retrieved_docs_auto_max ▁▁
+wandb:            test/n_retrieved_docs_auto_min ▁▁
+wandb:                       test/precision_at_5 ▁▁
+wandb:              test/precision_at_5_auto_max ▁▁
+wandb:              test/precision_at_5_auto_min ▁▁
+wandb:                          test/recall_at_5 ▁▁
+wandb:                 test/recall_at_5_auto_max ▁▁
+wandb:                 test/recall_at_5_auto_min ▁▁
+wandb:                  test/selected_failed_hit █▁
+wandb:         test/selected_failed_hit_auto_max ▁▁
+wandb:         test/selected_failed_hit_auto_min █▁
+wandb:               test/selected_failed_no_hit ▁█
+wandb:      test/selected_failed_no_hit_auto_max ▁█
+wandb:      test/selected_failed_no_hit_auto_min ▁▁
+wandb:              test/selected_successful_hit █▁
+wandb:     test/selected_successful_hit_auto_max ▁▁
+wandb:     test/selected_successful_hit_auto_min █▁
+wandb:           test/selected_successful_no_hit ▁█
+wandb:  test/selected_successful_no_hit_auto_max ▁█
+wandb:  test/selected_successful_no_hit_auto_min ▁▁
+wandb:                       test/successful_hit █▁
+wandb:              test/successful_hit_auto_max ▁▁
+wandb:              test/successful_hit_auto_min █▁
+wandb:                    test/successful_no_hit ▁█
+wandb:           test/successful_no_hit_auto_max ▁█
+wandb:           test/successful_no_hit_auto_min ▁▁
+wandb:                          train/loss_epoch █▁
+wandb:                 train/loss_epoch_auto_max ▁
+wandb:                 train/loss_epoch_auto_min ▁
+wandb:                           train/loss_step █▇▇▄▇▄▃▁▁▆▃▃▂▁▂▂▄▃▁▅▃▃▂▁▅▁▆▃▅▂▂▁▄▆▇▅▃▅▂▃
+wandb:                  train/loss_step_auto_max ▁▁
+wandb:                  train/loss_step_auto_min ▁▁
+wandb:                               train/lr[0] ███▇▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁
+wandb:                      train/lr[0]_auto_max ▁▁
+wandb:                      train/lr[0]_auto_min █▁
+wandb:                               train/lr[1] ███▇▇▇▇▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁
+wandb:                      train/lr[1]_auto_max ▁▁
+wandb:                      train/lr[1]_auto_min █▁
+wandb:                       trainer/global_step ▁▁▁▂▂▂▂▂▃▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇████
+wandb: 
+wandb: Run summary:
+wandb:                                     epoch 8
+wandb:            test/accuracy_AnswerType_other 51.52
+wandb:   test/accuracy_AnswerType_other_auto_max 51.59
+wandb:   test/accuracy_AnswerType_other_auto_min 51.52
+wandb:          test/accuracy_QuestionType_eight 49.58
+wandb: test/accuracy_QuestionType_eight_auto_max 49.93
+wandb: test/accuracy_QuestionType_eight_auto_min 49.58
+wandb:           test/accuracy_QuestionType_five 52.77
+wandb:  test/accuracy_QuestionType_five_auto_max 52.87
+wandb:  test/accuracy_QuestionType_five_auto_min 52.77
+wandb:           test/accuracy_QuestionType_four 57.18
+wandb:  test/accuracy_QuestionType_four_auto_max 57.39
+wandb:  test/accuracy_QuestionType_four_auto_min 57.18
+wandb:           test/accuracy_QuestionType_nine 39.52
+wandb:  test/accuracy_QuestionType_nine_auto_max 39.52
+wandb:  test/accuracy_QuestionType_nine_auto_min 38.33
+wandb:            test/accuracy_QuestionType_one 47.72
+wandb:   test/accuracy_QuestionType_one_auto_max 47.72
+wandb:   test/accuracy_QuestionType_one_auto_min 47.11
+wandb:          test/accuracy_QuestionType_other 53.57
+wandb: test/accuracy_QuestionType_other_auto_max 53.86
+wandb: test/accuracy_QuestionType_other_auto_min 53.57
+wandb:          test/accuracy_QuestionType_seven 50.09
+wandb: test/accuracy_QuestionType_seven_auto_max 50.98
+wandb: test/accuracy_QuestionType_seven_auto_min 50.09
+wandb:            test/accuracy_QuestionType_six 51.63
+wandb:   test/accuracy_QuestionType_six_auto_max 51.63
+wandb:   test/accuracy_QuestionType_six_auto_min 51.35
+wandb:            test/accuracy_QuestionType_ten 54.57
+wandb:   test/accuracy_QuestionType_ten_auto_max 54.57
+wandb:   test/accuracy_QuestionType_ten_auto_min 54.42
+wandb:          test/accuracy_QuestionType_three 50.23
+wandb: test/accuracy_QuestionType_three_auto_max 50.23
+wandb: test/accuracy_QuestionType_three_auto_min 50.05
+wandb:            test/accuracy_QuestionType_two 57.56
+wandb:   test/accuracy_QuestionType_two_auto_max 57.79
+wandb:   test/accuracy_QuestionType_two_auto_min 57.56
+wandb:                     test/accuracy_overall 51.52
+wandb:            test/accuracy_overall_auto_max 51.59
+wandb:            test/accuracy_overall_auto_min 51.52
+wandb:                                test/epoch 8.0
+wandb:                       test/epoch_auto_max 8.0
+wandb:                       test/epoch_auto_min 7.0
+wandb:                     test/exact_match_at_1 0.56104
+wandb:            test/exact_match_at_1_auto_max 0.56143
+wandb:            test/exact_match_at_1_auto_min 0.56104
+wandb:                     test/exact_match_at_2 0.6845
+wandb:            test/exact_match_at_2_auto_max 0.68728
+wandb:            test/exact_match_at_2_auto_min 0.6845
+wandb:                     test/exact_match_at_3 0.71502
+wandb:            test/exact_match_at_3_auto_max 0.7176
+wandb:            test/exact_match_at_3_auto_min 0.71502
+wandb:                     test/exact_match_at_4 0.72354
+wandb:            test/exact_match_at_4_auto_max 0.72671
+wandb:            test/exact_match_at_4_auto_min 0.72354
+wandb:                     test/exact_match_at_5 0.72434
+wandb:            test/exact_match_at_5_auto_max 0.72771
+wandb:            test/exact_match_at_5_auto_min 0.72434
+wandb:                           test/failed_hit 0.25097
+wandb:                  test/failed_hit_auto_max 0.25581
+wandb:                  test/failed_hit_auto_min 0.25097
+wandb:                        test/failed_no_hit 0.21427
+wandb:               test/failed_no_hit_auto_max 0.21427
+wandb:               test/failed_no_hit_auto_min 0.20975
+wandb:                  test/gold_precision_at_5 0.37424
+wandb:         test/gold_precision_at_5_auto_max 0.37424
+wandb:         test/gold_precision_at_5_auto_min 0.37424
+wandb:                     test/gold_recall_at_5 0.66766
+wandb:            test/gold_recall_at_5_auto_max 0.66766
+wandb:            test/gold_recall_at_5_auto_min 0.66766
+wandb:                     test/n_retrieved_docs 5.0
+wandb:            test/n_retrieved_docs_auto_max 5.0
+wandb:            test/n_retrieved_docs_auto_min 5.0
+wandb:                       test/precision_at_5 0.51835
+wandb:              test/precision_at_5_auto_max 0.51835
+wandb:              test/precision_at_5_auto_min 0.51835
+wandb:                          test/recall_at_5 0.81272
+wandb:                 test/recall_at_5_auto_max 0.81272
+wandb:                 test/recall_at_5_auto_min 0.81272
+wandb:                  test/selected_failed_hit 0.283
+wandb:         test/selected_failed_hit_auto_max 0.28755
+wandb:         test/selected_failed_hit_auto_min 0.283
+wandb:               test/selected_failed_no_hit 0.15597
+wandb:      test/selected_failed_no_hit_auto_max 0.15597
+wandb:      test/selected_failed_no_hit_auto_min 0.15101
+wandb:              test/selected_successful_hit 0.41914
+wandb:     test/selected_successful_hit_auto_max 0.42073
+wandb:     test/selected_successful_hit_auto_min 0.41914
+wandb:           test/selected_successful_no_hit 0.14189
+wandb:  test/selected_successful_no_hit_auto_max 0.14189
+wandb:  test/selected_successful_no_hit_auto_min 0.14071
+wandb:                       test/successful_hit 0.35711
+wandb:              test/successful_hit_auto_max 0.35846
+wandb:              test/successful_hit_auto_min 0.35711
+wandb:                    test/successful_no_hit 0.17765
+wandb:           test/successful_no_hit_auto_max 0.17765
+wandb:           test/successful_no_hit_auto_min 0.17598
+wandb:                          train/loss_epoch 0.37769
+wandb:                 train/loss_epoch_auto_max 0.42285
+wandb:                 train/loss_epoch_auto_min 0.42285
+wandb:                           train/loss_step 0.24436
+wandb:                  train/loss_step_auto_max 0.96499
+wandb:                  train/loss_step_auto_min 0.01936
+wandb:                               train/lr[0] 0.0
+wandb:                      train/lr[0]_auto_max 1e-05
+wandb:                      train/lr[0]_auto_min 0.0
+wandb:                               train/lr[1] 0.0
+wandb:                      train/lr[1]_auto_max 0.0
+wandb:                      train/lr[1]_auto_min 0.0
+wandb:                       trainer/global_step 2537
+wandb: 
+wandb: 🚀 View run OKVQA_RA-VQA-continue.21542376 at: https://wandb.ai/xl544/RAVQA/runs/g762ob6o
+wandb: Synced 6 W&B file(s), 2 media file(s), 4 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20230601_130857-g762ob6o/logs

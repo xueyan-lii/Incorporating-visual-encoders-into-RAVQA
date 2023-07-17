@@ -1,0 +1,5 @@
+Extracting val2014 using InstructBLIP Flan-T5-XL
+{'year': 2019, 'version': '1.0', 'description': 'This is v1.0 of the OK-VQA dataset.'}
+5046 questions loaded from json 
+Done
+5046 embeddings saved 
