@@ -275,6 +275,15 @@ class RagModelInstructBLIP(pl.LightningModule):
 
         for index, input_text_sequence in enumerate(input_text_sequences):
             scores = []
+            #lora cannt change embedding space
+            input_text_sequence = input_text_sequence.replace("<BOQ>","Question:")
+            input_text_sequence = input_text_sequence.replace("<EOQ>","")
+            input_text_sequence = input_text_sequence.replace("<BOC>","Caption:")
+            input_text_sequence = input_text_sequence.replace("<EOC>","")
+            input_text_sequence = input_text_sequence.replace("<BOV>","Objects:")
+            input_text_sequence = input_text_sequence.replace(" <SOV>",",")
+            input_text_sequence = input_text_sequence.replace("<EOV>","")
+            #print("generator input",input_text_sequence)
             for doc in retrieved_docs[index]:
                 extended_input_text_sequences.append(
                     'Document: '.join([input_text_sequence, doc['content']])
@@ -419,7 +428,7 @@ class RagModelInstructBLIP(pl.LightningModule):
         
         # Retrieve docs for given question inputs
         retrieval_results = self.retrieve(input_ids, attention_mask, labels, question_ids, input_text_sequences)
-        print(input_text_sequences)
+        #print("retrieval input",input_text_sequences)
         retrieved_docs, doc_scores = retrieval_results.retrieved_docs, retrieval_results.doc_scores
         
 
