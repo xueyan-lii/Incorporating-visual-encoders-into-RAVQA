@@ -1,0 +1,1704 @@
+Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/RAVQA_instructblip.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='InstructBLIP_RAVQA_test', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=True, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='test', modules=['force_existence'], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['data_loader.additional.num_knowledge_passages=5', 'test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt'], overfit_batches=0.0, plugins=None, precision='bf16', prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')
+input value {} is not a number, parse to string.
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'CACHE_DIR': '', 'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA']}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'ocr_feature_preprocessed': 0, 'qformer_embeddings': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10, 'num_knowledge_passages': 5}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadGoogleSearchPassageData']}, 'dataset_type': 'OKVQADatasetBLIP2Text', 'dummy_dataloader': 0, 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset', 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'}, 'type': 'DataLoaderOKVQAWithKnowledge'}, 'experiment_name': 'InstructBLIP_RAVQA_test', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_exact_match'}, {'name': 'compute_retrieval_metrics'}, {'name': 'compute_okvqa_scores'}], 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': [], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'DecoderTokenizerClass': 'InstructBlipProcessor', 'DecoderTokenizerModelVersion': 'Salesforce/instructblip-flan-t5-xl', 'GeneratorModelClass': 'InstructBlipForConditionalGeneration', 'GeneratorModelVersion': 'Salesforce/instructblip-flan-t5-xl', 'LoadPretrainMLP': 0, 'ModelClass': 'RagModelInstructBLIP', 'QueryEncoderConfigClass': 'DPRConfig', 'QueryEncoderModelClass': 'DPRQuestionEncoder', 'QueryEncoderModelVersion': '/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/wl356/projects/Retrieval-Augmented-Visual-Question-Answering/Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder', 'RAVQA_loss_type': 'Approach6', 'SPECIAL_TOKENS': {'additional_special_tokens': []}, 'TokenizerClass': 'DPRQuestionEncoderTokenizer', 'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base', 'UseInstructBLIPEmb': 0, 'UsePrefixEmb': 0, 'UseQformerEmb': 0, 'base_model': 'RAG', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '', 'start': 'Question:'}, 'type': 'QuestionInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0}, 'modules': ['force_existence'], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenizationInstructBLIP'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt', 'num_evaluation': 0}, 'train': {'MLP_lr': 0.0001, 'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 4, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 32, 'epochs': 9999, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'lr': 0.0001, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'none', 'type': 'RagExecutorInstructBLIP'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 100}, 'reset': False, 'mode': 'test', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation/imgs', 'results_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/InstructBLIP_RAVQA_test', 'args': {'config': '../configs/okvqa/RAVQA_instructblip.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'test', 'reset': False, 'experiment_name': 'InstructBLIP_RAVQA_test', 'tags': [], 'modules': ['force_existence'], 'log_prediction_tables': True, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 'bf16', 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['data_loader.additional.num_knowledge_passages=5', 'test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt']}}
+['/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation/imgs', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation']
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data',
+ 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments',
+ 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs',
+ 'WANDB': {'entity': 'xl544',
+           'id': '3lrq309i',
+           'name': 'InstructBLIP_RAVQA_test',
+           'project': 'RAVQA',
+           'resume': 'must',
+           'tags': ['OKVQA', 'RAG', 'force_existence']},
+ 'args': {'DATA_FOLDER': '',
+          'EXPERIMENT_FOLDER': '',
+          'accelerator': 'auto',
+          'accumulate_grad_batches': None,
+          'amp_backend': 'native',
+          'amp_level': None,
+          'auto_lr_find': False,
+          'auto_scale_batch_size': False,
+          'auto_select_gpus': False,
+          'benchmark': None,
+          'check_val_every_n_epoch': 1,
+          'checkpoint_callback': None,
+          'config': '../configs/okvqa/RAVQA_instructblip.jsonnet',
+          'default_root_dir': None,
+          'detect_anomaly': False,
+          'deterministic': None,
+          'devices': '1',
+          'enable_checkpointing': True,
+          'enable_model_summary': True,
+          'enable_progress_bar': True,
+          'experiment_name': 'InstructBLIP_RAVQA_test',
+          'fast_dev_run': False,
+          'flush_logs_every_n_steps': None,
+          'gpus': None,
+          'gradient_clip_algorithm': None,
+          'gradient_clip_val': None,
+          'ipus': None,
+          'limit_predict_batches': None,
+          'limit_test_batches': None,
+          'limit_train_batches': None,
+          'limit_val_batches': None,
+          'log_every_n_steps': 50,
+          'log_gpu_memory': None,
+          'log_prediction_tables': True,
+          'logger': True,
+          'max_epochs': None,
+          'max_steps': -1,
+          'max_time': None,
+          'min_epochs': None,
+          'min_steps': None,
+          'mode': 'test',
+          'modules': ['force_existence'],
+          'move_metrics_to_cpu': False,
+          'multiple_trainloader_mode': 'max_size_cycle',
+          'num_nodes': 1,
+          'num_processes': None,
+          'num_sanity_val_steps': 2,
+          'opts': ['data_loader.additional.num_knowledge_passages=5',
+                   'test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt'],
+          'overfit_batches': 0.0,
+          'plugins': None,
+          'precision': 'bf16',
+          'prepare_data_per_node': None,
+          'process_position': 0,
+          'profiler': None,
+          'progress_bar_refresh_rate': None,
+          'reload_dataloaders_every_n_epochs': 0,
+          'replace_sampler_ddp': True,
+          'reset': False,
+          'resume_from_checkpoint': None,
+          'stochastic_weight_avg': False,
+          'strategy': None,
+          'sync_batchnorm': False,
+          'tags': [],
+          'terminate_on_nan': None,
+          'test_batch_size': -1,
+          'test_evaluation_name': '',
+          'tpu_cores': None,
+          'track_grad_norm': -1,
+          'val_check_interval': None,
+          'weights_save_path': None,
+          'weights_summary': 'top'},
+ 'cache': {'default_folder': '../data/ok-vqa/cache',
+           'regenerate': {'clip_embeddings': 0,
+                          'ocr_feature_preprocessed': 0,
+                          'qformer_embeddings': 0,
+                          'test_data_preprocessed': 0,
+                          'train_data_preprocessed': 0,
+                          'vinvl_feature_preprocessed': 0}},
+ 'cuda': 0,
+ 'data_loader': {'additional': {'max_decoder_source_length': 512,
+                                'max_source_length': 512,
+                                'max_target_length': 10,
+                                'num_knowledge_passages': 5},
+                 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl',
+                                                                                                           'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'},
+                                                                                       'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl',
+                                                                                                                   'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'},
+                                                                                       'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl',
+                                                                                                              'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}},
+                                                                            'option': 'default',
+                                                                            'type': 'EmbeddingInput'},
+                                                     'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True,
+                                                                                          'test': '../data/ok-vqa/pre-extracted_features/OCR/valid',
+                                                                                          'train': '../data/ok-vqa/pre-extracted_features/OCR/train'},
+                                                                               'option': 'default',
+                                                                               'type': 'LoadGoogleOCRFeatures'},
+                                                     'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json',
+                                                                                                                     'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json',
+                                                                                                                     'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchAnnotations'},
+                                                     'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv',
+                                                                                                                      'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'},
+                                                                                                'use_full_split': True},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchPassageData'},
+                                                     'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014',
+                                                                                                      'train': '../data/ok-vqa/train2014'},
+                                                                                  'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json',
+                                                                                                                         'train': '../data/ok-vqa/mscoco_train2014_annotations.json'},
+                                                                                                    'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json',
+                                                                                                                       'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}},
+                                                                       'option': 'default',
+                                                                       'type': 'LoadOKVQAData'},
+                                                     'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json',
+                                                                                             'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json',
+                                                                                             'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'},
+                                                                                  'option': 'default',
+                                                                                  'type': 'LoadOscarCaptionFeatures'},
+                                                     'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json',
+                                                                                                                                             'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}},
+                                                                                                       'option': 'none',
+                                                                                                       'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'},
+                                                     'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv',
+                                                                                      'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'},
+                                                                           'option': 'default',
+                                                                           'type': 'LoadVinVLFeatures'}},
+                                     'module_list': ['LoadVinVLFeatures',
+                                                     'LoadGoogleOCRFeatures',
+                                                     'LoadOscarCaptionFeatures',
+                                                     'LoadOKVQAData',
+                                                     'LoadGoogleSearchPassageData']},
+                 'dataset_type': 'OKVQADatasetBLIP2Text',
+                 'dummy_dataloader': 0,
+                 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset',
+                                 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'},
+                 'type': 'DataLoaderOKVQAWithKnowledge'},
+ 'experiment_name': 'InstructBLIP_RAVQA_test',
+ 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test',
+ 'gpu_device': 0,
+ 'ignore_pretrained_weights': [],
+ 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation/imgs',
+ 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test',
+ 'metrics': [{'name': 'compute_exact_match'},
+             {'name': 'compute_retrieval_metrics'},
+             {'name': 'compute_okvqa_scores'}],
+ 'mode': 'test',
+ 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': [],
+                                             'bos_token': '<PAD>',
+                                             'pad_token': '<PAD>'},
+                  'DecoderTokenizerClass': 'InstructBlipProcessor',
+                  'DecoderTokenizerModelVersion': 'Salesforce/instructblip-flan-t5-xl',
+                  'GeneratorModelClass': 'InstructBlipForConditionalGeneration',
+                  'GeneratorModelVersion': 'Salesforce/instructblip-flan-t5-xl',
+                  'LoadPretrainMLP': 0,
+                  'ModelClass': 'RagModelInstructBLIP',
+                  'QueryEncoderConfigClass': 'DPRConfig',
+                  'QueryEncoderModelClass': 'DPRQuestionEncoder',
+                  'QueryEncoderModelVersion': '/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/wl356/projects/Retrieval-Augmented-Visual-Question-Answering/Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder',
+                  'RAVQA_loss_type': 'Approach6',
+                  'SPECIAL_TOKENS': {'additional_special_tokens': []},
+                  'TokenizerClass': 'DPRQuestionEncoderTokenizer',
+                  'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base',
+                  'UseInstructBLIPEmb': 0,
+                  'UsePrefixEmb': 0,
+                  'UseQformerEmb': 0,
+                  'base_model': 'RAG',
+                  'decoder_input_modules': {'module_list': [],
+                                            'postprocess_module_list': []},
+                  'input_modules': {'module_list': [{'option': 'default',
+                                                     'separation_tokens': {'end': '',
+                                                                           'start': 'Question:'},
+                                                     'type': 'QuestionInput'}],
+                                    'postprocess_module_list': [{'option': 'default',
+                                                                 'type': 'PostProcessInputTokenization'}]},
+                  'loss_ratio': {'additional_loss': 0,
+                                 'nll_loss': 1,
+                                 'rag_loss': 0},
+                  'modules': ['force_existence'],
+                  'output_modules': {'module_list': [{'option': 'default',
+                                                      'type': 'GenerationOutput'}],
+                                     'postprocess_module_list': [{'option': 'default',
+                                                                  'type': 'PostProcessOutputTokenizationInstructBLIP'}]},
+                  'pretrained': 1,
+                  'rag_modules': {'module_list': []}},
+ 'platform_type': 'pytorch',
+ 'reset': False,
+ 'results_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation',
+ 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/train/saved_model',
+ 'seed': 2021,
+ 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/InstructBLIP_RAVQA_test',
+ 'test': {'additional': {'multiprocessing': 4},
+          'batch_size': 32,
+          'evaluation_name': 'test_evaluation',
+          'load_best_model': 0,
+          'load_epoch': -1,
+          'load_model_path': '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt',
+          'num_evaluation': 0},
+ 'train': {'MLP_lr': 0.0001,
+           'adam_epsilon': 1e-08,
+           'additional': {'gradient_accumulation_steps': 4,
+                          'gradient_clipping': 0,
+                          'plugins': [],
+                          'save_top_k': 1,
+                          'save_top_k_metric': 'test/accuracy_overall',
+                          'save_top_k_mode': 'max',
+                          'warmup_steps': 0},
+           'batch_size': 32,
+           'epochs': 9999,
+           'load_best_model': 0,
+           'load_epoch': -1,
+           'load_model_path': '',
+           'lr': 0.0001,
+           'retriever_lr': 1e-05,
+           'save_interval': 1,
+           'scheduler': 'none',
+           'type': 'RagExecutorInstructBLIP'},
+ 'valid': {'additional': {},
+           'batch_size': 32,
+           'break_interval': 3000,
+           'step_size': 100}}
+data columns: dict_keys(['vinvl_features'])
+data columns: dict_keys(['vinvl_features', 'ocr_features'])
+[Data Statistics] Caption features 123287
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features'])
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.127349
+creating index...
+index created!
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.060730
+creating index...
+index created!
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data'])
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data', 'passages'])
+Uses full checkpoint from Salesforce/instructblip-flan-t5-xl
+r value for LoRA is 8
+trainable params: 4718592 || all params: 2854475776 || trainable%: 0.16530502867367827
+initializing retrieval
+Testing: 0it [00:00, ?it/s]Testing:   0%|          | 0/158 [00:00<?, ?it/s]Testing DataLoader 0:   0%|          | 0/158 [00:00<?, ?it/s]['race', 'ride', 'race', 'race', 'race', 0.95, 1.39, 1.93, 2.1, 2.35, 8.44, 6.15, 7.44, 11.16, 8.91]
+['fern', 'wall', 'fern', 'fern', 'fern', 0.35, 2.13, 2.62, 2.8, 3.09, 4.09, 8.0, 1.71, 2.41, 4.24]
+['teddy bear', 'teddy bear', 'teddy bear', 'teddy bear', 'stuffed', 0.6, 1.86, 2.15, 2.24, 2.63, 2.68, 2.56, 2.0, 1.71, 5.33]
+['mouth', 'mouth', 'mouth', 'mouth', 'mouth', 1.19, 1.34, 1.54, 1.91, 2.64, 3.45, 0.64, 1.98, 2.92, 3.47]
+['newspaper', 'newspaper', 'newspaper', 'newspaper', 'newspaper', 0.81, 1.79, 1.83, 2.04, 2.31, 3.05, 2.9, 3.91, 1.81, 3.11]
+['person', 'person', 'person', 'person', 'people', 0.85, 1.4, 1.92, 2.39, 2.46, 5.5, 1.83, 4.1, 2.85, 3.29]
+['up', 'up', 'up', 'down', 'up', 0.62, 1.35, 2.28, 2.72, 3.43, 2.24, 4.51, 2.89, 0.05, 0.74]
+['island', 'island', 'island', 'island', 'island', 0.88, 0.98, 2.24, 2.62, 3.45, 7.29, 1.37, 0.02, 0.08, 0.17]
+['shop', 'shop', 'shop', 'money', 'shop', 0.88, 1.42, 1.85, 2.16, 2.64, 6.17, 6.89, 7.46, 10.71, 10.93]
+['plant', 'plant', 'plant', 'plant', 'plant', 0.21, 2.83, 2.93, 3.18, 3.38, 3.88, 4.79, 3.6, 2.07, 4.49]
+['swing', 'play baseball', 'hit', 'hit', 'swing', 0.7, 1.68, 2.14, 2.21, 2.4, 0.0, 4.17, 0.09, 0.68, 0.01]
+['salt', 'salt', 'salt', 'salt', 'salt', 0.9, 1.18, 1.94, 2.5, 2.79, 4.54, 1.48, 3.17, 2.43, 2.75]
+['artist', 'sculptor', 'artist', 'artist', 'sculptor', 0.86, 1.08, 1.99, 2.76, 3.29, 0.9, 0.03, 9.59, 2.18, 3.14]
+['relish', 'pickle', 'pickle', 'pickle', 'pickle', 0.74, 1.35, 2.32, 2.43, 2.56, 2.12, 9.82, 8.52, 9.78, 8.07]
+['office', 'work', 'work', 'work', 'work', 1.35, 1.55, 1.59, 1.63, 2.04, 0.14, 1.54, 0.01, 0.01, 0.0]
+['dirt bike', 'dirt bike', 'dirt bike', 'dirt bike', 'dirt bike', 0.4, 2.01, 2.47, 2.88, 2.88, 1.1, 7.0, 3.1, 0.27, 5.04]
+['747', 'passenger', 'passenger', 'passenger', 'passenger', 0.94, 1.59, 1.61, 2.07, 2.56, 0.5, 2.48, 1.04, 5.14, 1.01]
+['girl', 'girl', 'girl', 'girl', 'girl', 0.47, 1.87, 2.25, 2.53, 3.28, 2.99, 0.21, 2.62, 0.47, 0.99]
+['1950', '1950', '1804', '1950', '1804', 0.97, 1.59, 1.92, 1.93, 2.06, 6.79, 1.12, 3.42, 4.47, 4.35]
+['surf', 'spin', 'flip', 'spin', 'surf', 0.61, 1.21, 2.15, 3.81, 3.89, 3.18, 1.36, 2.04, 0.74, 3.54]
+['home run', 'home run', 'home run', 'home run', 'home run', 0.98, 1.63, 1.69, 2.05, 2.16, 0.09, 0.76, 0.01, 0.12, 0.71]
+['charge', 'power', 'charge', 'power', 'power', 0.62, 1.56, 2.16, 2.33, 3.28, 2.43, 2.04, 0.28, 0.28, 1.35]
+['circle', 'round', 'circle', 'circle', 'circle', 1.48, 1.5, 1.53, 1.68, 1.91, 6.09, 4.8, 0.3, 7.67, 1.96]
+['300', '300', '1000', '500', '400', 0.73, 1.49, 1.7, 2.43, 3.88, 3.37, 3.53, 5.15, 5.23, 2.13]
+['cross country', 'cross country', 'cross country', 'cross country', 'cross country', 1.34, 1.44, 1.75, 1.8, 1.82, 0.26, 0.13, 1.38, 1.28, 0.96]
+['wetsuit', 'wet suit', 'wet suit', 'wet suit', 'wet suit', 0.75, 1.24, 2.22, 2.33, 3.37, 9.92, 16.36, 11.07, 14.74, 15.21]
+['surfboard', 'surfboard', 'surfboard', 'surfboard', 'surfboard', 0.61, 1.25, 2.18, 3.52, 3.67, 13.26, 14.42, 13.24, 14.03, 16.57]
+['cloth', 'cloth', 'leather', 'fabric', 'cloth', 0.26, 2.4, 2.54, 3.5, 3.55, 1.47, 1.94, 0.07, 3.25, 2.51]
+['mouth', 'mouth', 'gum', 'mouth', 'mouth', 0.16, 2.76, 3.01, 3.73, 4.18, 0.26, 0.03, 2.16, 0.29, 0.2]
+['vanilla', 'chocolate', 'strawberry', 'vanilla', 'chocolate', 1.01, 1.16, 2.05, 2.31, 2.36, 0.1, 2.04, 2.18, 1.32, 0.82]
+['vase', 'vase', 'vase', 'vase', 'vase', 0.82, 1.16, 1.97, 2.83, 3.09, 0.97, 0.01, 0.01, 1.55, 0.13]
+['uk', 'england', 'england', 'england', 'england', 1.21, 1.54, 1.59, 1.77, 2.19, 0.52, 7.27, 6.44, 7.5, 8.87]
+race <---> ride    (<pad> ride</s><pad><pad><pad><pad>)
+vine <---> fern    (<pad> fern</s><pad><pad><pad>)
+stuffed animal <---> teddy bear    (<pad> teddy bear</s>)
+mouth <---> mouth    (<pad> mouth</s><pad><pad><pad><pad>)
+cloth <---> newspaper    (<pad> newspaper</s><pad><pad><pad><pad>)
+man <---> person    (<pad> person</s><pad><pad><pad><pad>)
+down <---> down    (<pad> down</s><pad><pad><pad><pad>)
+island <---> island    (<pad> island</s><pad><pad><pad><pad>)
+shop <---> shop    (<pad> shop</s><pad><pad><pad><pad>)
+ground <---> plant    (<pad> plant</s><pad><pad><pad><pad>)
+swing <---> swing    (<pad> swing</s><pad><pad><pad><pad>)
+salt water beach <---> salt    (<pad> salt</s><pad><pad><pad><pad>)
+artist <---> sculptor    (<pad> sculptor</s><pad><pad>)
+condiment <---> relish    (<pad> relish</s><pad><pad><pad><pad>)
+work <---> office    (<pad> office</s><pad><pad><pad><pad>)
+bmx <---> dirt bike    (<pad> dirt bike</s><pad><pad><pad>)
+commercial <---> 747    (<pad> 747</s><pad><pad><pad>)
+girl <---> girl    (<pad> girl</s><pad><pad><pad><pad>)
+1847 <---> 1950    (<pad> 1950</s><pad><pad><pad><pad>)
+ride <---> spin    (<pad> spin</s><pad><pad><pad><pad>)
+homerun <---> home run    (<pad> home run</s><pad><pad><pad>)
+charge <---> charge    (<pad> charge</s><pad><pad><pad><pad>)
+circle <---> circle    (<pad> circle</s><pad><pad><pad><pad>)
+510 <---> 300    (<pad> 300</s><pad><pad><pad><pad>)
+cross country <---> cross country    (<pad> cross country</s><pad><pad><pad>)
+wetsuit <---> wetsuit    (<pad> wetsuit</s><pad><pad>)
+surfboard <---> surfboard    (<pad> surfboard</s><pad><pad><pad>)
+cloth <---> cloth    (<pad> cloth</s><pad><pad><pad><pad>)
+mouth <---> mouth    (<pad> mouth</s><pad><pad><pad><pad>)
+blueberry <---> vanilla    (<pad> vanilla</s><pad><pad><pad><pad>)
+vase <---> vase    (<pad> vase</s><pad><pad><pad><pad>)
+scotland <---> uk    (<pad> uk</s><pad><pad><pad>)
+Testing DataLoader 0:   1%|          | 1/158 [00:09<24:50,  9.49s/it]Testing DataLoader 0:   1%|          | 1/158 [00:09<24:50,  9.49s/it]['soup', 'soup', 'soup', 'soup', 'soup', 0.81, 1.43, 1.67, 2.52, 3.06, 0.14, 1.83, 1.75, 1.37, 0.87]
+['spook', 'paint', 'spook', 'spook', 'spook', 0.58, 1.73, 2.2, 2.53, 2.65, 5.87, 3.04, 8.4, 7.5, 6.6]
+['800', '1000', '300', '700', '700', 0.36, 2.15, 2.25, 3.25, 3.25, 0.62, 0.07, 2.02, 1.06, 0.42]
+['quilt', 'quilt', 'quilt', 'quilt', 'quilt', 0.35, 2.03, 2.77, 2.94, 2.97, 0.35, 0.36, 0.08, 0.82, 0.79]
+['brazil', 'brazil', 'mexico', 'brazil', 'brazil', 0.34, 1.85, 2.12, 4.98, 5.59, 0.04, 0.23, 2.12, 0.2, 0.05]
+['fast food', 'fast food', 'fast food', 'fast food', 'fast food', 1.48, 1.56, 1.57, 1.68, 1.79, 2.15, 3.36, 3.81, 2.66, 4.93]
+['bus', 'truck', 'bus', 'bus', 'bus', 0.65, 1.24, 2.62, 2.63, 3.07, 2.21, 1.92, 1.03, 3.24, 2.83]
+['becker', 'becker', 'becker', 'becker', 'becker', 0.27, 1.94, 3.38, 3.48, 3.51, 1.96, 0.11, 0.45, 13.75, 0.61]
+['break', 'break', 'shatter', 'break', 'break', 0.26, 1.67, 3.76, 4.86, 4.88, 0.41, 2.21, 2.88, 3.89, 4.71]
+['ralph lauren', 'brooks', 'ralph lauren', 'sammy', 'ralph lauren', 0.39, 1.99, 2.23, 3.21, 3.33, 2.79, 1.16, 2.57, 8.09, 2.13]
+['online', 'walmart', 'online', 'online', 'online', 0.27, 2.11, 3.13, 3.32, 3.38, 3.13, 0.09, 2.59, 0.72, 3.12]
+['sushi', 'sushi', 'sushi', 'sushi', 'sushi', 0.5, 1.34, 3.01, 3.09, 3.29, 5.16, 3.76, 6.16, 1.18, 6.27]
+['bluebird', 'blue jay', 'blue jay', 'blue jay', 'blue jay', 0.24, 2.9, 2.91, 2.93, 3.01, 6.09, 6.46, 5.76, 6.94, 5.76]
+['smile', 'smile', 'smile', 'smile', 'smile', 0.81, 1.91, 1.94, 1.99, 2.07, 0.14, 1.68, 1.98, 0.3, 3.31]
+['100 mph', '100 mph', '100 mph', '100 mph', '100 mph', 0.69, 1.53, 2.02, 2.4, 2.88, 0.96, 5.75, 5.46, 4.72, 4.87]
+['fedora', 'sombrero', 'sombrero', 'sombrero', 'sombrero', 1.13, 1.17, 1.66, 2.34, 2.52, 0.0, 3.55, 10.08, 0.19, 7.87]
+['florida', 'florida', 'florida', 'florida', 'florida', 0.67, 1.7, 2.19, 2.23, 2.43, 5.35, 7.67, 8.05, 5.66, 7.59]
+['sweet', 'sweet', 'sweet', 'sweet', 'sweet', 0.27, 1.98, 3.13, 3.6, 3.62, 6.94, 2.93, 3.28, 3.48, 1.76]
+['cement', 'cement', 'cement', 'concrete', 'cement', 0.39, 2.38, 2.44, 2.52, 2.79, 5.95, 5.38, 9.92, 0.14, 4.09]
+['track', 'track', 'rail', 'rail', 'rail', 0.61, 1.48, 2.27, 2.74, 2.82, 0.03, 0.02, 7.49, 0.91, 4.6]
+['polarize', 'polarize', 'filter', 'polarize', 'polarize', 0.78, 1.62, 1.78, 2.36, 2.54, 10.68, 11.74, 1.83, 12.47, 9.26]
+['gazebo', 'gazebo', 'gazebo', 'gazebo', 'gazebo', 0.3, 1.39, 5.33, 5.55, 6.25, 0.0, 0.01, 0.01, 0.01, 0.01]
+['play', 'eat it', 'play', 'play', 'play', 0.35, 2.17, 2.66, 2.85, 2.9, 0.08, 6.89, 0.24, 0.02, 0.11]
+['high school', 'high school', 'high school', 'high school', 'high school', 1.2, 1.31, 1.7, 2.01, 2.18, 0.65, 0.14, 0.14, 0.17, 0.2]
+['rug', 'rug', 'rug', 'rug', 'rug', 0.73, 1.47, 1.88, 2.11, 4.3, 0.37, 0.33, 0.02, 1.62, 0.06]
+['commercial', 'commercial', 'commercial', 'commercial', 'commercial', 0.55, 1.16, 2.8, 3.49, 4.06, 0.21, 0.24, 0.34, 0.37, 0.38]
+['baseball', 'baseball', 'baseball', 'baseball', 'baseball', 0.97, 1.13, 1.69, 2.51, 3.42, 2.97, 0.42, 3.14, 3.04, 6.32]
+['birkenstock', 'birkenstock', 'birkenstock', 'birkenstock', 'birkenstock', 0.6, 1.36, 2.33, 2.95, 3.16, 6.29, 6.58, 6.14, 8.03, 7.14]
+['chris evans', 'chris evans', 'chris evans', 'chris hemsworth', 'chris evans', 1.06, 1.55, 1.84, 1.94, 1.98, 12.17, 10.74, 9.23, 13.14, 7.97]
+['even', 'even', 'even', 'even', 'even', 1.16, 1.16, 1.18, 3.06, 3.85, 0.94, 0.9, 0.92, 0.64, 1.45]
+['high', 'high', 'high', 'high', 'high', 0.63, 1.61, 2.04, 2.57, 2.84, 0.33, 0.09, 0.72, 0.32, 0.91]
+['john henry', 'elvis', 'michael jackson', 'jackie robinson', 'elvis', 0.83, 1.47, 2.0, 2.01, 2.75, 2.12, 0.18, 0.43, 0.48, 0.61]
+soup <---> soup    (<pad> soup</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+tip <---> paint    (<pad> paint</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+800 <---> 800    (<pad> 800</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+quilt <---> quilt    (<pad> quilt</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+brazil <---> brazil    (<pad> brazil</s><pad><pad><pad><pad><pad><pad>)
+diner <---> fast food    (<pad> fast food</s><pad><pad><pad><pad><pad><pad><pad>)
+firetruck <---> bus    (<pad> bus</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+becker vineyard <---> becker    (<pad> becker</s><pad><pad><pad><pad><pad><pad><pad>)
+shatter <---> break    (<pad> break</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+brook brother <---> brooks    (<pad> brooks</s><pad><pad><pad><pad><pad><pad>)
+gallery <---> walmart    (<pad> walmart</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+sushi <---> sushi    (<pad> sushi</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+blue jay <---> bluebird    (<pad> bluebird</s><pad><pad><pad><pad><pad><pad><pad>)
+smile <---> smile    (<pad> smile</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+80 mph <---> 100 mph    (<pad> 100 mph</s><pad><pad><pad><pad><pad><pad>)
+sombrero <---> fedora    (<pad> fedora</s><pad><pad><pad><pad><pad><pad>)
+california <---> florida    (<pad> florida</s><pad><pad><pad><pad><pad><pad>)
+good <---> sweet    (<pad> sweet</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+cement <---> concrete    (<pad> concrete</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+track <---> track    (<pad> track</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+fisheye <---> filter    (<pad> filter</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+gazebo <---> gazebo    (<pad> gazebo</s><pad><pad><pad><pad><pad><pad><pad>)
+throw it <---> play    (<pad> play</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+high school <---> high school    (<pad> high school</s><pad><pad><pad><pad><pad><pad><pad>)
+rug <---> rug    (<pad> rug</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+commercial <---> commercial    (<pad> commercial</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+batter <---> baseball    (<pad> baseball</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+birkenstock <---> birkenstock    (<pad> birkenstock</s><pad><pad><pad><pad><pad>)
+joss whedon <---> chris evans    (<pad> chris evans</s><pad>)
+noon <---> even    (<pad> even</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+high <---> high    (<pad> high</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+taylor swift <---> elvis    (<pad> elvis</s><pad><pad><pad><pad><pad>)
+Testing DataLoader 0:   1%|▏         | 2/158 [00:18<23:19,  8.97s/it]Testing DataLoader 0:   1%|▏         | 2/158 [00:18<23:19,  8.97s/it]['sink', 'sink', 'sink', 'sink', 'sink', 1.0, 1.27, 2.01, 2.06, 2.43, 0.0, 0.01, 0.0, 0.01, 0.13]
+['horn', 'horn', 'horn', 'horn', 'horn', 0.94, 1.17, 1.59, 2.75, 3.47, 2.41, 0.02, 0.66, 0.18, 0.13]
+['emirates', 'boeing', 'egypt', 'boeing', 'egypt', 1.22, 1.35, 1.57, 2.02, 2.26, 8.16, 4.08, 16.42, 3.34, 17.7]
+['1886', '1886', '1898', '1886', '1892', 1.19, 1.31, 1.86, 1.87, 2.15, 1.5, 0.03, 0.06, 0.45, 0.17]
+['top hat', 'top hat', 'top hat', 'top hat', 'top hat', 1.07, 1.73, 1.78, 1.8, 1.93, 11.42, 13.09, 8.15, 6.62, 4.41]
+['mickey mouse', 'mickey mouse', 'mickey mouse', 'mickey mouse', 'mickey mouse', 1.19, 1.33, 1.79, 1.97, 2.1, 9.17, 0.13, 15.91, 10.98, 8.88]
+['coconut', 'pineapple', 'coconut', 'coconut', 'coconut', 0.89, 1.04, 2.34, 2.49, 2.88, 2.54, 1.26, 3.38, 9.39, 4.53]
+['cross country', 'cross country', 'cross country', 'cross country', 'cross country', 0.04, 4.31, 4.68, 4.86, 5.29, 0.37, 0.13, 2.72, 1.39, 1.48]
+['be tall', 'be tall', 'be tall', 'be tall', 'be tall', 1.33, 1.42, 1.49, 1.83, 2.23, 15.85, 11.87, 7.4, 11.49, 8.19]
+['mammal', 'mammal', 'mammals', 'mammal', 'mammals', 1.03, 1.32, 1.86, 2.2, 2.22, 0.36, 1.68, 6.87, 0.15, 0.73]
+['freeze', 'freeze', 'freeze', 'freeze', 'freeze', 0.77, 1.75, 1.98, 2.12, 2.24, 0.02, 0.35, 0.04, 0.02, 0.02]
+['20 feet', '20 feet', '20 feet', '20 feet', '20 feet', 0.58, 2.03, 2.11, 2.37, 2.38, 3.17, 0.59, 2.7, 3.78, 3.37]
+['tabby', 'calico', 'tabby', 'calico', 'tabby', 0.67, 1.56, 2.25, 2.44, 2.44, 1.9, 4.21, 3.52, 4.05, 4.99]
+['fruit', 'veggies', 'veggie', 'vegetable', 'fruit', 1.01, 1.68, 1.7, 1.89, 2.15, 0.03, 7.5, 4.97, 3.79, 0.01]
+['garden', 'green', 'produce', 'health', 'health', 0.69, 1.44, 2.13, 2.49, 2.79, 0.25, 7.02, 2.46, 0.36, 0.41]
+['fear', 'fear', 'fear', 'fear', 'fear', 0.79, 1.35, 2.18, 2.38, 2.5, 1.68, 6.4, 2.1, 0.34, 0.73]
+['toaster', 'toaster', 'stove', 'toaster', 'toaster', 0.54, 1.48, 2.32, 2.91, 3.31, 0.12, 1.71, 3.9, 0.5, 1.8]
+['sail', 'sail', 'sail', 'sail', 'sail', 0.63, 1.85, 1.91, 2.39, 2.68, 14.1, 14.99, 14.71, 17.67, 14.91]
+['napkin', 'napkin', 'napkin', 'napkin', 'napkin', 1.03, 1.37, 1.57, 2.27, 2.55, 0.0, 0.02, 0.25, 2.68, 2.07]
+['furniture', 'good', 'furniture', 'furniture', 'furniture', 0.51, 1.62, 2.37, 2.83, 2.99, 0.43, 0.34, 8.19, 5.01, 5.66]
+['new', 'full', 'full', 'waxing', 'full', 1.08, 1.38, 1.4, 2.51, 2.54, 0.77, 0.88, 0.22, 1.7, 0.25]
+['deer', 'deer', 'deer', 'deer', 'deer', 0.7, 1.72, 1.99, 2.35, 2.41, 10.33, 9.97, 7.76, 7.93, 7.72]
+['polo', 'jump', 'polo', 'jump', 'polo', 1.24, 1.52, 1.64, 1.71, 2.15, 2.45, 1.0, 1.73, 2.28, 4.09]
+['blanket', 'blanket', 'blanket', 'blanket', 'blanket', 0.31, 1.82, 2.86, 3.41, 4.53, 0.35, 0.43, 0.09, 1.27, 0.78]
+['helium', 'helium', 'helium', 'helium', 'helium', 0.84, 1.48, 1.5, 2.39, 3.68, 0.02, 0.0, 0.0, 0.02, 0.01]
+['public', 'public', 'public', 'public', 'public', 1.07, 1.25, 1.8, 2.19, 2.36, 3.26, 1.9, 1.28, 2.81, 1.87]
+['10', '10', '10', '10', '6', 1.12, 1.14, 1.89, 2.23, 2.33, 6.47, 6.91, 10.42, 7.89, 4.46]
+['water', 'wave', 'wave', 'water', 'wave', 0.24, 2.56, 3.05, 3.06, 3.09, 6.42, 7.54, 7.77, 6.42, 6.96]
+['advertising', 'advertising', 'advertising', 'advertising', 'advertising', 0.71, 1.26, 2.28, 2.39, 3.44, 1.75, 2.65, 0.14, 0.87, 0.74]
+['art', 'art', 'art', 'art', 'art', 0.76, 0.87, 2.99, 3.27, 3.58, 6.73, 11.09, 5.75, 10.34, 8.66]
+['play', 'play', 'play', 'play', 'play', 0.89, 1.67, 1.78, 2.01, 2.31, 11.06, 6.81, 9.35, 13.95, 7.78]
+['oneworld', 'one world', 'one world', 'one world', 'one world', 0.97, 1.75, 1.86, 1.9, 1.96, 10.31, 16.02, 16.55, 13.81, 16.38]
+sink <---> sink    (<pad> sink</s><pad><pad><pad><pad><pad>)
+horn <---> horn    (<pad> horn</s><pad><pad><pad><pad>)
+kuwait airway <---> boeing    (<pad> boeing</s><pad><pad><pad>)
+1892 <---> 1886    (<pad> 1886</s><pad><pad><pad><pad>)
+top hat <---> top hat    (<pad> top hat</s><pad><pad><pad>)
+mickey mouse <---> mickey mouse    (<pad> mickey mouse</s><pad><pad><pad>)
+coconut <---> pineapple    (<pad> pineapple</s><pad><pad><pad><pad><pad>)
+cross country <---> cross country    (<pad> cross country</s><pad><pad><pad><pad>)
+long neck <---> be tall    (<pad> be tall</s><pad><pad><pad><pad>)
+mammal <---> mammal    (<pad> mammal</s><pad><pad><pad>)
+freeze <---> freeze    (<pad> freeze</s><pad><pad><pad><pad><pad>)
+20 feet <---> 20 feet    (<pad> 20 feet</s><pad><pad><pad><pad>)
+calico <---> tabby    (<pad> tabby</s><pad><pad><pad><pad>)
+veggies <---> fruit    (<pad> fruit</s><pad><pad><pad><pad><pad>)
+healthy <---> garden    (<pad> garden</s><pad><pad><pad><pad><pad>)
+depression <---> fear    (<pad> fear</s><pad><pad><pad><pad><pad>)
+toaster <---> toaster    (<pad> toaster</s><pad><pad><pad>)
+sail <---> sail    (<pad> sail</s><pad><pad><pad><pad><pad>)
+napkin <---> napkin    (<pad> napkin</s><pad><pad><pad><pad>)
+furniture <---> furniture    (<pad> furniture</s><pad><pad><pad><pad><pad>)
+half <---> full    (<pad> full</s><pad><pad><pad><pad><pad>)
+deer <---> deer    (<pad> deer</s><pad><pad><pad><pad>)
+race <---> jump    (<pad> jump</s><pad><pad><pad><pad><pad>)
+electric blanket <---> blanket    (<pad> blanket</s><pad><pad><pad><pad><pad>)
+helium <---> helium    (<pad> helium</s><pad><pad><pad>)
+public <---> public    (<pad> public</s><pad><pad><pad><pad><pad>)
+15 <---> 6    (<pad> 6</s><pad><pad><pad><pad><pad>)
+wave <---> water    (<pad> water</s><pad><pad><pad><pad><pad>)
+advertising <---> advertising    (<pad> advertising</s><pad><pad><pad><pad><pad>)
+art <---> art    (<pad> art</s><pad><pad><pad><pad><pad>)
+sleep <---> play    (<pad> play</s><pad><pad><pad><pad><pad>)
+oneworld <---> oneworld    (<pad> oneworld</s><pad><pad><pad><pad>)
+Testing DataLoader 0:   2%|▏         | 3/158 [00:26<23:00,  8.91s/it]Testing DataLoader 0:   2%|▏         | 3/158 [00:26<23:00,  8.91s/it]['drape', 'drape', 'curtain', 'curtain', 'curtain', 0.22, 2.14, 2.64, 5.18, 5.39, 3.1, 2.58, 6.54, 4.65, 2.05]
+['cow', 'pig', 'cow', 'cow', 'cow', 1.3, 1.33, 1.77, 1.9, 1.95, 0.0, 0.38, 0.08, 0.01, 0.19]
+['foot', 'foot', 'foot', 'foot', 'kick', 1.06, 1.49, 1.73, 1.97, 2.18, 14.29, 11.91, 13.76, 9.73, 14.66]
+['20 feet', '20 feet', '20 feet', '20 feet', '20 feet', 0.6, 1.7, 1.74, 2.98, 3.16, 3.5, 3.64, 2.69, 3.75, 3.89]
+['lot', 'lot', 'lot', 'lot', 'not alot', 0.9, 1.35, 1.81, 2.2, 2.81, 4.17, 6.12, 3.47, 7.58, 8.7]
+['levis', 'levi', 'levi', 'levi', 'levis', 0.21, 2.28, 3.0, 3.79, 4.42, 1.46, 0.22, 0.21, 0.13, 0.01]
+['nocturnal', 'nocturnal', 'nocturnal', 'nocturnal', 'nocturnal', 0.1, 2.99, 3.31, 5.74, 5.78, 0.38, 0.1, 0.2, 0.01, 2.24]
+['trail', 'trail', 'trail', 'trail', 'trail', 0.17, 2.48, 3.35, 3.86, 4.26, 2.17, 0.01, 0.31, 1.55, 0.77]
+['not heavy', 'not heavy', 'not heavy', 'not heavy', 'not heavy', 0.01, 5.88, 6.61, 6.62, 6.7, 7.44, 12.14, 8.13, 9.18, 5.31]
+['italian', 'pizza hut', 'italian', 'italian', 'italian', 0.41, 2.41, 2.44, 2.44, 2.67, 14.08, 6.67, 7.31, 8.32, 7.34]
+['terrier', 'terrier', 'terrier', 'terrier', 'terrier', 0.18, 2.49, 3.15, 4.03, 4.04, 6.73, 2.12, 5.42, 6.15, 6.56]
+['keyboard', 'keyboard', 'keyboard', 'keyboard', 'keyboard', 0.05, 3.84, 4.05, 5.08, 5.54, 9.83, 7.5, 6.39, 10.49, 9.6]
+['cargo', 'cargo', 'cargo', 'cargo', 'cargo', 0.62, 1.77, 1.84, 2.58, 2.84, 0.02, 0.0, 0.01, 0.01, 0.49]
+['dachshund', 'dachshund', 'dachshund', 'dachshund', 'dachshund', 0.73, 1.59, 2.05, 2.16, 2.71, 4.49, 5.32, 5.11, 6.46, 3.54]
+['pancake', 'pancake', 'pancake', 'pancake', 'pancake', 0.85, 0.95, 2.17, 3.3, 3.35, 4.35, 7.6, 4.28, 8.5, 7.26]
+['pancake', 'pancake', 'pancake', 'pancake', 'pancake', 0.78, 1.46, 2.1, 2.21, 2.58, 2.3, 3.62, 7.23, 6.86, 1.34]
+['thanksgiving', 'thanksgiving', 'thanksgiving', 'thanksgiving', 'thanksgiving', 0.13, 2.87, 3.57, 3.92, 4.04, 0.28, 0.27, 0.01, 0.0, 0.03]
+['bug', 'bug', 'bug', 'bug', 'bug', 0.8, 1.66, 1.75, 2.28, 2.5, 7.26, 5.54, 6.96, 7.55, 4.97]
+['street name', 'street name', 'street sign', 'street sign', 'street sign', 0.46, 1.46, 2.74, 3.28, 3.33, 24.37, 16.49, 17.66, 17.35, 14.89]
+['herd', 'herd', 'herd', 'herd', 'herd', 0.73, 1.12, 2.67, 2.76, 2.8, 0.02, 1.0, 0.63, 1.0, 0.12]
+['paddle', 'paddle', 'paddle', 'paddle', 'paddle', 1.36, 1.47, 1.65, 1.8, 1.84, 10.38, 10.55, 7.85, 14.46, 8.9]
+['knife', 'knife', 'knife', 'knife', 'serrated', 0.15, 2.43, 3.59, 4.3, 4.58, 0.09, 0.09, 0.1, 1.23, 5.26]
+['tropical climate', 'south america', 'tropical climate', 'tropical climate', 'tropical climate', 0.59, 2.04, 2.06, 2.1, 2.78, 5.55, 0.17, 0.87, 0.17, 0.46]
+['10 years', '5 years', '5 years', '10 years', '10 years', 0.03, 3.99, 5.5, 5.51, 5.88, 2.42, 3.91, 4.78, 2.02, 2.48]
+['runner', 'sponsor', 'sponsor', 'runner', 'runner', 0.09, 3.15, 3.82, 4.17, 5.11, 9.0, 0.0, 0.11, 0.8, 6.8]
+['claw', 'claw', 'claw', 'claw', 'claw', 0.24, 2.72, 2.85, 3.05, 3.1, 1.42, 1.24, 0.11, 1.6, 5.61]
+['concert', 'concert', 'concert', 'concert', 'concert', 0.38, 1.8, 2.57, 3.22, 3.39, 5.31, 3.99, 5.8, 8.21, 3.18]
+['atv', 'atv', 'atv', 'atv', 'atv', 0.84, 1.73, 1.81, 2.14, 2.2, 10.51, 9.71, 13.02, 10.71, 10.18]
+['direction', 'turn', 'direction', '1 way', 'turn', 0.27, 2.54, 2.79, 3.0, 3.02, 0.02, 0.83, 1.03, 8.52, 1.53]
+['fight', 'fight', 'fight', 'fight', 'fight', 0.49, 2.11, 2.34, 2.37, 2.59, 6.24, 9.09, 5.93, 6.15, 6.49]
+['library', 'library', 'library', 'library', 'library', 1.09, 1.22, 1.61, 2.47, 2.47, 5.21, 4.19, 4.18, 1.84, 0.21]
+['twice a day', 'twice a day', 'twice a day', 'twice a day', '2 minutes', 1.03, 1.59, 1.61, 1.83, 2.58, 0.66, 2.17, 0.44, 5.55, 0.06]
+drape <---> drape    (<pad> drape</s><pad><pad><pad><pad>)
+pig <---> cow    (<pad> cow</s><pad><pad><pad><pad>)
+key <---> foot    (<pad> foot</s><pad><pad><pad><pad>)
+20 feet <---> 20 feet    (<pad> 20 feet</s><pad><pad><pad>)
+2 cups <---> lot    (<pad> lot</s><pad><pad><pad><pad>)
+american <---> levis    (<pad> levis</s><pad><pad><pad>)
+nocturnal <---> nocturnal    (<pad> nocturnal</s><pad>)
+contrail <---> trail    (<pad> trail</s><pad><pad><pad><pad>)
+100 lbs <---> not heavy    (<pad> not heavy</s><pad><pad><pad>)
+pizzaria <---> pizza hut    (<pad> pizza hut</s><pad><pad>)
+chihuahua <---> terrier    (<pad> terrier</s><pad><pad>)
+piano <---> keyboard    (<pad> keyboard</s><pad><pad><pad><pad>)
+cargo <---> cargo    (<pad> cargo</s><pad><pad><pad><pad>)
+lab <---> dachshund    (<pad> dachshund</s>)
+pancake <---> pancake    (<pad> pancake</s><pad><pad><pad><pad>)
+pancake <---> pancake    (<pad> pancake</s><pad><pad><pad><pad>)
+thanksgiving <---> thanksgiving    (<pad> thanksgiving</s><pad><pad><pad>)
+mice <---> bug    (<pad> bug</s><pad><pad><pad><pad>)
+direct <---> street name    (<pad> street name</s><pad><pad><pad>)
+herd <---> herd    (<pad> herd</s><pad><pad><pad>)
+hang 10 <---> paddle    (<pad> paddle</s><pad><pad><pad><pad>)
+serrated <---> knife    (<pad> knife</s><pad><pad><pad><pad>)
+south america <---> south america    (<pad> south america</s><pad><pad>)
+10 years <---> 10 years    (<pad> 10 years</s><pad><pad><pad>)
+sponsor <---> sponsor    (<pad> sponsor</s><pad><pad><pad><pad>)
+claw <---> claw    (<pad> claw</s><pad><pad><pad><pad>)
+concert <---> concert    (<pad> concert</s><pad><pad><pad><pad>)
+tractor <---> atv    (<pad> atv</s><pad><pad><pad>)
+1 way <---> direction    (<pad> direction</s><pad><pad><pad><pad>)
+mate <---> fight    (<pad> fight</s><pad><pad><pad><pad>)
+library <---> library    (<pad> library</s><pad><pad><pad><pad>)
+5 minutes <---> twice a day    (<pad> twice a day</s><pad>)
+Testing DataLoader 0:   3%|▎         | 4/158 [00:35<22:40,  8.84s/it]Testing DataLoader 0:   3%|▎         | 4/158 [00:35<22:40,  8.84s/it]['crow', 'crow', 'crow', 'crow', 'crow', 0.63, 2.07, 2.08, 2.2, 2.26, 0.55, 4.51, 3.36, 4.48, 1.2]
+['swim trunk', 'swim trunk', 'swim trunk', 'swim trunk', 'swim trunk', 0.52, 2.27, 2.28, 2.29, 2.34, 14.34, 14.76, 7.79, 13.69, 12.38]
+['uber', 'uber', 'uber', 'uber', 'uber', 0.07, 3.85, 3.94, 4.26, 4.35, 0.33, 0.16, 0.01, 0.02, 0.69]
+['flood', 'flood', 'rain', 'flood', 'storm', 0.85, 1.24, 2.28, 2.38, 2.42, 3.67, 7.48, 1.83, 3.62, 1.27]
+['500', '500', '500', '500', '500', 1.08, 1.55, 1.56, 1.65, 3.07, 0.8, 0.8, 1.66, 1.03, 0.44]
+['flush', 'flush', 'flush', 'flush', 'flush', 0.97, 1.08, 2.21, 2.46, 2.47, 13.4, 14.09, 7.11, 11.48, 17.86]
+['skate', 'skate', 'skate', 'skate', 'skate', 0.76, 1.6, 1.95, 2.28, 2.45, 0.52, 0.62, 0.67, 0.47, 0.78]
+['triumph', 'triumph', 'triumph', 'triumph', 'triumph', 1.1, 1.3, 1.59, 2.33, 2.37, 12.0, 11.26, 10.6, 10.46, 9.73]
+['salt', 'salt', 'salt', 'salt', 'salt', 0.04, 3.4, 5.81, 7.28, 8.48, 1.35, 0.06, 0.21, 0.12, 0.78]
+['steam', 'steam', 'steam', 'steam', 'steam', 0.79, 1.43, 1.97, 2.44, 2.51, 0.99, 1.67, 0.05, 0.08, 1.37]
+['pizza cutter', 'pizza slicer', 'pizza slicer', 'pizza slicer', 'pizza slicer', 0.36, 1.8, 2.94, 2.99, 3.37, 3.39, 1.83, 3.08, 2.26, 2.75]
+['fry', 'fry', 'fry', 'fry', 'heat', 0.93, 0.97, 1.97, 2.97, 3.34, 16.8, 12.02, 12.69, 15.43, 9.25]
+['canal', 'canal', 'canal', 'canal', 'canal', 0.14, 3.28, 3.29, 3.32, 4.14, 0.14, 2.62, 2.65, 0.19, 0.0]
+['legal', 'legal', 'legal', 'illegal', 'legal', 0.85, 1.1, 2.21, 2.26, 3.55, 6.09, 0.91, 4.59, 0.0, 4.99]
+['flower shop', 'florist', 'florist', 'flower shop', 'florist', 1.03, 1.37, 1.9, 1.98, 2.28, 0.1, 0.22, 0.2, 0.71, 0.41]
+['anchor', 'anchor', 'anchor', 'anchor', 'anchor', 0.58, 1.78, 2.17, 2.43, 2.65, 0.0, 0.01, 0.0, 0.0, 0.0]
+['seagull', 'seagull', 'seagull', 'seagull', 'seagull', 0.92, 1.53, 1.91, 2.12, 2.15, 6.84, 5.62, 7.32, 8.5, 8.75]
+['microphone', 'microphone', 'microphone', 'microphone', 'microphone', 0.54, 1.97, 2.27, 2.29, 2.61, 0.0, 0.0, 0.0, 0.01, 0.0]
+['suit', 'suit', 'suit', 'suit', 'suit', 0.87, 1.62, 1.94, 1.99, 2.26, 5.93, 9.09, 5.28, 5.83, 10.28]
+['tempered', 'tempered', 'tempered', 'tempered', 'tempered', 1.23, 1.61, 1.67, 1.77, 1.92, 0.79, 0.04, 2.32, 0.05, 0.69]
+['bowl', 'vessel sink', 'vessel', 'vessel sink', 'vessel sink', 0.22, 2.05, 3.34, 4.03, 4.44, 2.93, 9.69, 4.13, 4.37, 7.39]
+['broccoli', 'broccoli', 'broccoli', 'broccoli', 'broccoli', 0.12, 3.23, 3.37, 3.69, 4.2, 17.8, 8.76, 12.41, 13.46, 8.25]
+['piano', 'piano', 'piano', 'piano', 'classical', 0.23, 2.47, 2.58, 3.82, 3.93, 0.12, 1.78, 2.73, 0.48, 0.18]
+['wright brother', 'wright brother', 'wright brother', 'wright brother', 'wright brother', 1.22, 1.52, 1.75, 1.8, 1.93, 8.52, 9.49, 9.52, 4.43, 9.08]
+['rubber', 'neoprene', 'neoprene', 'rubber', 'neoprene', 1.2, 1.55, 1.56, 1.81, 2.16, 0.1, 0.99, 0.03, 15.0, 1.39]
+['rugby', 'rugby', 'rugby', 'rugby', 'rugby', 0.18, 2.71, 2.72, 3.71, 4.47, 3.93, 7.07, 6.2, 6.4, 5.35]
+['horse race', 'horse race', 'horse race', 'horse race', 'horse race', 0.18, 2.71, 2.72, 3.71, 4.47, 7.84, 10.97, 12.19, 4.17, 1.99]
+['plumber', 'plumber', 'plumber', 'plumber', 'plumber', 0.32, 2.36, 2.5, 2.86, 3.3, 8.54, 5.47, 4.97, 3.6, 7.18]
+['sahara', 'beach', 'beach', 'beach', 'beach', 1.01, 1.36, 1.73, 2.18, 2.41, 2.63, 0.15, 0.03, 0.34, 0.05]
+['sourdough', 'rye', 'sourdough', 'foccacia', 'rye', 0.31, 2.03, 2.51, 3.5, 3.62, 1.63, 0.18, 0.86, 0.63, 1.79]
+['buddhism', 'buddhism', 'buddhism', 'buddhism', 'buddhism', 0.95, 1.53, 1.82, 1.84, 2.59, 3.46, 11.42, 1.23, 12.26, 6.27]
+['orange', 'orange', 'orange', 'orange', 'orange', 0.53, 1.74, 1.92, 2.99, 3.23, 12.36, 13.09, 9.72, 9.18, 12.11]
+myna <---> crow    (<pad> crow</s><pad><pad><pad><pad>)
+short <---> swim trunk    (<pad> swim trunk</s><pad><pad><pad><pad><pad>)
+uber <---> uber    (<pad> uber</s><pad><pad><pad><pad><pad>)
+flood <---> storm    (<pad> storm</s><pad><pad><pad><pad><pad><pad>)
+400 <---> 500    (<pad> 500</s><pad><pad><pad><pad><pad><pad>)
+flush <---> flush    (<pad> flush</s><pad><pad><pad><pad><pad><pad>)
+skate park <---> skate    (<pad> skate</s><pad><pad><pad><pad><pad><pad>)
+kawasaki <---> triumph    (<pad> triumph</s><pad><pad><pad><pad><pad><pad>)
+salt and pepper <---> salt    (<pad> salt</s><pad><pad><pad><pad><pad><pad>)
+steam <---> steam    (<pad> steam</s><pad><pad><pad><pad><pad><pad>)
+spatula <---> pizza slicer    (<pad> pizza slicer</s><pad><pad><pad><pad>)
+make donuts <---> heat    (<pad> heat</s><pad><pad><pad><pad><pad><pad>)
+canal <---> canal    (<pad> canal</s><pad><pad><pad><pad><pad><pad>)
+legal <---> legal    (<pad> legal</s><pad><pad><pad><pad><pad><pad>)
+florist <---> flower shop    (<pad> flower shop</s><pad><pad><pad><pad><pad>)
+anchor <---> anchor    (<pad> anchor</s><pad><pad><pad><pad><pad><pad>)
+seagull <---> seagull    (<pad> seagull</s><pad><pad><pad><pad>)
+microphone <---> microphone    (<pad> microphone</s><pad><pad><pad><pad><pad><pad>)
+suit <---> suit    (<pad> suit</s><pad><pad><pad><pad><pad><pad>)
+tempered <---> tempered    (<pad> tempered</s><pad><pad><pad><pad><pad>)
+basin <---> bowl    (<pad> bowl</s><pad><pad><pad><pad><pad><pad>)
+steak <---> broccoli    (<pad> broccoli</s><pad><pad><pad><pad><pad><pad>)
+piano <---> piano    (<pad> piano</s><pad><pad><pad><pad><pad><pad>)
+gottlieb daimler <---> wright brother    (<pad> wright brother</s><pad><pad><pad>)
+neoprene <---> rubber    (<pad> rubber</s><pad><pad><pad><pad><pad><pad>)
+rugby <---> rugby    (<pad> rugby</s><pad><pad><pad><pad><pad><pad>)
+horse race <---> horse race    (<pad> horse race</s><pad><pad><pad><pad><pad>)
+plumber <---> plumber    (<pad> plumber</s><pad><pad><pad><pad><pad><pad>)
+sahara <---> beach    (<pad> beach</s><pad><pad><pad><pad><pad><pad>)
+rye <---> sourdough    (<pad> sourdough</s><pad><pad>)
+buddhism <---> buddhism    (<pad> buddhism</s><pad><pad>)
+orange <---> orange    (<pad> orange</s><pad><pad><pad><pad><pad><pad>)
+Testing DataLoader 0:   3%|▎         | 5/158 [00:44<22:44,  8.92s/it]Testing DataLoader 0:   3%|▎         | 5/158 [00:44<22:44,  8.92s/it]['siamese cat', 'siamese cat', 'siamese cat', 'siamese cat', 'siamese', 0.33, 2.44, 2.59, 2.73, 2.93, 5.72, 6.07, 1.57, 1.18, 0.94]
+['shanghai', 'san francisco', 'san francisco', 'san francisco', 'san francisco', 0.72, 0.96, 2.84, 3.3, 3.4, 12.64, 0.36, 4.92, 2.96, 2.21]
+['omnivore', 'omnivore', 'omnivore', 'omnivore', 'omnivore', 0.81, 1.69, 1.79, 2.24, 2.34, 1.4, 4.07, 2.84, 1.62, 2.29]
+['peanut butter', 'jelly', 'peanut butter', 'peanut butter', 'peanut butter', 0.24, 2.24, 3.1, 3.51, 3.56, 7.26, 9.79, 4.97, 1.11, 2.33]
+['dark', 'dark', 'dark', 'dark', 'dark', 1.27, 1.57, 1.59, 1.72, 2.05, 5.07, 2.58, 5.78, 5.58, 3.82]
+['hill', 'downhill', 'run', 'downhill', 'mountain', 0.81, 1.34, 2.03, 2.48, 2.56, 0.02, 4.45, 5.37, 4.98, 0.26]
+['electric', 'electric', 'electric', 'gas', 'gas', 0.5, 1.34, 2.71, 3.23, 3.65, 1.04, 0.91, 2.19, 3.6, 1.12]
+['ski pole', 'ski pole', 'glove', 'ski pole', 'ski pole', 0.94, 1.05, 2.25, 2.28, 2.94, 17.74, 18.23, 0.04, 11.16, 14.87]
+['luggage', 'bike', 'bike', 'luggage', 'bike', 0.0, 6.39, 6.52, 6.95, 7.07, 3.73, 0.01, 0.07, 6.18, 0.08]
+['disc golf', 'disc golf', 'disc golf', 'disc golf', 'disc golf', 1.02, 1.31, 1.63, 2.21, 2.74, 10.8, 15.23, 15.48, 11.06, 14.85]
+['grill', 'bake', 'cook', 'grill', 'bake', 0.17, 2.47, 3.38, 3.85, 3.95, 0.27, 0.12, 3.35, 1.53, 0.21]
+['work', 'work', 'work', 'work', 'work', 1.33, 1.38, 1.75, 1.75, 1.98, 9.24, 9.48, 8.31, 5.5, 8.97]
+['garden', 'garden', 'farm', 'garden', 'garden', 1.05, 1.34, 1.62, 2.08, 2.71, 5.76, 2.05, 4.05, 1.32, 2.86]
+['c', 'calcium', 'd', 'vitamin c', 'vitamin d', 0.62, 1.28, 2.06, 3.26, 4.06, 1.86, 0.7, 1.83, 2.4, 3.02]
+['ketchup', 'pea', 'pea', 'pea', 'pea', 1.01, 1.52, 1.54, 1.99, 2.69, 0.56, 15.3, 19.06, 14.82, 14.96]
+['barack obama', 'obama', 'obama', 'obama', 'obama', 0.37, 1.81, 2.38, 3.61, 3.66, 2.7, 2.01, 6.83, 6.63, 4.95]
+['brick', 'brick', 'brick', 'brick', 'brick', 1.4, 1.49, 1.66, 1.78, 1.78, 3.35, 0.7, 5.0, 0.06, 5.08]
+['screen', 'screen saver', 'screen saver', 'background', 'screen saver', 0.43, 1.79, 2.49, 2.94, 3.03, 0.02, 1.58, 3.25, 0.04, 5.5]
+['medium rare', 'medium rare', 'medium rare', 'medium rare', 'medium rare', 0.17, 2.81, 3.04, 3.61, 3.72, 0.81, 0.36, 0.06, 0.38, 0.44]
+['cardinal', 'cardinal', 'cardinal', 'cardinal', 'cardinal', 0.24, 2.9, 2.91, 2.93, 3.01, 5.61, 9.15, 6.08, 9.09, 6.1]
+['alcohol', 'alcoholic', 'alcohol', 'juice', 'juice', 0.98, 1.47, 1.78, 2.04, 2.33, 0.21, 0.59, 0.55, 1.19, 0.68]
+['traffic', 'traffic', 'traffic', 'yield', 'traffic', 1.12, 1.72, 1.73, 1.77, 1.91, 9.94, 9.67, 7.51, 7.69, 7.5]
+['north america', 'america', 'america', 'america', 'north america', 0.51, 2.18, 2.24, 2.41, 2.42, 2.31, 1.34, 1.52, 1.94, 0.68]
+['helmet', 'helmet', 'helmet', 'helmet', 'helmet', 1.2, 1.22, 1.64, 2.23, 2.3, 10.77, 10.32, 7.97, 6.94, 7.15]
+['chihuahua', 'chihuahua', 'chihuahua', 'chihuahua', 'chihuahua', 0.07, 3.46, 4.03, 4.58, 4.59, 6.65, 5.15, 6.15, 5.04, 4.24]
+['second', 'second', 'second', 'second', 'second', 0.71, 1.68, 1.93, 2.23, 2.65, 11.76, 12.17, 8.39, 10.55, 11.83]
+['canine', 'canine', 'canine', 'canine', 'canine', 0.66, 1.05, 2.99, 3.0, 3.35, 0.02, 0.01, 0.02, 0.0, 0.02]
+['moon', 'moon', 'moon', 'moon', 'moon', 0.59, 1.91, 1.94, 2.52, 2.6, 0.0, 0.0, 0.06, 0.0, 0.01]
+['crosswalk', 'crosswalk', 'crosswalk', 'crosswalk', 'crosswalk', 1.04, 1.2, 1.38, 3.05, 3.07, 5.5, 3.77, 2.62, 9.55, 3.4]
+['suitcase', 'suitcase', 'suitcase', 'suitcase', 'suitcase', 0.63, 1.05, 3.08, 3.27, 3.41, 5.51, 6.12, 10.86, 4.98, 9.12]
+['big', 'big', 'big', 'big', 'big', 0.79, 1.84, 1.87, 2.01, 2.3, 3.41, 3.56, 4.17, 6.18, 4.13]
+['5000', '5000', 'white', 'white', 'white', 0.54, 1.79, 2.27, 2.4, 2.85, 9.25, 14.37, 0.67, 1.78, 2.12]
+Testing DataLoader 0:   4%|▍         | 6/158 [00:53<22:48,  9.00s/it]Testing DataLoader 0:   4%|▍         | 6/158 [00:53<22:48,  9.00s/it]['50 pounds', '50 lbs', '50 lbs', '50 pounds', '10 pounds', 0.01, 5.75, 5.95, 6.06, 6.23, 0.94, 2.78, 1.48, 3.66, 2.82]
+['young', 'young', 'young', 'young', 'young', 0.42, 2.27, 2.31, 2.41, 3.0, 0.69, 4.03, 3.06, 2.27, 3.44]
+['stallion', 'mustang', 'mustang', 'mustang', 'arabian', 1.26, 1.6, 1.7, 1.77, 1.82, 2.0, 3.53, 0.03, 0.17, 2.11]
+['natural', 'natural', 'natural', 'natural', 'natural', 0.26, 1.83, 3.1, 4.51, 4.75, 0.55, 0.86, 1.2, 0.14, 0.24]
+['olive', 'olive', 'onion', 'onion', 'onion', 0.65, 1.25, 2.36, 2.98, 3.06, 5.31, 0.06, 5.73, 2.44, 5.61]
+['suit', 'suit', 'suit', 'suit', 'suit', 0.7, 1.71, 2.19, 2.22, 2.26, 0.06, 0.36, 0.08, 0.07, 4.59]
+['iron', 'metal', 'iron', 'iron', 'iron', 1.11, 1.15, 1.91, 2.23, 2.34, 7.99, 3.63, 1.69, 5.14, 6.46]
+['tide', 'wind', 'wind', 'wind', 'wind', 0.31, 2.26, 2.33, 3.35, 3.58, 0.67, 0.1, 0.18, 0.02, 0.07]
+['light', 'light', 'light', 'light', 'light', 1.03, 1.56, 1.71, 2.01, 2.13, 4.09, 1.63, 0.63, 2.15, 4.29]
+['towel rack', 'towel bar', 'towel rack', 'towel bar', 'towel rack', 0.07, 3.15, 4.24, 4.67, 6.46, 3.05, 0.34, 1.95, 0.24, 1.07]
+['microwave', 'microwave', 'microwave', 'microwave', 'microwave', 0.47, 1.92, 2.44, 2.59, 2.7, 2.08, 2.42, 3.83, 1.36, 2.05]
+['badminton', 'badminton', 'badminton', 'badminton', 'badminton', 1.2, 1.46, 1.6, 1.95, 2.08, 4.19, 0.01, 2.22, 4.46, 0.01]
+['30 mph', '30 mph', '30 mph', '30 mph', '30 mph', 0.38, 1.62, 3.0, 3.22, 3.64, 6.38, 8.86, 5.96, 7.48, 9.41]
+['wind turbine', 'wind', 'wind turbine', 'windmill', 'wind turbine', 0.52, 1.73, 2.14, 2.57, 3.41, 5.77, 20.23, 1.66, 0.25, 1.14]
+['mouse', 'mouse', 'mouse', 'mouse', 'mouse', 0.05, 4.21, 4.33, 4.35, 4.64, 0.02, 0.01, 0.26, 0.02, 0.9]
+['1804', '1804', '1804', '1804', '1873', 0.52, 1.77, 1.94, 2.55, 4.15, 4.16, 1.14, 7.93, 19.5, 7.76]
+['acer', 'acer', 'acer', 'acer', 'acer', 0.13, 2.93, 2.94, 4.87, 5.54, 1.48, 5.77, 4.96, 5.97, 5.5]
+['freight', 'freight', 'freight', 'freight', 'freight', 1.05, 1.48, 1.59, 2.16, 2.26, 0.34, 0.07, 0.03, 0.28, 0.28]
+['prop', 'private', 'private', 'propeller', 'passenger', 0.9, 1.66, 1.79, 2.08, 2.2, 8.7, 2.06, 1.94, 11.96, 3.18]
+['direct', 'direct', 'direct', 'direct', 'direction', 0.39, 1.61, 2.68, 3.45, 3.63, 7.03, 6.57, 7.06, 6.13, 7.4]
+['san francisco', 'san francisco', 'salt lake', 'san francisco', 'san francisco', 0.26, 1.92, 3.48, 3.48, 3.79, 0.54, 0.04, 1.69, 0.25, 7.15]
+['highway', 'freeway', 'highway', 'highway', 'highway', 0.61, 1.36, 2.68, 2.69, 2.73, 0.0, 0.08, 0.08, 2.48, 0.31]
+['mario', 'mario', 'mario', 'mario', 'mario', 0.51, 1.14, 2.92, 4.22, 4.29, 10.25, 8.7, 11.37, 8.16, 7.99]
+['smell', 'smell', 'smell', 'smell', 'smell', 0.81, 1.34, 2.1, 2.46, 2.48, 0.96, 0.07, 0.01, 0.23, 0.03]
+['tennis racket', 'tennis racket', 'tennis racket', 'tennis racket', 'tennis racket', 0.8, 1.7, 1.94, 2.18, 2.19, 14.66, 12.77, 18.91, 13.14, 13.79]
+['wicker', 'wicker', 'wicker', 'wicker', 'wicker', 0.92, 1.39, 1.73, 2.31, 2.59, 1.5, 0.55, 0.18, 0.02, 0.2]
+['train station', 'train station', 'train station', 'train station', 'train station', 1.23, 1.45, 1.73, 1.86, 1.95, 10.44, 2.87, 8.58, 10.77, 12.04]
+['grease', 'grease', 'water', 'dirt', 'water', 0.36, 2.05, 2.66, 2.74, 3.27, 5.8, 5.34, 0.2, 6.48, 1.64]
+['energy', 'energy', 'energy', 'energy', 'energy', 0.49, 1.7, 2.62, 2.7, 2.7, 0.06, 0.03, 0.03, 2.44, 0.01]
+['regular', 'regular', 'regular', 'regular', 'regular', 0.92, 0.99, 2.17, 2.72, 2.93, 0.06, 0.07, 0.03, 0.04, 0.14]
+['feather', 'feather', 'feather', 'feather', 'feather', 1.27, 1.38, 1.49, 1.85, 2.46, 0.08, 0.03, 0.07, 0.03, 0.09]
+['fern', 'fern', 'fern', 'fern', 'hosta', 0.13, 2.88, 3.69, 3.76, 3.89, 0.8, 3.7, 3.83, 0.42, 0.01]
+Testing DataLoader 0:   4%|▍         | 7/158 [01:02<22:32,  8.96s/it]Testing DataLoader 0:   4%|▍         | 7/158 [01:02<22:32,  8.96s/it]['illegal', 'illegal', 'illegal', 'illegal', 'illegal', 0.92, 1.08, 2.08, 2.62, 2.71, 0.13, 0.11, 1.19, 0.21, 1.49]
+['lego', 'lego', 'lego', 'house', 'lego', 0.64, 1.09, 2.52, 3.56, 3.66, 13.52, 12.43, 11.66, 12.36, 12.88]
+['500', '500', '500', '500', '500', 0.91, 1.36, 2.04, 2.18, 2.33, 0.53, 0.76, 0.44, 0.83, 1.8]
+['violin', 'violin', 'violin', 'violin', 'violin', 0.0, 7.45, 8.72, 9.23, 9.25, 0.49, 3.64, 15.09, 5.96, 4.08]
+['birthday', 'rainbow', 'birthday', 'rainbow', 'rainbow', 1.21, 1.32, 1.66, 1.97, 2.26, 2.32, 7.68, 4.3, 6.66, 5.95]
+['window', 'window', 'window', 'window', 'window', 0.46, 1.83, 1.94, 3.19, 3.76, 9.42, 3.45, 6.37, 8.04, 10.51]
+['shawn white', 'shawn white', 'shawn white', 'shawn white', 'shawn white', 1.23, 1.58, 1.59, 1.87, 1.94, 12.56, 18.37, 10.61, 14.9, 18.52]
+['1981', '1981', '1995', '1977', '1977', 0.89, 1.6, 2.01, 2.02, 2.11, 0.83, 1.49, 0.35, 0.63, 0.27]
+['fair', 'fair', 'africa', 'africa', 'fair', 0.06, 3.89, 4.28, 4.54, 4.62, 11.62, 12.0, 6.14, 7.53, 11.33]
+['antique', 'wagon', 'antique', 'antique', 'antique', 0.69, 1.93, 1.99, 2.2, 2.26, 3.11, 8.33, 5.69, 10.0, 11.36]
+['r m daniel harry potter', 'jk rowling', 'ronald roosevelt', 'jk rowling', 'r m daniel', 0.16, 2.06, 4.56, 4.78, 5.48, 22.7, 1.38, 8.03, 2.91, 6.88]
+['bike', 'bike', 'bicycle', 'bike', 'bike', 0.42, 1.57, 2.89, 2.98, 3.71, 6.62, 9.25, 6.81, 5.11, 6.09]
+['samsung', 'samsung', 'samsung', 'samsung', 'samsung', 0.98, 1.36, 1.68, 2.33, 2.47, 4.61, 2.94, 0.73, 0.94, 0.9]
+['rough', 'rough', 'rough', 'rough', 'rough', 1.09, 1.31, 1.74, 2.16, 2.27, 0.07, 6.82, 0.14, 1.22, 0.02]
+['wood', 'wood', 'wood', 'wood', 'fiberglass', 0.76, 0.95, 2.72, 3.19, 3.25, 0.0, 0.01, 0.05, 0.56, 1.85]
+['budweiser', 'heineken', 'budweiser', 'jack daniel', 'smirnoff', 0.63, 1.39, 2.55, 2.64, 2.67, 4.92, 0.19, 1.53, 0.91, 0.14]
+['cloth', 'cloth', 'cloth', 'cloth', 'cloth', 0.97, 1.34, 1.52, 2.63, 2.68, 0.78, 6.24, 0.99, 1.58, 0.14]
+['arabic', 'turkish', 'greek', 'arabic', 'turkish', 1.25, 1.41, 1.57, 1.79, 2.35, 9.54, 11.83, 8.95, 6.88, 12.83]
+['duck', 'duck', 'duck', 'duck', 'duck', 0.67, 1.45, 1.88, 2.91, 3.02, 13.07, 5.48, 4.8, 5.51, 4.73]
+['windsor', 'windsor', 'windsor', 'windsor', 'windsor', 1.16, 1.36, 1.48, 2.09, 2.53, 1.21, 2.25, 0.02, 0.16, 0.15]
+['coin', 'dollar', 'coin', 'coin', 'coin', 0.87, 1.34, 1.6, 2.53, 3.24, 0.05, 1.29, 0.19, 0.04, 0.56]
+['temperate', 'rain', 'temperate', 'temperate', 'rain', 0.59, 1.41, 1.95, 3.43, 3.66, 0.06, 1.0, 1.61, 4.27, 0.41]
+['jump', 'jump', 'jump', 'jump', 'jump', 0.31, 2.21, 2.34, 3.28, 3.82, 2.65, 3.29, 3.35, 5.98, 4.34]
+['42', '42', '42', '42', '32', 1.25, 1.38, 1.56, 1.81, 2.41, 4.26, 4.04, 0.97, 3.41, 3.71]
+['seagull', 'seagull', 'seagull', 'seagull', 'seagull', 1.3, 1.48, 1.55, 1.71, 2.22, 5.1, 8.12, 7.04, 7.1, 10.65]
+['chihuahua', 'chihuahua', 'terrier', 'chihuahua', 'chihuahua', 0.27, 2.46, 2.81, 3.04, 3.19, 5.97, 5.39, 2.92, 6.57, 5.38]
+['hotel', 'tower', 'tower', 'tower', 'tower', 0.65, 1.26, 2.38, 2.56, 3.75, 1.97, 5.14, 5.29, 4.59, 4.88]
+['herd', 'herd', 'herd', 'herd', 'herd', 0.62, 2.08, 2.11, 2.19, 2.25, 2.91, 5.02, 5.58, 8.82, 5.04]
+['visor', 'baseball', 'visor', 'baseball', 'baseball', 0.52, 1.92, 2.42, 2.45, 2.47, 0.69, 2.68, 2.84, 0.09, 5.05]
+['stone', 'stone', 'stone', 'stone', 'stone', 0.28, 2.25, 2.55, 2.89, 4.78, 1.0, 3.07, 1.09, 1.78, 4.14]
+['zebra', 'wolf', 'lion', 'wolf', 'fox', 0.73, 1.51, 2.01, 2.46, 2.58, 2.02, 1.24, 0.67, 1.88, 0.75]
+['clean', 'towel', 'towel', 'clean', 'clean', 0.28, 1.97, 2.41, 4.44, 5.73, 0.3, 7.14, 6.9, 0.06, 3.56]
+Testing DataLoader 0:   5%|▌         | 8/158 [01:12<23:14,  9.30s/it]Testing DataLoader 0:   5%|▌         | 8/158 [01:12<23:14,  9.30s/it]['tusk', 'be dumb', 'tusk', 'tusk', 'tusk', 1.29, 1.33, 1.84, 1.89, 1.9, 7.63, 11.76, 6.03, 7.4, 7.08]
+['basketball', 'basketball', 'basketball', 'box', 'baseball', 0.18, 2.46, 3.37, 3.53, 3.97, 4.96, 4.15, 5.26, 3.19, 0.67]
+['continental', 'forehand', 'regular', 'normal', 'overhand', 0.56, 1.16, 2.93, 3.38, 3.51, 2.02, 1.04, 3.09, 3.64, 0.46]
+['coin', 'dollar', 'coin', 'coin', 'coin', 0.53, 2.08, 2.17, 2.34, 2.57, 2.51, 2.5, 0.25, 0.49, 1.66]
+['fire service', 'fire service', 'fire service', 'fire service', 'fire service', 1.12, 1.41, 1.7, 2.08, 2.09, 16.87, 17.17, 17.01, 17.39, 16.45]
+['denim', 'denim', 'denim', 'denim', 'denim', 1.21, 1.22, 1.73, 2.1, 2.23, 10.86, 0.44, 9.03, 0.29, 10.48]
+['1839', '1839', '1839', '1839', '1839', 1.42, 1.58, 1.68, 1.69, 1.7, 0.0, 0.0, 0.0, 0.0, 0.21]
+['america', 'america', 'america', 'america', 'america', 0.67, 1.44, 2.37, 2.51, 2.59, 10.55, 10.13, 9.04, 11.61, 8.96]
+['heat water', 'heat water', 'heat water', 'heat food', 'heat food', 0.08, 3.8, 3.94, 4.07, 4.12, 11.74, 6.63, 9.08, 9.99, 18.24]
+['cowboy', 'sombrero', 'sombrero', 'cowboy', 'fedora', 0.68, 1.65, 2.04, 2.35, 2.62, 0.2, 0.31, 0.02, 11.11, 0.0]
+['sport watch', 'rolex', 'sport watch', 'sport watch', 'sport watch', 1.08, 1.31, 1.35, 2.72, 2.76, 10.08, 0.13, 7.07, 7.97, 8.34]
+['1968', '1970', '1968', '1968', '1968', 1.13, 1.2, 1.54, 2.17, 3.05, 2.71, 2.99, 0.14, 0.05, 0.69]
+['boeing', 'fighter', 'boeing', 'boeing', 'boeing', 0.26, 2.38, 2.78, 3.32, 3.35, 1.91, 10.02, 3.32, 3.18, 2.19]
+['terrier', 'terrier', 'terrier', 'terrier', 'terrier', 0.82, 1.78, 1.79, 2.02, 2.4, 8.37, 6.71, 7.29, 2.6, 9.08]
+['yamaha', 'harley', 'harley', 'bmw', 'bmw', 1.37, 1.6, 1.61, 1.73, 1.8, 1.66, 0.32, 0.23, 0.26, 7.92]
+['shadow', 'shadow', 'shadow', 'light', 'light', 1.34, 1.49, 1.68, 1.7, 1.95, 6.96, 4.57, 5.95, 8.53, 10.72]
+['wilson', 'brooks brother', 'wilson', 'wright brother', 'wilson', 0.32, 2.61, 2.66, 2.72, 2.72, 9.98, 0.9, 13.75, 6.95, 14.44]
+['napkin', 'napkin', 'candle', 'napkin', 'candle', 0.02, 4.66, 5.9, 6.1, 6.4, 8.44, 7.87, 2.47, 9.51, 2.11]
+['overhead', 'fluorescent', 'overhead', 'overhead', 'led', 0.93, 1.1, 2.16, 2.28, 2.85, 2.59, 2.68, 2.03, 3.46, 0.08]
+['train', 'airplane', 'aircraft', 'airplane', 'train', 0.76, 1.51, 2.13, 2.22, 2.49, 0.2, 4.29, 1.84, 4.74, 0.44]
+['handlebar', 'handlebar', 'handlebar', 'handlebar', 'rack', 0.6, 1.68, 2.17, 2.52, 2.63, 3.4, 0.55, 2.89, 2.14, 0.58]
+['bowl', 'bowl', 'bathroom sink', 'pedestal', 'pedestal', 1.04, 1.56, 1.66, 1.66, 2.85, 5.89, 4.26, 2.65, 4.97, 5.41]
+['1930', '1945', '1945', '1930', '1940', 0.23, 2.84, 2.84, 3.03, 3.13, 0.14, 0.23, 0.31, 2.97, 11.37]
+['mac', 'apple', 'mac', 'mac', 'window', 1.05, 1.63, 1.75, 1.97, 1.97, 3.98, 5.79, 0.19, 4.49, 0.1]
+['jump', 'ollie', 'jump', 'ollie', 'jump', 0.63, 1.41, 1.85, 3.34, 3.51, 4.5, 0.09, 3.97, 0.08, 6.39]
+['boat', 'car', 'boat', 'boat', 'boat', 1.02, 1.65, 1.77, 1.96, 2.0, 7.1, 0.39, 6.2, 7.37, 7.36]
+['garden', 'garden', 'garden', 'garden', 'carrot garden', 0.58, 1.59, 2.44, 2.5, 2.69, 1.56, 9.66, 3.73, 6.05, 12.01]
+['center', 'center', 'center', 'center', 'center', 0.89, 1.68, 1.87, 1.97, 2.21, 5.11, 2.88, 3.63, 1.88, 7.45]
+['contemporary', 'small', 'galley', 'small', 'restaurant', 0.7, 1.28, 2.12, 2.94, 2.98, 1.15, 1.07, 0.55, 4.11, 2.3]
+['leave', 'leave', 'leave', 'pet', 'leave', 1.36, 1.4, 1.58, 1.7, 2.21, 4.34, 2.5, 3.7, 14.52, 3.12]
+['cell', 'cell', 'cell', 'iphone', 'flip', 1.19, 1.3, 1.73, 1.81, 2.47, 0.32, 0.38, 2.45, 0.01, 0.92]
+['culinary', 'culinary', 'cook', 'culinary', 'culinary', 0.7, 1.17, 2.14, 2.93, 3.83, 13.53, 15.04, 13.16, 2.5, 12.44]
+Testing DataLoader 0:   6%|▌         | 9/158 [01:21<22:38,  9.12s/it]Testing DataLoader 0:   6%|▌         | 9/158 [01:21<22:38,  9.12s/it]['office', 'cubicle', 'cubicle', 'cubicle', 'cubicle', 0.19, 2.69, 3.18, 3.46, 3.54, 0.27, 1.67, 0.51, 0.04, 0.12]
+['fly kite', 'fly kite', 'fly kite', 'fly kite', 'fly kite', 0.79, 0.94, 2.44, 3.4, 3.45, 15.6, 17.28, 14.1, 22.35, 23.88]
+['base', 'base', 'base', 'base', 'base', 0.19, 2.72, 2.81, 3.24, 5.34, 0.02, 1.76, 0.24, 0.11, 0.0]
+['screen', 'call', 'video', 'screen', 'internet', 1.11, 1.55, 1.59, 1.91, 2.23, 0.09, 9.3, 0.86, 0.74, 6.36]
+['video', 'video', 'video', 'video', 'video', 0.35, 2.03, 2.62, 2.88, 3.42, 9.62, 5.94, 6.25, 6.56, 7.49]
+['richard trevithick', 'john henry', 'john henry', 'john henry', 'john henry', 1.07, 1.32, 1.86, 1.92, 2.44, 3.8, 5.07, 6.59, 5.96, 5.57]
+['20th', '21st', '20th', '19th', '20th', 0.52, 1.42, 2.82, 2.92, 2.93, 3.67, 3.49, 2.13, 0.37, 0.35]
+['flip phone', 'flip phone', 'flip phone', 'flip phone', 'flip phone', 0.95, 1.37, 1.96, 2.06, 2.41, 4.43, 9.12, 5.23, 5.18, 4.08]
+['panther', 'jaguar', 'panther', 'tiger', 'panther', 0.34, 2.11, 2.58, 2.95, 3.24, 0.22, 0.52, 0.1, 0.39, 0.14]
+['60', '60', '45', '60', '60', 0.83, 0.88, 2.42, 3.37, 3.64, 2.48, 3.41, 1.64, 2.91, 5.09]
+['kenmore', 'kenmore', 'ge', 'kenmore', 'kenmore', 0.35, 1.58, 3.39, 3.4, 3.74, 0.54, 0.03, 0.49, 0.17, 0.07]
+['wifi', 'wifi', 'router', 'wireless', 'router', 0.81, 1.58, 2.02, 2.11, 2.32, 0.25, 2.75, 2.13, 4.15, 0.89]
+['floral', 'floral', 'floral', 'floral', 'floral', 0.18, 2.3, 3.29, 4.03, 4.8, 11.21, 14.03, 7.96, 7.4, 0.13]
+['cheese', 'flour', 'pepper', 'dough and meat', 'pepper', 0.53, 1.13, 3.23, 3.55, 3.97, 4.33, 3.45, 6.9, 15.17, 5.59]
+['10 years', 'year', 'year', 'year', 'year', 0.17, 1.94, 4.25, 7.67, 7.77, 3.68, 0.1, 1.05, 0.14, 1.79]
+['stallion', 'clydesdale', 'clydesdale', 'arabian', 'clydesdale', 1.02, 1.61, 1.86, 1.91, 2.0, 3.71, 0.19, 0.87, 1.0, 0.38]
+['very heavy', 'not heavy', '100 lbs', '20 pounds', '200 lbs', 0.53, 1.88, 2.02, 2.56, 3.0, 7.86, 7.71, 5.66, 13.95, 5.19]
+['bicycle', 'bicycle', 'bike', 'bike', 'bike', 1.18, 1.41, 1.49, 2.19, 2.21, 5.84, 5.63, 8.09, 8.78, 10.59]
+['colorado', 'minnesota', 'minnesota', 'alaska', 'minnesota', 0.33, 2.14, 2.45, 3.05, 3.41, 3.78, 5.0, 4.18, 4.99, 3.73]
+['hello kitty', 'cartoon', 'hello kitty', 'hello kitty', 'hello kitty', 0.14, 2.48, 3.99, 4.15, 4.17, 8.72, 16.88, 11.47, 11.74, 10.01]
+['husky', 'husky', 'husky', 'husky', 'husky', 0.21, 2.86, 2.98, 3.08, 3.3, 8.14, 6.65, 7.88, 6.98, 6.68]
+['frost', 'frost', 'frost', 'frost', 'frost', 0.64, 0.95, 2.82, 4.22, 4.47, 10.44, 5.08, 5.39, 6.78, 5.05]
+['open', 'open', 'open', 'open', 'open', 1.35, 1.48, 1.66, 1.78, 1.87, 0.11, 0.05, 0.02, 0.43, 0.53]
+['70', '70', '70', '70', '70', 1.12, 1.28, 1.34, 2.59, 2.83, 6.72, 5.81, 5.9, 4.36, 7.29]
+['rolex', 'rolex', 'rolex', 'rolex', 'rolex', 0.14, 2.8, 3.01, 4.41, 5.03, 0.19, 0.03, 0.06, 0.04, 0.05]
+['ice cream', 'hot dog', 'pretzel', 'ice cream', 'ice cream', 0.8, 1.36, 2.04, 2.11, 3.13, 1.99, 3.91, 1.85, 2.28, 2.18]
+['cumulus', 'cumulus', 'cumulus', 'cumulus', 'cumulus', 1.19, 1.72, 1.73, 1.75, 1.8, 4.21, 4.28, 4.43, 2.95, 3.93]
+['swim', 'swim', 'swim', 'swim', 'swim', 1.08, 1.39, 1.92, 2.02, 2.03, 4.6, 6.56, 6.6, 1.24, 1.34]
+['tree', 'tree', 'tree', 'tree', 'grass', 0.22, 1.97, 3.69, 3.9, 4.21, 6.51, 6.35, 9.41, 1.02, 0.03]
+['biplane', 'biplane', 'biplane', 'biplane', 'biplane', 0.9, 1.66, 1.79, 2.08, 2.2, 6.99, 8.69, 6.43, 6.45, 8.15]
+['yankees', 'yankees', 'yankees', 'yankees', 'new york', 0.27, 1.69, 3.39, 4.48, 4.63, 13.94, 12.55, 5.21, 6.34, 5.31]
+['1885', '1885', '1885', '1885', '1885', 0.16, 2.56, 3.32, 4.01, 4.06, 3.92, 4.6, 1.88, 3.97, 2.58]
+Testing DataLoader 0:   6%|▋         | 10/158 [01:31<23:01,  9.33s/it]Testing DataLoader 0:   6%|▋         | 10/158 [01:31<23:01,  9.33s/it]['pelican', 'pelican', 'pelican', 'pelican', 'pelican', 1.36, 1.44, 1.53, 1.85, 2.03, 6.51, 4.93, 7.76, 5.48, 5.59]
+['priest', 'priest', 'priest', 'priest', 'priest', 0.0, 8.58, 8.7, 8.88, 9.34, 10.5, 11.12, 11.71, 11.76, 10.25]
+['ferris wheel', 'ferris wheel', 'ferris wheel', 'ferris wheel', 'ferris wheel', 0.02, 4.07, 6.27, 6.46, 6.91, 0.2, 0.15, 0.1, 0.91, 4.95]
+['religion', 'religion', 'religion', 'religion', 'religion', 0.55, 1.99, 2.16, 2.36, 2.54, 11.74, 14.33, 11.33, 10.02, 13.0]
+['wash', 'wash', 'wash', 'laundry', 'laundry', 0.38, 2.14, 2.3, 2.71, 3.44, 0.36, 1.02, 5.88, 0.47, 2.58]
+['ride', 'ride', 'ride', 'ride', 'bareback', 0.69, 1.41, 2.26, 2.55, 2.64, 0.38, 1.98, 0.87, 0.27, 2.44]
+['dog', 'bulldog', 'bulldog', 'dog', 'bulldog', 1.06, 1.34, 1.61, 1.99, 2.89, 1.36, 0.67, 4.93, 2.61, 2.01]
+['grocery store', 'grocery store', 'grocery store', 'grocery store', 'grocery store', 0.81, 1.4, 1.94, 2.34, 2.69, 5.24, 8.81, 6.1, 6.13, 6.67]
+['stainless steel', 'stainless steel', 'stainless steel', 'stainless steel', 'stainless steel', 1.16, 1.21, 1.41, 2.38, 2.94, 0.36, 0.31, 1.84, 4.95, 0.82]
+['christmas', 'christmas', 'thanksgiving', 'christmas', 'christmas', 0.39, 2.16, 2.26, 2.74, 3.26, 0.11, 0.98, 1.42, 0.13, 0.04]
+['river', 'pond', 'pond', 'lake', 'lake', 0.03, 4.77, 5.19, 5.21, 5.22, 4.65, 5.02, 7.89, 4.27, 3.15]
+['brussels sprout', 'brussels sprout', 'beet', 'brussels sprout', 'brussels sprout', 0.72, 1.6, 2.09, 2.35, 2.39, 6.59, 6.68, 0.21, 7.39, 7.23]
+['us', 'new zealand', 'america', 'us', 'canada', 1.06, 1.43, 1.72, 2.14, 2.15, 3.51, 0.61, 1.95, 3.15, 1.32]
+['brake', 'brake', 'brake', 'brake', 'brake', 0.35, 2.2, 2.7, 2.75, 2.9, 1.58, 0.07, 0.13, 0.92, 0.05]
+['tree', 'tree', 'tree', 'tree', 'tree', 1.44, 1.45, 1.53, 1.75, 1.98, 10.72, 7.31, 15.25, 8.97, 7.76]
+['pink', 'nylon', 'parasol', 'pink', 'pink', 1.05, 1.39, 1.53, 2.3, 2.48, 8.08, 5.8, 3.23, 8.64, 9.21]
+['pine', 'pine', 'fir', 'pine', 'pine', 0.91, 1.11, 1.96, 2.75, 2.75, 0.47, 0.01, 2.74, 3.61, 2.98]
+['sommelier', 'sommelier', 'sommelier', 'sommelier', 'wine taste', 1.02, 1.47, 1.72, 1.96, 2.39, 6.86, 13.05, 11.91, 8.19, 15.77]
+['mexican', 'mexican', 'mexican', 'mexican', 'mexican', 0.95, 1.13, 1.82, 2.49, 3.08, 4.86, 5.81, 6.34, 5.09, 7.48]
+['brake', 'stop', 'brake', 'stop', 'slow down', 0.9, 1.78, 1.85, 1.95, 2.07, 0.04, 2.19, 0.03, 1.06, 5.12]
+['kindergarten', 'kindergarten', 'second', '2nd', 'kindergarten', 0.37, 2.12, 2.58, 2.65, 3.09, 0.18, 0.1, 3.88, 6.16, 2.93]
+['cat', 'no', 'no', 'cat', 'cat', 0.31, 1.53, 3.78, 4.04, 4.36, 0.13, 9.76, 8.72, 0.09, 0.1]
+['road', 'highway', 'street', 'railroad', 'road', 0.26, 2.12, 3.03, 3.45, 3.51, 3.92, 4.1, 0.71, 10.65, 3.52]
+['fake', 'fake', 'fake', 'fake', 'fake', 0.59, 0.85, 4.54, 5.09, 6.33, 0.04, 0.78, 0.66, 0.09, 0.15]
+['rack', 'rack', 'rack', 'rack', 'rack', 0.25, 2.22, 3.26, 3.31, 3.32, 10.56, 9.41, 8.21, 11.17, 9.49]
+['north', 'north', 'west', 'west', 'west', 0.09, 3.59, 3.78, 4.05, 4.11, 1.65, 0.38, 0.34, 0.11, 0.16]
+['race', 'race', 'race', 'race', 'race', 0.02, 5.02, 5.1, 5.13, 5.74, 0.04, 2.77, 0.02, 0.03, 0.06]
+['aluminum foil', 'aluminum foil', 'tin foil', 'tin foil', 'foil', 0.53, 1.29, 2.47, 3.66, 3.76, 0.12, 1.62, 15.54, 14.26, 1.43]
+['doctor', 'doctor', 'doctor', 'doctor', 'doctor', 0.54, 1.93, 2.16, 2.44, 2.65, 13.19, 11.96, 14.85, 13.31, 11.19]
+['wheel', 'wheel', 'pedal', 'chain', 'wheel', 0.77, 0.89, 2.83, 3.23, 3.63, 3.22, 0.47, 7.15, 3.87, 1.04]
+['cardboard', 'cardboard', 'cardboard', 'cardboard', 'cardboard', 0.8, 1.19, 2.32, 2.47, 2.77, 5.0, 8.62, 7.36, 6.79, 7.29]
+['shark', 'shark', 'shark', 'shark', 'shark', 0.73, 1.71, 1.84, 2.34, 2.53, 0.83, 0.0, 0.21, 0.55, 0.0]
+Testing DataLoader 0:   7%|▋         | 11/158 [01:40<22:23,  9.14s/it]Testing DataLoader 0:   7%|▋         | 11/158 [01:40<22:23,  9.14s/it]['skate park', 'skatepark', 'sidewalk', 'sidewalk', 'driveway', 0.1, 3.51, 3.62, 3.85, 3.95, 4.4, 3.62, 8.67, 9.41, 7.33]
+['net', 'net', 'net', 'net', 'net', 1.02, 1.74, 1.81, 1.82, 1.98, 0.0, 0.06, 0.0, 0.0, 0.01]
+["1950's", "1950's", "1950's", "1950's", "1950's", 0.78, 1.54, 1.54, 2.59, 3.28, 0.51, 6.1, 0.58, 0.76, 1.53]
+['garden', 'garden', 'garden', 'garden', 'broccoli', 1.05, 1.1, 1.92, 2.38, 2.58, 4.59, 4.73, 11.14, 0.02, 10.52]
+['lake', 'lake', 'lake', 'river', 'river', 0.64, 1.85, 1.95, 2.17, 2.86, 1.36, 3.34, 3.28, 1.94, 3.79]
+['fabric', 'craft', 'craft', 'craft', 'craft', 1.09, 1.39, 1.83, 1.98, 2.15, 0.48, 0.38, 4.82, 0.04, 0.03]
+['cat food', 'cat food', 'cat food', 'cat food', 'cat food', 0.17, 2.84, 3.24, 3.49, 3.51, 6.93, 7.77, 12.2, 7.73, 4.34]
+['lion', 'zebra', 'zebra', 'zebra', 'zebra', 0.97, 1.31, 1.74, 2.4, 2.45, 0.96, 2.05, 2.49, 3.17, 6.03]
+["1800's", "1800's", "1850's", "1920's", "1800's", 0.9, 1.64, 1.89, 2.06, 2.12, 8.44, 6.64, 7.47, 2.36, 13.33]
+['cook', 'cook', 'cook', 'cook', 'cook', 0.23, 2.52, 2.87, 3.28, 3.56, 4.04, 1.8, 4.54, 3.13, 3.79]
+['wave', 'wave', 'wave', 'wave', 'wave', 0.45, 1.88, 2.42, 2.66, 2.96, 15.97, 15.66, 15.81, 18.57, 12.34]
+['32', '32', '32', '28', '32', 1.17, 1.21, 1.54, 1.89, 3.61, 1.16, 0.34, 1.07, 4.56, 3.18]
+['amtrak', 'amtrak', 'amtrak', 'amtrak', 'amtrak', 0.88, 1.39, 2.06, 2.14, 2.39, 0.18, 0.28, 0.53, 0.92, 0.23]
+['skyscraper', 'skyscraper', 'skyscraper', 'skyscraper', 'skyscraper', 1.13, 1.6, 1.69, 1.83, 2.05, 0.0, 0.1, 0.01, 0.0, 0.04]
+['stick', 'stick', 'pole', 'pole', 'stick', 0.26, 1.71, 3.67, 4.25, 5.2, 3.2, 0.26, 5.73, 1.43, 3.72]
+['run', 'run', 'run', 'run', 'run', 0.46, 1.61, 2.56, 2.92, 3.34, 0.38, 1.17, 0.19, 0.53, 0.26]
+['warehouse', 'warehouse', 'warehouse', 'industrial', 'storage', 0.7, 0.9, 2.76, 4.04, 4.31, 6.15, 0.55, 5.29, 1.34, 4.86]
+['street sign', 'road', 'road', 'street sign', 'road', 1.12, 1.72, 1.73, 1.77, 1.91, 11.31, 8.73, 6.09, 12.02, 6.95]
+['chopstick', 'chopstick', 'chopstick', 'chopstick', 'chopstick', 0.85, 1.15, 2.01, 2.7, 2.94, 8.87, 8.72, 0.11, 4.68, 9.95]
+['hospital', 'hospital', 'hospital', 'hospital', 'hospital', 0.82, 0.97, 2.55, 2.57, 3.67, 9.07, 9.36, 7.9, 6.46, 8.89]
+['hawaii', 'hawaii', 'cuba', 'hawaii', 'hawaii', 1.13, 1.4, 1.44, 2.1, 2.68, 2.58, 2.81, 2.34, 3.95, 1.74]
+['blue jay', 'blue jay', 'blue jay', 'blue jay', 'blue jay', 0.58, 1.94, 2.16, 2.36, 2.43, 3.59, 2.87, 3.83, 4.29, 6.51]
+['communication', 'call', 'phone call', 'call', 'communication', 1.09, 1.54, 1.62, 2.04, 2.11, 0.13, 11.04, 9.12, 10.16, 0.8]
+['olive', 'olive', 'olive', 'olive', 'olive', 1.04, 1.65, 1.83, 1.85, 1.98, 0.05, 0.1, 0.06, 0.21, 0.02]
+['picket', 'picket', 'picket', 'picket', 'picket', 0.9, 1.75, 1.89, 1.97, 2.05, 2.69, 0.52, 1.28, 1.39, 1.0]
+['bee', 'fly', 'bee', 'ladybug', 'spider', 0.21, 2.18, 3.08, 3.83, 4.44, 0.33, 2.88, 0.26, 2.69, 2.73]
+['student', 'student', 'single', 'student', 'student', 0.98, 1.52, 1.61, 2.03, 2.59, 0.32, 0.0, 5.45, 0.0, 0.22]
+['to watch people', 'lifeguard', 'lifeguard', 'lifeguard', 'lifeguard', 0.88, 1.51, 1.91, 2.09, 2.39, 7.74, 11.95, 11.93, 23.08, 12.13]
+['jousting', 'jousting', 'jousting', 'jousting', 'jousting', 0.5, 1.82, 2.31, 2.45, 3.1, 18.56, 13.77, 13.7, 13.61, 13.49]
+['pet store', 'petco', 'pet store', 'pet shop', 'walmart', 0.8, 1.78, 1.83, 2.11, 2.28, 1.35, 1.54, 0.73, 0.49, 7.85]
+['cumulus', 'cumulus', 'cumulus', 'cumulus', 'cumulus', 1.23, 1.28, 1.91, 1.94, 1.98, 5.25, 4.69, 5.31, 4.23, 5.7]
+['8', '8', '8', '8', '8', 0.78, 1.59, 1.72, 2.55, 2.55, 1.11, 2.94, 0.19, 2.95, 3.54]
+Testing DataLoader 0:   8%|▊         | 12/158 [01:48<21:54,  9.01s/it]Testing DataLoader 0:   8%|▊         | 12/158 [01:48<21:54,  9.01s/it]['nose', 'nose', 'wing', 'apron', 'apron', 0.63, 1.31, 2.57, 2.75, 2.86, 0.01, 0.02, 0.07, 4.23, 2.17]
+['vacation', 'vacation', 'vacation', 'vacation', 'vacation', 0.78, 1.05, 2.55, 2.79, 2.95, 9.81, 7.03, 3.22, 5.77, 6.23]
+['to hold glass in place', 'to hold glass in place', 'to hold glass in place', 'headband', 'to hold glass in place', 0.44, 1.95, 2.15, 2.73, 3.51, 12.93, 15.39, 15.97, 4.23, 17.34]
+['kitchen', 'kitchen', 'kitchen', 'kitchen', 'kitchen', 0.81, 1.55, 2.05, 2.19, 2.26, 1.25, 2.93, 1.52, 2.08, 6.34]
+['birthday party', 'birthday party', 'birthday party', 'birthday party', 'vacation', 0.87, 1.32, 1.62, 2.59, 3.16, 4.27, 8.08, 2.37, 7.2, 8.86]
+['model', 'doll', 'model', 'doll', 'model', 0.36, 1.8, 2.8, 2.99, 3.73, 0.0, 9.36, 0.0, 8.34, 0.03]
+['airplane and no', 'plane and no attack', 'airplane and no attack', 'airplane and no terrorist attacks', 'airplane and no', 0.13, 2.33, 4.09, 5.04, 5.11, 12.0, 16.94, 28.7, 15.06, 13.72]
+['wright', 'wright', 'wright', 'wright', 'wright', 0.43, 1.91, 2.45, 2.53, 3.42, 0.03, 0.01, 0.03, 0.02, 0.02]
+['brew', 'brew', 'brew', 'brew', 'brew', 0.04, 4.33, 4.52, 4.75, 4.79, 2.11, 4.08, 1.2, 2.8, 3.72]
+['sand', 'sand', 'sand', 'sand', 'sand', 0.32, 2.27, 2.54, 3.06, 3.16, 2.04, 1.2, 0.53, 0.1, 1.11]
+['vegetable', 'plant', 'plant', 'root', 'vegetable', 0.57, 1.75, 1.81, 2.95, 3.03, 4.84, 0.97, 3.84, 4.06, 3.47]
+['comfort', 'companionship', 'companionship', 'bond', 'comfort', 0.83, 1.02, 1.87, 3.64, 3.74, 0.03, 1.43, 0.08, 1.72, 0.18]
+['sail', 'sail', 'sail', 'sail', 'sail', 0.46, 1.47, 2.86, 2.89, 3.53, 11.32, 11.0, 15.15, 16.84, 12.38]
+['goal', 'goal', 'goal', 'goal', 'goal', 1.13, 1.25, 1.8, 1.84, 2.71, 0.04, 0.0, 0.0, 0.01, 0.01]
+['5', '5', '5', '5', '8 oz', 0.56, 1.87, 1.96, 2.44, 3.1, 1.36, 3.66, 1.29, 2.05, 5.55]
+['dalmation', 'dalmation', 'dalmation', 'dalmation', 'dalmation', 0.89, 1.6, 1.67, 2.04, 2.69, 7.03, 8.74, 7.58, 8.58, 7.23]
+['caution', 'caution', 'danger', 'caution', 'caution', 0.78, 1.42, 2.06, 2.19, 2.75, 9.16, 10.11, 9.22, 10.66, 5.78]
+['million', 'million', 'million', 'million', 'million', 0.59, 2.09, 2.09, 2.19, 2.46, 1.41, 1.36, 0.83, 6.15, 2.23]
+['camouflage', 'camouflage', 'camouflage', 'camouflage', 'camouflage', 1.32, 1.41, 1.55, 1.8, 2.22, 0.52, 0.07, 0.13, 0.42, 0.64]
+['girl', 'girl', 'girl', 'female', 'female', 0.81, 1.05, 2.23, 2.89, 3.12, 0.23, 0.1, 0.13, 0.39, 0.18]
+['dali', 'artist', 'artist', 'artist', 'artist', 0.04, 3.87, 4.91, 5.32, 5.47, 1.38, 1.23, 2.92, 6.08, 7.23]
+['hungry', 'hungry', 'hungry', 'hungry', 'hungry', 0.55, 1.19, 2.94, 3.23, 3.74, 0.01, 1.44, 0.11, 0.01, 0.9]
+['collar', 'collar', 'bandana', 'collar', 'scarf', 0.1, 2.6, 4.45, 4.65, 5.69, 0.01, 0.04, 0.12, 0.0, 2.55]
+['air canada', 'canadian', 'canadian', 'air canada', 'canadian', 0.57, 2.02, 2.12, 2.26, 2.55, 5.75, 10.02, 9.58, 5.72, 12.22]
+['potato', 'potato salad', 'fry', 'potato', 'potato', 0.23, 2.19, 3.27, 3.48, 3.61, 0.15, 0.18, 1.44, 5.7, 2.35]
+['internet', 'compute', 'compute', 'compute', 'internet', 0.03, 3.97, 5.39, 6.45, 6.89, 7.44, 7.42, 8.39, 4.67, 10.33]
+['undershirt', 't shirt', 'rash guard', 'long sleeve', 'long sleeve', 0.52, 1.9, 2.27, 2.45, 2.75, 0.3, 5.45, 15.21, 7.2, 7.46]
+['new york', 'san diego', 'city', 'la', 'los angeles', 0.16, 2.71, 3.39, 3.66, 3.69, 4.13, 6.37, 6.44, 6.42, 5.6]
+['teddy bear', 'teddy bear', 'teddy bear', 'teddy bear', 'bear', 0.53, 1.51, 1.94, 3.74, 3.82, 2.44, 3.05, 1.07, 0.31, 9.21]
+['desk', 'desk', 'desk', 'desk', 'desk', 0.55, 1.15, 3.25, 3.3, 3.46, 3.33, 2.48, 0.85, 1.94, 2.04]
+['lemon', 'lemon', 'lemon', 'lemon', 'butter', 0.03, 3.7, 5.36, 5.88, 6.99, 3.68, 3.64, 4.26, 4.95, 0.55]
+['tennis', 'tennis', 'tennis', 'tennis', 'tennis', 0.51, 1.49, 2.48, 3.1, 3.15, 12.02, 7.89, 12.38, 17.02, 7.04]
+Testing DataLoader 0:   8%|▊         | 13/158 [01:57<21:41,  8.98s/it]Testing DataLoader 0:   8%|▊         | 13/158 [01:57<21:41,  8.98s/it]['safety', 'ride', 'safety', 'safety', 'safety', 1.16, 1.64, 1.71, 1.79, 1.92, 4.16, 8.85, 1.86, 0.6, 9.58]
+['rat', 'cat', 'worm', 'rat', 'lettuce', 1.01, 1.46, 1.62, 2.05, 2.58, 5.26, 2.74, 10.45, 9.77, 16.23]
+['dog', 'dog', 'terrier', 'terrier', 'terrier', 0.54, 1.72, 2.48, 2.5, 2.64, 2.97, 7.52, 2.96, 1.59, 1.11]
+['park meter', 'park meter', 'park meter', 'park meter', 'park meter', 1.27, 1.28, 1.67, 1.67, 2.75, 21.45, 25.02, 21.49, 21.53, 21.48]
+['neck', 'neck', 'neck', 'neck', 'neck', 0.94, 1.27, 1.94, 2.37, 2.41, 0.0, 0.0, 0.0, 0.0, 0.0]
+['rye', 'rye', 'rye', 'challah', 'sourdough', 0.5, 1.37, 2.99, 3.02, 3.14, 1.81, 0.07, 0.18, 0.02, 0.41]
+['computer', 'computer', 'computer', 'computer', 'computer', 0.93, 1.71, 1.87, 1.88, 2.14, 0.38, 4.33, 1.24, 4.29, 0.26]
+['19th', '19th', '19th', '19th', '19th', 0.52, 1.42, 2.82, 2.92, 2.93, 0.49, 0.65, 0.41, 0.38, 2.59]
+['1973', '1977', '1965', '1995', '1965', 0.45, 1.88, 2.43, 2.74, 2.84, 8.66, 3.54, 5.5, 15.08, 11.88]
+['festival', 'food festival', 'festival', 'festival', 'festival', 0.91, 1.5, 1.87, 1.99, 2.49, 5.7, 18.37, 6.61, 3.68, 2.59]
+['luggage store', 'walmart', 'online', 'walmart', 'amazon', 0.89, 1.17, 2.14, 2.17, 3.0, 7.01, 1.49, 3.08, 4.75, 0.32]
+['honda', 'honda', 'volvo', 'honda', 'honda', 1.07, 1.17, 1.79, 2.2, 2.71, 3.88, 3.32, 0.36, 2.23, 1.1]
+['sail', 'sail', 'sail', 'sail', 'sail', 0.67, 1.53, 2.29, 2.43, 2.48, 11.3, 9.0, 9.46, 10.61, 11.02]
+['kite', 'kite', 'kite', 'kite', 'kite', 0.61, 1.73, 1.76, 2.57, 3.53, 7.06, 6.91, 11.46, 12.21, 9.83]
+['stripe', 'checkered', 'checkered', 'stripe', 'stripe', 0.69, 1.68, 1.74, 2.44, 2.97, 0.3, 9.21, 4.98, 0.11, 0.05]
+['eat', 'eat', 'eat', 'eat', 'eat', 1.0, 1.48, 1.87, 2.0, 2.16, 1.95, 1.15, 0.29, 2.1, 0.49]
+['square', 'square', 'square', 'square', 'square', 0.73, 1.4, 2.17, 2.44, 2.65, 1.43, 0.02, 0.11, 0.83, 0.4]
+['road work', 'road work', 'road work', 'work', 'road work', 0.3, 2.17, 2.55, 3.15, 3.72, 19.22, 19.45, 19.91, 10.49, 17.6]
+['cactus', 'cactus', 'cactus', 'cactus', 'cactus', 0.46, 1.84, 2.3, 2.79, 3.07, 0.02, 6.95, 10.58, 4.38, 7.63]
+['clay', 'clay', 'clay', 'clay', 'clay', 0.29, 2.5, 2.57, 2.98, 3.16, 1.5, 3.49, 0.73, 0.03, 0.21]
+['400', '500', '450', '500', '500', 0.6, 1.78, 2.03, 2.55, 2.64, 0.08, 4.3, 0.37, 5.38, 0.42]
+['tea', 'tea', 'coffee', 'tea', 'tea', 0.85, 1.05, 2.31, 2.7, 2.87, 0.66, 0.3, 0.28, 0.62, 0.8]
+['frost bite', 'frost bite', 'frost bite', 'frost bite', 'frost bite', 0.24, 2.14, 3.04, 3.59, 3.78, 2.39, 0.95, 5.85, 5.85, 2.43]
+['ice', 'frost', 'ice', 'ice', 'fondant', 0.98, 1.38, 1.71, 2.19, 2.52, 4.19, 2.3, 4.67, 2.64, 0.0]
+['sony', 'sony', 'sony', 'sony', 'sony', 1.25, 1.66, 1.69, 1.76, 1.79, 0.1, 0.56, 0.58, 1.16, 1.94]
+['japan', 'japan', 'japan', 'japan', 'japan', 0.61, 2.05, 2.07, 2.28, 2.31, 12.87, 16.88, 11.66, 10.66, 11.56]
+['quarter', 'mustang', 'mustang', 'mustang', 'quarter', 1.24, 1.33, 1.55, 2.02, 2.3, 1.41, 0.18, 0.03, 0.05, 2.25]
+['work', 'work', 'work', 'work', 'work', 0.26, 1.72, 3.63, 4.3, 4.3, 6.89, 0.36, 5.9, 6.76, 9.04]
+['clothes', 'map', 'shop', 'map', 'phone', 0.9, 1.41, 1.69, 2.04, 3.31, 6.3, 10.43, 4.75, 10.16, 9.4]
+['danger', 'danger', 'danger', 'danger', 'danger', 0.9, 1.67, 1.73, 2.12, 2.22, 3.11, 1.58, 2.58, 2.46, 7.95]
+['mexico', 'mexico', 'mexico', 'mexico', 'mexico', 0.32, 1.99, 2.88, 3.24, 3.26, 9.56, 5.23, 8.56, 3.01, 4.71]
+['boy', 'boy', 'boy', 'boy', 'boy', 0.72, 1.11, 1.95, 3.74, 3.97, 2.31, 1.97, 2.04, 1.44, 1.75]
+Testing DataLoader 0:   9%|▉         | 14/158 [02:06<21:22,  8.90s/it]Testing DataLoader 0:   9%|▉         | 14/158 [02:06<21:22,  8.90s/it]['honda', 'honda', 'honda', 'harley', 'harley', 1.23, 1.32, 1.66, 1.71, 2.69, 5.58, 10.34, 9.88, 0.26, 0.43]
+['english', 'english', 'english', 'english', 'english', 0.86, 1.74, 1.85, 2.05, 2.14, 0.64, 1.79, 0.22, 0.91, 2.65]
+['navel', 'navel', 'navel', 'navel', 'navel', 0.47, 2.1, 2.44, 2.49, 2.52, 0.24, 0.08, 2.88, 3.98, 0.53]
+['atlantic', 'atlantic', 'atlantic', 'atlantic', 'atlantic', 0.98, 1.66, 1.77, 1.83, 2.24, 5.09, 8.37, 6.64, 9.12, 7.07]
+['throw', 'throw', 'catch', 'throw', 'catch', 1.05, 1.53, 1.7, 2.07, 2.09, 4.81, 4.12, 2.46, 3.18, 2.04]
+['tree', 'tree', 'tree', 'tree', 'tree', 1.19, 1.31, 1.53, 1.97, 2.67, 0.32, 0.07, 0.29, 0.45, 0.09]
+['wash hand', 'wash hand', 'wash hand', 'pee', 'wash hand', 0.69, 1.04, 2.86, 3.0, 3.35, 9.94, 10.08, 9.32, 2.5, 11.21]
+['pole', 'ski pole', 'pole', 'ski pole', 'pole', 0.25, 2.59, 2.79, 3.19, 3.22, 7.46, 14.73, 10.37, 11.61, 10.49]
+['yamaha', 'bmw', 'harley', 'honda', 'honda', 0.94, 1.31, 1.8, 2.43, 2.44, 1.61, 0.36, 0.35, 1.8, 0.87]
+['lab', 'labrador', 'labrador', 'labrador', 'lab', 0.93, 1.36, 1.95, 2.07, 2.51, 4.4, 6.17, 4.01, 5.54, 3.39]
+['no wave', 'no wetsuit', 'no wave', 'no wetsuit', 'no wave', 0.54, 1.88, 2.06, 2.44, 2.93, 2.17, 5.6, 0.39, 5.28, 1.95]
+['78 feet', '100 feet', '80 feet', '80 feet', '78 feet', 0.72, 1.68, 2.07, 2.25, 2.37, 0.71, 0.41, 2.41, 2.43, 1.38]
+['coke', 'budweiser', 'budweiser', 'budweiser', 'budweiser', 0.32, 2.36, 2.37, 3.0, 3.28, 0.71, 1.29, 3.86, 3.62, 3.31]
+['clydesdale', 'clydesdale', 'clydesdale', 'clydesdale', 'clydesdale', 0.41, 1.31, 3.32, 3.98, 4.78, 0.36, 0.12, 8.25, 0.03, 7.46]
+['moo', 'moo', 'moo', 'moo', 'moo', 0.29, 1.59, 3.84, 4.23, 4.64, 3.48, 3.79, 4.09, 3.29, 3.49]
+['hit', 'hit', 'pitch', 'pitch', 'hit', 1.01, 1.3, 1.56, 2.23, 3.08, 5.67, 7.72, 13.75, 13.22, 5.78]
+['feed it', 'feed it', 'cat food', 'feed it', 'feed it', 0.52, 2.07, 2.25, 2.33, 2.58, 6.85, 11.44, 12.85, 8.17, 3.56]
+['pie', 'pie', 'pie', 'pie', 'pie', 0.02, 4.68, 4.86, 5.57, 6.0, 4.0, 8.7, 3.89, 4.97, 3.79]
+['wood', 'wood', 'wood', 'wood', 'wood', 1.41, 1.43, 1.6, 1.85, 1.86, 5.12, 1.22, 5.57, 4.49, 2.56]
+['grind', 'grind', 'grind', 'grind', 'grind', 1.39, 1.56, 1.65, 1.74, 1.76, 1.41, 0.23, 7.47, 1.46, 6.62]
+['20 pounds', '20 pounds', '20 pounds', '20 pounds', '20 pounds', 0.22, 2.4, 2.68, 3.84, 4.11, 11.56, 9.23, 10.96, 5.98, 10.18]
+['selfie', 'selfie', 'selfie', 'selfie', 'selfie', 1.18, 1.21, 1.96, 2.01, 2.13, 9.27, 9.38, 0.05, 3.11, 8.26]
+['deck', 'deck', 'deck', 'deck', 'deck', 0.31, 1.44, 4.29, 4.96, 5.16, 1.81, 4.12, 5.48, 5.05, 3.36]
+['prince', 'wilson', 'wilson', 'wilson', 'prince', 0.63, 1.97, 2.14, 2.18, 2.3, 0.39, 0.1, 0.03, 0.49, 0.2]
+['tabby', 'ragdoll', 'tabby', 'domestic', 'ragdoll', 1.28, 1.4, 1.73, 1.87, 1.95, 2.67, 3.23, 2.24, 2.52, 4.03]
+['calf', 'calf', 'calf', 'calf', 'calf', 0.69, 1.71, 2.01, 2.34, 2.43, 1.94, 5.07, 2.14, 4.82, 1.48]
+['talk show', 'news', 'news', 'news', 'news', 1.18, 1.25, 1.91, 2.02, 2.07, 0.69, 0.84, 6.47, 6.15, 8.29]
+['30', '20', '25', '30', '40', 0.26, 1.62, 4.02, 4.74, 4.75, 3.38, 2.25, 0.73, 2.72, 2.05]
+['palm', 'palm', 'palm', 'palm', 'palm', 0.83, 1.05, 2.2, 2.78, 3.25, 6.61, 5.03, 6.35, 5.42, 6.72]
+['cone', 'ice', 'sub', 'pop', 'pop', 0.46, 2.19, 2.46, 2.46, 2.48, 4.75, 1.77, 3.69, 2.37, 2.43]
+['sheep herd', 'sheep herd', 'sheep herd', 'sheep herd', 'sheep herd', 1.1, 1.29, 1.81, 2.16, 2.16, 4.83, 14.17, 12.36, 8.47, 8.41]
+['music', 'music', 'music', 'music', 'music', 0.4, 2.11, 2.24, 2.68, 3.36, 3.0, 0.31, 0.04, 0.01, 0.44]
+Testing DataLoader 0:   9%|▉         | 15/158 [02:15<21:05,  8.85s/it]Testing DataLoader 0:   9%|▉         | 15/158 [02:15<21:05,  8.85s/it]['coat', 'coat', 'coat', 'coat', 'coat', 0.83, 1.35, 1.72, 2.7, 2.85, 6.98, 0.54, 3.33, 4.41, 3.29]
+['6 feet', '2 feet', '20 inches', '20 inches', '2 feet', 0.32, 2.07, 2.43, 3.17, 3.98, 2.54, 0.54, 1.37, 0.48, 3.44]
+['policeman', 'policeman', 'policeman', 'policeman', 'policeman', 0.62, 1.8, 1.92, 2.51, 2.68, 5.26, 3.21, 6.39, 4.88, 5.26]
+['chair', 'chair', 'chair', 'chair', 'chair', 0.15, 2.63, 3.69, 3.84, 3.94, 0.01, 0.06, 5.29, 0.01, 0.03]
+['california', 'california', 'california', 'colorado', 'california', 0.94, 1.11, 1.7, 2.78, 3.37, 6.21, 3.37, 0.28, 0.09, 2.15]
+['black', 'tabby', 'black', 'black', 'tabby', 0.95, 1.26, 2.08, 2.24, 2.31, 5.95, 0.48, 6.33, 4.18, 0.36]
+['graffiti', 'banksy', 'banksy', 'graffiti', 'graffiti', 0.91, 1.59, 1.72, 2.12, 2.37, 2.33, 0.18, 0.02, 4.36, 10.79]
+['handrail', 'stair stair', 'stair stair', 'stair stair', 'stair stair', 0.82, 1.63, 1.87, 2.23, 2.29, 0.24, 4.02, 2.96, 6.65, 4.41]
+['yosemite', 'yosemite', 'redwood', 'yosemite', 'yosemite', 0.01, 5.06, 7.63, 9.36, 9.83, 0.06, 0.01, 0.01, 0.27, 3.27]
+['bow', 'bow', 'bow', 'bow', 'bow', 1.22, 1.45, 1.81, 1.82, 1.93, 0.11, 0.17, 0.19, 1.02, 0.12]
+['ice cream', 'candy', 'cotton candy', 'cotton candy', 'ice cream', 0.03, 4.12, 5.34, 6.1, 6.13, 0.05, 0.14, 0.0, 0.0, 0.02]
+['wicker', 'wicker', 'wicker', 'wicker', 'wicker', 1.04, 1.45, 1.48, 2.28, 2.5, 6.93, 8.75, 11.66, 9.91, 11.43]
+['mozzarella', 'mozzarella', 'mozzarella', 'mozzarella', 'mozzarella', 1.25, 1.47, 1.47, 1.99, 2.15, 0.18, 0.56, 4.11, 0.05, 0.15]
+['florida', 'florida', 'florida', 'florida', 'florida', 0.33, 1.97, 2.67, 2.99, 3.76, 5.03, 3.0, 4.4, 2.76, 5.32]
+['teeth', 'teeth', 'teeth', 'teeth', 'teeth', 1.12, 1.35, 1.56, 2.21, 2.35, 15.07, 12.79, 14.95, 16.96, 14.43]
+['1926', '1926', '1869', '1926', 'john kemp starley', 0.84, 1.78, 1.81, 1.95, 2.37, 9.77, 7.41, 7.89, 9.24, 8.39]
+['lg', 'lg', 'lg', 'lg', 'lg', 0.29, 2.17, 2.34, 3.49, 4.37, 0.06, 5.47, 1.21, 3.83, 3.79]
+['square', 'square', 'borosilicate', 'square', 'square', 0.51, 2.12, 2.29, 2.37, 2.49, 10.72, 8.44, 0.11, 8.29, 10.1]
+['plane', 'plane', 'plane', 'plane', 'plane', 0.16, 2.55, 3.51, 3.84, 3.98, 1.57, 3.33, 2.68, 2.62, 2.56]
+['read', 'read', 'read', 'read', 'read', 0.75, 1.14, 2.59, 2.59, 2.87, 4.95, 2.71, 5.57, 3.76, 4.12]
+['park', 'park', 'park', 'park', 'park', 1.04, 1.57, 1.59, 2.1, 2.2, 9.31, 7.57, 6.27, 10.9, 9.62]
+['baby', 'baby', 'baby', 'primary', 'baby', 0.9, 0.9, 2.16, 3.15, 3.54, 1.23, 1.16, 0.94, 0.52, 0.84]
+['swan', 'swan', 'swan', 'owl', 'duck', 0.96, 1.33, 1.94, 2.25, 2.25, 12.92, 10.64, 11.61, 4.01, 4.56]
+['glue', 'string', 'string', 'glue', 'string', 0.02, 5.18, 5.37, 5.71, 5.99, 6.59, 6.24, 9.26, 1.53, 8.66]
+['sun', 'sun', 'sun protection', 'sunglasses', 'sun', 1.07, 1.28, 1.7, 1.98, 2.89, 3.98, 1.46, 8.02, 0.17, 8.84]
+['roger connor', 'babe ruth', 'babe ruth', 'mike trout', 'barry bond', 0.61, 1.0, 3.19, 3.41, 4.21, 1.24, 0.04, 0.38, 2.17, 0.14]
+['horse race', 'horse race', 'horse race', 'horse race', 'horse race', 0.18, 2.71, 2.72, 3.71, 4.47, 7.84, 10.97, 12.19, 4.17, 1.99]
+['gothic', 'victorian', 'gothic', 'greek', 'spanish', 0.03, 4.52, 4.83, 5.37, 5.69, 0.02, 1.68, 5.69, 2.12, 0.06]
+['45 minutes', '10 minutes', '10 minutes', '10 minutes', '20 minutes', 0.01, 5.59, 7.15, 7.39, 7.53, 1.94, 2.18, 3.35, 3.66, 3.44]
+['mozzarella', 'cheddar', 'cheddar', 'cheddar', 'mozzarella', 0.67, 1.4, 2.4, 2.51, 2.64, 0.46, 0.19, 0.12, 1.22, 0.91]
+['1804', '1804', '1804', '1804', '1804', 0.8, 1.57, 2.03, 2.04, 2.48, 0.04, 0.21, 0.27, 0.03, 0.64]
+['mountain bike', 'mountain bike', 'mountain bike', 'mountain bike', 'mountain bike', 0.03, 4.89, 4.89, 5.04, 5.07, 11.85, 7.74, 13.38, 18.19, 13.3]
+Testing DataLoader 0:  10%|█         | 16/158 [02:24<21:03,  8.90s/it]Testing DataLoader 0:  10%|█         | 16/158 [02:24<21:03,  8.90s/it]['business', 'business', 'business', 'economic', 'business', 0.91, 1.46, 1.84, 2.05, 2.56, 4.54, 7.56, 5.53, 12.49, 3.93]
+['food', 'mail', 'mail', 'mail', 'mail', 0.36, 2.01, 2.82, 2.87, 2.93, 2.02, 10.11, 11.77, 11.58, 11.22]
+['analog', 'analog', 'analog', 'analog', 'analog', 1.04, 1.25, 1.51, 2.46, 2.89, 2.25, 1.54, 0.36, 1.27, 0.96]
+['bird', 'monkey', 'monkey', 'monkey', 'monkey', 1.45, 1.59, 1.59, 1.6, 1.85, 0.51, 5.09, 2.61, 3.83, 6.15]
+['snickers', 'm&m', 'lollipop', 'jellybean', 'lollipop', 0.0, 5.71, 8.69, 8.75, 8.76, 0.08, 0.24, 2.5, 1.84, 8.06]
+['freight', 'locomotive', 'locomotive', 'locomotive', 'locomotive', 0.51, 1.52, 2.79, 2.81, 2.86, 0.8, 1.96, 0.1, 0.46, 0.48]
+['urine', 'urine', 'urine', 'urine', 'urine', 0.7, 1.82, 1.95, 2.23, 2.39, 14.64, 14.02, 17.4, 16.99, 20.2]
+['sticker', 'sticker', 'sticker', 'sticker', 'sticker', 0.41, 1.23, 3.97, 4.25, 4.69, 10.78, 5.82, 7.97, 7.09, 3.67]
+['walmart', 'goodwill', 'toy store', 'walmart', 'toy store', 0.37, 1.67, 2.98, 3.3, 3.41, 0.41, 0.77, 8.46, 0.11, 6.32]
+['television', 'tv', 'tv', 'playstation', 'tv', 0.5, 1.28, 3.13, 3.34, 3.35, 0.0, 3.55, 1.31, 5.79, 0.25]
+['kentucky', 'kentucky', 'kentucky', 'kentucky', 'kentucky', 1.16, 1.43, 1.8, 1.83, 2.1, 0.39, 0.19, 0.14, 0.1, 0.18]
+['bento', 'bento', 'bento', 'bento', 'bento', 0.67, 1.83, 2.1, 2.15, 2.41, 7.32, 8.53, 7.36, 9.62, 12.21]
+['d', 'z', 'd', 'z', 'd', 0.27, 2.36, 2.62, 3.36, 3.48, 1.68, 4.18, 1.45, 10.01, 4.52]
+['sweater', 'yarn', 'cloth', 'sweater', 'yarn', 0.68, 1.55, 1.99, 2.57, 2.65, 0.11, 0.07, 1.52, 0.02, 1.27]
+['seagull', 'seagull', 'pelican', 'seagull', 'seagull', 1.06, 1.53, 1.59, 2.15, 2.17, 7.83, 8.86, 9.16, 8.33, 7.73]
+['elbow', 'elbow', 'hand', 'elbow', 'elbow', 0.8, 0.87, 2.24, 4.35, 4.35, 0.0, 0.0, 1.48, 0.0, 0.03]
+['wetsuit', 'wetsuit', 'wetsuit', 'wetsuit', 'wetsuit', 1.38, 1.48, 1.5, 1.84, 1.96, 20.58, 15.79, 13.27, 17.8, 18.85]
+['top', 'roof', 'top', 'top', 'top', 0.22, 1.75, 4.09, 5.6, 6.27, 9.16, 7.05, 11.76, 9.55, 7.73]
+['child', 'teddy bear', 'child', 'child', 'child', 0.87, 1.14, 1.52, 3.68, 3.82, 0.93, 3.95, 0.35, 4.2, 4.38]
+['hawk', 'hawk', 'hawk', 'hawk', 'hawk', 0.63, 2.07, 2.08, 2.2, 2.26, 5.54, 9.96, 1.57, 9.93, 1.39]
+['charger', 'charger', 'charger', 'charger', 'charger', 0.91, 1.65, 1.74, 1.83, 2.7, 0.83, 0.03, 3.01, 0.2, 0.02]
+['cocktail', 'orange juice', 'mojito', 'orange juice', 'cocktail', 0.93, 1.69, 1.76, 1.95, 2.24, 3.2, 4.68, 1.41, 6.95, 3.95]
+['decoration', 'decoration', 'holiday', 'decoration', 'festive', 0.51, 1.26, 3.01, 3.25, 3.49, 6.4, 2.76, 2.11, 3.28, 1.18]
+['space', 'space', 'space', 'space', 'space', 0.22, 2.67, 2.95, 2.97, 3.58, 11.73, 11.72, 12.05, 8.08, 15.51]
+['seed', 'seed', 'seed', 'seed', 'seed', 0.02, 4.66, 5.39, 5.44, 5.68, 7.18, 7.43, 10.3, 5.66, 7.53]
+['lord of ring', 'ninjago', 'lord of ring', 'lord of ring', 'ninjago', 0.39, 1.94, 2.44, 2.96, 3.27, 1.39, 12.8, 1.29, 4.29, 15.44]
+['10', 'lot', '20', '23', '50', 0.85, 1.41, 1.67, 2.59, 2.72, 0.98, 18.31, 1.93, 0.3, 1.5]
+['20 years', '20 years', '25', '20 years', '25', 0.19, 2.71, 2.85, 3.64, 3.64, 2.33, 2.35, 3.43, 2.34, 3.51]
+['tell', 'tell', 'tell', 'decorate', 'tell', 0.58, 1.57, 1.98, 2.93, 3.16, 2.3, 2.25, 2.42, 1.23, 4.22]
+['military', 'military', 'military', 'military', 'military', 1.41, 1.53, 1.64, 1.73, 1.78, 12.14, 4.56, 8.98, 10.13, 5.83]
+['toxoplasmosis', 'toxoplasma', 'toxoplasmosis', 'toxoplasmosis', 'toxoplasma', 0.98, 1.36, 1.39, 2.79, 2.87, 0.78, 3.86, 0.53, 0.45, 1.37]
+['refrigerator', 'refrigerator', 'refrigerator', 'refrigerator', 'refrigerator', 1.12, 1.38, 1.45, 2.33, 2.42, 17.68, 17.26, 13.63, 11.61, 17.88]
+Testing DataLoader 0:  11%|█         | 17/158 [02:33<21:00,  8.94s/it]Testing DataLoader 0:  11%|█         | 17/158 [02:33<21:00,  8.94s/it]['collar', 'leash', 'collar', 'leash', 'leash', 0.58, 1.47, 2.44, 2.46, 3.24, 9.72, 0.11, 9.1, 0.05, 0.06]
+['stove', 'stove', 'stove', 'stove', 'stove', 0.0, 8.2, 9.48, 10.32, 10.39, 0.0, 0.0, 0.02, 0.05, 0.0]
+['sign', 'sign', 'sign', 'sign', 'sign', 0.18, 2.36, 3.62, 3.69, 4.16, 14.11, 10.41, 10.81, 6.82, 9.03]
+['military', 'military', 'military', 'military', 'military', 0.3, 1.51, 3.99, 4.52, 5.06, 7.08, 1.8, 3.79, 8.45, 5.53]
+['fly', 'fly', 'fly', 'fly', 'fly', 0.72, 1.79, 2.05, 2.09, 2.33, 0.46, 2.93, 2.47, 7.08, 2.1]
+['wagon', 'carriage', 'wagon', 'carriage', 'carriage', 0.12, 2.86, 3.12, 4.71, 4.93, 0.5, 8.56, 0.18, 7.82, 9.58]
+['fetch', 'fetch', 'fetch', 'fetch', 'fetch', 1.2, 1.31, 1.65, 1.93, 2.39, 9.05, 8.32, 1.88, 0.49, 7.99]
+['tom yum goong', 'baby elephant', 'baby elephant', 'baby elephant', 'ong bak', 0.77, 1.83, 1.89, 2.17, 2.18, 0.14, 15.16, 12.39, 12.26, 0.52]
+['second', 'second', 'second', 'second', 'second', 0.29, 1.59, 3.84, 4.09, 4.64, 14.73, 11.85, 13.08, 9.68, 10.43]
+['plate', 'plate', 'plate', 'plate', 'plate', 0.28, 2.06, 3.02, 3.1, 3.68, 0.01, 0.0, 0.04, 0.01, 0.07]
+['dock', 'dock', 'dock', 'dock', 'dock', 0.47, 2.02, 2.26, 2.63, 2.76, 9.54, 13.37, 13.44, 10.83, 14.72]
+['ship', 'ship', 'ship', 'ship', 'ship', 0.85, 1.88, 1.89, 2.0, 2.02, 0.48, 0.12, 0.19, 0.2, 0.21]
+['wilson', 'wilson', 'wilson', 'prince', 'prince', 1.12, 1.48, 1.76, 1.79, 2.26, 0.09, 0.32, 0.09, 1.44, 0.26]
+['ram', 'ram', 'ram', 'ram', 'ram', 1.13, 1.44, 1.67, 1.97, 2.18, 0.98, 0.72, 1.63, 7.58, 6.57]
+['wine', 'wine', 'birthday', 'birthday', 'anniversary', 0.91, 1.78, 1.82, 1.99, 2.03, 15.9, 16.75, 0.09, 5.56, 4.68]
+['dark', 'dark', 'lamp', 'dark', 'overhead', 0.85, 1.21, 1.81, 2.63, 3.16, 9.86, 9.86, 1.49, 0.29, 0.0]
+['store', 'store', 'store', 'store', 'store', 0.13, 3.05, 3.4, 3.81, 3.95, 1.58, 5.4, 0.92, 5.74, 4.6]
+['sled', 'sled', 'sled', 'sled', 'sled', 0.64, 1.84, 2.17, 2.3, 2.3, 12.08, 14.46, 10.72, 11.54, 7.03]
+['cell phone', 'cell phone', 'phone', 'phone', 'phone', 1.14, 1.17, 1.97, 2.07, 2.26, 0.87, 0.86, 2.57, 0.39, 0.27]
+['pirate', 'pirate', 'pirate', 'pirate', 'pirate', 1.36, 1.44, 1.46, 1.87, 2.12, 6.17, 4.51, 4.29, 4.77, 5.81]
+['babar', 'babar', 'babar', 'babar', 'babar', 1.01, 1.59, 1.76, 1.91, 2.2, 0.99, 0.01, 1.38, 0.14, 1.7]
+['internet', 'computer', 'internet', 'computer', 'computer', 1.47, 1.53, 1.53, 1.77, 1.79, 5.52, 6.16, 5.74, 8.24, 8.26]
+['signal', 'tell time', 'tell time', 'tell time', 'tell time', 0.82, 1.4, 2.09, 2.26, 2.44, 4.64, 10.3, 7.97, 6.1, 7.74]
+['snowboard', 'snowboard', 'snowboard', 'snowboard', 'snowboard', 0.78, 1.2, 2.42, 2.55, 2.64, 11.19, 13.52, 12.13, 13.13, 11.75]
+['fly', 'fly', 'fly', 'fly', 'fly ball', 0.64, 1.32, 2.48, 2.65, 3.01, 1.06, 0.46, 1.65, 0.45, 2.72]
+['seattle', 'seattle', 'san francisco', 'seattle', 'seattle', 1.12, 1.45, 1.6, 1.77, 2.67, 10.73, 10.32, 5.44, 14.1, 8.07]
+['100 mph', '100 mph', '150 mph', 'fast', '100 mph', 0.7, 1.05, 2.68, 3.11, 3.26, 3.27, 1.64, 1.35, 0.88, 0.6]
+['broccoli', 'broccoli', 'tomato', 'carrot', 'lettuce', 0.02, 5.05, 5.38, 6.15, 6.25, 3.03, 1.77, 0.32, 0.9, 1.0]
+['1804', '1804', '1804', '1804', '1804', 0.48, 1.52, 2.83, 2.84, 3.06, 0.8, 0.01, 0.01, 0.02, 1.17]
+['stop', 'yield', 'stop', 'stop', 'stop', 1.06, 1.57, 1.9, 1.91, 1.92, 0.02, 0.16, 0.07, 0.14, 0.01]
+['jockey', 'jockey', 'jockey', 'jockey', 'jockey', 1.27, 1.27, 1.78, 1.82, 2.22, 0.03, 0.0, 0.0, 0.96, 0.19]
+['school', 'school', 'college', 'school', 'office', 0.52, 1.42, 2.42, 3.0, 3.83, 11.26, 8.77, 7.19, 10.7, 1.03]
+Testing DataLoader 0:  11%|█▏        | 18/158 [02:42<20:55,  8.97s/it]Testing DataLoader 0:  11%|█▏        | 18/158 [02:42<20:55,  8.97s/it]['plaid', 'plaid', 'plaid', 'plaid', 'plaid', 1.03, 1.11, 1.74, 2.6, 2.75, 0.22, 0.82, 0.05, 3.9, 0.1]
+['fire service', 'fire service', 'fire service', 'fire service', 'fire service', 1.06, 1.26, 1.78, 2.25, 2.36, 9.33, 9.23, 9.17, 5.56, 3.93]
+['fall', 'rainy', 'ny', 'fall', 'seattle', 1.1, 1.38, 1.84, 1.99, 2.11, 7.13, 4.11, 6.83, 9.24, 1.62]
+['license', 'license', 'license', 'license', 'license', 0.92, 1.67, 1.81, 2.02, 2.12, 9.08, 10.7, 0.23, 3.66, 8.32]
+['ranch', 'stable', 'ranch', 'stable', 'ranch', 1.37, 1.51, 1.51, 1.86, 1.91, 9.93, 0.22, 8.38, 0.06, 4.75]
+['fruit', 'fruit', 'fruit', 'fruit', 'fruit', 0.76, 1.92, 1.92, 2.02, 2.25, 0.16, 0.2, 0.2, 0.13, 0.34]
+['willow', 'willow', 'willow', 'willow', 'willow', 0.78, 1.41, 2.24, 2.33, 2.34, 5.7, 4.72, 6.87, 6.34, 5.82]
+['shark', 'shark', 'shark', 'shark', 'shark', 0.4, 2.18, 2.47, 2.65, 2.75, 0.01, 0.05, 0.04, 0.04, 0.07]
+['met', 'cub', 'met', 'met', 'met', 0.55, 1.98, 2.18, 2.25, 2.74, 7.71, 2.91, 7.26, 8.03, 6.26]
+['parked', 'parked', 'parked', 'parked', 'park', 1.36, 1.51, 1.71, 1.72, 1.82, 5.01, 4.2, 5.67, 2.8, 0.76]
+['egg', 'egg', 'egg', 'egg', 'egg', 0.93, 1.11, 2.03, 2.39, 2.95, 0.52, 4.99, 5.03, 0.08, 1.62]
+['giraffe', 'giraffe', 'giraffe', 'giraffe', 'giraffe', 0.49, 1.51, 2.14, 3.48, 3.89, 3.28, 4.15, 6.54, 8.62, 4.85]
+['benjamin franklin', 'ben franklin', 'benjamin franklin', 'benjamin franklin', 'benjamin franklin', 1.21, 1.26, 1.74, 2.07, 2.16, 0.0, 0.03, 0.52, 0.03, 0.01]
+['sign', 'sign', 'sign', 'sign', 'sign', 1.04, 1.68, 1.73, 1.91, 2.01, 5.06, 2.81, 8.67, 15.42, 5.73]
+['swim', 'swim', 'swim', 'swim', 'swim', 1.43, 1.47, 1.55, 1.67, 2.03, 6.81, 6.4, 7.58, 8.29, 4.82]
+['high', 'high', 'high', 'high', 'high', 0.51, 1.99, 2.14, 2.46, 2.83, 0.09, 0.2, 0.25, 0.73, 0.19]
+['ketchup', 'ketchup', 'ketchup', 'ketchup', 'mayo', 0.55, 1.73, 1.97, 2.79, 3.13, 0.31, 0.14, 1.89, 2.57, 1.72]
+['not expensive', 'not expensive', 'moderately', 'very expensive', 'not expensive', 0.0, 7.26, 10.03, 10.64, 11.05, 8.45, 3.63, 14.79, 7.97, 2.79]
+['leap', 'leap', 'leap', 'leap', 'leap', 0.59, 1.26, 2.57, 2.86, 3.67, 16.49, 14.11, 15.45, 15.24, 15.01]
+['clydesdale', 'arabian', 'clydesdale', 'mustang', 'clydesdale', 1.38, 1.57, 1.6, 1.75, 1.82, 0.42, 2.27, 0.27, 0.05, 6.06]
+['pepperoni', 'pepperoni', 'pepperoni', 'pepperoni', 'pepperoni', 0.61, 1.08, 3.15, 3.17, 3.4, 0.06, 0.48, 0.41, 2.88, 4.96]
+['drive', 'drive', 'drive', 'drive', 'drive', 1.05, 1.54, 1.55, 1.88, 2.65, 7.4, 4.44, 7.09, 6.01, 5.95]
+['tokyo', 'tokyo', 'tokyo', 'tokyo', 'tokyo', 0.77, 0.83, 3.28, 3.45, 3.49, 0.02, 10.91, 11.05, 11.16, 11.86]
+['2', '2', '2', '2', '2', 0.41, 1.61, 2.46, 3.6, 3.73, 2.89, 2.64, 1.63, 3.21, 2.48]
+['furniture store', 'furniture store', 'furniture store', 'furniture store', 'walmart', 1.33, 1.47, 1.55, 1.87, 1.97, 5.83, 4.2, 5.11, 5.73, 4.51]
+['honda', 'honda', 'honda', 'honda', 'honda', 0.62, 1.93, 2.14, 2.27, 2.38, 5.16, 1.99, 1.15, 0.59, 1.37]
+['sweatpant', 'legging', 'legging', 'legging', 'legging', 1.02, 1.62, 1.76, 1.93, 2.09, 4.41, 2.44, 10.51, 4.3, 8.17]
+['ticket', 'ticket', 'ticket', 'boarding pass', 'id', 0.93, 1.6, 1.8, 2.05, 2.22, 0.41, 3.42, 3.83, 1.43, 3.69]
+['uk', 'us', 'us', 'uk', 'uk', 0.7, 1.44, 2.31, 2.32, 2.7, 1.55, 1.39, 1.08, 0.13, 0.21]
+['alp', 'alp', 'alp', 'alp', 'alp', 0.96, 1.59, 1.89, 2.01, 2.04, 1.41, 8.48, 3.9, 1.06, 2.65]
+['biplane', 'biplane', 'biplane', 'biplane', 'biplane', 0.28, 1.92, 3.26, 3.36, 3.61, 7.45, 4.06, 8.67, 7.1, 1.46]
+['burger', 'burger', 'hamburger', 'burger', 'burger', 1.06, 1.21, 2.01, 2.19, 2.22, 7.9, 6.24, 5.21, 9.34, 7.5]
+Testing DataLoader 0:  12%|█▏        | 19/158 [02:51<20:53,  9.02s/it]Testing DataLoader 0:  12%|█▏        | 19/158 [02:51<20:53,  9.02s/it]['stir fry', 'stir fry', 'stir fry', 'stir fry', 'stir fry', 0.74, 1.23, 2.22, 2.59, 3.0, 5.5, 11.2, 9.93, 9.96, 9.66]
+['spooky', 'very', 'very', 'very', 'very', 0.11, 2.87, 3.36, 4.69, 5.16, 0.31, 1.15, 1.21, 1.85, 2.66]
+['sick', 'sick', 'sick', 'sick', 'sick', 0.58, 1.6, 2.41, 2.54, 2.7, 14.5, 14.15, 15.95, 8.41, 10.75]
+['garage', 'garage', 'factory', 'garage', 'garage', 0.35, 1.23, 6.43, 6.56, 7.41, 0.77, 2.25, 0.13, 0.08, 0.19]
+['forklift driver', 'foreman', 'forklift driver', 'forklift driver', 'foreman', 0.65, 1.72, 2.12, 2.35, 2.51, 16.07, 11.31, 14.8, 15.75, 10.4]
+['0', '8 oz', 'lot', 'lot', '5 gallons', 0.28, 2.11, 2.96, 3.25, 3.36, 3.29, 3.03, 5.01, 7.26, 1.66]
+['horse', 'ranch', 'horse', 'horse', 'horse', 0.85, 1.38, 1.68, 2.34, 3.26, 7.61, 2.97, 9.65, 11.24, 9.18]
+['gasoline', 'gasoline', 'gasoline', 'gasoline', 'gasoline', 0.68, 1.86, 2.08, 2.17, 2.31, 0.13, 0.25, 0.33, 0.18, 0.1]
+['table', 'ottoman', 'vanity', 'vanity', 'vanity', 1.1, 1.59, 1.69, 1.97, 1.97, 6.11, 8.01, 0.0, 1.13, 0.01]
+['la', 'la', 'la', 'la', 'san francisco', 1.37, 1.59, 1.6, 1.76, 1.79, 8.22, 5.91, 7.23, 3.43, 0.11]
+['goth', 'goth', 'gothic', 'goth', 'goth', 0.4, 1.12, 5.93, 6.03, 7.48, 0.44, 1.31, 1.59, 2.94, 0.68]
+['squat', 'squat', 'squat', 'squat', 'squat', 0.38, 1.85, 2.6, 3.0, 3.31, 0.0, 0.0, 1.99, 0.0, 0.0]
+['nokia', 'nokia', 'nokia', 'nokia', 'nokia', 0.84, 1.01, 2.32, 2.68, 3.32, 2.48, 3.45, 3.3, 3.21, 3.49]
+['alaska', 'alaska', 'zoo', 'zoo', 'alaska', 0.36, 1.77, 2.7, 3.29, 3.57, 1.02, 0.12, 2.95, 6.59, 2.72]
+['smoke', 'contrail', 'contrail', 'smoke', 'smoke', 1.15, 1.28, 1.34, 2.44, 2.88, 12.43, 3.68, 1.63, 11.58, 11.49]
+['practice', 'game', 'practice', 'play', 'play', 0.71, 1.75, 2.0, 2.21, 2.39, 0.67, 1.09, 1.55, 0.53, 3.01]
+["valentine's day", "valentine's day", "valentine's day", "valentine's day", "valentine's", 0.32, 1.97, 2.16, 4.24, 5.15, 1.2, 1.23, 0.53, 0.6, 2.97]
+['strawberry', 'strawberry', 'strawberry', 'strawberry', 'strawberry', 0.56, 1.22, 2.98, 3.1, 3.27, 1.3, 3.32, 4.29, 5.98, 1.11]
+['suit', 'suit', 'suit', 'suit', 'suit', 0.29, 2.62, 2.68, 2.73, 3.11, 0.04, 3.44, 7.6, 0.24, 4.07]
+['texas', 'south', 'texas', 'texas', 'southern', 0.67, 1.49, 1.67, 3.23, 3.27, 4.73, 0.32, 7.12, 3.59, 0.8]
+['dome', 'dome', 'minaret', 'dome', 'minaret', 0.97, 1.04, 2.32, 2.46, 2.48, 1.59, 1.98, 0.03, 2.17, 0.03]
+['fiber', 'fiber', 'fiber', 'fiber', 'fiber', 0.56, 1.79, 1.93, 2.63, 3.12, 0.03, 0.02, 0.01, 0.01, 0.09]
+['bench', 'bench', 'bench', 'bench', 'bench', 1.07, 1.66, 1.73, 1.77, 2.13, 4.44, 2.55, 2.39, 5.15, 6.98]
+['walkway', 'walkway', 'walkway', 'walkway', 'walkway', 1.16, 1.37, 1.56, 2.02, 2.43, 0.19, 0.02, 0.03, 0.41, 3.06]
+['ski hill', 'ski hill', 'ski hill', 'ski hill', 'ski hill', 0.36, 1.55, 2.46, 5.33, 6.6, 10.64, 11.26, 11.93, 10.26, 11.06]
+['williams', 'williams', 'williams', 'williams', 'williams', 0.8, 1.04, 1.97, 3.31, 3.78, 0.71, 3.73, 0.03, 0.01, 0.22]
+['samsung', 'samsung', 'samsung', 'samsung', 'samsung', 0.89, 1.68, 1.91, 2.03, 2.09, 0.46, 4.95, 4.3, 3.42, 4.25]
+['pizza', 'pizza', 'pizza', 'pizza', 'pizza', 0.99, 1.32, 2.03, 2.07, 2.27, 8.16, 10.72, 7.37, 12.5, 11.26]
+['herd', 'herd', 'herd', 'herd', 'herd', 0.9, 1.14, 1.87, 2.77, 2.9, 0.04, 1.0, 1.05, 1.0, 0.02]
+['ford', 'ford', 'porsche', 'ford', 'ford', 0.21, 2.79, 3.12, 3.13, 3.19, 1.71, 0.53, 6.17, 0.92, 0.32]
+['propeller', 'propeller', 'propeller', 'propeller', 'propeller', 0.89, 1.14, 1.85, 2.78, 2.95, 1.43, 2.41, 0.42, 0.04, 0.18]
+['marie antoinette', 'marie antoinette', 'marie antoinette', 'marie antoinette', 'marie antoinette', 0.02, 4.01, 5.61, 6.63, 8.42, 1.01, 0.2, 1.59, 1.73, 0.11]
+Testing DataLoader 0:  13%|█▎        | 20/158 [03:00<20:36,  8.96s/it]Testing DataLoader 0:  13%|█▎        | 20/158 [03:00<20:36,  8.96s/it]['recliner', 'recliner', 'recliner', 'recliner', 'recliner', 0.63, 1.82, 2.12, 2.37, 2.39, 5.38, 7.13, 5.64, 4.11, 0.24]
+['box', 'box', 'box', 'at door', 'box', 0.14, 2.76, 2.9, 5.1, 5.71, 0.3, 0.25, 0.41, 6.98, 0.31]
+['underhand', 'overhand', 'overhand', 'overhand', 'overhand', 0.48, 1.7, 2.2, 3.07, 3.16, 0.45, 0.11, 0.58, 0.12, 0.13]
+['colgate', 'colgate', 'colgate', 'colgate', 'colgate', 1.1, 1.16, 1.78, 2.36, 2.43, 2.51, 1.58, 3.5, 0.92, 3.55]
+['pad', 'pad', 'pad', 'pad', 'pad', 0.84, 1.2, 1.84, 2.7, 3.28, 0.01, 5.47, 0.02, 0.03, 0.03]
+['$500', '5000', '$500', '$60000', '$10000', 0.3, 2.0, 3.05, 3.1, 3.44, 1.33, 3.05, 0.04, 2.36, 0.28]
+['ketchup', 'bbq', 'bbq', 'ketchup', 'bbq', 0.83, 0.97, 2.5, 2.75, 3.32, 10.45, 13.84, 10.64, 7.79, 14.89]
+['bad', 'bad', 'bad', 'bad', 'bad', 0.99, 1.17, 1.75, 2.44, 2.9, 0.02, 0.32, 0.06, 0.04, 0.4]
+['uniform', 'uniform', 'team', 'uniform', 'uniform', 0.87, 1.04, 2.52, 2.55, 2.67, 3.12, 4.73, 10.7, 2.62, 7.82]
+['high', 'high', 'mountain', 'high', 'high', 1.05, 1.41, 1.69, 1.88, 2.65, 0.71, 0.01, 2.96, 1.78, 2.75]
+['rubber', 'rubber', 'neoprene', 'rubber', 'polyester', 0.78, 1.15, 2.37, 2.65, 2.82, 15.54, 3.72, 0.13, 9.9, 0.24]
+['dishwasher', 'microwave', 'dishwasher', 'microwave', 'dishwasher', 0.77, 1.33, 1.52, 3.39, 3.77, 0.04, 0.22, 0.09, 0.26, 1.73]
+['traffic', 'stop', 'stop', 'stop', 'stop', 0.92, 1.41, 1.9, 2.05, 2.57, 3.77, 19.15, 6.35, 14.86, 13.07]
+['camera', 'camera', 'camera', 'camera', 'camera', 0.7, 1.52, 2.05, 2.54, 2.6, 0.29, 0.06, 0.03, 0.07, 0.14]
+['beer', 'beer', 'beer', 'beer', 'beer', 1.11, 1.15, 1.65, 2.44, 2.6, 0.69, 2.63, 0.23, 0.05, 0.52]
+['giant', 'giant', 'giant', 'giant', 'giant', 0.99, 1.74, 1.78, 1.85, 2.04, 9.89, 9.29, 8.64, 10.71, 6.64]
+['delete', 'delete', 'delete', 'delete', 'delete', 0.56, 1.77, 2.06, 2.46, 3.14, 1.71, 0.46, 1.4, 1.68, 3.43]
+['strike', 'foul', 'foul', 'out', 'strike', 0.65, 1.05, 2.91, 3.16, 3.4, 0.46, 1.62, 0.35, 2.55, 3.21]
+['danish', 'english', 'english', 'english', 'english', 0.15, 2.78, 2.83, 4.41, 5.11, 1.55, 2.9, 2.37, 1.8, 4.22]
+['bath', 'bath', 'bath', 'bath', 'bath', 0.88, 1.52, 2.1, 2.1, 2.13, 2.8, 0.0, 4.34, 3.0, 3.81]
+['country', 'country', 'country', 'country', 'country', 0.55, 1.82, 2.19, 2.57, 2.58, 8.58, 9.36, 9.42, 10.34, 7.69]
+['wax', 'wax', 'wax', 'wax', 'wax', 0.46, 1.9, 2.41, 2.64, 2.87, 7.61, 8.91, 3.42, 5.02, 5.26]
+['wetsuit', 'wetsuit', 'wetsuit', 'wetsuit', 'wetsuit', 1.22, 1.53, 1.53, 1.9, 2.09, 11.08, 13.09, 15.3, 16.81, 12.58]
+['cross country', 'cross country', 'cross country', 'cross country', 'cross country', 0.93, 1.52, 1.66, 2.19, 2.47, 1.96, 0.27, 0.03, 1.36, 0.67]
+['bagel', 'bagel', 'bagel', 'bagel', 'bagel', 1.0, 1.08, 1.87, 2.66, 2.72, 8.05, 6.52, 9.35, 7.34, 6.31]
+['pork', 'pork', 'beef', 'beef', 'dog', 0.04, 4.21, 4.59, 4.76, 4.8, 4.34, 6.47, 0.07, 5.19, 7.68]
+['go', 'turn', 'turn', 'go', 'go', 1.13, 1.19, 1.83, 2.02, 2.53, 2.19, 2.65, 1.1, 4.55, 1.71]
+['reed', 'edward dent', 'rex', 'rex', 'ej dent', 0.75, 1.36, 2.05, 2.49, 2.87, 6.1, 0.25, 13.89, 11.82, 0.57]
+['glass cleaner', 'glass cleaner', 'windex', 'windex', 'bleach', 0.38, 1.58, 2.36, 4.49, 5.03, 3.18, 1.61, 0.09, 0.42, 3.81]
+['overcast', 'overcast', 'overcast', 'cloudy', 'overcast', 0.76, 1.39, 2.1, 2.25, 2.87, 10.14, 11.19, 9.69, 1.07, 9.07]
+['herbivore', 'herbivore', 'herbivore', 'herbivore', 'herbivore', 1.07, 1.62, 1.75, 1.94, 1.97, 0.11, 0.05, 0.0, 0.0, 0.06]
+['desktop', 'desktop', 'desktop', 'desktop', 'desktop', 0.59, 1.69, 2.13, 2.52, 2.75, 0.88, 1.33, 0.66, 0.52, 2.31]
+Testing DataLoader 0:  13%|█▎        | 21/158 [03:09<20:28,  8.97s/it]Testing DataLoader 0:  13%|█▎        | 21/158 [03:09<20:28,  8.97s/it]['right', 'right', 'right', 'right', 'right', 0.69, 1.62, 2.27, 2.3, 2.34, 2.08, 2.13, 1.62, 0.48, 3.26]
+['sunday', 'sunday', 'sunday', 'sunday', 'sunday', 0.02, 4.49, 5.22, 5.26, 5.95, 1.26, 1.36, 3.87, 0.02, 0.01]
+['pea', 'pea', 'potato', 'pea', 'pea', 0.82, 1.58, 1.98, 2.12, 2.39, 10.0, 6.67, 0.0, 5.05, 5.72]
+['string', 'string', 'string', 'string', 'string', 0.92, 1.51, 1.92, 2.13, 2.15, 7.6, 7.84, 8.1, 4.65, 6.63]
+['tabby', 'tabby', 'tabby', 'tabby', 'tabby', 0.56, 1.83, 2.3, 2.41, 2.53, 1.17, 0.68, 4.97, 0.46, 4.2]
+['garfield', 'garfield', 'garfield', 'sylvester', 'samuel fox', 0.05, 3.99, 4.0, 5.07, 5.48, 4.95, 0.01, 4.41, 2.57, 5.92]
+['remote', 'remote', 'remote', 'remote', 'remote', 0.77, 1.69, 1.75, 2.4, 2.44, 8.57, 10.22, 9.7, 12.9, 13.46]
+['shell', 'shell', 'shell', 'shell', 'shell', 0.01, 5.02, 6.01, 6.7, 6.8, 0.26, 5.41, 0.84, 0.03, 0.9]
+['anniversary', 'anniversary', 'anniversary', 'wed', 'anniversary', 1.33, 1.34, 1.56, 1.95, 2.1, 0.0, 0.55, 0.01, 0.34, 0.0]
+['spring', 'spring', 'fall', 'fall', 'spring', 1.22, 1.22, 1.9, 2.0, 2.08, 1.1, 3.0, 0.93, 0.98, 2.09]
+['rocky', 'alp', 'rocky', 'rockies', 'alp', 0.31, 2.51, 2.68, 2.71, 2.95, 0.34, 0.19, 0.22, 0.53, 1.37]
+['best buy', 'walmart', 'best buy', 'best buy', 'walmart', 0.29, 2.32, 2.5, 3.28, 3.38, 1.14, 0.11, 0.11, 0.17, 1.1]
+['captain', 'captain', 'captain', 'captain', 'captain', 0.31, 2.24, 2.7, 2.71, 3.59, 9.69, 9.01, 10.47, 8.96, 8.71]
+['stratosphere', 'upper', 'upper', 'stratosphere', 'altitude', 1.03, 1.51, 1.67, 1.75, 2.8, 0.31, 0.83, 0.83, 0.19, 2.53]
+['plow', 'plow', 'plow', 'plow', 'plow', 0.13, 2.93, 3.52, 3.77, 4.07, 4.01, 0.32, 9.67, 11.9, 1.53]
+['trailer', 'trailer', 'trailer', 'trailer', 'trailer', 1.03, 1.71, 1.8, 1.9, 1.92, 6.38, 12.68, 10.94, 9.45, 10.59]
+['goatee', 'goatee', 'goatee', 'goatee', 'goatee', 0.2, 2.63, 3.15, 3.4, 3.51, 0.04, 0.01, 0.02, 0.01, 0.02]
+['american airline', 'american airline', 'boeing', 'american airline', 'american airline', 1.07, 1.58, 1.81, 1.81, 2.09, 0.29, 0.18, 0.0, 0.26, 3.52]
+['gibson', 'fender', 'fender', 'fender', 'fender', 0.42, 1.36, 3.3, 3.53, 3.8, 0.38, 0.0, 0.25, 0.15, 0.4]
+['penny farthing', 'penny farthing', 'penny farthing', 'penny farthing', 'penny farthing', 0.82, 1.39, 2.26, 2.27, 2.3, 15.97, 16.27, 15.15, 16.49, 13.87]
+['graze', 'they are vegetarian', 'graze', 'they are hungry', 'grass', 0.79, 1.72, 2.04, 2.13, 2.14, 8.17, 1.74, 13.61, 2.38, 4.07]
+['tusk', 'tusk', 'tusk', 'tusk', 'tusk', 1.28, 1.36, 1.51, 2.06, 2.16, 7.03, 8.67, 2.81, 0.07, 0.03]
+['good', 'good', 'good', 'good', 'good', 0.78, 1.34, 2.33, 2.35, 2.41, 0.34, 0.0, 0.01, 0.01, 0.03]
+['astros', 'yankees', 'yankees', 'yankees', 'yankees', 1.01, 1.04, 2.15, 2.38, 2.64, 0.24, 1.02, 0.83, 0.06, 0.1]
+['short', 'short', 'short', 'short', 'short', 1.15, 1.53, 1.78, 1.86, 1.95, 8.23, 5.69, 7.24, 7.61, 5.7]
+['prom', 'work', 'work', 'work', 'smile', 0.92, 1.31, 1.5, 2.74, 3.2, 17.07, 1.36, 3.78, 2.85, 14.18]
+['take selfie', 'take selfie', 'take picture', 'take picture', 'take selfie', 0.59, 1.41, 2.18, 3.02, 3.25, 12.09, 7.48, 10.27, 15.74, 13.22]
+['cowboy', 'cowboy', 'cowboy', 'cowboy', 'cowboy', 0.27, 1.67, 3.67, 4.42, 4.54, 13.06, 14.93, 11.93, 12.64, 10.97]
+['mystery', 'mystery', 'history', 'mystery', 'topology', 0.34, 2.27, 2.43, 2.87, 3.16, 3.99, 0.1, 3.6, 8.41, 1.35]
+['sweet', 'sweet', 'sweet', 'sweet', 'sweet', 0.14, 3.05, 3.26, 3.66, 3.86, 5.83, 10.64, 6.15, 4.27, 6.28]
+['steam', 'steam', 'locomotive', 'steam', 'locomotive', 0.49, 1.32, 2.64, 3.5, 4.13, 2.88, 4.92, 0.24, 3.42, 1.36]
+['rice', 'rice', 'lo mein', 'rice', 'rice', 0.06, 4.08, 4.15, 4.47, 4.59, 6.16, 6.98, 0.01, 7.7, 7.77]
+Testing DataLoader 0:  14%|█▍        | 22/158 [03:16<19:06,  8.43s/it]Testing DataLoader 0:  14%|█▍        | 22/158 [03:16<19:06,  8.43s/it]['smoothie', 'salad', 'shake', 'smoothie', 'shake', 0.59, 1.68, 2.03, 2.66, 2.8, 0.11, 3.77, 6.87, 0.34, 8.75]
+['sad', 'sad', 'sad', 'sad', 'sad', 0.2, 1.83, 4.31, 5.11, 6.21, 0.03, 0.09, 0.02, 0.03, 0.0]
+['brown', 'brown', 'brown', 'brown', 'brown', 1.51, 1.62, 1.62, 1.65, 1.66, 1.09, 0.42, 1.23, 0.28, 1.81]
+['ski', 'ski', 'ski', 'ski', 'ski', 0.99, 1.39, 1.81, 2.08, 2.4, 6.71, 9.97, 7.16, 3.68, 4.15]
+['men', 'men', 'male', 'men', 'men', 0.25, 1.82, 3.66, 3.91, 4.5, 11.14, 8.79, 6.21, 4.22, 11.37]
+['honda', 'honda', 'honda', 'honda', 'honda', 0.32, 2.36, 2.69, 2.91, 2.92, 5.17, 0.07, 0.13, 0.12, 0.54]
+['chasing prey', 'migration', 'scavenge food', 'mate', 'scavenge food', 0.43, 1.32, 3.38, 3.56, 3.8, 19.82, 0.2, 11.57, 5.92, 7.95]
+['interstate', 'interstate', 'interstate', 'interstate', 'interstate', 0.58, 1.17, 2.95, 3.16, 3.34, 0.34, 1.46, 0.67, 2.48, 2.06]
+['india', 'india', 'plantation', 'india', 'india', 0.15, 2.69, 3.46, 3.6, 4.37, 8.1, 7.57, 1.93, 14.85, 18.75]
+['desk', 'desk', 'desk', 'desk', 'desk', 0.73, 1.43, 2.28, 2.35, 2.54, 0.04, 0.0, 0.03, 0.09, 0.0]
+['see', 'see', 'see', 'see', 'vision', 0.49, 1.83, 2.53, 2.54, 2.68, 6.66, 0.73, 8.73, 1.24, 0.46]
+['rattan', 'bamboo', 'wicker', 'wicker', 'wicker', 0.76, 1.21, 2.38, 2.63, 2.64, 0.65, 1.8, 0.9, 0.08, 0.25]
+['golden gate', 'suspension', 'suspension', 'suspension', 'suspension', 0.03, 4.08, 5.25, 5.98, 6.02, 1.99, 0.46, 0.23, 0.22, 0.18]
+['see', 'see', 'see', 'see', 'see', 0.05, 4.2, 4.47, 4.65, 4.8, 8.0, 3.65, 3.53, 6.42, 5.11]
+['canopy', 'canopy', 'canopy', 'canopy', 'canopy', 0.28, 2.65, 2.69, 2.89, 2.93, 8.9, 15.44, 11.61, 11.68, 11.63]
+['fish', 'fish', 'fish', 'fish', 'fish', 0.02, 5.12, 5.57, 5.64, 5.88, 10.24, 12.78, 11.37, 11.48, 12.09]
+['scottsdale', 'scottsdale', 'san diego', 'san diego', 'san diego', 0.45, 1.98, 2.53, 2.58, 2.63, 15.37, 17.1, 13.95, 17.77, 6.1]
+['bunk', 'bunk', 'bunk', 'bunk', 'bunk', 1.37, 1.53, 1.65, 1.67, 1.91, 0.1, 4.38, 0.57, 1.85, 1.42]
+['zebra', 'zebra', 'zebra', 'zebra', 'zebra', 0.11, 2.85, 4.07, 4.32, 4.37, 6.52, 8.0, 4.07, 4.73, 5.79]
+['space', 'space', 'space', 'space', 'space', 1.39, 1.4, 1.41, 1.84, 2.29, 11.54, 10.08, 10.92, 9.27, 10.55]
+['sahara', 'sahara', 'sahara', 'sahara', 'sahara', 0.2, 1.99, 3.96, 4.0, 4.82, 10.7, 9.46, 12.85, 8.44, 13.26]
+['ear', 'ear', 'ear', 'ear', 'ear', 0.85, 1.37, 2.05, 2.25, 2.49, 2.53, 3.23, 0.79, 0.89, 1.27]
+['english', 'english', 'english', 'chinese', 'english', 0.5, 1.97, 2.23, 2.49, 2.76, 5.66, 4.06, 4.1, 0.43, 0.25]
+['shark', 'shark', 'shark', 'shark', 'shark', 1.07, 1.45, 1.6, 2.17, 2.25, 0.0, 0.0, 0.06, 0.01, 0.02]
+['ford', 'up', 'mhr', 'ford', 'dixie chopper', 0.99, 1.5, 1.7, 2.17, 2.23, 1.12, 0.0, 2.43, 5.59, 6.1]
+['canada', 'switzerland', 'united state', 'united state', 'us', 0.76, 1.92, 1.92, 2.09, 2.18, 1.98, 10.02, 3.54, 6.25, 5.34]
+['tail', 'string', 'tail', 'string', 'tail', 0.35, 1.92, 2.92, 3.04, 3.14, 0.0, 2.5, 0.01, 4.42, 0.0]
+['american airline', 'american airline', 'american airline', 'american airline', 'american airline', 1.14, 1.32, 1.85, 1.94, 2.19, 15.27, 10.01, 9.05, 14.84, 14.31]
+['wax', 'wax', 'paper', 'wax', 'wax', 0.99, 1.26, 1.63, 2.59, 2.63, 5.88, 7.72, 7.52, 0.43, 12.17]
+['1930', '1930', '1930', '1897', '1869', 1.26, 1.44, 1.56, 1.67, 2.5, 3.81, 2.97, 3.79, 2.39, 3.08]
+['30', '20', '20', '20', '20', 0.13, 3.17, 3.51, 3.66, 3.78, 0.92, 2.66, 2.56, 1.51, 1.22]
+['carpet', 'carpet', 'carpet', 'tulle', 'carpet', 0.49, 1.97, 2.04, 2.5, 3.31, 3.84, 3.87, 4.02, 19.01, 3.87]
+Testing DataLoader 0:  15%|█▍        | 23/158 [03:25<19:19,  8.59s/it]Testing DataLoader 0:  15%|█▍        | 23/158 [03:25<19:19,  8.59s/it]['transportation', 'transportation', 'fly', 'transportation', 'transportation', 1.15, 1.36, 1.71, 1.96, 2.26, 0.24, 0.05, 12.53, 0.12, 0.52]
+['ale', 'ale', 'ale', 'ale', 'ale', 0.72, 0.88, 2.83, 3.55, 4.39, 0.67, 0.78, 3.45, 4.42, 5.3]
+['jet fuel', 'jet fuel', 'jet fuel', 'jet fuel', 'gasoline', 1.24, 1.49, 1.63, 1.69, 2.25, 1.04, 0.63, 1.59, 1.31, 1.61]
+['ferris wheel', 'big wheel', 'ferris wheel', 'ferris wheel', 'ferris wheel', 0.26, 2.48, 2.89, 3.04, 3.2, 0.79, 0.41, 0.1, 0.13, 0.26]
+['round', 'round', 'round', 'circle', 'circle', 0.81, 1.68, 1.86, 2.07, 2.42, 3.5, 1.38, 8.23, 1.34, 5.11]
+['reflect', 'light', 'reflection', 'reflection', 'reflect', 0.33, 2.37, 2.68, 2.74, 2.88, 1.33, 3.75, 0.62, 0.31, 1.81]
+['tusk', 'tusk', 'tusk', 'tusk', 'tusk', 0.98, 1.66, 1.79, 1.82, 2.26, 15.74, 17.31, 7.85, 4.37, 12.89]
+['court', 'court', 'court', 'court', 'court', 0.31, 2.3, 2.48, 3.01, 3.45, 0.0, 0.02, 0.02, 0.0, 1.94]
+['soap', 'mirror', 'soap', 'mirror', 'soap', 0.13, 2.38, 4.53, 4.53, 4.78, 7.26, 10.9, 8.24, 8.57, 7.73]
+['food', 'food', 'food', 'food', 'food', 0.69, 1.8, 1.85, 2.32, 2.54, 9.72, 11.02, 11.23, 11.85, 10.09]
+['jet', 'jet', 'jet', 'jet', 'jet', 0.74, 1.66, 2.14, 2.18, 2.29, 4.8, 1.77, 1.91, 2.51, 4.08]
+['suit', 'suit', 'suit', 'suit', 'suit', 0.32, 1.75, 2.6, 4.26, 4.45, 9.15, 0.84, 6.54, 2.01, 6.98]
+['safe', 'safe', 'safe', 'safe', 'safe', 0.64, 1.21, 2.38, 2.94, 3.49, 0.0, 0.0, 1.35, 0.69, 0.08]
+['fight fire', 'fight fire', 'fight fire', 'fight fire', 'fight fire', 0.48, 1.01, 4.74, 5.1, 5.18, 23.32, 26.16, 23.77, 26.41, 24.54]
+['english', 'english', 'english', 'english', 'english', 1.21, 1.53, 1.7, 1.75, 2.05, 0.84, 0.47, 0.64, 2.35, 1.13]
+['sister', 'sister', 'sister', 'sister', 'sister', 0.07, 2.8, 5.04, 5.82, 7.02, 4.27, 1.64, 1.44, 0.94, 0.79]
+['100 mph', '200 mph', '100 mph', '80 mph', 'fast', 0.51, 1.66, 2.56, 2.64, 2.77, 0.67, 0.63, 0.56, 3.8, 6.22]
+['moen', 'moen', 'moen', 'kohler', 'moen', 1.05, 1.2, 1.65, 2.24, 2.96, 0.0, 0.0, 0.0, 0.06, 0.01]
+['pillow', 'bed', 'bed', 'bed', 'bed', 1.14, 1.25, 1.6, 2.03, 2.79, 0.32, 2.28, 2.46, 3.4, 3.12]
+['atlantic', 'atlantic', 'atlantic', 'east', 'atlantic', 1.25, 1.43, 1.69, 1.7, 2.22, 0.7, 1.5, 1.28, 2.98, 3.13]
+['5 feet', '6 feet', '5 feet', '10 feet', '30 feet', 0.14, 3.06, 3.39, 3.42, 3.94, 6.04, 2.26, 4.42, 6.22, 6.26]
+['barber school', 'barber', 'barber school', 'barber school', 'barber school', 0.82, 1.67, 1.91, 2.01, 2.39, 10.0, 8.13, 8.22, 5.39, 8.65]
+['office', 'apartment', 'bus station', 'hotel', 'bus', 0.82, 0.97, 2.55, 2.57, 3.67, 6.34, 0.1, 10.32, 1.46, 13.02]
+['samuel fox', 'samuel fox', 'samuel fox', 'samuel fox', 'samuel fox', 0.69, 1.78, 1.98, 2.14, 2.59, 3.48, 2.67, 3.31, 3.3, 3.01]
+['clydesdale', 'clydesdale', 'clydesdale', 'clydesdale', 'clydesdale', 1.26, 1.6, 1.7, 1.77, 1.82, 5.81, 5.1, 8.42, 8.51, 5.95]
+['ski', 'ski', 'ski', 'ski', 'ski', 0.24, 2.53, 3.08, 3.09, 3.14, 4.35, 5.3, 8.13, 5.77, 5.75]
+['bear', 'bear', 'bear', 'bear', 'bear', 0.05, 3.58, 4.15, 5.53, 5.83, 0.39, 0.06, 0.19, 1.7, 4.15]
+['internet', 'internet', 'computer', 'computer', 'computer', 0.81, 1.34, 2.12, 2.46, 2.46, 6.42, 4.55, 2.22, 1.56, 1.68]
+['safety', 'safety', 'safety', 'safety', 'safety', 0.16, 2.68, 3.3, 3.56, 4.06, 1.68, 1.67, 5.75, 0.21, 9.01]
+['brush teeth', 'brush teeth', 'brush teeth', 'brush teeth', 'brush teeth', 0.85, 1.29, 1.54, 2.95, 3.5, 13.06, 12.91, 13.19, 13.0, 9.25]
+['beef', 'pulled pork', 'pulled pork', 'pulled pork', 'pulled pork', 0.82, 1.6, 1.91, 2.1, 2.44, 6.24, 10.83, 16.16, 9.99, 6.92]
+['5000', '5000', 'thousand', 'thousand', '5000', 0.41, 1.64, 2.61, 3.02, 4.03, 3.23, 4.35, 3.59, 1.27, 3.1]
+Testing DataLoader 0:  15%|█▌        | 24/158 [03:33<19:10,  8.58s/it]Testing DataLoader 0:  15%|█▌        | 24/158 [03:33<19:10,  8.58s/it]['stopped', 'parked', 'parked', 'parked', 'stopped', 0.54, 1.97, 2.36, 2.38, 2.4, 8.19, 0.43, 0.3, 0.25, 6.35]
+['eagle', 'eagle', 'eagle', 'seagull', 'seagull', 0.62, 1.64, 2.09, 2.41, 2.89, 6.19, 4.91, 5.27, 1.81, 0.7]
+['rubber', 'rubber', 'rubber', 'rubber', 'rubber', 0.64, 1.73, 2.05, 2.43, 2.51, 1.07, 0.69, 0.59, 0.3, 1.05]
+['biscuit', 'biscuit', 'biscuit', 'biscuit', 'biscuit', 1.05, 1.36, 1.86, 1.92, 2.38, 2.51, 2.18, 6.22, 0.12, 10.71]
+['brown', 'brown', 'brown', 'brown', 'brown', 1.42, 1.6, 1.64, 1.67, 1.74, 1.09, 2.06, 1.47, 0.42, 0.61]
+['firemen', 'firemen', 'firemen', 'firemen', 'firemen', 0.2, 2.44, 3.42, 3.47, 3.52, 12.75, 12.63, 6.06, 12.41, 15.36]
+['honda', 'honda', 'honda', 'bmw', 'honda', 1.37, 1.6, 1.62, 1.74, 1.78, 1.7, 2.36, 2.6, 0.26, 6.44]
+['tree', 'tree', 'tree', 'tree', 'tree', 0.42, 2.12, 2.45, 2.61, 2.8, 2.52, 2.66, 1.39, 0.32, 1.06]
+['pizza', 'face', 'face', 'face', 'face', 0.46, 1.88, 2.33, 2.73, 2.9, 3.37, 5.82, 6.67, 6.73, 6.77]
+['apple slicer', 'apple slicer', 'apple slicer', 'apple slicer', 'apple slicer', 0.61, 1.03, 3.32, 3.47, 3.49, 22.1, 20.4, 29.45, 19.37, 18.09]
+['tennis', 'tennis', 'tennis', 'tennis', 'tennis', 0.38, 1.81, 2.57, 3.2, 3.38, 8.53, 5.36, 8.48, 8.56, 6.95]
+['million', 'million', 'million', 'million', 'million', 0.65, 1.19, 2.64, 2.8, 3.25, 2.46, 2.78, 2.82, 2.85, 2.07]
+['light', 'light', 'light', 'light', 'reflection', 0.8, 0.95, 2.72, 3.0, 3.01, 0.86, 2.44, 1.45, 0.33, 0.32]
+['floral', 'floral', 'floral', 'floral', 'floral', 0.76, 1.09, 2.22, 2.9, 3.39, 1.96, 2.73, 6.51, 2.44, 2.38]
+['thomas', 'thomas', 'thomas', 'thomas', 'thomas', 0.62, 1.84, 2.11, 2.32, 2.45, 17.64, 11.24, 0.86, 16.05, 0.61]
+['engineer', 'passenger', 'passenger', 'passenger', 'passenger', 0.63, 1.35, 2.23, 2.68, 3.49, 4.32, 0.0, 0.08, 0.21, 0.14]
+['january', 'may', 'fall', 'march', 'fall', 0.76, 1.72, 1.91, 1.99, 2.68, 1.79, 2.23, 3.73, 0.63, 3.95]
+['red', 'red', 'yellow', 'yellow', 'green', 0.77, 1.24, 2.19, 2.59, 2.8, 4.44, 2.2, 3.82, 2.41, 0.94]
+['club', 'club', 'club', 'club', 'club', 0.22, 2.37, 3.16, 3.18, 3.94, 4.31, 0.0, 0.25, 0.09, 0.15]
+['air show', 'air show', 'air show', 'air show', 'air show', 0.59, 1.04, 3.3, 3.31, 3.85, 13.92, 8.81, 9.13, 14.35, 11.03]
+['shepherd', 'shepherd', 'shepherd', 'shepherd', 'shepherd', 0.18, 2.47, 3.15, 4.01, 4.03, 4.8, 3.58, 2.9, 3.47, 4.11]
+['endangered', 'many', 'many', 'many', 'many', 0.11, 3.35, 3.64, 3.9, 3.94, 0.42, 0.9, 5.06, 1.42, 2.13]
+['picture', 'picture', 'picture', 'picture', 'picture', 0.72, 1.07, 2.52, 3.01, 3.3, 0.08, 1.05, 0.07, 0.07, 0.06]
+['hold', 'hold', 'hold', 'direction', 'dish', 0.9, 1.61, 1.65, 2.15, 2.46, 7.15, 4.44, 8.43, 1.77, 12.5]
+['1930', '1940', '1940', '1940', '1930', 0.27, 2.56, 2.62, 2.84, 3.73, 0.23, 0.86, 3.92, 0.93, 0.78]
+['man', 'man', 'man', 'man', 'man', 0.81, 1.84, 1.98, 2.04, 2.05, 7.45, 1.26, 8.84, 10.95, 8.33]
+['coin', 'coin', 'coin', 'coin', 'coin', 0.99, 1.01, 2.28, 2.41, 2.66, 3.64, 10.51, 2.58, 1.57, 7.43]
+['stripe', 'stripe', 'stripe', 'stripe', 'stripe', 0.74, 1.23, 2.32, 2.56, 2.88, 3.04, 1.85, 4.85, 1.75, 9.46]
+['even', 'even', 'even', 'even', 'even', 1.16, 1.16, 1.18, 3.06, 3.86, 0.93, 0.9, 0.9, 0.65, 1.48]
+['tell time', 'tell time', 'tell time', 'tell time', 'tell time', 0.86, 1.5, 1.86, 2.3, 2.32, 0.7, 0.56, 1.5, 0.82, 0.77]
+['train', 'railroad', 'train', 'rail', 'train', 0.71, 0.75, 4.38, 4.47, 4.56, 0.39, 0.23, 0.15, 0.08, 0.71]
+['lot', 'lot', 'lot', '20 grams', '8 oz', 0.67, 1.85, 1.93, 2.09, 2.78, 6.73, 7.79, 6.96, 7.67, 0.78]
+Testing DataLoader 0:  16%|█▌        | 25/158 [03:42<19:01,  8.59s/it]Testing DataLoader 0:  16%|█▌        | 25/158 [03:42<19:01,  8.59s/it]['pepsi', 'coke', 'coke', 'pepsi', 'pepsi', 1.31, 1.55, 1.61, 1.73, 1.96, 0.8, 0.61, 0.42, 0.52, 0.65]
+['beach', 'beach', 'beach', 'beach', 'beach', 0.14, 3.15, 3.32, 3.52, 3.98, 0.83, 5.99, 9.91, 4.45, 8.5]
+['apple pie', 'hot dog', 'apple pie', 'baseball', 'pie', 0.52, 1.61, 2.54, 2.69, 2.88, 0.01, 1.29, 0.8, 2.79, 0.66]
+['sailboat', 'sail', 'sailboat', 'sail', 'sail', 0.36, 2.02, 2.46, 3.17, 3.19, 1.18, 4.24, 3.89, 5.78, 5.78]
+['heron', 'heron', 'heron', 'heron', 'heron', 0.24, 2.9, 2.91, 2.93, 3.01, 7.86, 7.65, 9.97, 7.39, 9.96]
+['outside', 'outside', 'restaurant', 'outside', 'outside', 0.72, 1.48, 1.95, 2.17, 3.57, 2.5, 2.11, 0.23, 3.59, 4.25]
+['wireless', 'wireless', 'wireless', 'cordless', 'cordless', 0.47, 1.94, 2.13, 2.57, 3.27, 1.23, 1.25, 0.92, 0.15, 0.36]
+['fast food', 'fast food', 'fast food', 'fast food', 'fast food', 0.77, 1.51, 2.0, 2.39, 2.44, 6.53, 10.71, 8.02, 8.25, 5.37]
+['suitcase', 'luggage', 'luggage', 'luggage', 'luggage', 0.11, 3.12, 3.51, 4.0, 4.14, 0.13, 9.45, 15.95, 11.38, 10.89]
+['sheep dog', 'sheep dog', 'sheep dog', 'sheep dog', 'sheep dog', 0.3, 2.3, 2.59, 3.14, 3.28, 7.95, 7.26, 7.72, 7.29, 7.32]
+['banana', 'banana', 'banana', 'banana', 'banana', 0.81, 1.16, 2.2, 2.61, 2.83, 4.1, 1.73, 2.81, 1.74, 7.28]
+['soup', 'soup', 'soup', 'soup', 'soup', 1.42, 1.61, 1.65, 1.68, 1.71, 4.25, 4.1, 5.22, 10.79, 4.09]
+['500', '600', '500', '500', '500', 1.17, 1.23, 1.66, 2.18, 2.35, 0.22, 2.98, 0.91, 0.63, 2.42]
+['thick', 'thick', 'thick', 'thin', 'thick', 1.01, 1.21, 2.05, 2.06, 2.46, 0.7, 1.57, 2.74, 0.11, 1.66]
+['150 mph', '100 mph', '200 mph', '400 mph', 'fast', 0.58, 1.5, 2.46, 2.66, 2.75, 1.33, 4.45, 2.17, 2.68, 8.57]
+['cow', 'cow', 'cow', 'cow', 'cow', 0.41, 2.09, 2.57, 2.64, 2.71, 0.22, 0.26, 0.05, 2.39, 0.34]
+['far sighted', 'far', 'far sighted', 'far', 'farsighted', 1.28, 1.47, 1.68, 1.86, 1.88, 0.44, 1.08, 0.67, 0.71, 0.45]
+['peanut', 'leaf', 'peanut', 'peanut', 'peanut', 1.26, 1.35, 1.78, 1.92, 1.95, 8.06, 7.42, 13.06, 9.86, 6.98]
+['train station', 'bus', 'bus', 'bus stop', 'bus', 0.86, 1.79, 1.8, 2.07, 2.13, 5.34, 8.55, 1.3, 0.38, 2.64]
+['collar', 'collar', 'leash', 'leash', 'leash', 0.87, 1.05, 2.03, 2.82, 3.19, 8.85, 9.17, 0.09, 0.17, 0.0]
+['potassium', 'potassium', 'potassium', 'potassium', 'fiber', 1.41, 1.41, 1.64, 1.77, 1.92, 0.32, 2.33, 2.86, 3.79, 0.73]
+['tulip', 'tulip', 'tulip', 'flower', 'flower', 1.21, 1.38, 1.56, 2.11, 2.12, 6.91, 12.57, 5.19, 0.89, 0.99]
+['coal', 'fuel', 'oil', 'coal', 'coal', 0.83, 1.55, 1.9, 2.28, 2.3, 0.13, 2.83, 0.04, 0.2, 0.21]
+['cupcake', 'cupcake', 'cupcake', 'cupcake', 'cupcake', 0.49, 1.87, 2.39, 2.62, 2.7, 15.52, 17.67, 15.87, 16.29, 15.79]
+['chinese', 'chinese', 'chinese', 'chinese', 'chinese', 1.05, 1.57, 1.76, 1.82, 2.21, 7.78, 7.71, 7.04, 2.59, 9.44]
+['marker', 'marker', 'spray paint', 'marker', 'marker', 0.68, 1.61, 2.16, 2.34, 2.5, 4.06, 3.07, 9.08, 5.57, 2.21]
+['richard trevithick', 'thomas eddy', 'thomas eddy', 'thomas eddy', 'thomas eddy', 1.07, 1.32, 1.86, 1.92, 2.44, 3.8, 5.14, 5.48, 9.93, 10.24]
+['2 feet', '2 feet', '18 inches', '2 feet', '20 inches', 0.91, 1.23, 2.09, 2.23, 2.61, 3.31, 4.87, 0.93, 0.6, 0.09]
+['tabby', 'calico', 'calico', 'calico', 'calico', 0.28, 2.12, 2.84, 3.3, 3.5, 0.78, 2.88, 3.74, 5.44, 5.49]
+['herbivorous', 'herbivorous', 'herbivorous', 'herbivorous', 'herbivorous', 0.64, 1.46, 2.14, 2.68, 2.89, 0.36, 0.04, 0.04, 0.74, 0.1]
+['tomato', 'mustard', 'mustard', 'ketchup', 'mustard', 0.57, 1.67, 2.07, 2.61, 3.0, 0.43, 1.14, 4.49, 0.0, 0.01]
+['messy', 'messy', 'unorganized', 'not organized', 'messy', 0.24, 1.89, 3.21, 4.27, 4.53, 2.02, 2.2, 1.85, 0.96, 7.04]
+Testing DataLoader 0:  16%|█▋        | 26/158 [03:52<19:44,  8.98s/it]Testing DataLoader 0:  16%|█▋        | 26/158 [03:52<19:44,  8.98s/it]['steven spielberg', 'steven spielberg', 'steven spielberg', 'steven spielberg', 'steven spielberg', 0.49, 1.26, 2.65, 3.88, 4.52, 3.39, 4.64, 10.76, 3.97, 7.69]
+['steamed', 'steamed', 'steamed', 'steamed', 'steamed', 0.95, 0.99, 1.82, 3.09, 3.4, 0.39, 0.27, 0.09, 0.02, 0.09]
+['black and white', 'black', 'black and white', 'black and white', 'sepia', 0.33, 2.48, 2.59, 2.79, 2.84, 2.99, 1.01, 6.11, 10.26, 2.12]
+['broken leg', 'broken bone', 'sprain', 'fall', 'sprain', 0.29, 2.16, 2.29, 3.94, 4.04, 0.55, 3.35, 1.14, 5.63, 5.25]
+['stand', 'stand', 'stand', 'stand', 'stand', 0.54, 1.8, 1.84, 2.63, 3.73, 13.36, 7.09, 8.6, 8.51, 8.4]
+['roll', 'white', 'sourdough', 'sourdough', 'rye', 0.66, 1.27, 2.23, 3.02, 3.09, 2.84, 0.66, 0.84, 0.61, 0.59]
+['lot', 'lot', 'lot', 'lot', 'lot', 0.27, 2.32, 2.38, 3.63, 3.9, 8.21, 5.36, 10.1, 8.97, 9.39]
+['french fry', 'french fry', 'french fry', 'french fry', 'french fry', 0.94, 1.35, 2.01, 2.07, 2.42, 10.85, 9.24, 6.67, 10.29, 12.07]
+['global warm', 'global warm', 'climate change', 'climate change', 'climate change', 0.86, 1.5, 1.83, 2.22, 2.48, 1.31, 5.78, 0.1, 0.75, 0.39]
+['polo', 'horse race', 'horse race', 'polo', 'horse race', 0.04, 4.13, 4.36, 4.41, 6.54, 0.55, 5.84, 5.95, 0.15, 5.52]
+['beginner', 'beginner', 'beginner', 'beginner', 'advanced', 0.01, 5.82, 5.95, 6.57, 6.58, 1.93, 0.4, 3.93, 0.34, 0.17]
+['olive', 'olive', 'olive', 'olive', 'olive', 0.94, 1.77, 1.82, 1.9, 2.05, 0.42, 10.33, 10.07, 9.69, 7.44]
+['benjamin franklin', 'benjamin franklin', 'benjamin franklin', 'benjamin franklin', 'benjamin franklin', 0.68, 1.38, 2.04, 2.76, 3.05, 0.01, 0.0, 0.01, 0.01, 1.03]
+['juice', 'iced tea', 'juice', 'iced tea', 'juice', 0.89, 1.52, 1.85, 2.04, 2.5, 0.1, 8.25, 1.61, 8.22, 6.14]
+['picket', 'picket', 'picket', 'picket', 'white picket', 0.63, 1.45, 2.19, 2.77, 2.84, 4.24, 6.99, 0.12, 4.94, 3.42]
+['15', '25', '$32', '15', '40', 0.63, 1.78, 2.14, 2.22, 2.67, 4.32, 3.51, 2.31, 2.64, 1.68]
+['ebay', 'ebay', 'ebay', 'antique mall', 'antique mall', 0.73, 0.89, 3.18, 3.32, 3.42, 4.61, 0.02, 0.81, 7.88, 8.73]
+["2000's", "2000's", "1990's", "2000's", "1990's", 0.25, 1.88, 3.68, 3.75, 4.11, 2.55, 2.08, 1.41, 1.46, 0.41]
+['carrot', 'carrot', 'carrot', 'carrot', 'carrot', 0.91, 1.4, 1.99, 2.16, 2.31, 3.26, 2.4, 3.61, 3.37, 3.08]
+['hike', 'hike', 'hike', 'hike', 'hike', 0.41, 1.51, 2.87, 3.46, 3.66, 7.49, 11.96, 8.2, 6.45, 5.54]
+['cafeteria', 'cafeteria', 'cafeteria', 'cafeteria', 'cafeteria', 0.78, 1.41, 1.85, 2.52, 2.83, 4.86, 3.96, 11.48, 7.52, 4.05]
+['monitor', 'monitor', 'monitor', 'monitor', 'monitor', 0.66, 1.45, 2.29, 2.48, 2.8, 0.0, 0.12, 0.63, 6.23, 0.01]
+['phone', 'phone', 'phone', 'phone', 'phone', 0.78, 1.42, 2.19, 2.21, 2.54, 2.23, 1.49, 5.09, 1.66, 0.45]
+['watch tv', 'watch tv', 'watch tv', 'watch tv', 'watch tv', 0.47, 1.67, 2.74, 2.75, 2.83, 1.98, 0.46, 6.36, 0.43, 0.77]
+['8 years', '8 years', '15 years', '8 years', '8 years', 0.03, 3.99, 5.5, 5.51, 5.88, 2.6, 2.34, 2.24, 2.68, 2.31]
+['freight', 'passenger', 'passenger', 'freight', 'passenger', 0.87, 1.55, 2.04, 2.11, 2.13, 0.3, 0.95, 2.3, 0.75, 1.85]
+['safe', 'unsafe', 'unsafe', 'unsafe', 'unsafe', 0.71, 1.76, 1.99, 2.13, 2.54, 0.66, 0.06, 0.02, 0.05, 0.1]
+['sit', 'sit', 'sit', 'sit', 'sit', 0.81, 0.99, 2.23, 2.96, 3.65, 2.76, 4.76, 3.6, 6.32, 7.72]
+['western', 'western', 'cowboy', 'easy rider', 'western', 0.08, 2.6, 5.35, 7.12, 7.84, 0.1, 0.01, 0.46, 0.36, 0.06]
+['bear', 'old woman', 'old woman', 'bear', 'old woman', 1.16, 1.58, 1.75, 1.84, 1.89, 5.52, 7.93, 5.15, 5.67, 5.67]
+['rawling', 'spalding', 'goldsmith', 'rawling', 'rawling', 0.81, 0.93, 2.05, 4.04, 4.27, 0.43, 0.02, 0.3, 0.48, 0.66]
+['dog', 'canine', 'canine', 'canine', 'canine', 0.73, 1.25, 2.55, 2.57, 2.59, 7.49, 11.46, 14.24, 11.83, 7.45]
+Testing DataLoader 0:  17%|█▋        | 27/158 [04:00<19:00,  8.70s/it]Testing DataLoader 0:  17%|█▋        | 27/158 [04:00<19:00,  8.70s/it]['fedora', 'fedora', 'fedora', 'fedora', 'fedora', 1.03, 1.35, 1.79, 1.88, 2.75, 0.01, 0.01, 10.36, 0.42, 0.81]
+['turkey', 'turkey', 'turkey', 'club', 'turkey', 1.0, 1.04, 2.06, 2.43, 2.77, 1.16, 3.88, 4.5, 1.24, 5.97]
+['suitcase', 'suitcase', 'suitcase', 'suitcase', 'suitcase', 1.24, 1.47, 1.53, 1.98, 2.07, 11.27, 6.96, 4.84, 0.01, 0.02]
+['100', '1000', '1000', '500', 'lot', 0.76, 1.43, 1.99, 2.47, 2.65, 1.5, 5.59, 4.48, 3.55, 8.98]
+['rose', 'rose', 'rose', 'rose', 'rose', 0.13, 3.4, 3.49, 3.59, 3.59, 0.95, 3.41, 0.02, 2.5, 0.5]
+['day', 'day', 'day', 'day', 'day', 0.27, 2.65, 2.73, 2.94, 2.97, 0.0, 0.0, 0.01, 0.0, 0.0]
+['race', 'race', 'race', 'race', 'race', 0.5, 1.82, 2.31, 2.45, 3.1, 10.29, 5.2, 5.78, 6.98, 5.57]
+['sub', 'sub', 'sub', 'sub', 'sub', 1.14, 1.54, 1.66, 1.91, 2.06, 1.18, 4.16, 2.95, 1.91, 2.84]
+['bug', 'seed', 'bug', 'seed', 'bug', 1.01, 1.02, 2.2, 2.25, 2.88, 6.77, 0.09, 6.0, 0.02, 3.36]
+['flip phone', 'flip phone', 'flip phone', 'flip', 'flip', 0.21, 2.64, 3.07, 3.14, 3.54, 0.62, 1.28, 7.5, 2.25, 1.8]
+['brain', 'skin', 'brain', 'stomach', 'skin', 1.07, 1.35, 1.56, 1.97, 3.1, 1.05, 0.19, 0.42, 2.42, 0.18]
+['oven', 'oven', 'oven', 'oven', 'bake', 1.19, 1.48, 1.74, 1.89, 1.95, 2.11, 4.48, 6.12, 2.53, 0.92]
+['mouse', 'mouse', 'mouse', 'mouse', 'mouse', 0.65, 1.89, 2.15, 2.21, 2.3, 2.63, 0.02, 0.18, 0.13, 0.24]
+['eat', 'eat', 'eat', 'eat', 'eat', 1.17, 1.57, 1.69, 1.83, 2.0, 9.91, 5.57, 6.67, 3.48, 4.54]
+['mosquito net', 'mosquito net', 'mosquito net', 'mosquito net', 'mosquito net', 1.16, 1.24, 1.69, 2.23, 2.26, 16.15, 23.58, 15.04, 17.38, 15.16]
+['slider', 'french', 'french', 'slide', 'slide', 0.79, 1.05, 2.14, 2.65, 5.16, 0.2, 0.26, 6.27, 0.98, 1.69]
+['lift', 'ski lift', 'ski lift', 'ski lift', 'ski lift', 0.97, 1.51, 1.79, 1.93, 2.44, 8.95, 9.97, 12.21, 10.21, 12.37]
+['grand central station', 'eiffel tower', 'big ben', 'grand central station', 'big ben', 1.1, 1.21, 1.84, 1.99, 2.61, 12.43, 0.35, 10.79, 10.28, 11.19]
+['doughnut', 'donut', 'donut', 'doughnut', 'donuts', 1.18, 1.41, 1.52, 2.13, 2.19, 4.36, 0.47, 0.89, 0.34, 2.46]
+['500 feet', '300 feet', '100 feet', '30 feet', '50 feet', 0.76, 0.86, 3.05, 3.46, 3.47, 4.41, 1.08, 0.9, 2.22, 1.31]
+['double entendre', 'double entendre', 'double entendre', 'double entendre', 'double entendre', 1.23, 1.44, 1.45, 1.89, 2.48, 0.81, 0.91, 0.6, 0.76, 0.6]
+['church', 'church', 'church', 'church', 'church', 0.27, 1.88, 2.97, 4.01, 4.05, 1.11, 4.95, 3.05, 6.12, 9.21]
+['drink', 'drink', 'drink', 'drink', 'drink', 1.04, 1.39, 1.78, 1.97, 2.38, 0.03, 2.27, 0.08, 0.06, 1.08]
+['english channel', 'kelly slater', 'atlantic', 'mediterranean', 'mediterranean', 0.66, 1.64, 2.07, 2.44, 2.59, 0.01, 18.26, 0.2, 5.36, 0.08]
+['football', 'football', 'football', 'football', 'football', 0.38, 2.25, 2.52, 2.71, 2.74, 1.48, 1.14, 0.58, 0.82, 1.05]
+['korean air', 'korean', 'korean air', 'korean', 'korean', 1.36, 1.63, 1.69, 1.7, 1.71, 11.0, 14.29, 12.37, 16.64, 15.91]
+['too big', 'too small', 'too big', 'too big', 'too big', 0.17, 2.86, 3.16, 3.4, 3.61, 6.34, 4.93, 7.41, 3.99, 7.12]
+['asia', 'asia', 'asia', 'asia', 'asia', 0.33, 1.97, 2.53, 3.48, 3.49, 5.4, 3.21, 3.36, 2.23, 6.61]
+['halloween', 'halloween', 'halloween', 'halloween', 'halloween', 0.01, 4.72, 7.25, 7.34, 9.38, 0.04, 0.08, 1.16, 1.31, 0.22]
+['60 years', '60 years', '60 years', '60 years', '60 years', 0.14, 3.13, 3.13, 3.8, 4.07, 7.13, 5.18, 6.83, 6.96, 7.41]
+['1950', '1950', '1950', '1930', '1950', 0.59, 2.04, 2.06, 2.3, 2.43, 0.23, 0.22, 0.15, 0.53, 1.01]
+['xbox', 'xbox', 'playstation', 'xbox', 'laptop', 1.33, 1.54, 1.64, 1.72, 1.91, 0.06, 1.0, 0.21, 1.03, 8.81]
+Testing DataLoader 0:  18%|█▊        | 28/158 [04:09<19:26,  8.97s/it]Testing DataLoader 0:  18%|█▊        | 28/158 [04:09<19:26,  8.97s/it]['qantas', 'seattle', 'to', 'to', 'qantas', 1.22, 1.23, 1.77, 2.0, 2.23, 9.64, 2.74, 4.47, 5.62, 11.22]
+['shark', 'shark', 'shark', 'shark', 'shark', 0.17, 2.61, 2.9, 4.09, 4.41, 0.01, 0.01, 0.03, 0.02, 0.04]
+['pacific', 'pacific', 'pacific', 'pacific', 'pacific', 0.2, 2.31, 3.45, 3.59, 3.72, 0.03, 0.58, 0.43, 0.46, 0.86]
+['bulldog', 'bulldog', 'boxer', 'beagle', 'boxer', 0.61, 2.14, 2.14, 2.17, 2.23, 0.33, 3.95, 7.25, 1.4, 8.61]
+['mutt', 'mutt', 'mutt', 'mutt', 'mutt', 1.01, 1.4, 1.58, 2.36, 2.42, 4.74, 5.4, 7.89, 4.74, 9.25]
+['vegetable', 'salad', 'salad', 'salad', 'vegetable', 0.74, 1.48, 2.1, 2.4, 2.52, 3.27, 4.12, 5.65, 4.93, 2.91]
+['butter', 'butter', 'butter', 'cheese', 'cheese', 0.79, 1.06, 2.31, 2.69, 3.39, 0.01, 0.01, 0.01, 3.21, 4.71]
+['quarter', 'mustang', 'quarter', 'mustang', 'quarter', 1.23, 1.42, 1.85, 1.87, 1.88, 3.11, 0.47, 1.36, 0.03, 2.58]
+['down', 'down', 'down', 'down', 'down', 0.19, 2.68, 3.25, 3.29, 3.65, 0.08, 0.1, 2.03, 0.07, 0.16]
+['6 months', '6 months', '8 weeks', '6 months', '6 months', 0.13, 2.98, 3.25, 4.13, 4.25, 1.32, 1.59, 0.92, 1.78, 1.23]
+['cook', 'cook', 'cook', 'cook', 'cook', 0.42, 2.12, 2.44, 2.64, 2.77, 3.17, 8.0, 6.81, 3.37, 6.25]
+['chocolate', 'chocolate', 'vanilla', 'vanilla', 'vanilla', 0.8, 1.38, 1.88, 2.58, 2.61, 2.5, 2.62, 0.0, 0.0, 0.0]
+['1800s', '1800s', '1800s', '1800s', '1800s', 0.57, 1.46, 1.89, 3.64, 3.65, 6.03, 1.96, 3.42, 2.46, 3.75]
+['fiberglass', 'fiberglass', 'fiberglass', 'fiberglass', 'wood', 0.13, 2.93, 3.55, 3.84, 3.92, 3.84, 8.51, 8.71, 9.59, 2.14]
+['fork', 'fork', 'fork', 'fork', 'fork', 0.72, 1.88, 2.09, 2.1, 2.15, 0.64, 0.24, 0.1, 0.47, 1.35]
+['pajama', 'pajama', 'pajama', 'pajama', 'pajama', 1.19, 1.45, 1.75, 1.9, 1.99, 9.79, 11.72, 11.38, 11.94, 11.91]
+['500 mph', '200 mph', '500 mph', '500 mph', '500 mph', 0.08, 3.35, 3.65, 4.41, 5.91, 2.86, 1.61, 2.44, 2.42, 2.7]
+['1902', '1902', '1902', '1902', '1902', 0.93, 1.37, 1.92, 2.29, 2.3, 0.11, 0.97, 0.5, 0.62, 0.01]
+['messy', 'messy', 'messy', 'messy', 'messy', 0.5, 1.21, 3.17, 3.52, 3.81, 0.0, 0.0, 0.0, 0.0, 0.01]
+['gothic', 'gothic', 'gothic', 'gothic', 'gothic', 0.7, 1.83, 2.05, 2.21, 2.28, 0.01, 0.01, 0.13, 0.01, 0.02]
+['1800s', "1800's", "1800's", "1800's", '1800s', 0.42, 1.93, 2.28, 2.85, 3.29, 0.64, 7.25, 11.98, 9.83, 4.83]
+['garden', 'garden', 'garden', 'garden', 'garden', 1.19, 1.44, 1.59, 1.72, 2.56, 0.01, 0.0, 0.02, 1.02, 0.29]
+['2000 lbs', '2000 pounds', '2000 lbs', '2000 lbs', '2000 lbs', 0.73, 1.52, 1.82, 2.27, 3.29, 9.17, 9.28, 3.5, 10.3, 11.71]
+['carry on', 'overhead', 'carry on', 'carry on', 'carry on', 0.28, 1.48, 4.82, 5.01, 5.7, 2.19, 1.74, 0.04, 0.25, 23.57]
+['backpacker', 'backpacker', 'backpacker', 'backpacker', 'backpacker', 1.09, 1.1, 1.81, 2.31, 2.68, 0.06, 1.99, 0.22, 2.45, 0.06]
+['van gogh', 'renee francais', 'van gogh', 'van gogh', 'van gogh', 0.8, 1.23, 1.75, 2.83, 3.8, 0.1, 13.02, 2.7, 4.86, 0.03]
+['asian', 'asian', 'asian', 'asian', 'asian', 0.59, 1.53, 2.09, 2.75, 3.25, 0.8, 2.03, 1.21, 3.13, 2.96]
+['oak', 'fir', 'cedar', 'cedar', 'pine', 0.83, 1.61, 1.9, 2.05, 2.47, 0.29, 4.64, 2.5, 1.42, 1.71]
+['black and white', 'black and white', 'black and white', 'black and white', 'black and white', 1.08, 1.27, 1.33, 2.62, 3.22, 12.18, 9.77, 17.74, 8.8, 20.76]
+['mozzarella', 'mozzarella', 'mozzarella', 'mozzarella', 'mozzarella', 0.04, 3.72, 5.14, 5.49, 5.7, 1.67, 0.01, 0.14, 0.01, 0.15]
+['sci', 'toy', 'toy', 'toy', 'toy', 0.8, 1.33, 2.0, 2.28, 3.03, 0.04, 11.8, 8.15, 16.83, 14.45]
+['wallpaper', 'wallpaper', 'wallpaper', 'wallpaper', 'wallpaper', 0.8, 1.53, 1.96, 2.25, 2.41, 0.24, 0.27, 0.21, 0.63, 0.25]
+Testing DataLoader 0:  18%|█▊        | 29/158 [04:19<19:43,  9.18s/it]Testing DataLoader 0:  18%|█▊        | 29/158 [04:19<19:43,  9.18s/it]['bake', 'storage', 'storage', 'storage', 'storage', 0.23, 2.28, 2.4, 4.88, 5.83, 5.11, 0.69, 0.07, 1.97, 8.65]
+['pansy', 'lavender', 'lavender', 'lavender', 'pansy', 0.85, 1.41, 1.55, 2.79, 2.85, 0.15, 6.44, 8.17, 6.73, 0.03]
+['co2', 'benzene', 'carbon', 'carbon', 'smoke', 0.5, 1.51, 2.07, 3.45, 4.24, 1.24, 2.54, 4.44, 2.39, 3.36]
+['wind', 'wind', 'wind', 'lift', 'lift', 0.38, 2.0, 2.67, 2.78, 2.95, 3.35, 1.6, 0.96, 0.12, 0.04]
+['license', 'license', 'license', 'license', 'license', 1.2, 1.22, 1.64, 2.23, 2.3, 1.07, 0.39, 0.52, 0.54, 0.45]
+['vase', 'vase', 'vase', 'vase', 'vase', 0.33, 1.61, 2.73, 4.94, 4.96, 0.51, 0.13, 0.01, 0.39, 0.02]
+['stomach', 'eat', 'eat', 'eat', 'stomach', 0.63, 1.89, 2.02, 2.36, 2.41, 6.3, 4.87, 5.72, 7.54, 4.3]
+['boeing', '747', '747', '747', '747', 0.87, 1.57, 2.06, 2.07, 2.14, 0.15, 3.68, 2.01, 3.8, 1.19]
+['picnic', 'picnic', 'picnic', 'picnic', 'picnic', 0.43, 1.72, 2.68, 2.86, 3.15, 0.35, 0.02, 0.73, 0.01, 8.64]
+['clock', 'clock', 'clock', 'clock', 'clock', 0.3, 2.36, 2.39, 3.32, 3.4, 11.11, 12.07, 10.28, 10.83, 12.99]
+['swim trunk', 'swim trunk', 'swim trunk', 'swim trunk', 'bath suit', 0.8, 1.15, 2.44, 2.51, 2.76, 14.3, 16.85, 12.68, 12.9, 11.11]
+['mountain', 'colorado', 'mountain', 'mountain', 'mountain', 0.4, 1.7, 2.84, 3.05, 3.14, 0.32, 7.04, 2.1, 1.06, 0.63]
+['20 mph', '20 mph', '30 mph', '5 mph', '15 mph', 0.37, 1.85, 2.59, 3.21, 3.32, 4.16, 3.49, 4.45, 3.22, 4.52]
+['feed', 'feed', 'nurse', 'feed', 'feed', 0.2, 2.55, 3.03, 3.39, 3.94, 3.1, 0.69, 1.0, 2.03, 1.96]
+['sprinkle', 'krispy kreme', 'sprinkle', 'sprinkle', 'sprinkle', 0.31, 2.44, 2.56, 2.75, 3.33, 5.69, 0.25, 1.72, 2.05, 7.04]
+['2000', 'today', '2012', 'today', 'last week', 0.71, 1.33, 2.2, 2.68, 2.72, 1.63, 8.25, 5.82, 8.12, 12.11]
+['boeing 747', 'boeing 747', 'boeing 747', 'boeing 747', 'boeing 747', 1.19, 1.35, 1.52, 2.22, 2.23, 6.45, 9.03, 1.05, 3.06, 2.55]
+['bell', 'bell', 'shepherdstown', 'elizabeth', 'old', 0.99, 1.59, 1.74, 2.07, 2.09, 8.18, 4.97, 0.58, 0.59, 5.7]
+['shake', 'shake', 'shake', 'shake', 'cake', 0.38, 2.19, 2.62, 2.69, 2.77, 6.1, 7.03, 8.69, 6.49, 0.05]
+['cruise ship', 'cruise ship', 'cruise ship', 'cruise ship', 'cruise ship', 0.09, 2.89, 4.53, 4.72, 4.77, 3.46, 5.42, 6.09, 4.88, 5.38]
+['twin', 'twin', 'twin', 'twin', 'twin', 0.71, 1.35, 2.33, 2.47, 2.7, 4.42, 3.91, 4.34, 4.78, 7.32]
+['mixed', 'mix', 'mix', 'mixed', 'mix', 0.02, 4.87, 4.99, 5.2, 5.52, 1.01, 6.82, 7.92, 0.93, 7.99]
+['new york', 'new york', 'tokyo', 'new york', 'paris', 0.86, 1.32, 2.01, 2.35, 2.54, 0.43, 0.66, 0.01, 0.67, 0.64]
+['bake', 'bake', 'bake', 'bake', 'bake', 0.53, 1.35, 2.78, 2.97, 3.24, 2.96, 0.17, 0.36, 1.7, 0.17]
+['arctic', 'arctic', 'arctic', 'arctic', 'arctic', 0.53, 1.78, 2.21, 2.61, 2.77, 7.62, 3.47, 8.41, 7.88, 5.07]
+['halloween', 'halloween', 'halloween', 'halloween', 'halloween', 1.21, 1.39, 1.75, 1.92, 2.03, 9.85, 7.95, 10.04, 8.43, 9.44]
+['not worth much', 'not', 'not valuable', 'not', 'not very', 0.24, 1.75, 3.78, 4.93, 4.95, 9.76, 3.85, 7.62, 2.2, 2.26]
+['wright brother', 'wright brother', 'wright brother', 'wright brother', 'wright brother', 0.66, 0.97, 2.95, 3.35, 4.04, 5.62, 6.74, 7.52, 1.2, 5.03]
+['airport', 'airport', 'airport', 'airport', 'airport', 1.11, 1.45, 1.57, 2.16, 2.19, 1.82, 2.87, 0.96, 0.24, 0.21]
+['vietnam', 'ho chi minh', 'vietnam', 'vietnam', 'vietnam', 1.26, 1.32, 1.77, 1.87, 2.08, 12.91, 9.91, 11.8, 9.81, 12.66]
+['less', 'more', 'less', 'less', 'less', 0.81, 0.87, 2.88, 2.93, 3.56, 0.01, 1.01, 0.01, 0.04, 0.01]
+['it has hindquarter', 'it has stripe', 'it has stripe', 'it has stripe', 'it has short neck', 0.17, 2.6, 3.44, 3.69, 3.76, 14.74, 12.61, 12.29, 13.93, 10.67]
+Testing DataLoader 0:  19%|█▉        | 30/158 [04:28<19:20,  9.06s/it]Testing DataLoader 0:  19%|█▉        | 30/158 [04:28<19:20,  9.06s/it]['arugula', 'arugula', 'arugula', 'arugula', 'arugula', 0.57, 1.81, 2.0, 2.4, 3.12, 14.14, 14.86, 9.06, 16.21, 14.0]
+['rose', 'rose', 'rose', 'rose', 'rose', 1.42, 1.51, 1.62, 1.65, 1.91, 2.33, 2.9, 6.84, 1.05, 1.37]
+['asia', 'asia', 'asia', 'asia', 'africa', 0.05, 3.82, 4.54, 4.77, 4.83, 0.83, 4.28, 8.09, 1.35, 3.53]
+['jail', 'jail', 'jail', 'jail', 'jail', 0.05, 3.94, 4.31, 4.51, 5.66, 11.84, 11.57, 13.88, 12.15, 14.73]
+['serena williams', 'serena williams', 'serena williams', 'serena williams', 'serena williams', 0.51, 1.55, 2.53, 2.54, 3.55, 2.45, 4.77, 0.04, 0.95, 0.85]
+['juice', 'orange juice', 'juice', 'orange juice', 'juice', 0.24, 1.81, 3.66, 4.41, 4.75, 0.04, 5.39, 0.12, 1.23, 0.49]
+['birthday', 'birthday', 'birthday', 'birthday', 'birthday', 0.59, 1.55, 2.21, 2.73, 2.84, 4.22, 3.99, 7.62, 3.98, 5.02]
+['kelly slater', 'shaun white', 'kelly slater', 'shaun white', 'kelly slater', 1.36, 1.59, 1.62, 1.66, 1.88, 16.6, 2.98, 11.51, 2.41, 12.3]
+['cumulus', 'cumulus', 'cumulus', 'cumulus', 'cumulus', 1.2, 1.55, 1.59, 1.76, 2.2, 0.91, 1.66, 4.09, 2.47, 4.34]
+['transport good', 'transport good', 'transport good', 'transport good', 'transportation good', 1.12, 1.49, 1.75, 1.91, 2.05, 3.8, 1.15, 1.77, 1.81, 3.14]
+['transportation', 'travel', 'travel', 'travel', 'transportation', 1.1, 1.31, 1.69, 1.9, 2.74, 1.07, 1.51, 0.81, 1.17, 0.09]
+['flip phone', 'nokia', 'nokia', 'flip phone', 'flip phone', 0.69, 1.54, 1.8, 2.68, 3.01, 4.83, 7.31, 0.62, 6.56, 6.83]
+['coffee table', 'coffee table', 'coffee table', 'coffee table', 'coffee table', 0.75, 0.93, 2.19, 4.22, 4.71, 0.09, 0.04, 0.13, 1.58, 0.02]
+['chair', 'chair', 'chair', 'chair', 'chair', 1.31, 1.44, 1.71, 1.72, 2.02, 6.01, 3.3, 5.76, 1.08, 0.69]
+['tree', 'tree', 'tree', 'tree', 'tree', 0.2, 2.49, 3.17, 3.57, 3.61, 0.02, 0.1, 0.71, 0.27, 0.03]
+['bidet', 'bidet', 'bidet', 'bidet', 'bidet', 0.39, 1.94, 2.49, 2.87, 3.28, 11.45, 11.14, 11.5, 13.88, 12.68]
+['barn', 'barn', 'barn', 'barn', 'barn', 0.97, 1.25, 2.01, 2.16, 2.47, 0.05, 0.01, 0.18, 4.06, 0.33]
+['architect', 'architect', 'architect', 'architect', 'architect', 0.69, 1.82, 2.03, 2.2, 2.37, 3.08, 5.34, 1.69, 1.15, 4.63]
+['germany', 'norway', 'norway', 'australia', 'australia', 0.26, 2.45, 2.6, 3.2, 3.6, 0.95, 6.33, 0.51, 8.22, 3.0]
+['race', 'race', 'race', 'race', 'race', 1.29, 1.33, 1.84, 1.89, 1.9, 10.8, 10.65, 13.55, 7.51, 15.41]
+['his skin', 'his face', 'his skin', 'his skin', 'his arm', 0.59, 2.09, 2.15, 2.26, 2.3, 1.53, 0.22, 3.29, 1.38, 1.24]
+['volleyball', 'volleyball', 'volleyball', 'volleyball', 'volleyball', 0.96, 1.5, 1.79, 2.12, 2.25, 11.91, 8.7, 10.03, 8.46, 7.79]
+['gothic', 'gothic', 'gothic', 'gothic', 'gothic', 0.38, 1.77, 2.55, 3.21, 3.46, 5.7, 0.02, 3.87, 5.44, 7.49]
+['newton', 'george e curtis', 'benjamin franklin', 'samuel fox', 'ben franklin', 0.85, 1.26, 1.73, 2.78, 3.06, 1.61, 3.78, 0.1, 3.34, 5.24]
+['fire hydrant', 'fire hydrant', 'hydrant', 'fire hydrant', 'fire hydrant', 0.02, 4.0, 6.58, 6.77, 7.07, 0.07, 0.03, 1.72, 1.08, 0.09]
+['bad luck', 'bad luck', 'bad luck', 'bad luck', 'bad luck', 0.57, 2.05, 2.21, 2.3, 2.34, 0.06, 0.01, 0.56, 0.02, 0.15]
+['fall', 'fall', 'autumn', 'fall', 'fall', 0.07, 3.64, 3.98, 4.61, 4.77, 0.03, 3.52, 0.68, 0.65, 3.47]
+['colander', 'colander', 'colander', 'colander', 'colander', 0.4, 1.84, 2.6, 2.93, 3.17, 12.82, 13.03, 10.55, 16.04, 12.13]
+['play video game', 'play video game', 'play video game', 'play video game', 'play video game', 0.13, 2.51, 3.63, 4.59, 4.82, 8.18, 12.15, 8.59, 9.92, 5.59]
+['goat cheese', 'goat cheese', 'goat cheese', 'goat cheese', 'goat cheese', 1.14, 1.16, 1.88, 2.07, 2.43, 0.32, 0.35, 0.51, 1.01, 0.64]
+['wash it', 'brush', 'wash it', 'brush', 'brush', 0.99, 1.15, 1.84, 2.44, 2.72, 7.16, 0.59, 7.37, 2.08, 2.42]
+['pilot', 'pilot', 'pilot', 'pilot', 'pilot', 1.15, 1.35, 1.88, 1.96, 2.03, 2.79, 1.44, 0.36, 1.19, 0.95]
+Testing DataLoader 0:  20%|█▉        | 31/158 [04:38<19:44,  9.33s/it]Testing DataLoader 0:  20%|█▉        | 31/158 [04:38<19:44,  9.33s/it]['compute', 'compute', 'compute', 'compute', 'study', 1.28, 1.47, 1.75, 1.77, 1.92, 4.71, 8.8, 8.17, 6.5, 10.43]
+['cloudy', 'cloudy', 'cloudy', 'cloudy', 'cloudy', 1.34, 1.38, 1.42, 1.88, 2.41, 4.01, 0.94, 3.28, 5.14, 4.54]
+['amazon', 'hp', 'hp', 'hp', 'dc comics', 0.54, 1.41, 2.51, 3.01, 3.2, 0.08, 8.27, 11.8, 12.5, 2.75]
+['19th', '19th', '19th', '19th', '19th', 0.52, 1.42, 2.82, 2.92, 2.93, 0.48, 0.64, 0.41, 0.35, 2.55]
+['high', '120 volts', 'low', '120 volts', '120 volts', 0.25, 1.79, 3.75, 4.1, 4.14, 1.61, 4.99, 5.76, 4.13, 4.22]
+['san francisco', 'san francisco', 'san francisco', 'new york', 'san francisco', 0.97, 1.44, 1.64, 2.29, 2.4, 0.55, 6.96, 4.67, 0.59, 2.16]
+['shaun white', 'shaun white', 'shaun white', 'shaun white', 'shaun white', 0.71, 1.29, 2.47, 2.58, 2.59, 8.78, 8.9, 9.5, 9.12, 10.34]
+['eat', 'eat', 'eat', 'eat', 'eat', 1.19, 1.7, 1.71, 1.73, 1.86, 3.5, 2.88, 4.61, 3.14, 3.3]
+['king charles', 'king charles', 'king charles', 'budweiser', 'king charles', 1.13, 1.35, 1.68, 1.96, 2.44, 20.96, 17.07, 13.35, 0.0, 16.72]
+['20', '21', 'young', '20', '20', 1.26, 1.33, 1.51, 2.11, 2.22, 2.53, 4.56, 3.17, 3.76, 4.86]
+['quilt', 'quilt', 'quilt', 'blanket', 'blanket', 0.54, 1.3, 2.9, 2.99, 3.19, 2.88, 2.23, 2.9, 1.75, 1.37]
+['new york', 'new york', 'new york', 'new york', 'new york', 1.17, 1.45, 1.52, 1.82, 2.6, 5.04, 1.3, 1.61, 0.02, 3.96]
+['holstein', 'holstein', 'holstein', 'jersey', 'holstein', 0.93, 1.56, 1.66, 2.17, 2.38, 0.07, 0.12, 0.07, 0.47, 0.11]
+['tomato', 'tomato', 'tomato', 'tomato', 'tomato', 0.77, 1.57, 1.84, 2.26, 2.74, 4.74, 5.74, 4.51, 4.77, 5.32]
+['straw', 'straw', 'felt', 'straw', 'felt', 1.11, 1.37, 1.82, 1.86, 2.33, 0.88, 4.98, 2.22, 4.15, 0.1]
+['pregnant', 'pregnancy', 'pregnant', 'pregnancy', 'pregnancy', 0.51, 1.76, 2.2, 2.59, 3.23, 0.52, 0.02, 1.15, 0.05, 0.15]
+['phone', 'phone', 'phone', 'phone', 'phone', 1.11, 1.29, 1.96, 2.01, 2.11, 5.27, 4.24, 5.37, 4.75, 5.02]
+['piano', 'piano', 'piano', 'piano', 'piano', 0.57, 1.2, 2.46, 3.65, 3.93, 1.79, 1.9, 1.17, 1.92, 4.9]
+['color', 'snow', 'weather', 'weather', 'snow', 0.39, 2.39, 2.54, 2.54, 2.59, 2.68, 7.22, 1.57, 2.68, 8.63]
+['hammertime', 'hammertime', 'hammertime', 'hammertime', 'hammertime', 0.44, 1.94, 2.28, 2.63, 3.31, 20.6, 21.34, 26.95, 24.85, 18.63]
+['1804', '1804', '1804', '1804', '1804', 1.09, 1.57, 1.64, 2.01, 2.06, 4.83, 2.51, 3.91, 7.6, 0.54]
+['shade', 'shade', 'shade', 'shade', 'shade', 0.99, 1.61, 1.65, 1.97, 2.32, 0.08, 1.08, 5.81, 0.11, 7.13]
+['dance', 'dance', 'dance', 'dance', 'dance', 0.84, 0.97, 2.67, 2.74, 2.91, 6.09, 8.08, 2.6, 7.13, 6.19]
+['amplifier', 'guitar', 'guitar', 'music player', 'music player', 1.27, 1.39, 1.45, 2.01, 2.26, 13.01, 8.89, 6.32, 7.77, 8.58]
+['wakeboarding', 'water ski', 'water ski', 'water ski', 'wakeboarding', 0.2, 2.88, 3.13, 3.17, 3.34, 1.44, 4.68, 4.93, 3.23, 0.03]
+['run', 'run', 'run', 'run', 'run', 0.43, 1.47, 2.52, 3.59, 4.46, 2.97, 8.11, 6.19, 5.69, 8.93]
+['mirror', 'mirror', 'mirror', 'mirror', 'mirror', 0.32, 1.88, 2.96, 3.32, 3.38, 1.51, 0.58, 0.0, 0.03, 0.0]
+['shake', 'shingle', 'shake', 'shake', 'shake', 0.59, 0.96, 3.56, 3.81, 4.4, 4.84, 0.43, 0.2, 2.78, 0.44]
+['drain water', 'drain water', 'drain water', 'drain water', 'drain water', 1.22, 1.35, 1.4, 2.29, 2.34, 4.6, 1.96, 1.27, 9.21, 2.34]
+['snack', 'snack', 'snack', 'snack', 'snack', 1.35, 1.43, 1.7, 1.78, 1.91, 0.01, 0.02, 0.02, 0.02, 0.01]
+['skatepark', 'skatepark', 'skate park', 'skate park', 'skate park', 0.55, 1.09, 3.36, 3.37, 3.86, 2.03, 1.32, 9.04, 2.73, 1.46]
+['levis', 'levi', 'levis', 'levis', 'levis', 0.95, 1.42, 1.44, 2.52, 2.96, 0.06, 0.34, 3.19, 0.09, 0.05]
+Testing DataLoader 0:  20%|██        | 32/158 [04:47<19:24,  9.24s/it]Testing DataLoader 0:  20%|██        | 32/158 [04:47<19:24,  9.24s/it]['canoe', 'canoe', 'canoe', 'canoe', 'canoe', 0.5, 1.41, 2.36, 3.5, 3.67, 9.18, 4.54, 0.01, 2.4, 6.43]
+['book', 'book', 'book', 'book', 'book', 0.7, 1.75, 1.91, 2.4, 2.4, 0.35, 0.71, 0.14, 0.39, 6.16]
+['fight', 'fight', 'fight', 'fight', 'fight', 0.13, 2.81, 3.53, 4.09, 4.17, 9.93, 10.43, 11.2, 11.96, 2.75]
+['talk', 'talk', 'talk', 'talk', 'talk', 0.65, 1.46, 2.37, 2.54, 2.59, 5.81, 5.8, 6.54, 6.11, 5.39]
+['bus', 'bus', 'bus', 'liquor', 'bus', 0.44, 1.75, 2.1, 3.34, 3.79, 3.2, 3.39, 2.18, 0.98, 6.96]
+['engine', 'engine', 'conductor', 'engine', 'engine', 1.2, 1.52, 1.79, 1.81, 1.9, 2.65, 2.36, 9.55, 3.12, 2.03]
+['stork', 'stork', 'stork', 'stork', 'stork', 0.6, 2.07, 2.1, 2.28, 2.31, 6.58, 7.36, 8.09, 5.12, 4.61]
+['fly', 'fly', 'fly', 'fly', 'fly', 1.16, 1.64, 1.68, 1.72, 2.05, 7.8, 9.69, 10.61, 8.27, 8.81]
+['oregon', 'oregon', 'washington', 'oregon', 'washington', 0.74, 0.99, 2.84, 2.85, 3.33, 0.05, 0.12, 0.47, 0.04, 2.88]
+['silk', 'silk', 'silk', 'silk', 'silk', 0.84, 1.73, 1.97, 2.07, 2.08, 0.03, 0.07, 0.61, 0.18, 0.06]
+['first base', 'first base', 'catcher', 'catcher', 'home', 0.72, 1.69, 1.83, 2.46, 2.52, 0.9, 0.71, 2.23, 2.23, 1.78]
+['samsung', 'sony', 'sony', 'sony', 'samsung', 0.92, 1.57, 1.8, 1.95, 2.46, 0.02, 0.02, 0.44, 0.08, 0.09]
+['apple', 'mac', 'pc', 'apple', 'apple', 0.63, 1.72, 1.99, 2.57, 2.64, 10.88, 0.55, 0.2, 3.45, 7.2]
+['olive', 'olive', 'olive', 'olive', 'olive', 1.22, 1.4, 1.74, 1.9, 2.01, 9.3, 6.14, 7.73, 8.4, 8.17]
+['nun', 'nun', 'nun', 'nun', 'nun', 0.41, 1.72, 2.35, 3.45, 3.54, 16.79, 15.36, 21.88, 14.91, 22.4]
+['friend', 'friend', 'friend', 'friend', 'friend', 1.15, 1.35, 1.45, 2.14, 2.63, 0.0, 0.0, 0.0, 0.0, 0.0]
+['play', 'play', 'play', 'play', 'play', 0.05, 3.61, 4.53, 5.57, 5.59, 8.77, 5.75, 6.29, 4.63, 3.62]
+['washington', 'new york', 'washington', 'new york', 'new york', 1.37, 1.59, 1.6, 1.76, 1.79, 2.04, 6.87, 4.93, 6.49, 6.88]
+['rayban', 'rayban', 'oakley', 'oakley', 'rayban', 0.14, 3.04, 3.52, 3.53, 3.58, 0.52, 0.12, 0.18, 0.03, 0.5]
+['peacock', 'peacock', 'peacock', 'peacock', 'peacock', 1.21, 1.5, 1.71, 1.88, 1.92, 12.72, 13.22, 12.89, 11.21, 12.78]
+['storm', 'storm', 'storm', 'storm', 'storm', 1.37, 1.4, 1.49, 1.92, 2.07, 1.4, 1.47, 1.36, 1.51, 1.53]
+['passenger', 'commuter', 'commuter', 'commuter', 'commuter', 0.72, 1.55, 2.11, 2.34, 2.51, 1.72, 1.07, 2.74, 1.42, 1.3]
+['silver', 'silver', 'silver', 'silver', 'stainless steel', 0.49, 1.14, 3.81, 3.87, 3.89, 2.23, 2.99, 2.08, 1.91, 0.56]
+['american', 'french', 'spanish', 'french', 'mexican', 0.31, 1.99, 3.02, 3.21, 3.26, 5.04, 1.89, 3.5, 4.84, 3.03]
+['lawyer', 'lawyer', 'lawyer', 'lawyer', 'business', 0.68, 1.54, 2.2, 2.42, 2.57, 4.27, 2.78, 2.3, 2.71, 4.78]
+['drum', 'drum', 'drum', 'drum', 'drum', 0.47, 1.04, 4.68, 5.09, 5.57, 0.01, 3.79, 3.66, 0.37, 0.22]
+['honda', 'mustang', 'cadillac', 'mustang', 'jaguar', 0.95, 1.06, 2.04, 2.42, 3.07, 4.93, 16.96, 1.78, 0.57, 2.65]
+['diesel', 'diesel', 'diesel', 'diesel', 'diesel', 0.53, 2.04, 2.05, 2.55, 2.63, 0.72, 5.45, 0.38, 1.01, 6.52]
+['healthy', 'healthy', 'healthy', 'healthy', 'healthy', 0.89, 1.53, 1.96, 2.15, 2.16, 4.0, 1.06, 1.29, 1.64, 4.66]
+['kitten', 'kitten', 'kitten', 'kitten', 'kitten', 1.13, 1.46, 1.63, 1.96, 2.22, 3.32, 1.88, 3.44, 3.71, 1.45]
+['alcohol', 'alcohol', 'wine', 'wine', 'wine', 0.25, 2.54, 2.6, 3.18, 3.63, 0.03, 1.38, 7.26, 7.87, 5.12]
+['coke', 'coke', 'coke', 'coke', 'coke', 0.71, 1.67, 1.99, 2.18, 2.62, 0.19, 2.33, 0.1, 0.05, 2.81]
+Testing DataLoader 0:  21%|██        | 33/158 [04:56<19:17,  9.26s/it]Testing DataLoader 0:  21%|██        | 33/158 [04:56<19:17,  9.26s/it]['marble', 'marble', 'marble', 'marble', 'marble', 0.93, 1.8, 1.8, 1.85, 2.14, 1.38, 3.38, 1.39, 3.47, 3.55]
+['raspberry', 'raspberry', 'raspberry', 'raspberry', 'strawberry', 0.37, 1.86, 2.55, 3.23, 3.29, 1.3, 0.63, 0.02, 6.96, 3.76]
+['lemon', 'lemon', 'lemon', 'lemon', 'citrus', 0.55, 1.79, 2.42, 2.47, 2.52, 7.46, 5.86, 4.84, 5.89, 1.65]
+['antarctica', 'antarctica', 'antarctica', 'antarctica', 'antarctica', 0.59, 1.97, 2.01, 2.28, 2.67, 9.76, 0.22, 8.67, 10.14, 5.83]
+['windsor', 'windsor', 'tie', 'windsor', 'windsor', 0.91, 1.53, 1.91, 2.09, 2.22, 0.04, 0.05, 1.82, 1.29, 0.02]
+['olive', 'olive', 'olive', 'olive', 'olive', 1.45, 1.47, 1.52, 1.68, 2.04, 0.16, 0.13, 0.36, 0.43, 0.11]
+['peter fonda', 'peter fonda', 'john wayne', 'john wayne', 'john wayne', 0.28, 1.85, 2.97, 3.96, 3.99, 0.0, 0.0, 3.06, 3.21, 2.9]
+['spoon', 'spoon', 'spoon', 'spoon', 'spoon', 1.08, 1.51, 1.75, 1.98, 2.06, 0.02, 0.02, 0.23, 0.04, 0.01]
+['drive', 'run', 'drive', 'stop', 'hit', 1.09, 1.26, 1.9, 2.15, 2.18, 0.97, 0.97, 0.82, 2.33, 0.09]
+['ski', 'ski', 'ski', 'ski', 'ski', 1.15, 1.36, 1.81, 1.94, 2.13, 7.31, 11.19, 8.88, 7.02, 8.12]
+['blind', 'blind', 'blind', 'blind', 'blind', 1.05, 1.07, 1.66, 2.74, 2.95, 2.29, 3.21, 2.87, 0.12, 5.1]
+['cherry', 'pineapple', 'pineapple', 'pineapple', 'ice', 0.58, 1.47, 1.8, 3.46, 4.22, 3.31, 16.61, 12.7, 13.54, 0.31]
+['row', 'row', 'row', 'row', 'row', 0.41, 1.51, 2.87, 3.46, 3.66, 7.04, 10.69, 4.97, 10.55, 8.45]
+['pencil', 'pencil', 'pencil', 'pencil', 'pencil', 0.38, 2.18, 2.46, 2.6, 3.21, 12.85, 9.35, 8.06, 6.66, 3.25]
+['virgin', 'private', 'private', 'private', 'private', 1.45, 1.52, 1.56, 1.75, 1.82, 8.92, 7.66, 7.39, 6.61, 9.33]
+['ski', 'ski', 'ski', 'ski', 'ski', 0.26, 2.65, 2.83, 2.89, 3.23, 2.34, 9.53, 4.28, 6.32, 8.94]
+['still', 'still', 'move', 'still', 'still', 0.34, 1.55, 2.75, 4.5, 5.54, 1.11, 1.11, 2.62, 0.06, 0.78]
+['air mattress', 'air mattress', 'air mattress', 'air mattress', 'air mattress', 0.41, 2.09, 2.48, 2.7, 2.8, 13.9, 14.09, 13.13, 12.95, 11.23]
+['to sea', 'to sea', 'to sea', 'to sea', 'to sea', 1.24, 1.3, 1.84, 1.94, 1.98, 1.54, 0.71, 5.71, 5.6, 1.08]
+['1950', '1950', '1950', '1950', '1950', 1.15, 1.61, 1.65, 1.77, 2.13, 1.48, 1.23, 1.92, 1.15, 2.57]
+['keyboard', 'keyboard', 'laptop', 'keyboard', 'keyboard', 0.99, 1.37, 2.05, 2.05, 2.15, 0.99, 1.3, 2.56, 1.2, 2.55]
+['grape', 'grape', 'hand', 'grape', 'grape', 0.64, 1.86, 1.91, 2.25, 2.78, 18.55, 17.77, 0.09, 15.9, 23.0]
+['40 mph', '30 mph', '40 mph', '30 mph', '100 mph', 0.23, 2.44, 2.55, 3.82, 4.02, 1.62, 2.88, 1.43, 2.25, 0.77]
+['baseball', 'baseball', 'baseball', 'baseball', 'baseball', 0.87, 1.21, 2.35, 2.36, 2.39, 5.93, 4.55, 0.13, 0.55, 8.06]
+['volvo', 'volvo', 'volvo', 'volvo', 'volvo', 1.01, 1.34, 1.67, 2.34, 2.39, 11.84, 6.34, 17.07, 13.68, 11.66]
+['gasoline', 'gasoline', 'gasoline', 'gasoline', 'gasoline', 0.71, 1.77, 1.98, 2.25, 2.39, 5.07, 3.41, 2.01, 2.2, 0.98]
+['evergreen', 'evergreen', 'evergreen', 'evergreen', 'evergreen', 1.23, 1.31, 1.33, 2.39, 2.55, 3.17, 6.64, 2.11, 6.04, 1.82]
+['skate park', 'skate park', 'skate park', 'skate park', 'skate park', 0.58, 1.38, 1.89, 3.73, 4.2, 8.34, 3.07, 3.23, 0.21, 5.38]
+['newspaper', 'newspaper', 'newspaper', 'newspaper', 'newspaper', 1.27, 1.42, 1.49, 2.03, 2.11, 11.03, 7.94, 9.12, 10.85, 1.79]
+['church', 'church', 'church', 'church', 'church', 1.02, 1.58, 1.88, 1.91, 2.02, 10.94, 14.24, 9.77, 10.29, 9.17]
+['cut', 'cut', 'cut', 'cut', 'cut', 0.58, 2.09, 2.11, 2.26, 2.43, 14.77, 16.82, 13.77, 11.11, 18.3]
+['blueberry', 'blueberry', 'blueberry', 'blueberry', 'blueberry', 0.53, 1.05, 3.57, 4.17, 4.17, 0.05, 0.02, 11.8, 0.1, 2.01]
+Testing DataLoader 0:  22%|██▏       | 34/158 [05:05<19:06,  9.25s/it]Testing DataLoader 0:  22%|██▏       | 34/158 [05:05<19:06,  9.25s/it]['giraffe', 'giraffe', 'giraffe', 'giraffe', 'giraffe', 0.56, 1.75, 2.13, 2.66, 2.74, 0.71, 4.02, 2.98, 5.52, 6.06]
+['steak', 'beef', 'beef', 'beef', 'pork', 0.19, 2.81, 2.87, 3.42, 3.68, 4.49, 0.18, 0.58, 0.53, 0.42]
+['cessna', 'cessna', 'cessna', 'cessna', 'cessna', 0.99, 1.7, 1.77, 1.96, 1.99, 9.78, 9.34, 0.02, 8.51, 6.32]
+['tomato', 'tomato', 'tomato', 'tomato', 'apple', 0.8, 1.32, 1.73, 2.61, 3.4, 0.06, 0.0, 0.0, 0.24, 14.21]
+['kite', 'kite', 'kite', 'kite', 'kite', 0.12, 2.98, 3.44, 4.17, 4.43, 11.23, 12.58, 9.85, 12.56, 9.94]
+['recreational', 'recreational', 'recreational', 'recreational', 'recreational', 1.08, 1.66, 1.69, 1.7, 2.28, 0.06, 0.07, 0.14, 0.12, 0.05]
+['cow', 'cowboy', 'cowboy', 'cowboy', 'cowboy', 1.17, 1.27, 1.58, 2.08, 2.53, 9.22, 5.58, 10.41, 6.75, 7.53]
+['lay down', 'lay down', 'lay down', 'lay down', 'lay down', 0.47, 1.62, 2.51, 2.76, 3.38, 7.84, 5.94, 5.31, 11.2, 6.23]
+['ski', 'ski', 'ski', 'ski', 'ski', 1.08, 1.46, 1.63, 1.96, 2.38, 7.21, 6.89, 8.51, 7.0, 6.98]
+['produce', 'produce', 'produce', 'produce', 'produce', 0.41, 2.03, 2.27, 2.82, 3.2, 0.01, 0.05, 0.0, 0.0, 0.0]
+['fruit', 'fruit', 'fruit', 'fruit', 'fruit', 1.11, 1.51, 1.54, 1.98, 2.33, 0.01, 0.01, 0.01, 0.02, 0.01]
+['captain', 'captain', 'captain', 'captain', 'captain', 0.57, 0.85, 5.84, 6.63, 6.67, 0.03, 0.02, 0.04, 0.0, 0.02]
+['egg', 'egg', 'egg', 'egg', 'egg', 1.12, 1.42, 1.53, 1.95, 2.61, 8.75, 10.68, 9.43, 10.68, 7.75]
+['ping pong', 'ping pong', 'ping pong', 'ping pong', 'ping pong', 0.06, 3.57, 4.0, 4.79, 5.03, 10.15, 11.97, 10.26, 9.98, 15.49]
+['pigeon', 'pigeon', 'pigeon', 'pigeon', 'pigeon', 0.66, 1.84, 1.9, 2.4, 2.47, 6.09, 6.24, 6.73, 8.72, 5.24]
+['quilt', 'quilt', 'quilt', 'quilt', 'quilt', 0.93, 1.19, 1.29, 4.1, 4.73, 1.37, 1.34, 2.49, 2.17, 0.02]
+['desert', 'desert', 'desert', 'desert', 'desert', 0.2, 1.77, 5.51, 5.55, 5.83, 0.0, 0.0, 0.0, 6.89, 0.02]
+['rice', 'vegetable', 'vegetable', 'vegetable', 'broth', 1.01, 1.04, 2.19, 2.31, 2.65, 9.42, 1.57, 4.2, 0.03, 7.61]
+['english', 'english', 'english and fast food', 'english', 'english', 0.13, 2.28, 4.42, 5.1, 5.84, 3.23, 3.79, 5.96, 3.96, 2.89]
+['ben franklin', 'ben franklin', 'benjamin franklin', 'ben franklin', 'benjamin franklin', 0.38, 2.3, 2.59, 2.59, 2.76, 0.27, 0.75, 0.17, 0.56, 0.06]
+['underfed', 'underfed', 'underfed', 'overfed', 'underfed', 1.23, 1.52, 1.68, 1.88, 1.89, 7.34, 2.79, 1.71, 0.05, 1.37]
+['snowboard', 'snowboard', 'snowboard', 'snowboard', 'snowboard', 1.06, 1.66, 1.78, 1.85, 1.97, 17.18, 12.6, 14.63, 16.88, 15.58]
+['love', 'love', 'love', 'love', 'love', 0.21, 2.17, 3.42, 3.7, 3.83, 2.05, 8.7, 4.98, 3.5, 5.69]
+['las vegas', 'airport', 'airport', 'airport', 'airport', 0.56, 1.59, 1.9, 3.21, 3.34, 0.39, 0.93, 2.85, 2.78, 1.41]
+['snap pea', 'snap pea', 'snap pea', 'snap pea', 'snap pea', 0.79, 1.15, 1.97, 3.06, 3.17, 0.55, 0.24, 0.08, 0.27, 0.08]
+['brush', 'brush', 'bath', 'brush', 'brush', 0.19, 2.47, 3.4, 3.49, 3.67, 0.03, 0.05, 0.71, 0.05, 0.04]
+['sub', 'sub', 'sub', 'sandwich', 'sub', 0.4, 2.18, 2.42, 2.72, 2.73, 13.21, 15.23, 13.13, 3.59, 15.76]
+['bad', 'bad', 'bad', 'bad', 'bad', 0.81, 1.47, 1.75, 2.16, 3.3, 0.8, 0.01, 0.07, 0.02, 0.06]
+['common', 'common', 'common', 'common', 'common', 0.98, 1.32, 1.97, 1.99, 2.49, 0.39, 0.25, 0.18, 0.84, 0.1]
+['ikea', 'ikea', 'allmodern', 'ikea', 'furniture store', 0.22, 2.1, 2.79, 4.72, 4.82, 0.04, 0.41, 0.96, 0.07, 2.46]
+['spanish', 'gothic', 'gothic', 'baroque', 'spanish', 0.38, 1.77, 2.55, 3.21, 3.46, 5.04, 0.02, 3.87, 1.28, 1.57]
+['bratwurst', 'brat', 'bratwurst', 'hot dog', 'bratwurst', 0.21, 2.46, 3.12, 3.45, 3.49, 0.08, 0.92, 0.31, 9.84, 0.73]
+Testing DataLoader 0:  22%|██▏       | 35/158 [05:16<19:34,  9.55s/it]Testing DataLoader 0:  22%|██▏       | 35/158 [05:16<19:34,  9.55s/it]["1940's", "1950's", '1940', "1950's", "1960's", 0.24, 2.27, 2.98, 3.39, 3.59, 6.09, 3.56, 2.44, 1.83, 1.41]
+['kite', 'parasailing', 'parasailing', 'parasailing', 'parasailing', 1.07, 1.35, 1.96, 2.04, 2.06, 5.1, 10.28, 8.26, 9.55, 8.85]
+['concrete', 'concrete', 'concrete', 'concrete', 'concrete', 1.15, 1.57, 1.75, 1.79, 1.99, 1.97, 2.64, 2.51, 0.6, 1.84]
+['18', '18', '18', '21', '18', 0.85, 1.44, 1.83, 2.37, 2.5, 2.17, 0.06, 0.09, 1.22, 0.04]
+['ebay', 'ebay', 'ebay', 'ebay', 'ebay', 0.99, 1.39, 1.58, 2.26, 2.66, 0.34, 0.03, 1.39, 0.17, 0.7]
+['lilac', 'lily', 'lily', 'lily', 'lilac', 0.81, 1.46, 2.03, 2.25, 2.45, 3.17, 1.55, 0.59, 0.96, 2.68]
+['square', 'square', 'square', 'square', 'tile', 1.1, 1.56, 1.76, 1.77, 2.15, 4.77, 6.28, 1.71, 3.38, 0.49]
+['serve', 'serve', 'serve', 'serve', 'serve', 1.24, 1.4, 1.76, 1.81, 2.03, 4.17, 2.16, 3.93, 3.85, 3.69]
+['land', 'land', 'take off', 'take off', 'take off', 0.29, 2.51, 2.68, 2.81, 3.08, 0.19, 1.03, 8.22, 1.27, 6.1]
+['pancake', 'pancake', 'pancake', 'pancake', 'pancake', 0.05, 3.63, 4.82, 5.27, 5.43, 17.06, 14.83, 11.96, 11.85, 15.46]
+['snowboard', 'snowboard', 'snowboard', 'snowboard', 'snowboard', 1.14, 1.36, 1.5, 2.27, 2.32, 7.46, 7.01, 6.27, 4.28, 6.19]
+['work', 'work', 'work', 'work', 'type', 1.21, 1.27, 1.63, 1.89, 2.64, 9.21, 8.89, 5.47, 7.88, 8.55]
+['bat', 'bat', 'bat', 'bat', 'bat', 0.4, 1.89, 2.23, 3.37, 3.37, 6.44, 4.36, 0.87, 0.82, 3.22]
+['cardinal', 'cardinal', 'cardinal', 'cardinal', 'cardinal', 0.39, 1.65, 3.09, 3.1, 3.22, 5.29, 4.3, 5.57, 5.98, 5.64]
+['500', '500', '500', '500', '300', 1.0, 1.08, 2.27, 2.33, 2.38, 0.33, 1.62, 0.13, 0.96, 0.77]
+['sunlight', 'sunlight', 'sunlight', 'sunlight', 'sunlight', 0.59, 1.22, 2.42, 3.48, 3.53, 19.26, 12.05, 9.41, 13.93, 12.95]
+['brick', 'brick', 'brick', 'brick', 'brick', 1.44, 1.45, 1.58, 1.73, 1.94, 0.15, 0.03, 1.66, 7.9, 0.7]
+['policing', 'parade', 'parade', 'policing', 'parade', 0.25, 2.41, 2.58, 3.29, 3.85, 12.83, 0.01, 5.43, 12.19, 5.02]
+['skateboard', 'skateboard', 'skateboard', 'skateboard', 'skateboard', 0.38, 2.09, 2.53, 2.74, 3.07, 12.06, 11.0, 9.32, 12.92, 12.51]
+['remote', 'remote', 'remote', 'remote', 'remote', 0.48, 1.4, 3.0, 3.07, 3.22, 0.7, 3.26, 4.57, 4.51, 2.03]
+['not', 'not', 'not healthy', 'not healthy', 'not healthy', 0.98, 1.2, 2.15, 2.22, 2.34, 0.55, 0.53, 5.75, 2.25, 0.9]
+['1950', '1950', '1965', '1950', '1965', 0.6, 1.9, 2.24, 2.28, 2.38, 1.15, 6.69, 6.8, 2.51, 5.5]
+['helmet', 'helmet', 'helmet', 'helmet', 'helmet', 0.35, 2.45, 2.55, 2.71, 2.72, 6.19, 0.02, 0.05, 0.02, 2.33]
+['alp', 'mountain', 'mountain', 'alp', 'alp', 0.66, 1.02, 2.88, 3.37, 3.4, 12.95, 4.81, 1.51, 12.06, 13.34]
+['fell', 'fell', 'fell', 'fell', 'fell', 0.37, 1.53, 3.21, 3.46, 3.9, 2.8, 6.24, 2.89, 0.17, 8.33]
+['tarmac', 'runway', 'asphalt', 'runway', 'asphalt', 1.06, 1.3, 1.6, 2.16, 2.73, 0.1, 1.34, 2.43, 1.2, 1.23]
+['queen', '75', 'queen', '80 inches', 'king', 0.38, 1.52, 3.39, 3.45, 3.48, 4.2, 2.05, 3.37, 0.19, 5.51]
+['holstein', 'jersey', 'holstein', 'holstein', 'holstein', 0.95, 1.18, 1.61, 2.84, 3.05, 0.04, 0.27, 0.13, 0.11, 0.11]
+['new york', 'london', 'new york', 'paris', 'new york', 0.71, 1.99, 1.99, 2.14, 2.14, 7.36, 0.09, 1.05, 0.0, 0.24]
+['giraffe', 'giraffe', 'giraffe', 'giraffe', 'giraffe', 1.05, 1.15, 1.82, 2.33, 2.61, 7.43, 7.23, 6.04, 10.61, 6.3]
+['ge', 'ge', 'ge', 'maytag', 'kenmore', 1.21, 1.62, 1.68, 1.8, 1.88, 0.03, 0.66, 0.95, 0.08, 0.17]
+['night', 'night', 'night', 'night', 'night', 0.93, 1.34, 1.99, 2.21, 2.31, 8.4, 5.91, 6.01, 6.96, 9.13]
+Testing DataLoader 0:  23%|██▎       | 36/158 [05:23<18:17,  9.00s/it]Testing DataLoader 0:  23%|██▎       | 36/158 [05:23<18:17,  9.00s/it]['very big', 'big', 'very big', 'very big', 'large', 0.25, 1.91, 3.44, 3.62, 4.16, 8.78, 1.46, 3.59, 4.46, 1.12]
+['bread knife', 'bread knife', 'bread knife', 'serrated', 'serrated', 0.06, 3.48, 4.6, 4.75, 5.27, 0.3, 0.18, 0.22, 0.12, 0.17]
+['hooters', 'hooters', 'hooters', 'hooters', 'hooters', 0.06, 3.52, 4.0, 4.48, 5.97, 0.07, 0.27, 0.03, 0.45, 5.81]
+['hoodie', 'hoodie', 'hoodie', 't shirt', 'hoodie', 0.27, 2.36, 2.61, 3.01, 4.0, 11.23, 10.07, 6.89, 1.98, 6.28]
+['duck', 'wigeon', 'duck', 'geese', 'duck', 1.1, 1.18, 1.76, 2.15, 2.63, 5.05, 2.59, 3.73, 1.77, 0.06]
+['2007', '2000', '2000', '2000', '2000', 1.05, 1.43, 1.94, 2.0, 2.02, 1.93, 6.05, 3.61, 4.07, 6.57]
+['luggage', 'luggage', 'luggage', 'luggage', 'luggage', 0.87, 1.32, 1.62, 2.83, 2.83, 12.93, 9.03, 15.17, 9.79, 13.03]
+['volkswagon', 'volkswagon', 'volkswagen', 'volkswagon', 'volkswagen', 0.88, 1.07, 2.16, 2.77, 2.79, 15.48, 7.93, 1.82, 14.33, 0.06]
+['ship', 'sail', 'sailboat', 'sail', 'sail', 1.36, 1.43, 1.6, 1.89, 1.89, 6.92, 7.61, 0.63, 11.34, 11.1]
+['shortboard', 'longboard', 'longboard', 'longboard', 'longboard', 1.02, 1.38, 1.98, 2.04, 2.14, 1.64, 0.06, 0.43, 0.32, 0.35]
+['power', 'electricity', 'electricity', 'power', 'power', 0.5, 1.59, 1.9, 3.64, 4.18, 3.9, 1.15, 2.16, 0.92, 1.4]
+['leash', 'leash', 'leash', 'leash', 'leash', 1.14, 1.34, 1.91, 1.93, 2.07, 4.76, 4.19, 6.2, 3.66, 4.48]
+['pillow', 'sheet', 'sheet', 'pillow', 'sheet', 0.75, 1.43, 2.23, 2.31, 2.53, 5.59, 0.49, 1.31, 8.54, 0.12]
+['sister', 'sister', 'mother', 'mother', 'sister', 1.21, 1.5, 1.59, 1.77, 2.27, 6.26, 6.79, 3.49, 1.27, 8.87]
+['afternoon', 'afternoon', 'afternoon', 'afternoon', 'afternoon', 1.16, 1.16, 1.18, 3.06, 3.85, 1.88, 2.04, 1.92, 1.98, 1.72]
+['lot', 'lot', 'lot', 'lot', 'lot', 1.07, 1.32, 1.59, 2.35, 2.41, 5.7, 3.02, 1.38, 2.11, 1.37]
+['htc', 'htc', 'htc', 'htc', 'htc', 0.98, 1.12, 2.16, 2.38, 2.39, 5.55, 4.43, 4.34, 5.84, 3.2]
+['residential', 'urban', 'urban', 'downtown', 'downtown', 0.09, 2.93, 4.23, 4.45, 5.08, 0.12, 4.19, 3.16, 5.13, 4.57]
+['wallpaper', 'wallpaper', 'wallpaper', 'wallpaper', 'wallpaper', 0.69, 1.62, 1.85, 2.62, 2.63, 12.55, 15.04, 11.39, 16.59, 13.41]
+['older', 'old', 'adult', 'older', '10', 0.11, 2.52, 4.64, 4.74, 4.99, 4.73, 11.7, 0.17, 3.99, 5.12]
+['cheesecake factory', 'lava rock', 'cheesecake factory', 'cheesecake factory', 'lava rock', 0.03, 4.3, 4.31, 5.58, 5.71, 0.0, 11.3, 0.0, 0.02, 15.75]
+['10', '8', '8', '8', '8', 0.81, 1.05, 2.55, 2.59, 2.95, 0.88, 2.71, 2.6, 2.16, 0.59]
+['bread and meat', 'corn', 'meat', 'bun and meat', 'beef', 0.25, 2.06, 3.2, 3.57, 3.66, 9.19, 1.76, 10.23, 18.5, 1.48]
+['carriage', 'carriage', 'carriage', 'wagon', 'cart', 1.09, 1.65, 1.74, 1.91, 1.91, 7.25, 10.86, 7.59, 0.0, 0.0]
+['shark', 'shark', 'shark', 'shark', 'shark', 0.48, 2.05, 2.2, 2.27, 3.32, 8.9, 0.0, 0.1, 0.05, 8.24]
+['radiation', 'radiation', 'radiation', 'radiation', 'radiation', 0.66, 1.62, 1.75, 2.75, 3.11, 1.77, 3.53, 3.31, 4.02, 5.23]
+['guitar', 'guitar', 'guitar', 'guitar', 'guitar', 0.41, 1.73, 2.74, 3.0, 3.1, 2.56, 1.7, 0.99, 2.75, 0.06]
+['50 years', '40 years', '30 years', '20 years', '50 years', 0.11, 3.04, 3.68, 3.98, 4.11, 8.54, 2.32, 1.14, 6.64, 3.75]
+['broomstick', 'unicycle', 'unicycle', 'unicycle', 'broomstick', 0.99, 1.12, 1.61, 2.73, 3.32, 3.91, 0.09, 0.22, 0.03, 6.71]
+['tool', 'tool', 'tool', 'tool', 'tool', 0.1, 3.37, 3.82, 3.89, 4.01, 8.84, 6.1, 7.31, 9.24, 9.18]
+['hat', 'hat', 'hat', 'hat', 'hat', 0.83, 1.3, 2.19, 2.36, 2.48, 0.91, 0.04, 0.08, 0.12, 1.06]
+['teddy', 'grizzly', 'polar', 'brown', 'bear', 0.44, 1.57, 2.86, 3.04, 3.18, 5.85, 0.54, 0.44, 0.7, 3.36]
+Testing DataLoader 0:  23%|██▎       | 37/158 [05:33<18:18,  9.08s/it]Testing DataLoader 0:  23%|██▎       | 37/158 [05:33<18:18,  9.08s/it]['alaska', 'alaska', 'alaska', 'colorado', 'norway', 0.42, 1.87, 2.37, 2.77, 3.52, 6.65, 8.07, 4.47, 5.97, 6.12]
+['left', 'left', 'left', 'top', 'left', 0.51, 1.19, 2.97, 3.36, 4.78, 6.45, 6.3, 8.19, 8.84, 3.56]
+['home stager', 'stager', 'home stager', 'stager', 'stager', 0.47, 1.87, 2.53, 2.57, 2.76, 7.65, 1.37, 0.62, 17.47, 5.39]
+['informal', 'informal', 'informal', 'informal', 'informal', 0.74, 0.95, 2.3, 3.51, 4.9, 0.82, 4.1, 1.13, 2.75, 1.0]
+['grocery', 'supermarket', 'grocery', 'grocery', 'supermarket', 0.46, 1.54, 2.89, 2.9, 3.17, 7.89, 1.71, 4.13, 6.8, 6.38]
+['resort', 'poolside', 'poolside', 'poolside', 'poolside', 0.6, 1.78, 2.17, 2.18, 2.84, 1.37, 11.66, 11.32, 11.18, 14.85]
+['meow', 'meow', 'meow', 'meow', 'meow', 0.24, 2.41, 2.51, 3.63, 4.31, 8.85, 12.79, 16.76, 10.82, 8.94]
+['protein', 'protein', 'protein', 'protein', 'protein', 0.82, 1.41, 2.01, 2.19, 2.63, 0.06, 0.5, 0.1, 0.05, 0.05]
+['refrigeration', 'refrigeration', 'refrigeration', 'refrigeration', 'refrigeration', 1.29, 1.48, 1.74, 1.76, 1.91, 10.75, 10.83, 12.24, 11.76, 15.35]
+['bear', 'disney', 'steiff', 'ty', 'ty', 0.79, 1.65, 1.82, 2.19, 2.56, 2.66, 3.43, 0.09, 4.95, 4.36]
+['sunny', 'sunny', 'sunny', 'cloudy', 'sunny', 0.76, 1.39, 2.09, 2.25, 2.89, 3.68, 3.66, 5.41, 1.09, 5.84]
+['broccoli', 'broccoli', 'kale', 'broccoli', 'green', 0.63, 1.6, 1.8, 2.99, 3.0, 1.11, 0.09, 3.35, 1.22, 3.15]
+['roll', 'straight', 'straight', 'turn', 'straight', 0.98, 1.67, 1.79, 1.97, 2.02, 0.6, 3.16, 3.06, 0.56, 0.58]
+['cut cake', 'cut cake', 'cut cake', 'cut cake', 'cut cake', 0.05, 3.62, 4.54, 5.56, 5.6, 18.15, 14.66, 18.5, 14.86, 14.66]
+['trevithick', 'thomas evans morgan', 'trevithick', 'wright brother', 'thomas evans morgan', 0.92, 1.31, 1.54, 2.8, 2.86, 3.53, 18.48, 0.49, 1.45, 16.52]
+['labradoodle', 'labradoodle', 'labrador', 'labrador', 'labradoodle', 0.23, 2.53, 2.73, 3.2, 4.06, 6.91, 4.6, 5.92, 2.75, 4.06]
+['bird', 'jet', 'bird', 'bird', 'eagle', 1.13, 1.17, 1.98, 2.17, 2.17, 5.58, 14.65, 8.39, 7.27, 5.52]
+['couch', 'sofa', 'couch', 'couch', 'couch', 1.07, 1.32, 1.83, 2.11, 2.24, 3.68, 7.03, 7.51, 3.97, 4.84]
+['cell', 'cell', 'flip', 'flip', 'cell', 0.77, 1.0, 2.7, 2.96, 3.01, 7.67, 7.06, 1.36, 10.81, 2.22]
+['meal', 'meal', 'meal', 'meal', 'meal', 1.23, 1.39, 1.77, 1.92, 1.95, 2.1, 1.99, 0.73, 1.39, 0.76]
+['fish', 'fish', 'fish', 'fish', 'fish', 0.24, 2.64, 2.83, 3.17, 3.18, 5.26, 7.87, 1.97, 6.66, 5.15]
+['green', 'red', 'green', 'green', 'green', 0.87, 1.59, 1.64, 2.19, 2.64, 4.75, 0.2, 6.27, 2.27, 2.69]
+['video game', 'play', 'game', 'video game', 'video game', 0.85, 0.96, 2.67, 2.72, 2.93, 4.03, 3.12, 5.28, 6.68, 1.28]
+['bathrobe', 'bathrobe', 'bathrobe', 'bathrobe', 'bathrobe', 0.79, 1.44, 2.18, 2.32, 2.33, 8.37, 7.57, 8.74, 6.23, 8.47]
+['platform', 'board', 'platform', 'platform', 'platform', 0.45, 1.59, 2.71, 3.1, 3.1, 0.0, 0.97, 8.35, 5.14, 6.91]
+['tree', 'no tree', 'no tree', 'tree', 'no tree', 1.14, 1.59, 1.75, 1.82, 1.98, 3.81, 13.31, 12.06, 8.17, 10.55]
+['suv', 'suv', 'suv', 'suv', 'suv', 1.23, 1.39, 1.75, 1.79, 2.14, 5.22, 5.31, 5.05, 4.26, 4.8]
+['12 hours', '10 hours', '8 hours', '8 hours', '8 hours', 0.36, 1.52, 3.17, 3.65, 4.4, 3.65, 1.99, 3.01, 1.95, 2.75]
+['bake', 'bake', 'bake', 'bake', 'bake', 1.03, 1.19, 1.78, 2.25, 2.74, 11.66, 11.01, 12.29, 13.8, 11.41]
+['flock', 'flock', 'flock', 'flock', 'flock', 1.07, 1.23, 1.47, 2.17, 3.86, 3.44, 2.39, 4.5, 2.39, 0.05]
+['deep dish', 'deep dish', 'supreme', 'chicago', 'deep dish', 0.81, 1.37, 2.03, 2.38, 2.55, 5.14, 3.42, 0.7, 8.53, 0.53]
+['moon', 'moon', 'moon', 'moon', 'moon', 0.51, 1.77, 2.27, 2.71, 2.83, 0.09, 0.28, 0.01, 0.0, 0.12]
+Testing DataLoader 0:  24%|██▍       | 38/158 [05:43<18:41,  9.35s/it]Testing DataLoader 0:  24%|██▍       | 38/158 [05:43<18:41,  9.35s/it]['thanksgiving', 'thanksgiving', 'thanksgiving', 'thanksgiving', 'thanksgiving', 1.02, 1.54, 1.79, 1.93, 2.17, 0.8, 9.33, 0.01, 6.64, 0.15]
+['curious', 'curious', 'curious', 'curious', 'curious', 0.68, 1.7, 2.07, 2.31, 2.44, 7.8, 8.6, 1.24, 4.08, 9.28]
+['lg', 'lg', 'led', 'flat screen', 'led', 0.83, 1.63, 1.75, 2.14, 2.54, 6.28, 0.58, 1.22, 3.88, 0.11]
+['suit', 'dress', 'suit', 'suit', 'suit', 0.33, 2.41, 2.57, 2.78, 2.93, 0.15, 3.65, 0.03, 0.06, 0.01]
+['moo', 'moo', 'moo', 'moo', 'moo', 0.35, 2.0, 2.48, 3.08, 3.45, 3.48, 0.41, 3.79, 3.96, 3.45]
+['sprinkle', 'donut', 'donut', 'doughnut', 'donut', 0.28, 2.42, 2.73, 2.8, 3.6, 12.63, 10.08, 1.18, 0.04, 1.05]
+['retriever', 'golden retriever', 'golden retriever', 'retriever', 'golden retriever', 1.18, 1.58, 1.74, 1.83, 1.89, 7.82, 2.79, 8.04, 8.37, 4.31]
+['sandpiper', 'fish', 'bird', 'sandpiper', 'fish', 1.11, 1.25, 1.37, 2.68, 2.82, 6.76, 5.41, 3.73, 7.73, 5.08]
+['river', 'river', 'river', 'river', 'river', 1.01, 1.63, 1.82, 1.93, 2.02, 0.27, 1.27, 3.48, 0.56, 4.95]
+['plaid', 'plaid', 'plaid', 'plaid', 'plaid', 0.17, 2.67, 3.09, 3.8, 3.87, 5.88, 5.87, 5.74, 5.43, 5.26]
+['read', 'read', 'read', 'read', 'read', 0.93, 1.68, 1.72, 2.07, 2.16, 7.88, 5.24, 5.95, 0.85, 2.24]
+['carrot', 'chicken', 'chicken', 'chicken', 'chicken', 1.33, 1.38, 1.42, 2.07, 2.15, 6.72, 11.13, 11.98, 4.37, 10.29]
+['long', 'long', 'long', 'long', 'long', 1.15, 1.19, 1.75, 2.25, 2.27, 0.22, 0.17, 0.32, 0.07, 0.07]
+['daytime', 'day', 'daytime', 'daytime', 'daytime', 0.22, 2.06, 3.29, 3.68, 4.63, 0.07, 3.94, 0.64, 2.01, 0.08]
+['jak travel', 'jak travel', 'jak travel', 'jak travel', 'jak travel', 0.57, 1.85, 1.89, 2.67, 2.91, 19.02, 19.72, 24.0, 17.46, 21.57]
+['albino', 'dalmation', 'albino', 'mutt', 'mutt', 1.13, 1.25, 1.44, 2.52, 2.61, 0.0, 4.35, 0.1, 6.54, 6.81]
+['llama', 'llama', 'llama', 'llama', 'llama', 0.24, 1.63, 4.98, 5.27, 5.92, 7.4, 8.32, 8.4, 7.38, 9.45]
+['fermentation', 'macerate', 'macerate', 'macerate', 'fermentation', 1.25, 1.61, 1.71, 1.79, 1.81, 0.03, 12.95, 13.85, 13.23, 0.01]
+["1940's", "1940's", "1940's", "1940's", "1940's", 0.42, 2.17, 2.21, 2.79, 2.82, 1.94, 2.81, 1.26, 6.76, 2.38]
+['apartment', 'apartment', 'apartment', 'apartment', 'apartment', 0.82, 1.17, 1.95, 2.73, 3.19, 4.27, 11.11, 3.31, 5.49, 7.09]
+['tag', 'tag', 'tag', 'tag', 'tag', 0.77, 1.52, 2.0, 2.05, 2.86, 0.0, 1.69, 0.0, 1.51, 0.0]
+['pickle', 'pickle', 'pickle', 'pickle', 'pickle', 0.4, 1.58, 2.27, 4.15, 4.86, 13.03, 9.8, 10.63, 8.16, 8.08]
+['fire', 'fire', 'fire', 'fire', 'fire', 0.81, 1.53, 1.54, 2.74, 2.82, 1.03, 1.54, 1.01, 0.95, 1.14]
+['holstein', 'holstein', 'holstein', 'jersey', 'holstein', 0.93, 1.56, 1.66, 2.17, 2.38, 0.07, 0.12, 0.07, 0.47, 0.11]
+['plate', 'plate', 'plate', 'plate', 'plate', 1.07, 1.7, 1.74, 1.83, 1.99, 6.22, 6.04, 0.0, 8.83, 1.15]
+['pepperoni', 'sausage', 'chicken', 'sausage', 'sausage', 0.14, 2.93, 3.3, 3.68, 4.05, 0.14, 1.32, 7.15, 1.13, 2.07]
+['freeze', 'freeze', 'very cold', 'freeze', 'freeze', 1.11, 1.36, 1.49, 2.22, 2.56, 2.09, 0.03, 5.95, 4.13, 4.74]
+['paint', 'paint', 'paint', 'paint', 'paint', 0.62, 1.59, 1.77, 2.81, 3.57, 0.0, 0.0, 0.25, 0.0, 0.85]
+['stripe', 'stripe', 'stripe', 'stripe', 'stripe', 1.16, 1.47, 1.61, 2.04, 2.06, 15.87, 14.53, 11.54, 15.27, 14.23]
+['dress', 'dress', 'dress', 'dress', 'blouse', 1.05, 1.29, 1.96, 2.0, 2.32, 7.81, 4.9, 2.41, 5.29, 1.51]
+['female', 'female', 'female', 'female', 'female', 0.2, 2.22, 3.45, 3.84, 3.98, 1.1, 1.09, 0.1, 0.63, 1.94]
+['kitchen show', 'kitchen', 'antique show', 'antique show', 'kitchen', 0.06, 3.89, 4.28, 4.54, 4.62, 21.69, 9.46, 21.07, 26.61, 12.39]
+Testing DataLoader 0:  25%|██▍       | 39/158 [05:52<18:31,  9.34s/it]Testing DataLoader 0:  25%|██▍       | 39/158 [05:52<18:31,  9.34s/it]['retirement', 'retirement', 'party', 'retirement', 'picnic', 0.97, 1.37, 1.44, 2.58, 2.91, 0.07, 0.2, 2.02, 6.37, 7.23]
+['air show', 'air show', 'air show', 'air show', 'air show', 0.82, 1.57, 1.96, 2.01, 2.56, 8.4, 11.05, 12.06, 14.09, 13.53]
+['lemon', 'banana bread', 'vanilla', 'yellow', 'cheesecake', 1.0, 1.68, 1.79, 1.91, 2.01, 1.0, 5.51, 1.97, 2.2, 0.31]
+['tie', 'tie', 'tie', 'windsor', 'tie', 0.79, 1.8, 1.81, 2.14, 2.28, 5.66, 6.68, 5.78, 5.77, 3.81]
+['hotel', 'home', 'hotel', 'hotel', 'hotel', 0.95, 1.47, 1.8, 2.13, 2.31, 0.75, 1.65, 0.29, 1.82, 0.74]
+['tulip', 'tulip', 'tulip', 'tulip', 'tulip', 0.24, 2.52, 2.58, 3.32, 4.04, 4.16, 6.87, 3.72, 5.43, 6.79]
+['burner', 'stove', 'gas', 'gas', 'stove', 0.9, 1.34, 1.82, 2.33, 2.62, 0.16, 0.74, 1.02, 0.18, 2.2]
+['calico', 'domestic', 'calico', 'calico', 'tabby', 0.96, 1.35, 2.0, 2.17, 2.2, 5.37, 4.44, 3.78, 3.8, 2.26]
+['crt', 'television', 'tv', 'crt', 'crt', 0.71, 1.71, 1.9, 2.32, 2.53, 3.83, 3.42, 4.43, 3.08, 3.57]
+['19th', '19th', '19th', '19th', '20th', 0.52, 1.42, 2.82, 2.92, 2.93, 0.48, 0.64, 0.41, 0.38, 0.35]
+['cool', 'cool', 'cool', 'cool', 'cold', 0.39, 1.62, 2.6, 3.29, 4.2, 8.6, 5.35, 5.66, 6.16, 0.77]
+['labrador', 'labrador', 'labrador', 'lab', 'labrador', 0.18, 2.49, 3.15, 4.03, 4.04, 6.26, 4.57, 2.78, 4.36, 5.46]
+['salad', 'potato', 'potato', 'burrito', 'salad', 0.57, 1.37, 2.34, 3.18, 3.19, 6.69, 0.1, 0.19, 6.32, 0.98]
+['lion', 'lion', 'lion', 'tiger', 'lion', 0.66, 1.76, 2.17, 2.19, 2.46, 4.05, 5.16, 4.19, 0.55, 5.36]
+['plastic', 'fabric', 'plastic', 'plastic', 'plastic', 1.31, 1.49, 1.7, 1.77, 1.9, 6.1, 1.99, 2.53, 5.43, 10.48]
+['shortstop', 'second base', 'infield', 'second base', 'second base', 0.55, 1.94, 2.24, 2.34, 2.53, 0.31, 9.37, 3.98, 4.33, 5.87]
+['window', 'window', 'window', 'window', 'window', 0.88, 0.91, 2.05, 3.58, 3.63, 0.08, 0.16, 0.01, 0.0, 0.0]
+['air force', 'air force', 'air force', 'air force', 'air force', 0.04, 3.99, 4.46, 5.19, 5.42, 5.0, 1.3, 3.56, 5.25, 1.45]
+['couch', 'chair', 'table', 'table', 'table', 0.82, 1.87, 1.95, 2.0, 2.07, 0.53, 0.04, 3.23, 5.13, 3.1]
+['hungry', 'hungry', 'hungry', 'hungry', 'hungry', 0.97, 1.16, 1.89, 2.29, 2.85, 5.28, 8.06, 5.43, 2.12, 3.94]
+['17', '35', '20', '20', '20', 0.98, 1.54, 1.56, 2.2, 2.43, 0.16, 1.24, 1.65, 1.46, 2.15]
+['safe', 'safe', 'safe', 'safe', 'safe', 0.03, 3.43, 7.5, 7.65, 7.98, 1.92, 0.06, 0.12, 0.24, 2.31]
+['colorado', 'alp', 'colorado', 'colorado', 'colorado', 1.05, 1.4, 1.4, 2.17, 3.21, 0.09, 11.06, 9.8, 6.62, 5.52]
+['olive', 'olive', 'olive', 'olive', 'olive', 0.66, 1.61, 2.19, 2.2, 2.81, 4.69, 8.13, 5.64, 6.0, 5.97]
+['sit', 'sit', 'sit', 'sit', 'sit', 0.1, 3.34, 3.68, 3.76, 4.36, 4.02, 0.06, 2.57, 3.63, 0.92]
+['plant', 'peanut', 'leaf', 'peanut', 'peanut', 0.17, 2.84, 3.24, 3.49, 3.51, 2.64, 5.44, 8.79, 4.73, 8.69]
+['polo', 'horse race', 'horse race', 'horseback ride', 'horse race', 0.01, 5.28, 5.95, 6.21, 7.54, 0.0, 4.11, 2.69, 0.5, 4.34]
+['8 feet', '15 feet', '8 feet', '8 feet', '20 feet', 0.02, 5.04, 5.22, 6.21, 6.3, 0.7, 0.6, 1.98, 1.11, 0.73]
+['conair', 'kenmore', 'conair', 'conair', 'conair', 0.5, 1.71, 2.3, 2.8, 2.94, 0.0, 2.06, 0.05, 0.0, 0.02]
+['twin', 'twin', 'twin', 'twin', 'twin', 0.76, 1.26, 2.23, 2.37, 3.06, 1.31, 1.1, 7.23, 0.26, 0.44]
+['mut', 'mutt', 'mutt', 'terrier', 'mutt', 0.93, 1.36, 1.95, 2.07, 2.51, 8.45, 5.99, 5.96, 2.97, 5.57]
+['no turn', 'no entry', 'no turn', 'no entry', 'no turn', 0.57, 2.1, 2.12, 2.31, 2.38, 6.46, 4.44, 5.25, 5.21, 4.56]
+Testing DataLoader 0:  25%|██▌       | 40/158 [06:01<18:17,  9.30s/it]Testing DataLoader 0:  25%|██▌       | 40/158 [06:01<18:17,  9.30s/it]

@@ -1,0 +1,434 @@
+Namespace(DATA_FOLDER='', EXPERIMENT_FOLDER='', accelerator='auto', accumulate_grad_batches=None, amp_backend='native', amp_level=None, auto_lr_find=False, auto_scale_batch_size=False, auto_select_gpus=False, benchmark=None, check_val_every_n_epoch=1, checkpoint_callback=None, config='../configs/okvqa/RAVQA_instructblip.jsonnet', default_root_dir=None, detect_anomaly=False, deterministic=None, devices='1', enable_checkpointing=True, enable_model_summary=True, enable_progress_bar=True, experiment_name='InstructBLIP_RAVQA_test', fast_dev_run=False, flush_logs_every_n_steps=None, gpus=None, gradient_clip_algorithm=None, gradient_clip_val=None, ipus=None, limit_predict_batches=None, limit_test_batches=None, limit_train_batches=None, limit_val_batches=None, log_every_n_steps=50, log_gpu_memory=None, log_prediction_tables=True, logger=True, max_epochs=None, max_steps=-1, max_time=None, min_epochs=None, min_steps=None, mode='test', modules=['force_existence'], move_metrics_to_cpu=False, multiple_trainloader_mode='max_size_cycle', num_nodes=1, num_processes=None, num_sanity_val_steps=2, opts=['data_loader.additional.num_knowledge_passages=5', 'test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt'], overfit_batches=0.0, plugins=None, precision='bf16', prepare_data_per_node=None, process_position=0, profiler=None, progress_bar_refresh_rate=None, reload_dataloaders_every_n_epochs=0, replace_sampler_ddp=True, reset=False, resume_from_checkpoint=None, stochastic_weight_avg=False, strategy=None, sync_batchnorm=False, tags=[], terminate_on_nan=None, test_batch_size=-1, test_evaluation_name='', tpu_cores=None, track_grad_norm=-1, val_check_interval=None, weights_save_path=None, weights_summary='top')
+input value {} is not a number, parse to string.
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data', 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments', 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs', 'WANDB': {'CACHE_DIR': '', 'entity': 'xl544', 'project': 'RAVQA', 'tags': ['OKVQA']}, 'cache': {'default_folder': '../data/ok-vqa/cache', 'regenerate': {'clip_embeddings': 0, 'ocr_feature_preprocessed': 0, 'qformer_embeddings': 0, 'test_data_preprocessed': 0, 'train_data_preprocessed': 0, 'vinvl_feature_preprocessed': 0}}, 'cuda': 0, 'data_loader': {'additional': {'max_decoder_source_length': 512, 'max_source_length': 512, 'max_target_length': 10, 'num_knowledge_passages': 5}, 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'}, 'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'}, 'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl', 'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}}, 'option': 'default', 'type': 'EmbeddingInput'}, 'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True, 'test': '../data/ok-vqa/pre-extracted_features/OCR/valid', 'train': '../data/ok-vqa/pre-extracted_features/OCR/train'}, 'option': 'default', 'type': 'LoadGoogleOCRFeatures'}, 'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json', 'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json', 'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}}, 'option': 'default', 'type': 'LoadGoogleSearchAnnotations'}, 'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv', 'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'}, 'use_full_split': True}, 'option': 'default', 'type': 'LoadGoogleSearchPassageData'}, 'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014', 'train': '../data/ok-vqa/train2014'}, 'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json', 'train': '../data/ok-vqa/mscoco_train2014_annotations.json'}, 'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json', 'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}}, 'option': 'default', 'type': 'LoadOKVQAData'}, 'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json', 'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json', 'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'}, 'option': 'default', 'type': 'LoadOscarCaptionFeatures'}, 'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json', 'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}}, 'option': 'none', 'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'}, 'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv', 'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'}, 'option': 'default', 'type': 'LoadVinVLFeatures'}}, 'module_list': ['LoadVinVLFeatures', 'LoadGoogleOCRFeatures', 'LoadOscarCaptionFeatures', 'LoadOKVQAData', 'LoadGoogleSearchPassageData']}, 'dataset_type': 'OKVQADatasetBLIP2Text', 'dummy_dataloader': 0, 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset', 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'}, 'type': 'DataLoaderOKVQAWithKnowledge'}, 'experiment_name': 'InstructBLIP_RAVQA_test', 'gpu_device': 0, 'ignore_pretrained_weights': [], 'metrics': [{'name': 'compute_exact_match'}, {'name': 'compute_retrieval_metrics'}, {'name': 'compute_okvqa_scores'}], 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': [], 'bos_token': '<PAD>', 'pad_token': '<PAD>'}, 'DecoderTokenizerClass': 'InstructBlipProcessor', 'DecoderTokenizerModelVersion': 'Salesforce/instructblip-flan-t5-xl', 'GeneratorModelClass': 'InstructBlipForConditionalGeneration', 'GeneratorModelVersion': 'Salesforce/instructblip-flan-t5-xl', 'LoadPretrainMLP': 0, 'ModelClass': 'RagModelInstructBLIP', 'QueryEncoderConfigClass': 'DPRConfig', 'QueryEncoderModelClass': 'DPRQuestionEncoder', 'QueryEncoderModelVersion': '/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/wl356/projects/Retrieval-Augmented-Visual-Question-Answering/Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder', 'RAVQA_loss_type': 'Approach6', 'SPECIAL_TOKENS': {'additional_special_tokens': []}, 'TokenizerClass': 'DPRQuestionEncoderTokenizer', 'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base', 'UseInstructBLIPEmb': 0, 'UsePrefixEmb': 0, 'UseQformerEmb': 0, 'base_model': 'RAG', 'decoder_input_modules': {'module_list': [], 'postprocess_module_list': []}, 'input_modules': {'module_list': [{'option': 'default', 'separation_tokens': {'end': '', 'start': 'Question:'}, 'type': 'QuestionInput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessInputTokenization'}]}, 'loss_ratio': {'additional_loss': 0, 'nll_loss': 1, 'rag_loss': 0}, 'modules': ['force_existence'], 'output_modules': {'module_list': [{'option': 'default', 'type': 'GenerationOutput'}], 'postprocess_module_list': [{'option': 'default', 'type': 'PostProcessOutputTokenizationInstructBLIP'}]}, 'pretrained': 1, 'rag_modules': {'module_list': []}}, 'platform_type': 'pytorch', 'seed': 2021, 'test': {'additional': {'multiprocessing': 4}, 'batch_size': 32, 'evaluation_name': 'test_evaluation', 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt', 'num_evaluation': 0}, 'train': {'MLP_lr': 0.0001, 'adam_epsilon': 1e-08, 'additional': {'gradient_accumulation_steps': 4, 'gradient_clipping': 0, 'plugins': [], 'save_top_k': 1, 'save_top_k_metric': 'test/accuracy_overall', 'save_top_k_mode': 'max', 'warmup_steps': 0}, 'batch_size': 32, 'epochs': 9999, 'load_best_model': 0, 'load_epoch': -1, 'load_model_path': '', 'lr': 0.0001, 'retriever_lr': 1e-05, 'save_interval': 1, 'scheduler': 'none', 'type': 'RagExecutorInstructBLIP'}, 'valid': {'additional': {}, 'batch_size': 32, 'break_interval': 3000, 'step_size': 100}, 'reset': False, 'mode': 'test', 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test', 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test', 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/train/saved_model', 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation/imgs', 'results_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation', 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/InstructBLIP_RAVQA_test', 'args': {'config': '../configs/okvqa/RAVQA_instructblip.jsonnet', 'DATA_FOLDER': '', 'EXPERIMENT_FOLDER': '', 'mode': 'test', 'reset': False, 'experiment_name': 'InstructBLIP_RAVQA_test', 'tags': [], 'modules': ['force_existence'], 'log_prediction_tables': True, 'test_batch_size': -1, 'test_evaluation_name': '', 'logger': True, 'checkpoint_callback': None, 'enable_checkpointing': True, 'default_root_dir': None, 'gradient_clip_val': None, 'gradient_clip_algorithm': None, 'process_position': 0, 'num_nodes': 1, 'num_processes': None, 'devices': '1', 'gpus': None, 'auto_select_gpus': False, 'tpu_cores': None, 'ipus': None, 'log_gpu_memory': None, 'progress_bar_refresh_rate': None, 'enable_progress_bar': True, 'overfit_batches': 0.0, 'track_grad_norm': -1, 'check_val_every_n_epoch': 1, 'fast_dev_run': False, 'accumulate_grad_batches': None, 'max_epochs': None, 'min_epochs': None, 'max_steps': -1, 'min_steps': None, 'max_time': None, 'limit_train_batches': None, 'limit_val_batches': None, 'limit_test_batches': None, 'limit_predict_batches': None, 'val_check_interval': None, 'flush_logs_every_n_steps': None, 'log_every_n_steps': 50, 'accelerator': 'auto', 'strategy': None, 'sync_batchnorm': False, 'precision': 'bf16', 'enable_model_summary': True, 'weights_summary': 'top', 'weights_save_path': None, 'num_sanity_val_steps': 2, 'resume_from_checkpoint': None, 'profiler': None, 'benchmark': None, 'deterministic': None, 'reload_dataloaders_every_n_epochs': 0, 'auto_lr_find': False, 'replace_sampler_ddp': True, 'detect_anomaly': False, 'auto_scale_batch_size': False, 'prepare_data_per_node': None, 'plugins': None, 'amp_backend': 'native', 'amp_level': None, 'move_metrics_to_cpu': False, 'multiple_trainloader_mode': 'max_size_cycle', 'stochastic_weight_avg': False, 'terminate_on_nan': None, 'opts': ['data_loader.additional.num_knowledge_passages=5', 'test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt']}}
+['/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation/imgs', '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation']
+{'DATA_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data',
+ 'EXPERIMENT_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments',
+ 'TENSORBOARD_FOLDER': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs',
+ 'WANDB': {'entity': 'xl544',
+           'id': '3lrq309i',
+           'name': 'InstructBLIP_RAVQA_test',
+           'project': 'RAVQA',
+           'resume': 'must',
+           'tags': ['OKVQA', 'RAG', 'force_existence']},
+ 'args': {'DATA_FOLDER': '',
+          'EXPERIMENT_FOLDER': '',
+          'accelerator': 'auto',
+          'accumulate_grad_batches': None,
+          'amp_backend': 'native',
+          'amp_level': None,
+          'auto_lr_find': False,
+          'auto_scale_batch_size': False,
+          'auto_select_gpus': False,
+          'benchmark': None,
+          'check_val_every_n_epoch': 1,
+          'checkpoint_callback': None,
+          'config': '../configs/okvqa/RAVQA_instructblip.jsonnet',
+          'default_root_dir': None,
+          'detect_anomaly': False,
+          'deterministic': None,
+          'devices': '1',
+          'enable_checkpointing': True,
+          'enable_model_summary': True,
+          'enable_progress_bar': True,
+          'experiment_name': 'InstructBLIP_RAVQA_test',
+          'fast_dev_run': False,
+          'flush_logs_every_n_steps': None,
+          'gpus': None,
+          'gradient_clip_algorithm': None,
+          'gradient_clip_val': None,
+          'ipus': None,
+          'limit_predict_batches': None,
+          'limit_test_batches': None,
+          'limit_train_batches': None,
+          'limit_val_batches': None,
+          'log_every_n_steps': 50,
+          'log_gpu_memory': None,
+          'log_prediction_tables': True,
+          'logger': True,
+          'max_epochs': None,
+          'max_steps': -1,
+          'max_time': None,
+          'min_epochs': None,
+          'min_steps': None,
+          'mode': 'test',
+          'modules': ['force_existence'],
+          'move_metrics_to_cpu': False,
+          'multiple_trainloader_mode': 'max_size_cycle',
+          'num_nodes': 1,
+          'num_processes': None,
+          'num_sanity_val_steps': 2,
+          'opts': ['data_loader.additional.num_knowledge_passages=5',
+                   'test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt'],
+          'overfit_batches': 0.0,
+          'plugins': None,
+          'precision': 'bf16',
+          'prepare_data_per_node': None,
+          'process_position': 0,
+          'profiler': None,
+          'progress_bar_refresh_rate': None,
+          'reload_dataloaders_every_n_epochs': 0,
+          'replace_sampler_ddp': True,
+          'reset': False,
+          'resume_from_checkpoint': None,
+          'stochastic_weight_avg': False,
+          'strategy': None,
+          'sync_batchnorm': False,
+          'tags': [],
+          'terminate_on_nan': None,
+          'test_batch_size': -1,
+          'test_evaluation_name': '',
+          'tpu_cores': None,
+          'track_grad_norm': -1,
+          'val_check_interval': None,
+          'weights_save_path': None,
+          'weights_summary': 'top'},
+ 'cache': {'default_folder': '../data/ok-vqa/cache',
+           'regenerate': {'clip_embeddings': 0,
+                          'ocr_feature_preprocessed': 0,
+                          'qformer_embeddings': 0,
+                          'test_data_preprocessed': 0,
+                          'train_data_preprocessed': 0,
+                          'vinvl_feature_preprocessed': 0}},
+ 'cuda': 0,
+ 'data_loader': {'additional': {'max_decoder_source_length': 512,
+                                'max_source_length': 512,
+                                'max_target_length': 10,
+                                'num_knowledge_passages': 5},
+                 'dataset_modules': {'module_dict': {'LoadClipEmbeddings': {'config': {'clip_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_train2014.pkl',
+                                                                                                           'val': '../data/ok-vqa/pre-extracted_features/clip_embeddings/coco_ViT-L_14@336px_val2014.pkl'},
+                                                                                       'instructBLIP_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_train2014.pkl',
+                                                                                                                   'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl'},
+                                                                                       'qformer_embeddings': {'train': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_train2014.pkl',
+                                                                                                              'val': '../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_hgface_qformer_val2014.pkl'}},
+                                                                            'option': 'default',
+                                                                            'type': 'EmbeddingInput'},
+                                                     'LoadGoogleOCRFeatures': {'config': {'combine_with_vinvl': True,
+                                                                                          'test': '../data/ok-vqa/pre-extracted_features/OCR/valid',
+                                                                                          'train': '../data/ok-vqa/pre-extracted_features/OCR/train'},
+                                                                               'option': 'default',
+                                                                               'type': 'LoadGoogleOCRFeatures'},
+                                                     'LoadGoogleSearchAnnotations': {'config': {'annotations_path': {'test': '../data/ok-vqa/pre-extracted_features/passages/retriever_test.json',
+                                                                                                                     'train': '../data/ok-vqa/pre-extracted_features/passages/retriever_train.json',
+                                                                                                                     'valid': '../data/ok-vqa/pre-extracted_features/passages/retriever_testdev.json'}},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchAnnotations'},
+                                                     'LoadGoogleSearchPassageData': {'config': {'passage_data_path': {'full': '../data/ok-vqa/pre-extracted_features/passages/okvqa_full_corpus.csv',
+                                                                                                                      'train': '../data/ok-vqa/pre-extracted_features/passages/okvqa_train_corpus.csv'},
+                                                                                                'use_full_split': True},
+                                                                                     'option': 'default',
+                                                                                     'type': 'LoadGoogleSearchPassageData'},
+                                                     'LoadOKVQAData': {'config': {'image_data_path': {'test': '../data/ok-vqa/val2014',
+                                                                                                      'train': '../data/ok-vqa/train2014'},
+                                                                                  'vqa_data_path': {'annotation_files': {'test': '../data/ok-vqa/mscoco_val2014_annotations.json',
+                                                                                                                         'train': '../data/ok-vqa/mscoco_train2014_annotations.json'},
+                                                                                                    'question_files': {'test': '../data/ok-vqa/OpenEnded_mscoco_val2014_questions.json',
+                                                                                                                       'train': '../data/ok-vqa/OpenEnded_mscoco_train2014_questions.json'}}},
+                                                                       'option': 'default',
+                                                                       'type': 'LoadOKVQAData'},
+                                                     'LoadOscarCaptionFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/captions/test_predictions.json',
+                                                                                             'train': '../data/ok-vqa/pre-extracted_features/captions/train_predictions.json',
+                                                                                             'valid': '../data/ok-vqa/pre-extracted_features/captions/valid_predictions.json'},
+                                                                                  'option': 'default',
+                                                                                  'type': 'LoadOscarCaptionFeatures'},
+                                                     'LoadPretrainedDPROutputForGoogleSearchPassage': {'config': {'pretrained_dpr_outputs': {'test': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/test_predictions.json',
+                                                                                                                                             'train': '../Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/test/test_evaluation/train_predictions.json'}},
+                                                                                                       'option': 'none',
+                                                                                                       'type': 'LoadPretrainedDPROutputForGoogleSearchPassage'},
+                                                     'LoadVinVLFeatures': {'config': {'test': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_testset_full/inference/vinvl_vg_x152c4/predictions.tsv',
+                                                                                      'train': '../data/ok-vqa/pre-extracted_features/vinvl_output/vinvl_okvqa_trainset_full/inference/vinvl_vg_x152c4/predictions.tsv'},
+                                                                           'option': 'default',
+                                                                           'type': 'LoadVinVLFeatures'}},
+                                     'module_list': ['LoadVinVLFeatures',
+                                                     'LoadGoogleOCRFeatures',
+                                                     'LoadOscarCaptionFeatures',
+                                                     'LoadOKVQAData',
+                                                     'LoadGoogleSearchPassageData']},
+                 'dataset_type': 'OKVQADatasetBLIP2Text',
+                 'dummy_dataloader': 0,
+                 'index_files': {'index_passages_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset',
+                                 'index_path': '../data/ok-vqa/pre-extracted_features/faiss/ok-vqa-passages-full-caption-pretrained-NewRun/my_knowledge_dataset_hnsw_index.faiss'},
+                 'type': 'DataLoaderOKVQAWithKnowledge'},
+ 'experiment_name': 'InstructBLIP_RAVQA_test',
+ 'experiment_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test',
+ 'gpu_device': 0,
+ 'ignore_pretrained_weights': [],
+ 'imgs_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation/imgs',
+ 'log_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test',
+ 'metrics': [{'name': 'compute_exact_match'},
+             {'name': 'compute_retrieval_metrics'},
+             {'name': 'compute_okvqa_scores'}],
+ 'mode': 'test',
+ 'model_config': {'DECODER_SPECIAL_TOKENS': {'additional_special_tokens': [],
+                                             'bos_token': '<PAD>',
+                                             'pad_token': '<PAD>'},
+                  'DecoderTokenizerClass': 'InstructBlipProcessor',
+                  'DecoderTokenizerModelVersion': 'Salesforce/instructblip-flan-t5-xl',
+                  'GeneratorModelClass': 'InstructBlipForConditionalGeneration',
+                  'GeneratorModelVersion': 'Salesforce/instructblip-flan-t5-xl',
+                  'LoadPretrainMLP': 0,
+                  'ModelClass': 'RagModelInstructBLIP',
+                  'QueryEncoderConfigClass': 'DPRConfig',
+                  'QueryEncoderModelClass': 'DPRQuestionEncoder',
+                  'QueryEncoderModelVersion': '/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/wl356/projects/Retrieval-Augmented-Visual-Question-Answering/Experiments/Knowledge_Retriever_DPR_dim_768_inbatch_negative_caption_FullCorpus_NewRun/train/saved_model/epoch6/query_encoder',
+                  'RAVQA_loss_type': 'Approach6',
+                  'SPECIAL_TOKENS': {'additional_special_tokens': []},
+                  'TokenizerClass': 'DPRQuestionEncoderTokenizer',
+                  'TokenizerModelVersion': 'facebook/dpr-question_encoder-single-nq-base',
+                  'UseInstructBLIPEmb': 0,
+                  'UsePrefixEmb': 0,
+                  'UseQformerEmb': 0,
+                  'base_model': 'RAG',
+                  'decoder_input_modules': {'module_list': [],
+                                            'postprocess_module_list': []},
+                  'input_modules': {'module_list': [{'option': 'default',
+                                                     'separation_tokens': {'end': '',
+                                                                           'start': 'Question:'},
+                                                     'type': 'QuestionInput'}],
+                                    'postprocess_module_list': [{'option': 'default',
+                                                                 'type': 'PostProcessInputTokenization'}]},
+                  'loss_ratio': {'additional_loss': 0,
+                                 'nll_loss': 1,
+                                 'rag_loss': 0},
+                  'modules': ['force_existence'],
+                  'output_modules': {'module_list': [{'option': 'default',
+                                                      'type': 'GenerationOutput'}],
+                                     'postprocess_module_list': [{'option': 'default',
+                                                                  'type': 'PostProcessOutputTokenizationInstructBLIP'}]},
+                  'pretrained': 1,
+                  'rag_modules': {'module_list': []}},
+ 'platform_type': 'pytorch',
+ 'reset': False,
+ 'results_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/test/test_evaluation',
+ 'saved_model_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/InstructBLIP_RAVQA_test/train/saved_model',
+ 'seed': 2021,
+ 'tensorboard_path': '/rds/user/xl544/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Data_TB/tb_logs/InstructBLIP_RAVQA_test',
+ 'test': {'additional': {'multiprocessing': 4},
+          'batch_size': 32,
+          'evaluation_name': 'test_evaluation',
+          'load_best_model': 0,
+          'load_epoch': -1,
+          'load_model_path': '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.23647945/train/saved_model/model_3.ckpt',
+          'num_evaluation': 0},
+ 'train': {'MLP_lr': 0.0001,
+           'adam_epsilon': 1e-08,
+           'additional': {'gradient_accumulation_steps': 4,
+                          'gradient_clipping': 0,
+                          'plugins': [],
+                          'save_top_k': 1,
+                          'save_top_k_metric': 'test/accuracy_overall',
+                          'save_top_k_mode': 'max',
+                          'warmup_steps': 0},
+           'batch_size': 32,
+           'epochs': 9999,
+           'load_best_model': 0,
+           'load_epoch': -1,
+           'load_model_path': '',
+           'lr': 0.0001,
+           'retriever_lr': 1e-05,
+           'save_interval': 1,
+           'scheduler': 'none',
+           'type': 'RagExecutorInstructBLIP'},
+ 'valid': {'additional': {},
+           'batch_size': 32,
+           'break_interval': 3000,
+           'step_size': 100}}
+data columns: dict_keys(['vinvl_features'])
+data columns: dict_keys(['vinvl_features', 'ocr_features'])
+[Data Statistics] Caption features 123287
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features'])
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.190860
+creating index...
+index created!
+loading VQA annotations and questions into memory...
+time elpased:  0:00:00.155012
+creating index...
+index created!
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+creating index...
+index created!
+year: 2019
+version: 1.0
+description: This is v1.0 of the OK-VQA dataset.
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data'])
+data columns: dict_keys(['vinvl_features', 'ocr_features', 'caption_features', 'okvqa_data', 'vqa_data', 'passages'])
+Uses full checkpoint from Salesforce/instructblip-flan-t5-xl
+r value for LoRA is 8
+trainable params: 4718592 || all params: 2854475776 || trainable%: 0.16530502867367827
+initializing retrieval
+Testing: 0it [00:00, ?it/s]Testing:   0%|          | 0/158 [00:00<?, ?it/s]Testing DataLoader 0:   0%|          | 0/158 [00:00<?, ?it/s]['Question: What sport can you use this for? ', 'Question: Name the type of plant this is? ', 'Question: What toy is this? ', 'Question: Which part of this animal would be in use of it was playing the game that is played with the items the man is holding? ', 'Question: What could this gentleman be carrying in that red bag? ', 'Question: Who leaves a toilet like this? ', 'Question: Should you leave the toilet seat up like this photo or down? ', 'Question: A center affixed unit like this one in a kitchen is called a what? ', 'Question: Why might someone go to this place? ', 'Question: What does this grow from? ', 'Question: What is that man doing with the bat? ', 'Question: Is this at a salt water beach or a lake? ', 'Question: Who designed the statues? ', 'Question: What is the name of the items the hot dog are topped with? ', 'Question: What is this desk used for? ', 'Question: What type of bike is on the ground? ', 'Question: What type of plane is that? ', 'Question: Is this a room for a boy or girl? ', 'Question: In what year was this desert first introduced? ', 'Question: What is this surf trick called? ', 'Question: What do they call running around the bases on a single hit? ', 'Question: Why is this plugged in? ', 'Question: What is the shape? ', 'Question: What is the horsepower of the truck pulling the load? ', 'Question: What kind of skiing is this person engaged in? ', 'Question: What is the person in the photo wearing? ', 'Question: What is the name of the board he is on? ', 'Question: Name the material used to make this car seat shown in this picture? ', 'Question: What part of the face is the toothbrush in? ', 'Question: What flavor is this pastry? ', 'Question: What kind of container are the flowers in? ', 'Question: What country does this appear to be? ']
+race <---> ride    (<pad> ride</s><pad><pad><pad><pad>)
+vine <---> fern    (<pad> fern</s><pad><pad><pad>)
+stuffed animal <---> teddy bear    (<pad> teddy bear</s>)
+mouth <---> mouth    (<pad> mouth</s><pad><pad><pad><pad>)
+cloth <---> newspaper    (<pad> newspaper</s><pad><pad><pad><pad>)
+man <---> person    (<pad> person</s><pad><pad><pad><pad>)
+down <---> down    (<pad> down</s><pad><pad><pad><pad>)
+island <---> island    (<pad> island</s><pad><pad><pad><pad>)
+shop <---> shop    (<pad> shop</s><pad><pad><pad><pad>)
+ground <---> plant    (<pad> plant</s><pad><pad><pad><pad>)
+swing <---> swing    (<pad> swing</s><pad><pad><pad><pad>)
+salt water beach <---> salt    (<pad> salt</s><pad><pad><pad><pad>)
+artist <---> sculptor    (<pad> sculptor</s><pad><pad>)
+condiment <---> relish    (<pad> relish</s><pad><pad><pad><pad>)
+work <---> office    (<pad> office</s><pad><pad><pad><pad>)
+bmx <---> dirt bike    (<pad> dirt bike</s><pad><pad><pad>)
+commercial <---> 747    (<pad> 747</s><pad><pad><pad>)
+girl <---> girl    (<pad> girl</s><pad><pad><pad><pad>)
+1847 <---> 1950    (<pad> 1950</s><pad><pad><pad><pad>)
+ride <---> spin    (<pad> spin</s><pad><pad><pad><pad>)
+homerun <---> home run    (<pad> home run</s><pad><pad><pad>)
+charge <---> charge    (<pad> charge</s><pad><pad><pad><pad>)
+circle <---> circle    (<pad> circle</s><pad><pad><pad><pad>)
+510 <---> 300    (<pad> 300</s><pad><pad><pad><pad>)
+cross country <---> cross country    (<pad> cross country</s><pad><pad><pad>)
+wetsuit <---> wetsuit    (<pad> wetsuit</s><pad><pad>)
+surfboard <---> surfboard    (<pad> surfboard</s><pad><pad><pad>)
+cloth <---> cloth    (<pad> cloth</s><pad><pad><pad><pad>)
+mouth <---> mouth    (<pad> mouth</s><pad><pad><pad><pad>)
+blueberry <---> vanilla    (<pad> vanilla</s><pad><pad><pad><pad>)
+vase <---> vase    (<pad> vase</s><pad><pad><pad><pad>)
+scotland <---> uk    (<pad> uk</s><pad><pad><pad>)
+Testing DataLoader 0:   1%|          | 1/158 [00:11<31:16, 11.95s/it]Testing DataLoader 0:   1%|          | 1/158 [00:11<31:16, 11.95s/it]['Question: Which of the foods in the picture is best for you to eat when you have a cold? ', 'Question: What do teenage pranksters do to this animal? ', 'Question: How many watts is that microwave? ', 'Question: What is this type of blanket called? ', 'Question: What south american country usually has this climate? ', 'Question: What american restaurant features an open kitchen with visible cooking area such as this? ', 'Question: What other big vehicle is often painted about the same shade as this vehicle? ', 'Question: What brand is this wine? ', 'Question: What would happen if these items fall to the ground? ', 'Question: What brand of suit is the man in the image wearing? ', 'Question: Where might i buy a print that resembles this photo? ', 'Question: What are the rolled black food items called? ', 'Question: What type of bird is this? ', 'Question: How can you tell that the people are not upset? ', 'Question: How fast is the vehicle pictured capable of reaching? ', 'Question: Name the type of hat the man is wearing? ', 'Question: What sates are these grown in? ', 'Question: How does the bread taste? ', 'Question: What is this type of mack truck used for? ', 'Question: What type of platform should this vehicle be on? ', 'Question: What is the term for the effect used in this photo? ', 'Question: What is the small white outdoor house like building called? ', 'Question: What can the woman do with this toy? ', 'Question: Is this boy a professional player or still in high school? ', 'Question: What is the decorative fabric on the floor called? ', 'Question: Is this in a home kitchen or commercial kitchen? ', 'Question: Which type of helmet is used by the sport person shown in this picture? ', 'Question: Which brand of slipper is shown in this picture? ', 'Question: Who directed the 2012 movie shown on the television in the picture? ', 'Question: What time of day is it? ', 'Question: Is this bathroom high or low end? ', 'Question: Name one famous person whom also has a black and white one of these? ']
+soup <---> soup    (<pad> soup</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+tip <---> paint    (<pad> paint</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+800 <---> 800    (<pad> 800</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+quilt <---> quilt    (<pad> quilt</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+brazil <---> brazil    (<pad> brazil</s><pad><pad><pad><pad><pad><pad>)
+diner <---> fast food    (<pad> fast food</s><pad><pad><pad><pad><pad><pad><pad>)
+firetruck <---> bus    (<pad> bus</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+becker vineyard <---> becker    (<pad> becker</s><pad><pad><pad><pad><pad><pad><pad>)
+shatter <---> break    (<pad> break</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+brook brother <---> brooks    (<pad> brooks</s><pad><pad><pad><pad><pad><pad>)
+gallery <---> walmart    (<pad> walmart</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+sushi <---> sushi    (<pad> sushi</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+blue jay <---> bluebird    (<pad> bluebird</s><pad><pad><pad><pad><pad><pad><pad>)
+smile <---> smile    (<pad> smile</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+80 mph <---> 100 mph    (<pad> 100 mph</s><pad><pad><pad><pad><pad><pad>)
+sombrero <---> fedora    (<pad> fedora</s><pad><pad><pad><pad><pad><pad>)
+california <---> florida    (<pad> florida</s><pad><pad><pad><pad><pad><pad>)
+good <---> sweet    (<pad> sweet</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+cement <---> concrete    (<pad> concrete</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+track <---> track    (<pad> track</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+fisheye <---> filter    (<pad> filter</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+gazebo <---> gazebo    (<pad> gazebo</s><pad><pad><pad><pad><pad><pad><pad>)
+throw it <---> play    (<pad> play</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+high school <---> high school    (<pad> high school</s><pad><pad><pad><pad><pad><pad><pad>)
+rug <---> rug    (<pad> rug</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+commercial <---> commercial    (<pad> commercial</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+batter <---> baseball    (<pad> baseball</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+birkenstock <---> birkenstock    (<pad> birkenstock</s><pad><pad><pad><pad><pad>)
+joss whedon <---> chris evans    (<pad> chris evans</s><pad>)
+noon <---> even    (<pad> even</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+high <---> high    (<pad> high</s><pad><pad><pad><pad><pad><pad><pad><pad>)
+taylor swift <---> elvis    (<pad> elvis</s><pad><pad><pad><pad><pad>)
+Testing DataLoader 0:   1%|▏         | 2/158 [00:22<28:19, 10.90s/it]Testing DataLoader 0:   1%|▏         | 2/158 [00:22<28:19, 10.90s/it]['Question: Which item in this room is usually to wash hands? ', 'Question: What are the white objects on this animals head called? ', 'Question: Which airline has this insignia? ', 'Question: When was the cola brand on the signs founded? ', 'Question: What type of hat is this gentleman wearing? ', 'Question: What character does this clock look like? ', 'Question: What fruit comes from these trees? ', 'Question: What type of skiing is being done here? ', 'Question: What is this animal famously known for? ', 'Question: Are these animals mammals or insects? ', 'Question: If it gets cold enough what will happen to the area being stepped over? ', 'Question: How tall do these animals get? ', 'Question: What is the breed of this cat? ', 'Question: Is this fruit or veggies? ', 'Question: Why so many green vegetables? ', 'Question: What unpleasant emotional state does this weather phenomenon often cause? ', 'Question: What kind of oven is on the table? ', 'Question: How do people use this? ', 'Question: What small cloth is used to wipe the face or eating this meal? ', 'Question: What is this truck moving? ', 'Question: Which phase is that moon in? ', 'Question: What kind of animal is clearly displayed on the cover of this bed? ', 'Question: What is a type of horseback sport? ', 'Question: What item might be used to warm this item of furniture? ', 'Question: What fills the balloons? ', 'Question: Would this article of furniture typically be for public or private use? ', 'Question: How many passengers can this plane accomodate? ', 'Question: What knocked the guy off his chair? ', 'Question: What is the purpose of the logos on this truck? ', 'Question: What is the purpose of these objects? ', 'Question: What happens here? ', 'Question: What company is this plane flying for? ']
+sink <---> sink    (<pad> sink</s><pad><pad><pad><pad><pad>)
+horn <---> horn    (<pad> horn</s><pad><pad><pad><pad>)
+kuwait airway <---> boeing    (<pad> boeing</s><pad><pad><pad>)
+1892 <---> 1886    (<pad> 1886</s><pad><pad><pad><pad>)
+top hat <---> top hat    (<pad> top hat</s><pad><pad><pad>)
+mickey mouse <---> mickey mouse    (<pad> mickey mouse</s><pad><pad><pad>)
+coconut <---> pineapple    (<pad> pineapple</s><pad><pad><pad><pad><pad>)
+cross country <---> cross country    (<pad> cross country</s><pad><pad><pad><pad>)
+long neck <---> be tall    (<pad> be tall</s><pad><pad><pad><pad>)
+mammal <---> mammal    (<pad> mammal</s><pad><pad><pad>)
+freeze <---> freeze    (<pad> freeze</s><pad><pad><pad><pad><pad>)
+20 feet <---> 20 feet    (<pad> 20 feet</s><pad><pad><pad><pad>)
+calico <---> tabby    (<pad> tabby</s><pad><pad><pad><pad>)
+veggies <---> fruit    (<pad> fruit</s><pad><pad><pad><pad><pad>)
+healthy <---> garden    (<pad> garden</s><pad><pad><pad><pad><pad>)
+depression <---> fear    (<pad> fear</s><pad><pad><pad><pad><pad>)
+toaster <---> toaster    (<pad> toaster</s><pad><pad><pad>)
+sail <---> sail    (<pad> sail</s><pad><pad><pad><pad><pad>)
+napkin <---> napkin    (<pad> napkin</s><pad><pad><pad><pad>)
+furniture <---> furniture    (<pad> furniture</s><pad><pad><pad><pad><pad>)
+half <---> full    (<pad> full</s><pad><pad><pad><pad><pad>)
+deer <---> deer    (<pad> deer</s><pad><pad><pad><pad>)
+race <---> jump    (<pad> jump</s><pad><pad><pad><pad><pad>)
+electric blanket <---> blanket    (<pad> blanket</s><pad><pad><pad><pad><pad>)
+helium <---> helium    (<pad> helium</s><pad><pad><pad>)
+public <---> public    (<pad> public</s><pad><pad><pad><pad><pad>)
+15 <---> 6    (<pad> 6</s><pad><pad><pad><pad><pad>)
+wave <---> water    (<pad> water</s><pad><pad><pad><pad><pad>)
+advertising <---> advertising    (<pad> advertising</s><pad><pad><pad><pad><pad>)
+art <---> art    (<pad> art</s><pad><pad><pad><pad><pad>)
+sleep <---> play    (<pad> play</s><pad><pad><pad><pad><pad>)
+oneworld <---> oneworld    (<pad> oneworld</s><pad><pad><pad><pad>)
+Testing DataLoader 0:   2%|▏         | 3/158 [00:32<27:41, 10.72s/it]Testing DataLoader 0:   2%|▏         | 3/158 [00:32<27:41, 10.72s/it]['Question: Name the type of curtains shown in this picture? ', 'Question: What animal does the meat on the pizza come from? ', 'Question: How do you turn this on? ', 'Question: How tall is this animal usually? ', 'Question: How much tomato sauce is in this dish? ', 'Question: What brand of blue jeans is the skateboarder wearing? ', 'Question: Is this bird diurnal or nocturnal? ', 'Question: What is the white cloud behind the jet called? ', 'Question: How heavy is this object? ', 'Question: What restaraunt is this at? ', 'Question: What breed of dog is this? ', 'Question: What musical instrument is this man playing? ', 'Question: Does this type of train transport people or cargo? ', 'Question: What kind of dog is this? ', 'Question: What is the name of this dish? ', 'Question: What are these cakes called? ', 'Question: On what holiday do people traditionally eat this bird? ', 'Question: What do these animals generally eat? ', 'Question: What could a person use this for? ', 'Question: What is a group of these animals called? ', 'Question: What toe related phrase is most commonly associated with this sport? ', 'Question: What is the type of blade being used in this photo? ', 'Question: Where are fruits like this best found? ', 'Question: How long does this animal usually live? ', 'Question: People that pledge to give per mile monies for those participating in these types of events are called what? ', 'Question: What retractable appendage could this animal use to destroy the chair? ', 'Question: What event is this? ', 'Question: What other item is this company famous for manufacturing? ', 'Question: What is the arrow indicating? ', 'Question: Why would animals do this? ', 'Question: What area of a school might this be? ', 'Question: For how long should the man in this picture continue to brush his teeth? ']
+drape <---> drape    (<pad> drape</s><pad><pad><pad><pad>)
+pig <---> cow    (<pad> cow</s><pad><pad><pad><pad>)
+key <---> foot    (<pad> foot</s><pad><pad><pad><pad>)
+20 feet <---> 20 feet    (<pad> 20 feet</s><pad><pad><pad>)
+2 cups <---> lot    (<pad> lot</s><pad><pad><pad><pad>)
+american <---> levis    (<pad> levis</s><pad><pad><pad>)
+nocturnal <---> nocturnal    (<pad> nocturnal</s><pad>)
+contrail <---> trail    (<pad> trail</s><pad><pad><pad><pad>)
+100 lbs <---> not heavy    (<pad> not heavy</s><pad><pad><pad>)
+pizzaria <---> pizza hut    (<pad> pizza hut</s><pad><pad>)
+chihuahua <---> terrier    (<pad> terrier</s><pad><pad>)
+piano <---> keyboard    (<pad> keyboard</s><pad><pad><pad><pad>)
+cargo <---> cargo    (<pad> cargo</s><pad><pad><pad><pad>)
+lab <---> dachshund    (<pad> dachshund</s>)
+pancake <---> pancake    (<pad> pancake</s><pad><pad><pad><pad>)
+pancake <---> pancake    (<pad> pancake</s><pad><pad><pad><pad>)
+thanksgiving <---> thanksgiving    (<pad> thanksgiving</s><pad><pad><pad>)
+mice <---> bug    (<pad> bug</s><pad><pad><pad><pad>)
+direct <---> street name    (<pad> street name</s><pad><pad><pad>)
+herd <---> herd    (<pad> herd</s><pad><pad><pad>)
+hang 10 <---> paddle    (<pad> paddle</s><pad><pad><pad><pad>)
+serrated <---> knife    (<pad> knife</s><pad><pad><pad><pad>)
+south america <---> south america    (<pad> south america</s><pad><pad>)
+10 years <---> 10 years    (<pad> 10 years</s><pad><pad><pad>)
+sponsor <---> sponsor    (<pad> sponsor</s><pad><pad><pad><pad>)
+claw <---> claw    (<pad> claw</s><pad><pad><pad><pad>)
+concert <---> concert    (<pad> concert</s><pad><pad><pad><pad>)
+tractor <---> atv    (<pad> atv</s><pad><pad><pad>)
+1 way <---> direction    (<pad> direction</s><pad><pad><pad><pad>)
+mate <---> fight    (<pad> fight</s><pad><pad><pad><pad>)
+library <---> library    (<pad> library</s><pad><pad><pad><pad>)
+5 minutes <---> twice a day    (<pad> twice a day</s><pad>)
+Testing DataLoader 0:   3%|▎         | 4/158 [00:43<27:23, 10.67s/it]Testing DataLoader 0:   3%|▎         | 4/158 [00:43<27:23, 10.67s/it]['Question: What kind of bird is this? ', 'Question: How would you dress for this setting? ', 'Question: What new company has created competition for this type of transportation? ', 'Question: What weather phenomenon most likely happened? ', 'Question: How many calories is in a food like this? ', 'Question: What single verb can be used to describe the action in this photo? ', 'Question: What kind of park is this picture taken in? ', 'Question: Who is the motorcycle manufacture? ', 'Question: What kind of shakers are on the table? ', 'Question: What low calorie way of cooking the green vegetables involves heating them over hot water? ', 'Question: What kind of serving utensil is used to serve this pizza? ', 'Question: What type of process is occurring here? ', 'Question: What waterway is this boat on? ', 'Question: Is this illegal or legal? ', 'Question: Where can i buy flowers like these? ', 'Question: What do you call the device that keeps boats in place at sea? ', 'Question: What kind of bird are they? ', 'Question: This man is speaking into a? ', 'Question: What type of clothing are the men wearing? ', 'Question: What kind of glass is used to make that shower enclosure? ', 'Question: What is this kind of sink called? ', 'Question: What is brown on the plate? ', 'Question: What type of music is this child playing? ', 'Question: Who invented the headgear worn here? ', 'Question: What material are those suits made out of? ', 'Question: What sport is this? ', 'Question: What sport is this? ', 'Question: What type of person would you call if this happened in your house? ', 'Question: Is this the beach or sahara? ', 'Question: What type of bread is on this sandwhich? ', 'Question: What religion does the statue belone to? ', 'Question: What type of food is this? ']
+myna <---> crow    (<pad> crow</s><pad><pad><pad><pad>)
+short <---> swim trunk    (<pad> swim trunk</s><pad><pad><pad><pad><pad>)
+uber <---> uber    (<pad> uber</s><pad><pad><pad><pad><pad>)
+flood <---> storm    (<pad> storm</s><pad><pad><pad><pad><pad><pad>)
+400 <---> 500    (<pad> 500</s><pad><pad><pad><pad><pad><pad>)
+flush <---> flush    (<pad> flush</s><pad><pad><pad><pad><pad><pad>)
+skate park <---> skate    (<pad> skate</s><pad><pad><pad><pad><pad><pad>)
+kawasaki <---> triumph    (<pad> triumph</s><pad><pad><pad><pad><pad><pad>)
+salt and pepper <---> salt    (<pad> salt</s><pad><pad><pad><pad><pad><pad>)
+steam <---> steam    (<pad> steam</s><pad><pad><pad><pad><pad><pad>)
+spatula <---> pizza slicer    (<pad> pizza slicer</s><pad><pad><pad><pad>)
+make donuts <---> heat    (<pad> heat</s><pad><pad><pad><pad><pad><pad>)
+canal <---> canal    (<pad> canal</s><pad><pad><pad><pad><pad><pad>)
+legal <---> legal    (<pad> legal</s><pad><pad><pad><pad><pad><pad>)
+florist <---> flower shop    (<pad> flower shop</s><pad><pad><pad><pad><pad>)
+anchor <---> anchor    (<pad> anchor</s><pad><pad><pad><pad><pad><pad>)
+seagull <---> seagull    (<pad> seagull</s><pad><pad><pad><pad>)
+microphone <---> microphone    (<pad> microphone</s><pad><pad><pad><pad><pad><pad>)
+suit <---> suit    (<pad> suit</s><pad><pad><pad><pad><pad><pad>)
+tempered <---> tempered    (<pad> tempered</s><pad><pad><pad><pad><pad>)
+basin <---> bowl    (<pad> bowl</s><pad><pad><pad><pad><pad><pad>)
+steak <---> broccoli    (<pad> broccoli</s><pad><pad><pad><pad><pad><pad>)
+piano <---> piano    (<pad> piano</s><pad><pad><pad><pad><pad><pad>)
+gottlieb daimler <---> wright brother    (<pad> wright brother</s><pad><pad><pad>)
+neoprene <---> rubber    (<pad> rubber</s><pad><pad><pad><pad><pad><pad>)
+rugby <---> rugby    (<pad> rugby</s><pad><pad><pad><pad><pad><pad>)
+horse race <---> horse race    (<pad> horse race</s><pad><pad><pad><pad><pad>)
+plumber <---> plumber    (<pad> plumber</s><pad><pad><pad><pad><pad><pad>)
+sahara <---> beach    (<pad> beach</s><pad><pad><pad><pad><pad><pad>)
+rye <---> sourdough    (<pad> sourdough</s><pad><pad>)
+buddhism <---> buddhism    (<pad> buddhism</s><pad><pad>)
+orange <---> orange    (<pad> orange</s><pad><pad><pad><pad><pad><pad>)
+Testing DataLoader 0:   3%|▎         | 5/158 [00:53<26:59, 10.58s/it]Testing DataLoader 0:   3%|▎         | 5/158 [00:53<26:59, 10.58s/it]['Question: What kind of cat is this and what are some depictions of this breed of cat in fiction? ', 'Question: In what city is the restaurant the man in the green hat is eating at? ', 'Question: Is this animal a carnivore herbivore or omnivore? ', 'Question: What ingredient is missing from the picture to make a pb and j sandwich? ', 'Question: What is the lighing like? ', 'Question: What kind of slope is pictured here? ', 'Question: What source of energy does this vehicle use? ', 'Question: What are the two items that this athlete has in either hand? ', 'Question: What is the rack on the bus used for? ', 'Question: What is this woman playing with? ', 'Question: How do you make this dish? ', 'Question: What could this guy be doing? ', 'Question: Where were these vegetables grown? ', 'Question: The food in the photo contains which healthy vitamins? ', 'Question: What topping are on the hotdog? ', "Question: Which political figure is being referenced on the child's shirt? ", 'Question: What is this fireplace made of? ', 'Question: The picture on the laptop is called a what? ', 'Question: How well done is this steak cooked? ', 'Question: What type of bird is this? ', 'Question: What beverages are pictured in this phot? ', 'Question: What kind of sign is this? ', 'Question: What continent s is are this bird found on? ', 'Question: What is needed to use this vehicle? ', 'Question: What breed are these two dogs? ', 'Question: What base is this guy on? ', 'Question: What tooth is named after this type of animal? ', 'Question: What celestial body controls the movements of the body of water featured in this photo? ', 'Question: What are the white lines marked for? ', 'Question: What are these peole pulling? ', 'Question: How big do these animals get? ', 'Question: What kind of race is this? ']
+Testing DataLoader 0:   4%|▍         | 6/158 [01:04<26:47, 10.57s/it]Testing DataLoader 0:   4%|▍         | 6/158 [01:04<26:47, 10.57s/it]['Question: What might be the weight of this luggage? ', 'Question: Was the person old or young? ', 'Question: What breed of horse is that? ', 'Question: Is the light ambient or natural? ', 'Question: What black veggie is on this pizza? ', 'Question: The people in this photo are wearing what outfits which can be considered business formal? ', 'Question: What is this bench made out of? ', 'Question: What causes these waves? ', 'Question: What could make this room brighter? ', "Question: What is the name of that device that's holding the towels? ", 'Question: What small appliance is that stuffed animal inside? ', 'Question: What sport is this kind of racquet used to play? ', 'Question: How fast can the vehicle in the foreground go? ', 'Question: What items are spinning in the background which can be used to control electricity? ', 'Question: What object is synonymous with a rodent in this image? ', 'Question: When was this item first invented? ', 'Question: What brand is the black laptop? ', 'Question: What type of train is that freight or passenger? ', 'Question: What kind of plane is this? ', 'Question: What do the triangles on the back of this bus mean? ', 'Question: This type of bus can be found in what popular city? ', 'Question: What is a common term for the type of roadway the truck is entering? ', "Question: What is the cartoon character's name who is wearing the red hat? ", 'Question: What sense is this animal known for? ', "Question: What is in the woman's hand? ", 'Question: If this chair where outside it might be made from what reed like material? ', 'Question: Where does this vehicle stop? ', 'Question: What causes the staining to occur? ', 'Question: What are the benefits of drinking coffee? ', 'Question: Is this surfer regular footed or goofy footed? ', 'Question: What is used to stuff those pillows? ', 'Question: What are those wide leaved plants next to the bench called? ']
+Testing DataLoader 0:   4%|▍         | 7/158 [01:14<26:21, 10.47s/it]Testing DataLoader 0:   4%|▍         | 7/158 [01:14<26:21, 10.47s/it]['Question: Is this a legal or illegal fire hydrant color? ', 'Question: What object is this? ', 'Question: How many calories does this meal contain? ', 'Question: What kind of instrument is on the refrigerator? ', 'Question: What type of cake is this? ', 'Question: How do we know that this bathroom is probably in a high rise building? ', 'Question: Who invented the sports equipment being used here? ', 'Question: When was this gaming system first released? ', 'Question: Where is this? ', 'Question: What type of car is this? ', 'Question: Who wrote the famous novels about the young wizard named on this bus? ', 'Question: What type of race would these kids compete in? ', 'Question: What brand is this device? ', 'Question: Is the ocean calm or rough in this scene? ', 'Question: What is the board made of? ', 'Question: Can you guess the drink brand name shown in this picture? ', 'Question: What is in every drawer? ', 'Question: What language is that sign in? ', 'Question: What animal is this boat mimicing? ', 'Question: What is the name of the knot used on this tie? ', 'Question: What type of currency is mainly accepted by this item? ', 'Question: What climate would contain a lake like this? ', 'Question: How did this man get in the air? ', 'Question: How many teeth does this animal use to have? ', 'Question: What birds are those? ', 'Question: What kinds of dogs are those? ', 'Question: What types of buildings have these? ', 'Question: What is the scientific name for this group of animals? ', 'Question: What kind of hat is the person in orange shorts wearing? ', 'Question: What is the walls in this photo made from? ', "Question: What animal is the woman's shirt replicating the pelt? ", 'Question: What is the purpose of the red rag? ']
+Testing DataLoader 0:   5%|▌         | 8/158 [01:25<26:48, 10.72s/it]Testing DataLoader 0:   5%|▌         | 8/158 [01:25<26:48, 10.72s/it]['Question: What is this animal known for? ', 'Question: What other professional sport is famous for requiring leaps such as that seen here? ', 'Question: What grip does this woman have on this tennis racket? ', 'Question: What type of american currency would you stick in the machine? ', 'Question: Who uses this device? ', 'Question: What material is the jacket made from? ', 'Question: What year was this sport invented? ', 'Question: Where in the world do these types of animals live? ', 'Question: What does the plugged in item do? ', 'Question: The man wearing a hat what is the name of that hat? ', 'Question: What type of watch is this? ', 'Question: How long has ultimate frisbee been an official sport? ', 'Question: Can you guess the aircraft model shown in this picture? ', 'Question: What type of dog is pictured? ', 'Question: Name the bike model shown in this picture? ', 'Question: What is being cast onto the table? ', 'Question: Who invented this kind of suit? ', 'Question: What is causing the circles on the table? ', 'Question: What kind of lights are over these mirrors? ', 'Question: This plane is passing by a part of what type of vehicle? ', 'Question: What is the name of the bar that holds the bike up in this picture? ', 'Question: What kind of sink is on the wall? ', 'Question: What year was this plane made? ', 'Question: What operating system is on this computer? ', 'Question: What is the name of the trick being performed? ', 'Question: What normally can be seen crossing this? ', 'Question: Where does this food grow? ', 'Question: What section is the player standing on? ', 'Question: What type of kitchen is this? ', 'Question: What is he waiting to do? ', 'Question: What type of phone is this woman using? ', 'Question: Which class are these students most likely attending? ']
+Testing DataLoader 0:   6%|▌         | 9/158 [01:35<26:03, 10.49s/it]Testing DataLoader 0:   6%|▌         | 9/158 [01:35<26:03, 10.49s/it]['Question: What is this workspace called? ', 'Question: What is the person doing? ', 'Question: Is this creme an acid or base? ', 'Question: What are the features of this phone? ', 'Question: The man in the orange shirt has a device what is this device used for? ', 'Question: Who invented this item? ', 'Question: What century is this? ', 'Question: What type of cellphone are both women using? ', 'Question: Which large predatory feline is often a dark color like this animal? ', "Question: How many minutes per pound does the bird in the woman's hands have to be cooked? ", 'Question: What brand is this stove? ', 'Question: What is required for all these devices to be connected to the internet without wires? ', 'Question: What print is on the mans shirt? ', 'Question: Can you guess the ingredients used to make this dish? ', 'Question: How long does it take to learn this sport? ', 'Question: What type of horses are being ridin? ', 'Question: How heavy is this machine? ', 'Question: What forms of transportation are there? ', 'Question: The puppy pictured here is a native of what chilly state? ', 'Question: What cartoon is on the side of the plane? ', 'Question: What breed is this dog? ', 'Question: Why would we suspect that this is not a summer time scene? ', 'Question: Is the basket on the ground open or closed? ', 'Question: What age are the two people? ', 'Question: What brand of watch is pictured? ', 'Question: What popular food product is associated with this mode of transport? ', 'Question: What kinds of clouds are those? ', 'Question: What activities could you engage in at this place? ', 'Question: What plant is near the zebra? ', 'Question: What kind of plane is this? ', 'Question: What team is the player from? ', 'Question: When was this type of two wheeled vehicle invented? ']
+Testing DataLoader 0:   6%|▋         | 10/158 [01:46<25:49, 10.47s/it]Testing DataLoader 0:   6%|▋         | 10/158 [01:46<25:49, 10.47s/it]['Question: What kind of birds are these? ', "Question: Who's the guy on the left? ", 'Question: What amusement ride is pictured? ', 'Question: What would you practice inside this building? ', 'Question: What household chore do people use the white appliance for? ', 'Question: If someone is doing this without a saddle they are said to be doing what? ', 'Question: Can you guess the family or breed to which the dog belongs to? ', 'Question: Where can you get these? ', 'Question: Which type of metal is used for making this toilet? ', 'Question: At which holiday would you traditionally eat this food? ', 'Question: Can you name the place where this bird is seen? ', 'Question: What are the white veggies? ', 'Question: What country or countries will you find these birds in? ', 'Question: How would this train stop itself on the tracks? ', 'Question: How do we know this is not summertime? ', 'Question: What kind of umbrella are those in the background? ', 'Question: What kind of plant is this wreath made from? ', 'Question: Which occupation sniffs this item before drinking? ', 'Question: What nationality are these children appear to be? ', 'Question: What does the second light mean? ', 'Question: What grade are these kids in? ', 'Question: Egyptians worshiped these animals? ', 'Question: Where is that kind of sign found? ', 'Question: Is the christmas tree real or fake? ', 'Question: This holder is also called a shoe what? ', 'Question: In which direction is the wind blowing? ', 'Question: Is the man cross country skiing or is he in a race? ', 'Question: The sandwich in this photo was wrapped in what? ', 'Question: What room is this? ', 'Question: What mechanism propels the vehicle in this picture? ', 'Question: What is this toy made of? ', 'Question: What animal do you have to watch out for when doing this sport? ']

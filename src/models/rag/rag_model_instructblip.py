@@ -419,6 +419,7 @@ class RagModelInstructBLIP(pl.LightningModule):
         
         # Retrieve docs for given question inputs
         retrieval_results = self.retrieve(input_ids, attention_mask, labels, question_ids, input_text_sequences)
+        print(input_text_sequences)
         retrieved_docs, doc_scores = retrieval_results.retrieved_docs, retrieval_results.doc_scores
         
 
@@ -568,7 +569,10 @@ class RagModelInstructBLIP(pl.LightningModule):
                     top_cand_inds = (-loss_with_doc_scores[b]).topk(1)[1]
                     outputs.append(generation_outputs[b, top_cand_inds])
                     answer_proposals = generation_outputs_decoded[b*n_docs:(b+1)*n_docs]
-                    generation_outputs_for_docs.append(answer_proposals)
+                    
+                    long_log = answer_proposals + [str(round(i/100, 3)) for i in doc_scores[b].tolist()] + [str(round(i, 2)) for i in loss.sum(-1)[b].tolist()]
+                    #print(long_log)
+                    generation_outputs_for_docs.append(long_log)
                     # print(-loss[b])
                     # print(answer_proposals)
                 outputs = torch.cat(outputs)

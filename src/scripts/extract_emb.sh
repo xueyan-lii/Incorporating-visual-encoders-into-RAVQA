@@ -25,5 +25,5 @@ JOBID=$SLURM_JOB_ID
 LOG=../logs/$EXP_NAME-log.$JOBID
 ERR=../logs/$EXP_NAME-err.$JOBID
 
-python tools/extract_instructblip_head.py --split train2014 \
+python tools/extract_InstructBLIP_image_embeddings.py --split train2014 \
    >> $LOG 2> $ERR
