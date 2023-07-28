@@ -1,5 +1,6 @@
 #difference from extract_instruct_head is that this one gets output from mlp
 # to be used in faiss indexing
+#can also do blip2, don't foget to change save file name
 import torch
 import pickle
 import json
@@ -8,7 +9,7 @@ import argparse
 from pathlib import Path
 import numpy as np
 import os
-from transformers import InstructBlipProcessor
+from transformers import InstructBlipProcessor, Blip2Processor, Blip2ForConditionalGeneration
 import sys
 from PIL import Image
 from torchvision.transforms.functional import InterpolationMode
@@ -33,15 +34,18 @@ def main(subtype: str = "val2014"):
     print(f"Extracting {subtype} using InstructBLIP Flan-T5-XL")
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    processor = InstructBlipProcessor.from_pretrained("Salesforce/instructblip-flan-t5-xl")
-    model = InstructBlipForConditionalGeneration.from_pretrained("Salesforce/instructblip-flan-t5-xl")
+    #processor = InstructBlipProcessor.from_pretrained("Salesforce/instructblip-flan-t5-xl")
+    #model = InstructBlipForConditionalGeneration.from_pretrained("Salesforce/instructblip-flan-t5-xl")
+    processor = Blip2Processor.from_pretrained("Salesforce/blip2-flan-t5-xl")
+    model = Blip2ForConditionalGeneration.from_pretrained("Salesforce/blip2-flan-t5-xl")
+    
     model.to(device)
     
     out_path = (
         data_dir
         / "pre-extracted_features"
         / "text_embeddings"
-        / f"InstructBLIP_image_embeddings_{subtype}.pkl"
+        / f"BLIP2_image_embeddings_{subtype}.pkl"
     )
 
     with open(
@@ -77,9 +81,14 @@ def main(subtype: str = "val2014"):
 
         with torch.no_grad():
             question = str(data_item["question"])
+            '''
             inputs = processor(
                 images=image, 
                 text=question, 
+                return_tensors="pt").to(device, torch.float32)
+            '''
+            inputs = processor(
+                images=image, 
                 return_tensors="pt").to(device, torch.float32)
             language_model_inputs, language_model_attention_mask = model.get_qformer_features(**inputs)
             #print(language_model_inputs.shape) #[1, 32, 2048]

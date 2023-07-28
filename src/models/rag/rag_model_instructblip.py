@@ -497,6 +497,7 @@ class RagModelInstructBLIP(pl.LightningModule):
         # Find answer proposals from n_docs outputs for each question
         outputs = []
         generation_outputs_for_docs = []
+        doc_scores_percent = []
 
         if 'majority_voting' in self.config.model_config.modules:
             pass
@@ -578,10 +579,10 @@ class RagModelInstructBLIP(pl.LightningModule):
                     top_cand_inds = (-loss_with_doc_scores[b]).topk(1)[1]
                     outputs.append(generation_outputs[b, top_cand_inds])
                     answer_proposals = generation_outputs_decoded[b*n_docs:(b+1)*n_docs]
-                    
-                    long_log = answer_proposals + [str(round(i/100, 3)) for i in doc_scores[b].tolist()] + [str(round(i, 2)) for i in loss.sum(-1)[b].tolist()]
+                    generation_outputs_for_docs.append(answer_proposals)
+                    long_log = [str(round(i/100, 3)) for i in doc_scores[b].tolist()] #+ [str(round(i, 2)) for i in loss.sum(-1)[b].tolist()]
                     #print(long_log)
-                    generation_outputs_for_docs.append(long_log)
+                    doc_scores_percent.append(long_log)
                     # print(-loss[b])
                     # print(answer_proposals)
                 outputs = torch.cat(outputs)
@@ -590,7 +591,8 @@ class RagModelInstructBLIP(pl.LightningModule):
                         retrieved_docs=retrieved_docs, 
                         doc_scores=doc_scores.cpu().detach().numpy(),
                         loss_with_doc_scores=loss_with_doc_scores.cpu().detach().numpy(),
-                        generation_outputs_for_docs=generation_outputs_for_docs)
+                        generation_outputs_for_docs=generation_outputs_for_docs,
+                        doc_scores_percent=doc_scores_percent)
 
     def get_loss(
         self, seq_logits, doc_scores, target, reduce_loss=True, epsilon=0.0, exclude_bos_score=False, ignore_index=-100, n_docs=None, retrieval_labels=None,
@@ -705,6 +707,24 @@ class RagModelInstructBLIP(pl.LightningModule):
                         torch.logical_and((prediction_labels==0), (retrieval_labels==1)),
                         torch.logical_and((prediction_labels==1), (retrieval_labels==0)),
                         )
+                elif RAVQA_loss_type == 'Approach7':
+                    ##############   approach 7:  ##################
+                    # correct prediction + positive pseudo label = 1
+                    # wrong prediction + positive pseudo label = 0
+                    # correct prediction + negative pseudo label = 0
+                    # wrong prediction + negative pseudo label = 0
+                    merged_labels = torch.logical_and(prediction_labels, retrieval_labels).float()
+                    ignore_mask = torch.zeros_like(merged_labels).bool().to(merged_labels.device)
+
+                elif RAVQA_loss_type == 'Approach8':
+                    ##############   approach 8:  ##################
+                    # correct prediction + positive pseudo label = 1
+                    # wrong prediction + positive pseudo label = 0
+                    # correct prediction + negative pseudo label = -100
+                    # wrong prediction + negative pseudo label = 0
+                    merged_labels = torch.logical_and(prediction_labels, retrieval_labels).float()
+                    ignore_mask = torch.logical_and((prediction_labels==1), (retrieval_labels==0))
+
                 elif RAVQA_loss_type == 'NoPR':
                     ##############   approach NoPR:  ##################
                     # correct prediction = 1
