@@ -27,33 +27,14 @@ ERR=../logs/$EXP_NAME-err.$JOBID
 
 python main.py \
     ../configs/okvqa/RAVQA_instructblip.jsonnet  \
-    --mode train  \
+    --mode test  \
     --experiment_name ${EXP_NAME}.$JOBID \
     --accelerator auto --devices 1  \
     --modules force_existence  \
     --precision bf16 \
     --log_prediction_tables   \
-    --opts train.epochs=5  \
-            train.batch_size=1  \
-            valid.step_size=0.5  \
-            valid.batch_size=4  \
-            train.additional.gradient_accumulation_steps=32  \
-            train.lr=0.00006  \
-            train.retriever_lr=0.00001  \
-            train.scheduler=linear  \
-            model_config.loss_ratio.additional_loss=1  \
-            model_config.RAVQA_loss_type=Approach8  \
-            data_loader.additional.num_knowledge_passages=5 \
-   >> $LOG 2> $ERR
-
-# testing only from checkpoint
-# python main.py \
-#    ../configs/okvqa/RAVQA.jsonnet  \
-#    --mode test  \
-#    --experiment_name ${EXP_NAME}.$JOBID \
-#    --accelerator auto --devices 1  \
-#    --modules freeze_question_encoder force_existence  \
-#    --log_prediction_tables   \
-#    --opts data_loader.additional.num_knowledge_passages=5 \
-#            test.load_model_path=../Experiments/OKVQA_RA-VQA-FrDPR_FullCorpus.19792250/train/saved_model/model_6.ckpt \
-#   >> $LOG 2> $ERR
+    --opts data_loader.additional.num_knowledge_passages=50 \
+            valid.batch_size=4 \
+            test.batch_size=4 \
+            test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/sucessful_runs/OKVQA-instructblip.23978395/train/saved_model/model_3.ckpt \
+    >> $LOG 2> $ERR

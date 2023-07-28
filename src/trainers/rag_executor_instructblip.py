@@ -1,3 +1,4 @@
+#used to log results to be used for in-context learning, don't use this training
 import math
 import time
 import os
@@ -217,6 +218,7 @@ class RagExecutorInstructBLIP(BaseExecutor):
         retrieved_docs = generation_outputs.retrieved_docs
         generation_outputs_for_docs = generation_outputs.generation_outputs_for_docs
         loss_with_doc_scores = generation_outputs.loss_with_doc_scores
+        doc_scores_percent = generation_outputs.doc_scores_percent
         
 
         bos_token_id = self.data_loader.decoder_tokenizer.tokenizer.bos_token_id
@@ -261,6 +263,7 @@ class RagExecutorInstructBLIP(BaseExecutor):
                 item['gold_answer'],
                 decoded_output,
                 generation_outputs_for_docs[index],
+                doc_scores_percent[index],
             ]
             
             for doc, doc_prediction in zip(retrieved_docs[index], generation_outputs_for_docs[index]):
@@ -281,8 +284,6 @@ class RagExecutorInstructBLIP(BaseExecutor):
         return data_to_return
     
     
-
-
     def evaluate_outputs(self, step_outputs, mode='test'):
         # Batching every validation step outputs
         batch_predictions = []
@@ -292,7 +293,7 @@ class RagExecutorInstructBLIP(BaseExecutor):
         batch_loss_with_doc_scores = []
 
         n_docs = self.config.data_loader.additional.num_knowledge_passages
-        columns=["question_id", "image_key", "question", "caption", "answers", "gold_answer", "prediction", "doc_predictions"]
+        columns=["question_id", "image_key", "question", "caption", "answers", "gold_answer", "prediction", "doc_predictions", "doc_scores"]
         for i in range(n_docs):
             columns += ['p_{}'.format(i), 'a_{}'.format(i)]
         test_table = wandb.Table(columns=columns)
@@ -309,7 +310,6 @@ class RagExecutorInstructBLIP(BaseExecutor):
         # concatenate all tensors
         batch_loss_with_doc_scores = np.concatenate(batch_loss_with_doc_scores, axis=0)
 
-        
         ##############################
         ##    Compute Metrics       ##
         ##############################
