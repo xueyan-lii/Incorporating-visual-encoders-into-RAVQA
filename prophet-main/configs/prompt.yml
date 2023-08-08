@@ -1,0 +1,5 @@
+MODEL: text-curie-001
+TEMPERATURE: 0.
+MAX_TOKENS: 8
+
+T_INFER: 1

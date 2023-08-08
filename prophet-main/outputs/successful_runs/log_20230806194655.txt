@@ -1,0 +1,38 @@
+{ TIMESTAMP         }-> 20230806194655
+{ VERSION           }-> prompt_okvqa
+{ CKPTS_DIR         }-> outputs/ckpts/prompt_okvqa
+{ LOG_PATH          }-> outputs/logs/prompt_okvqa/log_20230806194655.txt
+{ RESULT_DIR        }-> outputs/results/prompt_okvqa
+{ RESULT_PATH       }-> outputs/results/prompt_okvqa/result_20230806194655.json
+{ RESUME            }-> True
+{ TASK              }-> ok
+{ RUN_MODE          }-> prompt
+{ DATA_TAG          }-> ok
+{ DATA_MODE         }-> finetune
+{ EVAL_NOW          }-> True
+{ NUM_WORKERS       }-> 8
+{ PIN_MEM           }-> True
+{ cfg_file          }-> configs/prompt.yml
+{ DEBUG             }-> False
+{ SEED              }-> 99
+{ EXAMPLES_PATH     }-> /home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/data/few_shot_promptcap_train_reduced_altprompt.csv
+{ OPENAI_KEY        }-> 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
+{ MODEL             }-> gpt-3.5-turbo
+{ TEMPERATURE       }-> 0.0
+{ MAX_TOKENS        }-> 8
+{ T_INFER           }-> 1
+
+Overall Accuracy is: 59.18
+Question Type                           	Prophet
+Plants and Animals                      	61.12
+Science and Technology                  	51.19
+Sports and Recreation                   	61.06
+Geography, History, Language and Culture	54.89
+Brands, Companies and Products          	62.56
+Vehicles and Transportation             	55.97
+Cooking and Food                        	60.55
+Weather and Climate                     	63.10
+People and Everyday life                	55.47
+Objects, Material and Clothing          	57.24
+
+
