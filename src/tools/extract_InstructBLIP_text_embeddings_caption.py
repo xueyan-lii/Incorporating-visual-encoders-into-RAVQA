@@ -42,7 +42,7 @@ def main(subtype: str = "val2014"):
         data_dir
         / "pre-extracted_features"
         / "text_embeddings"
-        / f"InstructBLIP_question+oscar_caption_embeddings_{subtype}.pkl"
+        / f"InstructBLIP_question+blip2_caption_embeddings_{subtype}.pkl"
     )
 
     with open(
@@ -70,9 +70,9 @@ def main(subtype: str = "val2014"):
         #tokenized_question = clip.tokenize(data_item['question']).to(device)
 
         with torch.no_grad():
-            print(data_item['question']+' '+captions[question_id]['oscar_caption'])
+            print(data_item['question']+' '+captions[question_id]['blip2_caption'])
             inputs = processor( #output includes input_ids, attention_mask, qformer_input_ids,qformer_attention_mask, pixel_values
-                text=data_item['question']+' '+captions[question_id]['oscar_caption'], 
+                text=data_item['question']+' '+captions[question_id]['blip2_caption'], 
                 padding='max_length',
                 max_length=64,
                 truncation=True,

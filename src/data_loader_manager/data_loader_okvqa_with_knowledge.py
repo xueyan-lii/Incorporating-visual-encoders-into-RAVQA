@@ -21,7 +21,7 @@ from datetime import datetime
 from pprint import pprint
 from easydict import EasyDict
 from collections import defaultdict
-from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, Subset
 
 
 import logging
@@ -373,6 +373,8 @@ class DataLoaderOKVQAWithKnowledge(DataLoaderOKVQA):
             'mode': 'train',
         }
         self.train_dataset = globals()[self.config.data_loader.dataset_type](self.config, train_dataset_dict)
+        
+        #self.train_dataset = Subset(self.train_dataset_o, range(0,len(self.train_dataset_o), 2))#only use this to train on a subset to generate worse training answer candidates for in-context
         # for i in self.train_dataset:
         #     pprint(i)
         #     input()

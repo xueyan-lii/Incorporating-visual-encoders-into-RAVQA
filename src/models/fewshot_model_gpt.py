@@ -1,4 +1,4 @@
-# few shot learning with various llms
+# counting number of tokens for gpt3.5, number stored in predictions
 import copy
 import math
 import os
@@ -20,7 +20,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 from transformers import LlamaForCausalLM, LlamaTokenizer
 import re
 import pytorch_lightning as pl
-
+import tiktoken
 #from datasets import load_from_disk
 import time
 import matplotlib.pyplot as plt
@@ -28,7 +28,7 @@ import matplotlib.pyplot as plt
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-class FewShotModel(pl.LightningModule):
+class FewShotModelGPT(pl.LightningModule):
     '''
     Class to use full blip2 model
     '''
@@ -45,12 +45,6 @@ class FewShotModel(pl.LightningModule):
 
         #load LLM
         
-        self.model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-xxl")
-        self.tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-xxl")
-        '''
-        self.tokenizer = LlamaTokenizer.from_pretrained("/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/shared_space/converted_vicuna_weights/vicuna-13b")
-        self.model = LlamaForCausalLM.from_pretrained("/home/xl544/rds/rds-cvnlp-hirYTW1FQIw/shared_space/converted_vicuna_weights/vicuna-13b")
-        '''
 
     def forward(self, **kwargs):
        pass
@@ -69,6 +63,11 @@ class FewShotModel(pl.LightningModule):
 
     def combine_shots(self, prompt_head, shots, test_shot):
         return prompt_head + ''.join(shots) + test_shot
+    
+    def num_tokens_from_string(self, string):
+        encoding = tiktoken.encoding_for_model("gpt-3.5-turbo")
+        num_tokens = len(encoding.encode(string))
+        return num_tokens
 
     def generate(self, questions, gold_answers, in_context_examples):
         #print(questions,gold_answers)
@@ -76,8 +75,7 @@ class FewShotModel(pl.LightningModule):
         max_candidates = self.config.data_loader.additional.max_candidates
         caption_type = self.config.data_loader.additional.caption_type + "_caption"
         
-        prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. The true answer may not be included in the candidates.'  
-        #prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. Come up with an answer if none of the answer candidates are suitable.'
+        prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. The true answer may not be included in the candidates'
         #prompt_head = ''
         combined_shots = []
         num_tokens = []
@@ -98,8 +96,12 @@ class FewShotModel(pl.LightningModule):
                 shots=[]
                 for shot in sample['in_context_examples']:
                     shots.append(self.create_shot(shot[caption_type], shot['question'], shot['doc_predictions'], shot['doc_scores'], max_candidates, shot['gold_answer']))
-                shot=self.combine_shots(prompt_head, shots, test_shot)
-                combined_shots.append(shot)
+                one_sample=self.combine_shots(prompt_head, shots, test_shot)
+                length = self.num_tokens_from_string(one_sample)
+                if length>4000:
+                    print(sample['in_context_examples'][0]['val_question'],'has token length exceed 4000',length)
+                num_tokens.append(length+5) #assume answers are 5 length
+                combined_shots.append(one_sample)
             '''
             print('\n',sample['question_id'])
             print(sample['gold_answer'])
@@ -108,43 +110,8 @@ class FewShotModel(pl.LightningModule):
             '''
         #print(combined_shots)
         
-        inputs = self.tokenizer(combined_shots, padding="longest", return_tensors="pt").to(device) 
-        outputs = self.model.generate(**inputs)
-        generated_text = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
-        #remove any brackets or scores
-        
-        generated_text_postprocessed=[]
-        for answer in generated_text:
-            bracket_index = answer.find('(')
-            if bracket_index == -1:
-                generated_text_postprocessed.append(answer.strip())
-            else:
-                generated_text_postprocessed.append(answer[:bracket_index].strip())
-        
-        '''
-        #this section is for llama2
-        generated_text=[]
-        for prompt in combined_shots:
-            inputs = self.tokenizer(prompt, return_tensors="pt").to(device) 
-            # Generate
-            generate_ids = self.model.generate(**inputs, max_new_tokens=10)
-            answer = self.tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
-            #print(answer)
-            #since this model repeat the whole prompt, only get last answer
-            start=[m.start() for m in re.finditer('Answer:', answer)][-1]
-            end=[m.start() for m in re.finditer('Context', answer)][-1]
-            print(answer[start:])
-            if end > start:
-                generation=answer[start+7:end].strip()
-            elif '\n' in answer:
-                loc=[m.start() for m in re.finditer('\n', answer)][0]
-                if loc > start:
-                    generation=answer[start+7:loc].strip()
-            else:
-                generation=answer[start+7:].strip()
-            generation = generation.replace(".", "")
-            generated_text.append(generation)
-        '''
-        print(generated_text)
-        print(generated_text_postprocessed)
-        return generated_text_postprocessed, combined_shots
+        #inputs = self.tokenizer(combined_shots, padding="longest", return_tensors="pt").to(device) 
+        #outputs = self.model.generate(**inputs)
+        #generated_text = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
+        print(num_tokens)
+        return num_tokens, combined_shots
