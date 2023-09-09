@@ -33,16 +33,16 @@ python main.py \
     --modules force_existence  \
     --precision bf16 \
     --log_prediction_tables   \
-    --opts train.epochs=5  \
+    --opts train.epochs=1  \
             train.batch_size=1  \
-            valid.step_size=0.5  \
+            valid.step_size=0.99  \
             valid.batch_size=4  \
             train.additional.gradient_accumulation_steps=32  \
             train.lr=0.00006  \
             train.retriever_lr=0.00001  \
             train.scheduler=linear  \
             model_config.loss_ratio.additional_loss=1  \
-            model_config.RAVQA_loss_type=Approach8  \
+            model_config.RAVQA_loss_type=Approach6  \
             data_loader.additional.num_knowledge_passages=5 \
    >> $LOG 2> $ERR
 

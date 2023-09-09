@@ -43,7 +43,7 @@ class Runner:
 
         try:
             # print('calling gpt3...')
-            '''
+            
             response = openai.ChatCompletion.create(
                 model=self.__C.MODEL,
                 messages=[{"role": "user", "content": prompt_text}],
@@ -66,15 +66,15 @@ class Runner:
                 stop=["\n", "<|endoftext|>"],
                 # timeout=20,
             )
-            
+            '''
         except Exception as e:
             print(type(e), e)
             if str(e) == 'You exceeded your current quota, please check your plan and billing details.':
                 exit(1)
             return self.gpt3_infer(prompt_text, _retry + 1)
 
-        #response_txt = response.choices[0].message.content.strip()
-        response_txt = response.choices[0].text.strip()
+        response_txt = response.choices[0].message.content.strip()
+        #response_txt = response.choices[0].text.strip()
         # print(response_txt)
         prob=0
         
@@ -140,7 +140,7 @@ class Runner:
                     'confidence': gen_prob
                 }
                 prompt_info_list.append(prompt_info)
-                #time.sleep(1)
+                #time.sleep(0.5)
             
             # vote
             ''''

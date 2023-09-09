@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --gres=gpu:1
-#SBATCH --time=15:00:00
+#SBATCH --time=2:00:00
 #SBATCH --mail-type=FAIL
 #! Uncomment this to prevent the job from being requeued (e.g. if
 #! interrupted by node failure or system downtime):
@@ -14,7 +14,7 @@
 
 LOG=/dev/stdout
 ERR=/dev/stderr
-EXP_NAME=extract_instructblip_head
+EXP_NAME=extract_promptcap_emb
 # UNCOMMENT BELOW FOR SLURM SBATCH
 . /etc/profile.d/modules.sh                # Leave this line (enables the module command)
 module purge                               # Removes all modules still loaded
@@ -25,5 +25,5 @@ JOBID=$SLURM_JOB_ID
 LOG=../logs/$EXP_NAME-log.$JOBID
 ERR=../logs/$EXP_NAME-err.$JOBID
 
-python tools/extract_InstructBLIP_image_embeddings.py --split train2014 \
+python tools/extract_promptcap_captions.py --split val2014 \
    >> $LOG 2> $ERR

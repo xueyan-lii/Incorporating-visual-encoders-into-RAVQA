@@ -75,7 +75,7 @@ local instructBLIP_embeddings = {
   "val": "../data/ok-vqa/pre-extracted_features/blip2_head_embeddings/coco_instructblip_qformer_val2014.pkl",
 };
 local in_context_examples = {
-  "file_path": "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/pre-extracted_features/in_context_examples/rices_concat_a1b1_normalized_textonly.pkl",
+  "file_path": "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/pre-extracted_features/in_context_examples/rices_concat_a1b1_normalized_text.pkl",
 };
 {
   "DATA_FOLDER": "",

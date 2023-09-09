@@ -66,6 +66,12 @@ class FewShotModel(pl.LightningModule):
 
         answer = ' Answer: ' + answer
         return context + question + candidates + answer
+    
+    def create_shot_no_candidates(self, caption, question, candidates, scores, max_candidates, answer=''):
+        context = ' Context: ' + caption
+        question = ' Question: ' + question
+        answer = ' Answer: ' + answer
+        return context + question + answer
 
     def combine_shots(self, prompt_head, shots, test_shot):
         return prompt_head + ''.join(shots) + test_shot
@@ -78,6 +84,8 @@ class FewShotModel(pl.LightningModule):
         
         prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. The true answer may not be included in the candidates.'  
         #prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. Come up with an answer if none of the answer candidates are suitable.'
+        #prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. Choose one answer from the candidates.'
+        
         #prompt_head = ''
         combined_shots = []
         num_tokens = []

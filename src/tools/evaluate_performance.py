@@ -159,8 +159,8 @@ def json_result(json_result_file_path):
     print('VQA Score',(sum(in_scores_list)+sum(out_scores_list))/(in_count+out_count))
          
 
-#csv_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/testing_results/few_shot_promptcap_baseline_promptcap.csv"
+#csv_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/data/few_shot_promptcap_prompt3.csv"
 #csv_result(csv_result_file_path)
 
-json_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/outputs/successful_runs/cache_20230807212508.json"
+json_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/outputs/successful_runs/cache_20230810215329.json"
 json_result(json_result_file_path)

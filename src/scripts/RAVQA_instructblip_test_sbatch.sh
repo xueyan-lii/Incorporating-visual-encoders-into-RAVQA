@@ -36,5 +36,5 @@ python main.py \
     --opts data_loader.additional.num_knowledge_passages=50 \
             valid.batch_size=4 \
             test.batch_size=4 \
-            test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/sucessful_runs/OKVQA-instructblip.23978395/train/saved_model/model_3.ckpt \
+            test.load_model_path=/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/Experiments/OKVQA-instructblip.24546926/train/saved_model/model_0.ckpt \
     >> $LOG 2> $ERR

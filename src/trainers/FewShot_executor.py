@@ -32,6 +32,7 @@ from .metrics_processors import MetricsProcessor
 from .base_executor import BaseExecutor
 from transformers import T5Tokenizer, T5ForConditionalGeneration, T5Config
 from models.fewshot_model import FewShotModel
+from models.fewshot_model_gpt import FewShotModelGPT
 from utils.dirs import *
 
 
@@ -142,8 +143,10 @@ class FewShotExecutor(BaseExecutor):
         decoded_output, prompts = self.model.generate(**test_batch)
         #print('questions',sample_batched['questions'],'predictions',decoded_output,'gold_answers',sample_batched['gold_answers'])
         for index, i in enumerate(decoded_output):
-
-            answer = decoded_output[index].strip()
+            if isinstance(decoded_output[index], str):
+                answer = decoded_output[index].strip()
+            else:
+                answer = decoded_output[index]
             prompt = prompts[index]
             
             question_id = sample_batched['question_ids'][index]
@@ -183,7 +186,6 @@ class FewShotExecutor(BaseExecutor):
 
         columns=["question_id", "image_key", "question", "oscar cpation", "answers", "gold_answer", "prediction", "prompt"]
         test_table = wandb.Table(columns=columns)
-
 
         for step_output in step_outputs:
             batch_predictions += step_output['predictions']
