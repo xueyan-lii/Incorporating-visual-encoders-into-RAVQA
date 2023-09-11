@@ -75,16 +75,46 @@ class FewShotModel(pl.LightningModule):
 
     def combine_shots(self, prompt_head, shots, test_shot):
         return prompt_head + ''.join(shots) + test_shot
-
+    
+    def find_most_popular_answer(self, all_answers, candidates, gold_answer):#most popular answer that appeared in answer candidates
+        scores_list=[]
+        temp_no=0
+        temp_answer=gold_answer
+        for i in set(candidates):
+            if i in all_answers:
+                no=all_answers.count(i)
+                if no>temp_no:
+                    temp_no=no
+                    temp_answer=i
+        #print(gold_answer, temp_answer)
+        return temp_answer
+    
+    def get_score(self, answer_list):
+        return answer_list['score']
+    def provide_all_answers(self, all_answers):
+        answer_list=[]
+        for i in set(all_answers):
+            no=all_answers.count(i)
+            answer_list.append({'answer':i, 'score':no/10})
+        
+        answer_list.sort(key=self.get_score, reverse=True)
+        return_string=""
+        for i in answer_list:
+            return_string+=i['answer']+ " (" + str(i['score']) + "), "
+            #return_string+=i['answer']+ ", "
+        #print(return_string)
+        return return_string
+        
     def generate(self, questions, gold_answers, in_context_examples):
         #print(questions,gold_answers)
         #print(in_context_examples)
         max_candidates = self.config.data_loader.additional.max_candidates
         caption_type = self.config.data_loader.additional.caption_type + "_caption"
         
-        prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. The true answer may not be included in the candidates.'  
+        #prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. The true answer may not be included in the candidates.'  
         #prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. Come up with an answer if none of the answer candidates are suitable.'
         #prompt_head = 'Answer the question according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. Choose one answer from the candidates.'
+        prompt_head = 'Provide short answers according to the context and answer candidates. Each answer candidate is associated with a confidence score within a bracket. In the examples, correct answers are provided where better answers have higher scores.'
         
         #prompt_head = ''
         combined_shots = []
@@ -92,7 +122,6 @@ class FewShotModel(pl.LightningModule):
         
         for sample in in_context_examples:
             #the same val information is in each shot so only take the first one
-            
             test_shot = self.create_shot(caption=sample['in_context_examples'][0]['val_'+caption_type], 
                                     question=sample['in_context_examples'][0]['val_question'],
                                     candidates=sample['in_context_examples'][0]['val_doc_predictions'],
@@ -105,7 +134,13 @@ class FewShotModel(pl.LightningModule):
             else:
                 shots=[]
                 for shot in sample['in_context_examples']:
-                    shots.append(self.create_shot(shot[caption_type], shot['question'], shot['doc_predictions'], shot['doc_scores'], max_candidates, shot['gold_answer']))
+                    if self.config.data_loader.additional.answer_type == 1: #use gold answer
+                        shots.append(self.create_shot(shot[caption_type], shot['question'], shot['doc_predictions'], shot['doc_scores'], max_candidates, shot['gold_answer']))
+                    elif self.config.data_loader.additional.answer_type == 2: #use the most popular answer from ground truth annotations
+                        shots.append(self.create_shot(shot[caption_type], shot['question'], shot['doc_predictions'], shot['doc_scores'], max_candidates, self.find_most_popular_answer(shot['answers'], shot['doc_predictions'], shot['gold_answer'])))
+                    elif self.config.data_loader.additional.answer_type == 3: #provide all ground truth answers
+                        shots.append(self.create_shot(shot[caption_type], shot['question'], shot['doc_predictions'], shot['doc_scores'], max_candidates, self.provide_all_answers(shot['answers'])))
+
                 shot=self.combine_shots(prompt_head, shots, test_shot)
                 combined_shots.append(shot)
             '''
@@ -121,13 +156,7 @@ class FewShotModel(pl.LightningModule):
         generated_text = self.tokenizer.batch_decode(outputs, skip_special_tokens=True)
         #remove any brackets or scores
         
-        generated_text_postprocessed=[]
-        for answer in generated_text:
-            bracket_index = answer.find('(')
-            if bracket_index == -1:
-                generated_text_postprocessed.append(answer.strip())
-            else:
-                generated_text_postprocessed.append(answer[:bracket_index].strip())
+        
         
         '''
         #this section is for llama2
@@ -154,5 +183,14 @@ class FewShotModel(pl.LightningModule):
             generated_text.append(generation)
         '''
         print(generated_text)
+        #print(generated_text_postprocessed)
+        
+        generated_text_postprocessed=[]
+        for answer in generated_text:
+            bracket_index = answer.find('(')
+            if bracket_index == -1:
+                generated_text_postprocessed.append(answer.strip())
+            else:
+                generated_text_postprocessed.append(answer[:bracket_index].strip())
         print(generated_text_postprocessed)
         return generated_text_postprocessed, combined_shots

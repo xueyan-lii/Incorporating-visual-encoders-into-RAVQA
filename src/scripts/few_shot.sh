@@ -33,7 +33,7 @@ python main_fewshot.py ../configs/okvqa/few_shot.jsonnet  \
     --log_prediction_tables   \
     --opts valid.batch_size=8 \
     data_loader.additional.num_shots=5 \
-    data_loader.additional.score=1 \
+    data_loader.additional.answer_type=2 \
     data_loader.additional.max_candidates=5 \
     data_loader.additional.caption_type="promptcap" \
    >> $LOG 2> $ERR

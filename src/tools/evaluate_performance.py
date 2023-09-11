@@ -133,6 +133,12 @@ def json_result(json_result_file_path):
     for question_id in data:
         answers=annotation[question_id]['answers']
         prediction=data[question_id]['answer']
+        #post process prediction to remove brackets and keep first answer only
+        bracket_index = prediction.find('(')
+        if bracket_index == -1:
+            prediction=prediction.strip()
+        else:
+            prediction = prediction[:bracket_index].strip()
         prompt=data[question_id]['prompt_info'][0]['prompt']
         #print(prompt)
         
@@ -159,8 +165,8 @@ def json_result(json_result_file_path):
     print('VQA Score',(sum(in_scores_list)+sum(out_scores_list))/(in_count+out_count))
          
 
-#csv_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/data/few_shot_promptcap_prompt3.csv"
-#csv_result(csv_result_file_path)
+csv_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/data/few_shot_final_1.csv"
+csv_result(csv_result_file_path)
 
-json_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/outputs/successful_runs/cache_20230810215329.json"
-json_result(json_result_file_path)
+#json_result_file_path = "/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/prophet-main/outputs/successful_runs/cache_20230911010141.json"
+#json_result(json_result_file_path)

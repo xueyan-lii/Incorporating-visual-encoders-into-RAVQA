@@ -16,7 +16,7 @@ USE_GPU = False
 RERUN_INDEX = True
 D_FILEPATH = '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/cache/concat_nearest_neightbours_distance_20.npy'
 I_FILEPATH = '/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/cache/concat_nearest_neighbours_index_20.npy' 
-OUT_PATH = data_dir / f"pre-extracted_features/in_context_examples/rices_concat_a1b1_normalized_textonly.pkl"
+OUT_PATH = data_dir / f"pre-extracted_features/in_context_examples/rices_concat_a1b1_normalized_text_promptcap_caption.pkl"
 ALPHA = 1.0 # weight on text embeddings
 BETA = 0.0 # weight on image embeddings
 TOP_K = 20 # number of neighbours to retrieve
@@ -89,13 +89,13 @@ def load_preprocessed_data(file_path):
     return data_dict 
 
 if __name__ == '__main__':
-    #val_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question+oscar_caption_embeddings_val2014.pkl"))
-    val_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question_embeddings_val2014.pkl"))
+    val_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question+promptcap_caption_embeddings_val2014.pkl"))
+    #val_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question_embeddings_val2014.pkl"))
     val_text_embeddings_df['text_embedding'] = val_text_embeddings_df.apply(lambda row : np.expand_dims(np.array(row['text_embedding'].flatten()) ,axis=0), axis=1)
     val_image_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_image_embeddings_val2014.pkl"), embed_field_name='image_embedding')
     val_image_embeddings_df['image_embedding'] = val_image_embeddings_df.apply(lambda row : np.expand_dims(np.array(row['image_embedding'].flatten()) ,axis=0), axis=1)
-    #train_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question+oscar_caption_embeddings_train2014.pkl"))
-    train_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question_embeddings_train2014.pkl"))
+    train_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question+promptcap_caption_embeddings_train2014.pkl"))
+    #train_text_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_question_embeddings_train2014.pkl"))
     train_text_embeddings_df['text_embedding'] = train_text_embeddings_df.apply(lambda row : np.expand_dims(np.array(row['text_embedding'].flatten()) ,axis=0), axis=1)
     train_image_embeddings_df = dict_data_to_df(load_pkl(data_dir / "pre-extracted_features/text_embeddings/InstructBLIP_image_embeddings_train2014.pkl"), embed_field_name='image_embedding')
     train_image_embeddings_df['image_embedding'] = train_image_embeddings_df.apply(lambda row : np.expand_dims(np.array(row['image_embedding'].flatten()) ,axis=0), axis=1)

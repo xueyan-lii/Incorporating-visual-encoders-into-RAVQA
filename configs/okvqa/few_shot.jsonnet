@@ -57,7 +57,7 @@ local override = {
     "dummy_dataloader": 0,
     "additional":{
       "num_shots": 5,
-      "score": 1,
+      "answer_type": 1,
       "max_candidates": 20,
       "caption_type": "oscar",
     },

@@ -1,4 +1,4 @@
-#extract question+oscar caption embedding together, max is 64 length so ratio to img is the same
+#extract question+oscar/promptcap caption embedding together, max is 64 length so ratio to img is the same
 #dont need gpu
 import torch
 import pickle
@@ -34,15 +34,18 @@ def main(subtype: str = "val2014"):
     # load results from previous tests only for oscar/blip2 caption
     if subtype == "train2014":
         f = open('/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/testing_results/RAVQA-InstructBLIP-train-K50.json')
+        f_promptcap = open('/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/pre-extracted_features/captions/coco_promptcap_captions_train2014.json')
     else:
         f = open('/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/testing_results/RAVQA-InstructBLIP-test-K50.json')
-    captions = json.load(f)
+        f_promptcap = open('/home/xl544/rds/hpc-work/Retrieval-Augmented-Visual-Question-Answering/data/ok-vqa/pre-extracted_features/captions/coco_promptcap_captions_val2014.json')
+    #captions = json.load(f)
+    promptcap_caption = json.load(f_promptcap)
 
     out_path = (
         data_dir
         / "pre-extracted_features"
         / "text_embeddings"
-        / f"InstructBLIP_question+blip2_caption_embeddings_{subtype}.pkl"
+        / f"InstructBLIP_question+promptcap_caption_embeddings_{subtype}.pkl"
     )
 
     with open(
@@ -70,15 +73,16 @@ def main(subtype: str = "val2014"):
         #tokenized_question = clip.tokenize(data_item['question']).to(device)
 
         with torch.no_grad():
-            print(data_item['question']+' '+captions[question_id]['blip2_caption'])
+            #print(data_item['question']+' '+captions[question_id]['blip2_caption'])
             inputs = processor( #output includes input_ids, attention_mask, qformer_input_ids,qformer_attention_mask, pixel_values
-                text=data_item['question']+' '+captions[question_id]['blip2_caption'], 
+                #text=data_item['question']+' '+captions[question_id]['blip2_caption'], 
+                text=data_item['question']+' '+promptcap_caption[question_id], 
                 padding='max_length',
                 max_length=64,
                 truncation=True,
                 return_tensors="pt").to(device, torch.float32)
             text_embedding = model.get_input_embeddings()(inputs.input_ids)[0]
-            print(text_embedding.shape) #torch.Size([32, 2048])
+            #print(text_embedding.shape) #torch.Size([32, 2048])
             text_embedding = model.get_input_embeddings()(inputs.input_ids)[0].cpu().numpy().astype(np.float32)
             #print(text_embedding)
 
