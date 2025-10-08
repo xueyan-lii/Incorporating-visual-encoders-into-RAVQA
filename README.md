@@ -1,4 +1,4 @@
-Incorporating visual-encoders into retrieval-augmented visual question answering.
+##Incorporating visual-encoders into retrieval-augmented visual question answering.
 
 This continuation of the original RAVQA (Weizhe Lin and Bill Byrne 2022) codebase adds modern vision‑language models and few-shot prompting pipeline for closed source models.
 
